@@ -11,7 +11,7 @@ script:
   - hexo clean && hexo generate && gulp # generate static files
 deploy:
   provider: pages
-  cleanup: false
+  skip_cleanup: true
   token: $GH_TOKEN
   keep_history: true
   on:
