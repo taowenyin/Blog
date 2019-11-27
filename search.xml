@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>决策树</title>
+    <url>/dt/</url>
+    <content><![CDATA[<img src="/dt/dt.png" class title="决策树">]]></content>
+      <categories>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>决策树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>机器学习资料</title>
     <url>/mlresource/</url>
     <content><![CDATA[<h1 id="国际顶级会议">国际顶级会议</h1>
