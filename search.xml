@@ -165,6 +165,32 @@
 \end{equation}\]</span></p>
 <p>其中<span class="math inline">\(Gini(D, A)\)</span>表示经<span class="math inline">\(A=a\)</span>分割后集合<span class="math inline">\(D\)</span>的不确定性。基尼指数值越大，样本集合的不确定性就越大。<strong>在树生成时选择基尼指数最小的特征及其对应的切分点作为最优特征与最优切分点。</strong></p>
 <h2 id="剪枝-1">剪枝</h2>
+<p>决策树的损失函数为：</p>
+<p><span class="math display">\[\begin{equation}
+    C_{\alpha}(T)=C(T)+\alpha|T|
+\end{equation}\]</span></p>
+<p>其中<span class="math inline">\(T\)</span>为任意子树；<span class="math inline">\(C(T)\)</span>为预测误差，用来衡量模型与训练数据的拟合程度；<span class="math inline">\(|T|\)</span>为子树<span class="math inline">\(T\)</span>的叶子节点个数，即树的复杂度；<span class="math inline">\(\alpha\)</span>为惩罚系数，用来控制模型和训练数据之间拟合程度，当<span class="math inline">\(\alpha\)</span>较大时，树模型较为简单，反之则树模型较为复杂。并且当<span class="math inline">\(\alpha\)</span>从0开始不断增加到<span class="math inline">\(+\infty\)</span>时，会产生一系列的子树序列：<span class="math inline">\(T_{0},T_{1},\cdots,T_{n}\)</span>，并且每一个<span class="math inline">\(T_{i+1}\)</span>子树都是由前一个子树<span class="math inline">\(T_{i}\)</span>剪掉某一个内部节点来生成的。</p>
+<p>对于任意一个内部节点<span class="math inline">\(t\)</span>，剪枝前有<span class="math inline">\(|T_{t}|\)</span>个叶子节点，并且预测误差为<span class="math inline">\(C(T_{t})\)</span>，剪枝后因为只有一个叶节点<span class="math inline">\(t\)</span>，因此预测误差为<span class="math inline">\(C(t)\)</span>，，因此损失函数的变化为：</p>
+<p>剪枝前：</p>
+<p><span class="math display">\[\begin{equation}
+    C_{\alpha}(T)=C(T)+\alpha|T|
+\end{equation}\]</span></p>
+<p>剪枝后：</p>
+<p><span class="math display">\[\begin{equation}
+    C_{\alpha}(t)=C(t)+\alpha \times 1=C(t)+\alpha
+\end{equation}\]</span></p>
+<p>要是剪枝后的损失函数与剪枝前的损失函数相同<span class="math inline">\(C(T)+\alpha|T|=C(t)+\alpha\)</span>，就可以得到：</p>
+<p><span class="math display">\[\begin{equation}
+    \alpha=\frac{C(t)-C\left(T_{t}\right)}{\left|T_{t}\right|-1}
+\end{equation}\]</span></p>
+<p><span class="math inline">\(\alpha\)</span>的意义在于在<span class="math inline">\(\left [ \alpha_{i}, \alpha_{i+1} \right )\)</span>中惩罚系数的临界值，如果比该<span class="math inline">\(\alpha\)</span>大，那么一定有<span class="math inline">\(C_{\alpha}(T) &gt; C_{\alpha}(t)\)</span>，即剪掉这个节点后都比不剪掉要更优。</p>
+<h2 id="回归树">回归树</h2>
+<p>对于连续值的处理，CART分类树采用基尼系数的大小来度量特征的划分点。在回归模型中，我们使用常见的和方差来进行度量，对于任意特征A进行划分，可以按照任意划分点<span class="math inline">\(s\)</span>把数据分为两部分，分别是数据集<span class="math inline">\(D_{1}\)</span>和数据集<span class="math inline">\(D_{2}\)</span>，只要使<span class="math inline">\(D_{1}\)</span>和<span class="math inline">\(D_{2}\)</span>的均方差最小，并且<span class="math inline">\(D_{1}\)</span>和<span class="math inline">\(D_{2}\)</span>的均方差之和最小，那么<span class="math inline">\(s\)</span>就是所对的特征划分点。表达式为：</p>
+<p><span class="math display">\[\begin{equation}
+    \min _{a, s}\left[\min _{c_{1}} \sum_{x_{i} \in D_{1}}\left(y_{i}-c_{1}\right)^{2}+\min _{c_{2}} \sum_{x_{i} \in D_{2}}\left(y_{i}-c_{2}\right)^{2}\right]
+\end{equation}\]</span></p>
+<p>其中，<span class="math inline">\(c_{1}\)</span>为数据集<span class="math inline">\(D_{1}\)</span>的样本输出均值，<span class="math inline">\(c_{2}\)</span>为数据集<span class="math inline">\(D_{2}\)</span>的样本输出均值。</p>
+<p>对于分类树来说采用叶子节点里概率最大的类别作为当前对象的预测类别。而在回归树中，则是采用最终叶子的均值或者中位数作为预测结果输出。</p>
 <h2 id="优点">优点</h2>
 <blockquote>
 <ul>
