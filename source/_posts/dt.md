@@ -89,12 +89,18 @@ Else
 
 ## 信息熵
 
+设$X$是一个取有限个值的离散随机变量，其概率分布为：
+
+\begin{matrix}
+    P(X=x_{i})=p_{i} & i=1,2,\cdots ,n
+\end{matrix}
+
 **信息熵：**表示信息的不确定度。由于随机离散事件的出现概率存在着不确定性，因此为了衡量这种信息的不确定性，就是用信息熵来表示。同时，**信息熵也用于在构建树的每个步骤决定要拆分的特征**。
 
 1、经验熵：熵中的概率由数据估计(特别是最大似然估计)得到。
 
 \begin{equation}
-    Entropy(D)=-\sum_{i=1}^{n}\frac{\left | c_{k} \right |}{\left | D \right |}\log_{2}\frac{\left | c_{k} \right |}{\left | D \right |}
+    Entropy(D)=-\sum_{i=1}^{n}p_{i}\log_{2}p_{i}=-\sum_{i=1}^{n}\frac{\left | c_{k} \right |}{\left | D \right |}\log_{2}\frac{\left | c_{k} \right |}{\left | D \right |}
 \end{equation}
 
 其中$\frac{\left | c_{k} \right |}{\left | D \right |}$为$\left | c_{k} \right |$样本数量和总样本数量$\left | D \right |$的比，当$\log$底为2时，成为比特熵，以$e$为底时称为纳特熵。
@@ -127,7 +133,7 @@ Else
     Gain(D, A)=H(D)-H(D|A)=Entropy(D)-\sum_{i=1}^{k} \frac{\left|D_{i}\right|}{|D|} Entropy\left(D_{i}\right)
 \end{equation}
 
-其中$D$表示父节点，$D_{i}$是子节点，$A$是在父节点$D$中选择的属性，$\frac{\left|D_{i}\right|}{|D|}$表示以父节点的分叉属性$A$为例，子节点在父节点出现的概率。
+其中$D$表示父节点，$D_{i}$是子节点，$A$是在父节点$D$中选择的属性，$\frac{\left|D_{i}\right|}{|D|}$表示以父节点的分叉属性$A$为例，子节点在父节点出现的概率。**该式可以理解为由于特征$A$而使得对数据集$D$的分类的不确定减少的程度。**
 
 {% asset_img infogain.png 信息增益 %}
 
@@ -188,7 +194,7 @@ ID3构造决策树时，容易产生过拟合。而在C4.5中，会在决策树�
 决策树的损失函数为：
 
 \begin{equation}
-    C_{\alpha}(T)=\sum_{t=1}^{|T|} N_{t} H_{t}(T)+\alpha|T|=C(T)+\alpha|T|
+    C_{\alpha}(T)=\sum_{t=1}^{|T|} N_{t} H_{t}(T)+\alpha|T|=\sum_{t=1}^{|T|} \sum_{k=1}^{K} N_{tk} \log\frac{N_{tk}}{N_{t}}+\alpha|T|=C(T)+\alpha|T|
 \end{equation}
 
 其中$T$表示子树的叶节点；$H_{t}(T)$表示第$t$个叶子的熵；$N_{t}$表示该叶子所含的训练样例的个数；$\alpha$表示惩罚系数，并控制模型和训练数据之间拟合程度，当$\alpha$较大时，树模型较为简单，反之则树模型较为复杂，为0时只考虑模型与训练数据的拟合程度，不考虑模型的复杂度；C(T)表示模型对训练数据的预测误差，即模型与训练数据的拟合程度。
@@ -228,21 +234,69 @@ C4.5在ID3的基础上，用信息增益率代替了信息增益，解决了噪�
 
 CART的全称是分类与回归树，即该算法既可以用于分类问题，也可以用于回归问题，并且使用CART生成的树只能是二叉树。
 
-1、回归树：使用平方误差最小化准则来选择特征并进行划分。每一个叶节点给出的预测值是划分到该叶子节点的所有样本目标值的均值，这样只是在给定划分的情况下最小化了平方误差。
+1、回归树：使用**平方误差最小化准则**来选择特征并进行划分。每一个叶节点给出的预测值是划分到该叶子节点的所有样本目标值的均值，这样只是在给定划分的情况下最小化了平方误差。
 
-2、分类树：使用基尼指数（GINI）最小化准则来选择特征并进行划分。基尼指数表示集合的不确定性，或者是不纯度。基尼指数越大，集合不确定性越高，不纯度也越大。
+2、分类树：使用**基尼指数（GINI）最小化准则**来选择特征并进行划分。基尼指数表示集合的不确定性，或者是不纯度。基尼指数越大，集合不确定性越高，不纯度也越大。
 
-## 算法组成
+### 算法步骤
 
 **1、决策树生成：**基于训练数据集生成决策树，生成的决策树要尽量大。
 
 **2、决策树剪枝：**用于验证数据集对已生成的数进行剪枝并选择最优子树，这时用损失函数最小作为剪枝的标准。
 
+## 回归树
+
+假设一组训练数据为
+
+\begin{equation}
+    D=\left \{ \left ( x_{1},y_{1} \right ), \left ( x_{2},y_{2} \right ),\cdots,\left ( x_{N},y_{N} \right ) \right \}
+\end{equation}
+
+所谓回归树就把输入空间进行划分，并且在每个划分的单元上进行输出。如果把空间划分为$M$个单元$R_{1},R_{2},\cdots,R_{M}$，并且在每个单元$R_{m}$上有一个固定的输出$c_{m}$，那么回归树就可以表示为：
+
+\begin{equation}
+    f\left ( x \right )=\sum_{m=1}^{M}c_{m}I\left ( x \in R_{m} \right )
+\end{equation}
+
+并且回归树使用平方误差最小准则求每个单元$R_{m}$上的最有输出。由平方误差最小准则就可以知道单元$R_{m}$上的$c_{m}$最优值$\hat{c_{m}}$为所有输入实例输出的$y_{i}$的均值，即：
+
+\begin{equation}
+    \hat{c}_{m}=ave\left(y_{i} | x_{i} \in R_{m}\right)=\frac{1}{N_{m}}\sum_{x_{i} \in R_{m}(j,s)}y_{i},\ x \in R_{m},\ m=1,2
+\end{equation}
+
+在CART回归树中，输入空间的划分采用启发式方法，即选择第$j$个变量$x^{(j)}$和空间取值$s$作为分割变量和分割点，并通过分割点定义两个区域：
+
+\begin{equation}
+    R_{1}\left ( j,s \right )=\left \{ x|x^{\left ( j \right )} \leq s \right \}\ R_{2}\left ( j,s \right )=\left \{ x|x^{\left ( j \right )} > s \right \}
+\end{equation}
+
+因此，最优的分割变量$j$和分割点$s$选择就是求解下面的式子：
+
+\begin{equation}
+    \min_{j, s}\left[\min_{c_{1}} \sum_{x_{i} \in R_{1}(j,s)}\left(y_{i}-c_{1}\right)^{2}+\min_{c_{2}} \sum_{x_{i} \in R_{2}(j,s)}\left(y_{i}-c_{2}\right)^{2}\right]
+\end{equation}
+
+并且对于固定输入$j$，可以球的最优切点$s$，使得$\hat{c}_{1}$和$\hat{c}_{2}$最优。
+
+\begin{equation}
+    \hat{c}_{1}=ave\left(y_{i} | x_{i} \in R_{1}(j,s)\right)\ \hat{c}_{2}=ave\left(y_{i} | x_{i} \in R_{2}(j,s)\right)
+\end{equation}
+
+### 损失函数
+
+回归树使用平方误差来表示回归树对训练数据的预测误差。
+
+\begin{equation}
+    \sum_{x_{i} \in R_{m}}\left(y_{i}-f\left(x_{i}\right)\right)^{2}
+\end{equation}
+
+## 分类树
+
 \begin{equation}
     Gini(D)=1-\sum_{k=1}^{K}\left ( \frac{\left | C_{k} \right |}{\left | D \right |} \right )^2
 \end{equation}
 
-其中$\left | C_{k} \right |$表示$D$中属于第$k$类样本的个数，$\left | D \right |$数据集的个数。
+其中$\left | C_{k} \right |$表示$D$中属于第$k$类样本的个数，$\left | D \right |$数据集的个数，$K$是类的个数。
 
 如果样本集合$D$中根据特征$A$的某个取值$a$来把$D$分割为$D_{1}$和$D_{2}$，那么在特征A的条件下，集合D的基尼指数为：
 
@@ -282,17 +336,7 @@ CART的全称是分类与回归树，即该算法既可以用于分类问题，�
     \alpha=\frac{C(t)-C\left(T_{t}\right)}{\left|T_{t}\right|-1}
 \end{equation}
 
-$\alpha$的意义在于在$\left [ \alpha_{i}, \alpha_{i+1} \right )$中惩罚系数的临界值，如果比该$\alpha$大，那么一定有$C_{\alpha}(T) > C_{\alpha}(t)$，即剪掉这个节点后都比不剪掉要更优。
-
-## 回归树
-
-对于连续值的处理，CART分类树采用基尼系数的大小来度量特征的划分点。在回归模型中，我们使用常见的和方差来进行度量，对于任意特征A进行划分，可以按照任意划分点$s$把数据分为两部分，分别是数据集$D_{1}$和数据集$D_{2}$，只要使$D_{1}$和$D_{2}$的均方差最小，并且$D_{1}$和$D_{2}$的均方差之和最小，那么$s$就是所对的特征划分点。表达式为：
-
-\begin{equation}
-    \min _{a, s}\left[\min _{c_{1}} \sum_{x_{i} \in D_{1}}\left(y_{i}-c_{1}\right)^{2}+\min _{c_{2}} \sum_{x_{i} \in D_{2}}\left(y_{i}-c_{2}\right)^{2}\right]
-\end{equation}
-
-其中，$c_{1}$为数据集$D_{1}$的样本输出均值，$c_{2}$为数据集$D_{2}$的样本输出均值。
+其中，$\alpha$的意义在于在$\left [ \alpha_{i}, \alpha_{i+1} \right )$中惩罚系数的临界值，如果比该$\alpha$大，那么一定有$C_{\alpha}(T) > C_{\alpha}(t)$，即剪掉这个节点后都比不剪掉要更优。
 
 对于分类树来说采用叶子节点里概率最大的类别作为当前对象的预测类别。而在回归树中，则是采用最终叶子的均值或者中位数作为预测结果输出。
 
