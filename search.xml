@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>最优化理论和应用</title>
+    <url>/optimization-theory/</url>
+    <content><![CDATA[<h1 id="向量空间与矩阵">向量空间与矩阵</h1><h2 id="向量与矩阵">向量与矩阵</h2><h3 id="线性相关">线性相关</h3><p>下式中，只有当所有系数<span class="math inline">\(\alpha_{i}(i=1,2,\cdots,k)\)</span>都等于零的前提下才成立，那么就称向量机<span class="math inline">\({\mathbf{a_{1}},\mathbf{a_{2}},\cdots,\mathbf{a_{k}}}\)</span>是线性无关的，否则就是线性相关。</p><p><span class="math display">\[\begin{equation}
+    \alpha_{1} \mathbf{a_{1}}+\alpha_{2} \mathbf{a_{2}}+\cdots+\alpha_{k} \mathbf{a_{k}}=\mathbf{0}
+\end{equation}\]</span></p><a id="more"></a>
+
+
+
+
+<p>对于所有包含<span class="math inline">\(\mathbf{0}\)</span>向量的集合都是线性相关。</p>
+<p>给定了向量<span class="math inline">\(\mathbf{a}\)</span>，如果存在标量<span class="math inline">\(a_{1}, a_{2}, \cdots, a_{k}\)</span>，使得</p>
+<p><span class="math display">\[\begin{equation}
+    \mathbf{a}=\alpha_{1} \mathbf{a_{1}}+\alpha_{2} \mathbf{a_{2}}+\cdots+\alpha_{k} \mathbf{a_{k}}
+\end{equation}\]</span></p>
+<p>那么就称向量<span class="math inline">\(\mathbf{a}\)</span>是<span class="math inline">\({\mathbf{a_{1}},\mathbf{a_{2}},\cdots,\mathbf{a_{k}}}\)</span>的线性组合。</p>
+<h3 id="生成子空间">生成子空间</h3>
+<p>假定<span class="math inline">\(\mathbf{a_{1}},\mathbf{a_{2}},\cdots,\mathbf{a_{k}}\)</span>是<span class="math inline">\(\mathbb{R}^n\)</span>中的任意向量，那么它们所有线性组合的集合称为生成子空间，记为:</p>
+<p><span class="math display">\[\begin{equation}
+    span\left [ \mathbf{a_{1}},\mathbf{a_{2}},\cdots,\mathbf{a_{k}} \right ]=\left \{ \sum_{i=1}^{k}\alpha_{i}\mathbf{a_{i}}:\alpha_{1},\cdots,\alpha_{k},\alpha_{k}\in\mathbb{R} \right \}
+\end{equation}\]</span></p>
+<p>给定子空间<span class="math inline">\(\mathcal{V}\)</span>，如果存在线性无关的向量集合<span class="math inline">\(\left\{\mathbf{a_{1}}, \mathbf{a_{2}}, \cdots, \mathbf{a_{k}}\right\}\subset \mathcal{V}\)</span>，使得<span class="math inline">\(\mathcal{V}=span\left [\mathbf{a_{1}}, \mathbf{a_{2}}, \cdots, \mathbf{a_{k}} \right]\)</span>，那么就称<span class="math inline">\(\left \{ \mathbf{a_{1}}, \mathbf{a_{2}}, \cdots, \mathbf{a_{k}} \right \}\)</span>是子空间<span class="math inline">\(\mathcal{V}\)</span>的一组基，并且<span class="math inline">\(\mathcal{V}\)</span>中所有基都具有相同数量的向量，该数量称为<span class="math inline">\(\mathcal{V}\)</span>的维数，记为<span class="math inline">\(dim\mathcal{V}\)</span>。</p>
+]]></content>
+      <categories>
+        <category>课程</category>
+      </categories>
+  </entry>
+  <entry>
     <title>决策树</title>
     <url>/dt/</url>
     <content><![CDATA[<img src="/dt/dt.png" class title="决策树"><h1 id="原理">原理</h1><p>决策树是一种<strong>非参数监督</strong>学习方法，用于分类和回归任务。对于离散值的构建的树模型，一般为分类树，而用连续值构建的树模型，一般为回归树。</p><blockquote>
