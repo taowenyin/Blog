@@ -73,6 +73,31 @@
 <p><span class="math display">\[\begin{equation}
     \textbf{det}[\lambda \mathbf{I}-\mathbf{A}]=\lambda^{n}+a_{n-1} \lambda^{n-1}+\cdots+a_{1} \lambda+a_{0}=0
 \end{equation}\]</span></p>
+<p>1、假定方程<span class="math inline">\(\textbf{det}\left [ \lambda\mathbf{I}-\mathbf{A} \right ]=0\)</span>存在<span class="math inline">\(n\)</span>个相异的根<span class="math inline">\(\lambda_{1},\lambda_{2},\cdots,\lambda_{n}\)</span>，那么就存在<span class="math inline">\(n\)</span>个线性无关的向量<span class="math inline">\(\mathbf{\mathcal{v}_{1}},\mathbf{\mathcal{v}_{2}},\cdots,\mathbf{\mathcal{v}_{n}}\)</span>。当矩阵<span class="math inline">\(\mathbf{A}=\mathbf{A}^{\top}\)</span>，则称<span class="math inline">\(\mathbf{A}\)</span>为对称矩阵。</p>
+<p>2、对于<span class="math inline">\(n \times n\)</span>实数对称矩阵，其<span class="math inline">\(n\)</span>个特征向量是相互正交的。</p>
+<h2 id="正投影">正投影</h2>
+<h2 id="矩阵范数">矩阵范数</h2>
+<p>矩阵<span class="math inline">\(\mathbf{A}\)</span>的范数记为<span class="math inline">\(\left \| \mathbf{A} \right \|\)</span>，是满足以下条件的任意函数<span class="math inline">\(\left \| \cdot \right \|\)</span></p>
+<p>1、如果<span class="math inline">\(\mathbf{A} \neq \mathbf{0}\)</span>，那么就有<span class="math inline">\(\left \| \mathbf{A} \right \| &gt; 0\)</span>，<span class="math inline">\(\left \| \mathbf{0} \right \| = 0\)</span>。</p>
+<p>2、对于任意<span class="math inline">\(c \in \mathbb{R}\)</span>，就有<span class="math inline">\(\left \| c\mathbf{A} \right \|=\left | c \right |\left \| \mathbf{A} \right \|\)</span>。</p>
+<p>3、<span class="math inline">\(\left \| \mathbf{A}+\mathbf{B} \right \| \leq \left \| \mathbf{A} \right \|+\left \| \mathbf{B} \right \|\)</span></p>
+<p>4、<span class="math inline">\(\left \| \mathbf{A} \mathbf{B} \right \| \leq \left \| \mathbf{A} \right \|\left \| \mathbf{B} \right \|\)</span></p>
+<p>令</p>
+<p><span class="math display">\[\begin{equation}
+    \left \| \mathbf{x} \right \|=\sqrt{\left(\sum_{k=1}^{n}\left|x_{k}\right|^{2}\right)}=\sqrt{\langle\mathbf{x}, \mathbf{x}\rangle}
+\end{equation}\]</span></p>
+<p>则由该向量函数导出矩阵范数为</p>
+<p><span class="math display">\[\begin{equation}
+    \left \| \mathbf{A} \right \|=\sqrt{\lambda_{1}}
+\end{equation}\]</span></p>
+<p>其中，<span class="math inline">\(\lambda_{1}\)</span>是矩阵<span class="math inline">\(\mathbf{A}^{\top}\mathbf{A}\)</span>的最大特征矩阵。</p>
+<p><strong>瑞利不等式：</strong>如果<span class="math inline">\(n \times n\)</span>矩阵<span class="math inline">\(\mathbf{P}\)</span>是一个实数对称正定矩阵，则有</p>
+<p><span class="math display">\[\begin{equation}
+    \lambda_{\min }(\mathbf{P})\|\mathbf{x}\|^{2} \leq \mathbf{x}^{\top} \mathbf{P} \mathbf{x} \leq \lambda_{\max }(\mathbf{P})\|\mathbf{x}\|^{2}
+\end{equation}\]</span></p>
+<p>其中，<span class="math inline">\(\lambda_{\min }(\mathbf{P})\)</span>表示<span class="math inline">\(\mathbf{P}\)</span>的最小特征值，<span class="math inline">\(\lambda_{\max }(\mathbf{P})\)</span>表示<span class="math inline">\(\mathbf{P}\)</span>的最大特征值。</p>
+<h1 id="有关几何概念">有关几何概念</h1>
+<h2 id="线段">线段</h2>
 ]]></content>
       <categories>
         <category>课程</category>
