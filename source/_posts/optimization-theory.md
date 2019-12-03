@@ -161,3 +161,54 @@ $\mathbb{R}^{n}$**中的毕达哥拉斯定理：**如果$\mathbf{x}$和$\mathbf{
 
 ## 线段
 
+$\mathbf{x}$和$\mathbf{y}$是空间$\mathbb{R}^{n}$中的两个点，$\mathbf{z}$是两点之间连线上的点，那么就可以得到
+
+\begin{equation}
+    \mathbf{z}-\mathbf{y}=\alpha \left ( \mathbf{x}-\mathbf{y} \right )
+\end{equation}
+
+其中$\alpha$是区间$\left [ 0,1 \right ]$之间的实数，因此上式可写为
+
+\begin{equation}
+    \mathbf{z}=\alpha \mathbf{x}+\left ( 1-\alpha  \right )\mathbf{y}
+\end{equation}
+
+并且表示为
+
+\begin{equation}
+    \left \{ \alpha \mathbf{x}+\left ( 1-\alpha  \right )\mathbf{y}:\alpha \in \left [ 0,1 \right ] \right \}
+\end{equation}
+
+## 超平面和线性簇
+
+令$u_{1}, u_{2}, \dots, u_{n}, v \in \mathbb{R}$，其中至少存在一个$u_{i}$不为零，由所有满足线性方程
+
+\begin{equation}
+    u_{1} x_{1}+u_{2} x_{2}+\cdots+u_{n} x_{n}=v
+\end{equation}
+
+的点$\mathbf{x}=\left[x_{1}, x_{2}, \cdots, x_{n}\right]^{\top}$组成的集合成为空间$\mathbb{R}^{n}$的超平面，可写为
+
+\begin{equation}
+    \left\{\mathbf{x} \in \mathbb{R}^{n}: \mathbf{u}^{\top} \mathbf{x}=v\right\}
+\end{equation}
+
+当$n$为2时，即二维空间时，超平面为一条直线方程$u_{1} x_{1}+u_{2} x_{2}=v$，当$n$为3时，即三维空间时，超平面为一个面。
+
+## 凸集
+
+已知两点$\mathbf{u},\mathbf{v} \in \mathbb{R}^{n}$之间的线段可表示为集合
+
+\begin{equation}
+    \left \{ \mathbf{w}=\mathbb{R}^{n}: \mathbf{w}=\alpha \mathbf{u}+(1-\alpha) \mathbf{v}, \alpha \in[0,1] \right \}
+\end{equation}
+
+如果点$\mathbf{w}=\alpha \mathbf{u}+(1-\alpha) \mathbf{v}\left ( \alpha \in \left [ 0,1 \right ] \right )$称为点$\mathbf{u}$和点$\mathbf{v}$的凸组合。如果$\mathbf{u},\mathbf{v} \in \Theta$，并且$\mathbf{u}$和$\mathbf{v}$之间的线段都在$\Theta$内，那么$\Theta \in \mathbb{R}^{n}$为凸集。
+
+凸集的性质：
+
+1、如果$\Theta$是一个凸集，且$\beta$是一个实数，那么$\beta \Theta=\{\mathbf{x}: \mathbf{x}=\beta \mathbf{v}, \mathbf{v} \in \Theta\}$也是凸集。
+
+2、如果$\Theta_{1}$和$\Theta_{2}$都是凸集，那么集合$\Theta_{1}+\Theta_{2}=\left\{\mathbf{x}: \mathbf{x}=\mathbf{v}_{1}+\mathbf{v}_{2}, \mathbf{v}_{1} \in \Theta_{1}, \mathbf{v}_{2} \in \Theta_{2}\right\}$也是凸集。
+
+3、任意多个凸集的交集都是凸集。
