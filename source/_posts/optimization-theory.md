@@ -116,3 +116,48 @@ $\mathbb{R}^{n}$**中的毕达哥拉斯定理：**如果$\mathbf{x}$和$\mathbf{
 \begin{equation}
     \textbf{det}[\lambda \mathbf{I}-\mathbf{A}]=\lambda^{n}+a_{n-1} \lambda^{n-1}+\cdots+a_{1} \lambda+a_{0}=0
 \end{equation}
+
+1、假定方程$\textbf{det}\left [ \lambda\mathbf{I}-\mathbf{A} \right ]=0$存在$n$个相异的根$\lambda_{1},\lambda_{2},\cdots,\lambda_{n}$，那么就存在$n$个线性无关的向量$\mathbf{\mathcal{v}_{1}},\mathbf{\mathcal{v}_{2}},\cdots,\mathbf{\mathcal{v}_{n}}$。当矩阵$\mathbf{A}=\mathbf{A}^{\top}$，则称$\mathbf{A}$为对称矩阵。
+
+2、对于$n \times n$实数对称矩阵，其$n$个特征向量是相互正交的。
+
+## 正投影
+
+## 矩阵范数
+
+矩阵$\mathbf{A}$的范数记为$\left \| \mathbf{A} \right \|$，是满足以下条件的任意函数$\left \| \cdot \right \|$
+
+1、如果$\mathbf{A} \neq \mathbf{0}$，那么就有$\left \| \mathbf{A} \right \| > 0$，$\left \| \mathbf{0} \right \| = 0$。
+
+2、对于任意$c \in \mathbb{R}$，就有$\left \| c\mathbf{A} \right \|=\left | c \right |\left \| \mathbf{A} \right \|$。
+
+3、$\left \| \mathbf{A}+\mathbf{B} \right \| \leq \left \| \mathbf{A} \right \|+\left \| \mathbf{B} \right \|$
+
+4、$\left \| \mathbf{A} \mathbf{B} \right \| \leq \left \| \mathbf{A} \right \|\left \| \mathbf{B} \right \|$
+
+令
+
+\begin{equation}
+    \left \| \mathbf{x} \right \|=\sqrt{\left(\sum_{k=1}^{n}\left|x_{k}\right|^{2}\right)}=\sqrt{\langle\mathbf{x}, \mathbf{x}\rangle}
+\end{equation}
+
+则由该向量函数导出矩阵范数为
+
+\begin{equation}
+    \left \| \mathbf{A} \right \|=\sqrt{\lambda_{1}}
+\end{equation}
+
+其中，$\lambda_{1}$是矩阵$\mathbf{A}^{\top}\mathbf{A}$的最大特征矩阵。
+
+**瑞利不等式：**如果$n \times n$矩阵$\mathbf{P}$是一个实数对称正定矩阵，则有
+
+\begin{equation}
+    \lambda_{\min }(\mathbf{P})\|\mathbf{x}\|^{2} \leq \mathbf{x}^{\top} \mathbf{P} \mathbf{x} \leq \lambda_{\max }(\mathbf{P})\|\mathbf{x}\|^{2}
+\end{equation}
+
+其中，$\lambda_{\min }(\mathbf{P})$表示$\mathbf{P}$的最小特征值，$\lambda_{\max }(\mathbf{P})$表示$\mathbf{P}$的最大特征值。
+
+# 有关几何概念
+
+## 线段
+
