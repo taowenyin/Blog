@@ -98,6 +98,38 @@
 <p>其中，<span class="math inline">\(\lambda_{\min }(\mathbf{P})\)</span>表示<span class="math inline">\(\mathbf{P}\)</span>的最小特征值，<span class="math inline">\(\lambda_{\max }(\mathbf{P})\)</span>表示<span class="math inline">\(\mathbf{P}\)</span>的最大特征值。</p>
 <h1 id="有关几何概念">有关几何概念</h1>
 <h2 id="线段">线段</h2>
+<p><span class="math inline">\(\mathbf{x}\)</span>和<span class="math inline">\(\mathbf{y}\)</span>是空间<span class="math inline">\(\mathbb{R}^{n}\)</span>中的两个点，<span class="math inline">\(\mathbf{z}\)</span>是两点之间连线上的点，那么就可以得到</p>
+<p><span class="math display">\[\begin{equation}
+    \mathbf{z}-\mathbf{y}=\alpha \left ( \mathbf{x}-\mathbf{y} \right )
+\end{equation}\]</span></p>
+<p>其中<span class="math inline">\(\alpha\)</span>是区间<span class="math inline">\(\left [ 0,1 \right ]\)</span>之间的实数，因此上式可写为</p>
+<p><span class="math display">\[\begin{equation}
+    \mathbf{z}=\alpha \mathbf{x}+\left ( 1-\alpha  \right )\mathbf{y}
+\end{equation}\]</span></p>
+<p>并且表示为</p>
+<p><span class="math display">\[\begin{equation}
+    \left \{ \alpha \mathbf{x}+\left ( 1-\alpha  \right )\mathbf{y}:\alpha \in \left [ 0,1 \right ] \right \}
+\end{equation}\]</span></p>
+<h2 id="超平面和线性簇">超平面和线性簇</h2>
+<p>令<span class="math inline">\(u_{1}, u_{2}, \dots, u_{n}, v \in \mathbb{R}\)</span>，其中至少存在一个<span class="math inline">\(u_{i}\)</span>不为零，由所有满足线性方程</p>
+<p><span class="math display">\[\begin{equation}
+    u_{1} x_{1}+u_{2} x_{2}+\cdots+u_{n} x_{n}=v
+\end{equation}\]</span></p>
+<p>的点<span class="math inline">\(\mathbf{x}=\left[x_{1}, x_{2}, \cdots, x_{n}\right]^{\top}\)</span>组成的集合成为空间<span class="math inline">\(\mathbb{R}^{n}\)</span>的超平面，可写为</p>
+<p><span class="math display">\[\begin{equation}
+    \left\{\mathbf{x} \in \mathbb{R}^{n}: \mathbf{u}^{\top} \mathbf{x}=v\right\}
+\end{equation}\]</span></p>
+<p>当<span class="math inline">\(n\)</span>为2时，即二维空间时，超平面为一条直线方程<span class="math inline">\(u_{1} x_{1}+u_{2} x_{2}=v\)</span>，当<span class="math inline">\(n\)</span>为3时，即三维空间时，超平面为一个面。</p>
+<h2 id="凸集">凸集</h2>
+<p>已知两点<span class="math inline">\(\mathbf{u},\mathbf{v} \in \mathbb{R}^{n}\)</span>之间的线段可表示为集合</p>
+<p><span class="math display">\[\begin{equation}
+    \left \{ \mathbf{w}=\mathbb{R}^{n}: \mathbf{w}=\alpha \mathbf{u}+(1-\alpha) \mathbf{v}, \alpha \in[0,1] \right \}
+\end{equation}\]</span></p>
+<p>如果点<span class="math inline">\(\mathbf{w}=\alpha \mathbf{u}+(1-\alpha) \mathbf{v}\left ( \alpha \in \left [ 0,1 \right ] \right )\)</span>称为点<span class="math inline">\(\mathbf{u}\)</span>和点<span class="math inline">\(\mathbf{v}\)</span>的凸组合。如果<span class="math inline">\(\mathbf{u},\mathbf{v} \in \Theta\)</span>，并且<span class="math inline">\(\mathbf{u}\)</span>和<span class="math inline">\(\mathbf{v}\)</span>之间的线段都在<span class="math inline">\(\Theta\)</span>内，那么<span class="math inline">\(\Theta \in \mathbb{R}^{n}\)</span>为凸集。</p>
+<p>凸集的性质：</p>
+<p>1、如果<span class="math inline">\(\Theta\)</span>是一个凸集，且<span class="math inline">\(\beta\)</span>是一个实数，那么<span class="math inline">\(\beta \Theta=\{\mathbf{x}: \mathbf{x}=\beta \mathbf{v}, \mathbf{v} \in \Theta\}\)</span>也是凸集。</p>
+<p>2、如果<span class="math inline">\(\Theta_{1}\)</span>和<span class="math inline">\(\Theta_{2}\)</span>都是凸集，那么集合<span class="math inline">\(\Theta_{1}+\Theta_{2}=\left\{\mathbf{x}: \mathbf{x}=\mathbf{v}_{1}+\mathbf{v}_{2}, \mathbf{v}_{1} \in \Theta_{1}, \mathbf{v}_{2} \in \Theta_{2}\right\}\)</span>也是凸集。</p>
+<p>3、任意多个凸集的交集都是凸集。</p>
 ]]></content>
       <categories>
         <category>课程</category>
