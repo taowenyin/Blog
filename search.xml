@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>高等工程应用数学</title>
+    <url>/math/</url>
+    <content><![CDATA[<h1 id="考试题目">考试题目</h1><h2 id="第一题">第一题</h2><p>设<span class="math inline">\(Z\)</span>表示整数集</p><blockquote>
+<ul>
+<li>（1）在<span class="math inline">\(Z\)</span>上定义运算：<span class="math inline">\(a \circ b = a+b+4\)</span>，求证<span class="math inline">\(\mathbb{Z}\)</span>按<span class="math inline">\(\circ\)</span>运算作为一个群。</li>
+<li>（2）如果在<span class="math inline">\(Z\)</span>上定义运算<span class="math inline">\(a \odot b = a^k\)</span>，说明<span class="math inline">\(\mathbb{Z}\)</span>运算不是一个群。</li>
+</ul>
+</blockquote><a id="more"></a>
+
+
+
+<p>（注：题目中的“+”以及“a^k”都是指通常意义下数的加法和乘方）</p>
+<h2 id="第二题">第二题</h2>
+<p>设<span class="math inline">\(R\)</span>是一个环，若<span class="math inline">\(\forall a \in R\)</span>，都有<span class="math inline">\(a^{2} = a\)</span>，则称R为布尔环</p>
+<blockquote>
+<ul>
+<li>（1）求证：若<span class="math inline">\(R\)</span>是布尔环，则<span class="math inline">\(\forall a \in R\)</span>，<span class="math inline">\(a+a=0\)</span>。</li>
+<li>（2）设<span class="math inline">\(X\)</span>是一个集合，<span class="math inline">\(\Gamma\)</span>表示由<span class="math inline">\(X\)</span>的全部子集作为元素得到的集合，定义<span class="math inline">\(\Gamma\)</span>中的两种运算，<span class="math inline">\(A+B=(A \setminus B) \cup (B \setminus A)\)</span>和<span class="math inline">\(A \ast B = A \cap B\)</span>，求证<span class="math inline">\(\Gamma\)</span>在这两个运算下构成一个环，并且是布尔环。（注：“”表示两个集合做差集）</li>
+</ul>
+</blockquote>
+<h2 id="第三题">第三题</h2>
+<p>设<span class="math inline">\(V\)</span>是<span class="math inline">\(n\)</span>维线性空间，<span class="math inline">\(W\)</span>是<span class="math inline">\(V\)</span>的一个线性真子空间。</p>
+<blockquote>
+<ul>
+<li>（1）写出商空间<span class="math inline">\(V/W\)</span>的定义（只要写出它的元素形式，加法、数乘的定义）。</li>
+<li>（2）若<span class="math inline">\(\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}\)</span>是<span class="math inline">\(W\)</span>的一组基，把它延拓为<span class="math inline">\(V\)</span>的一组基<span class="math inline">\(\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}, \alpha_{m+1}, \cdots, \alpha_{n}(n&gt;m)\)</span>，试写出商空间<span class="math inline">\(V/W\)</span>一组基，并验证它的线性无关性。</li>
+</ul>
+</blockquote>
+<h2 id="第四题">第四题</h2>
+<p>设<span class="math inline">\(\left ( X, \rho \right )\)</span>是距离空间，令</p>
+<p><span class="math display">\[\begin{equation}
+    d(x, y)=\frac{\rho(x, y)}{1+\rho(x, y)}, \forall x, y \in X
+\end{equation}\]</span></p>
+<blockquote>
+<ul>
+<li>（1）求证：<span class="math inline">\(\left ( X, d \right )\)</span>也是距离空间。</li>
+<li>（2）若<span class="math inline">\(X\)</span>中的点列<span class="math inline">\(\left\{x_{n}\right\}_{n=1}^{\infty}\)</span>按距离<span class="math inline">\(\rho\)</span>收敛到<span class="math inline">\(x\)</span>，求证<span class="math inline">\(\left\{x_{n}\right\}_{n=1}^{\infty}\)</span>也按距离<span class="math inline">\(d\)</span>收敛到<span class="math inline">\(x\)</span></li>
+<li>（3）若<span class="math inline">\(A\)</span>是<span class="math inline">\(\left ( X, d \right )\)</span>中的闭集，求证：<span class="math inline">\(A\)</span>也是<span class="math inline">\(\left ( X, \rho \right )\)</span>中的闭集。</li>
+</ul>
+</blockquote>
+<h2 id="第五题">第五题</h2>
+<p>设<span class="math inline">\(V\)</span>是数域<span class="math inline">\(P\)</span>上的赋范线性空间，证明：</p>
+<blockquote>
+<ul>
+<li>（1）<span class="math inline">\(V\)</span>中的收敛点列<span class="math inline">\(\left\{x_{n}\right\}\)</span>的极限是唯一的。</li>
+<li>（2）<span class="math inline">\(V\)</span>中收敛序列<span class="math inline">\(\left\{x_{n}\right\}\)</span>必有界，即存在正数<span class="math inline">\(M\)</span>，使得<span class="math inline">\(\left\|x_{u}\right\| \leq M(n=1,2, \cdots)\)</span>;</li>
+<li>（3）如果<span class="math inline">\(V\)</span>中序列<span class="math inline">\(\left\{x_{n}\right\}\)</span>收敛到<span class="math inline">\(x \in V\)</span>，则<span class="math inline">\(\left\{x_{n}\right\}\)</span>的任意一个子序列{<span class="math inline">\(\left\{x_{n_{k}}\right\}\)</span>}也收敛到<span class="math inline">\(x\)</span>；</li>
+<li>（4）如果<span class="math inline">\(V\)</span>中序列<span class="math inline">\(\left\{x_{n}\right\}\)</span>，<span class="math inline">\(\left\{y_{n}\right\}\)</span>分别收敛到<span class="math inline">\(x,y \in V\)</span>，则对任意<span class="math inline">\(a,b \in P\)</span>，有</li>
+</ul>
+</blockquote>
+<p><span class="math display">\[\begin{equation}
+    \lim_{n \rightarrow \infty}\left(a x_{n}+b y_{n}\right)=ax+by
+\end{equation}\]</span></p>
+]]></content>
+      <categories>
+        <category>课程</category>
+      </categories>
+  </entry>
+  <entry>
     <title>最优化理论和应用</title>
     <url>/optimization-theory/</url>
     <content><![CDATA[<h1 id="向量空间与矩阵">向量空间与矩阵</h1><h2 id="向量与矩阵">向量与矩阵</h2><h3 id="线性相关">线性相关</h3><p>下式中，只有当所有系数<span class="math inline">\(\alpha_{i}(i=1,2,\cdots,k)\)</span>都等于零的前提下才成立，那么就称向量机<span class="math inline">\({\mathbf{a_{1}},\mathbf{a_{2}},\cdots,\mathbf{a_{k}}}\)</span>是线性无关的，否则只要有一个<span class="math inline">\(\mathbf{a_{k}}\)</span>不等于零，那么就是线性相关。</p><a id="more"></a>
