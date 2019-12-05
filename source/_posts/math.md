@@ -97,17 +97,33 @@ $\therefore a+a=0$
 
 （1）$\left ( R,+ \right )$加法运算是交换群
 
->* 证明运算封闭
+>* 证明运算封闭（问题）
 
-$\because \forall A,B \in \Gamma$
+$\forall A,B \in \Gamma$
 
-$\therefore (A \setminus B) \in \Gamma,(B \setminus A) \in \Gamma$
+$(A \setminus B) \in \Gamma,(B \setminus A) \in \Gamma,(A \setminus B) \cup (B \setminus A) \in \Gamma$
 
->* 证明结合律
+
+
+>* 证明结合律（问题）
+
+$\forall A,B,C \in \Gamma$
+
+$\because \left ( A+B \right )+C=(A \setminus B) \cup (B \setminus A)+C=$
 
 >* 证明有单位元
 
->* 证明有逆元
+令$\phi=e$，且$\phi \in \Gamma$
+
+$\because A+\phi=(A \setminus \phi) \cup (\phi \setminus A)=A$
+
+又$\because \phi+A=(\phi \setminus A) \cup (A \setminus \phi)=A$
+
+$\therefore A+\phi=\phi+A$
+
+$\therefore \phi$为单位元
+
+>* 证明有逆元（问题）
 
 ## 第三题
 
