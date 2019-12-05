@@ -75,24 +75,31 @@
 <p>（1）<span class="math inline">\(\left ( R,+ \right )\)</span>加法运算是交换群</p>
 <blockquote>
 <ul>
-<li>证明运算封闭</li>
+<li>证明运算封闭（问题）</li>
 </ul>
 </blockquote>
-<p><span class="math inline">\(\because \forall A,B \in \Gamma\)</span></p>
-<p><span class="math inline">\(\therefore (A \setminus B) \in \Gamma,(B \setminus A) \in \Gamma\)</span></p>
+<p><span class="math inline">\(\forall A,B \in \Gamma\)</span></p>
+<p><span class="math inline">\((A \setminus B) \in \Gamma,(B \setminus A) \in \Gamma,(A \setminus B) \cup (B \setminus A) \in \Gamma\)</span></p>
 <blockquote>
 <ul>
-<li>证明结合律</li>
+<li>证明结合律（问题）</li>
 </ul>
 </blockquote>
+<p><span class="math inline">\(\forall A,B,C \in \Gamma\)</span></p>
+<p><span class="math inline">\(\because \left ( A+B \right )+C=(A \setminus B) \cup (B \setminus A)+C=\)</span></p>
 <blockquote>
 <ul>
 <li>证明有单位元</li>
 </ul>
 </blockquote>
+<p>令<span class="math inline">\(\phi=e\)</span>，且<span class="math inline">\(\phi \in \Gamma\)</span></p>
+<p><span class="math inline">\(\because A+\phi=(A \setminus \phi) \cup (\phi \setminus A)=A\)</span></p>
+<p>又<span class="math inline">\(\because \phi+A=(\phi \setminus A) \cup (A \setminus \phi)=A\)</span></p>
+<p><span class="math inline">\(\therefore A+\phi=\phi+A\)</span></p>
+<p><span class="math inline">\(\therefore \phi\)</span>为单位元</p>
 <blockquote>
 <ul>
-<li>证明有逆元</li>
+<li>证明有逆元（问题）</li>
 </ul>
 </blockquote>
 <h2 id="第三题">第三题</h2>
