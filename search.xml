@@ -75,33 +75,55 @@
 <p>（1）<span class="math inline">\(\left ( R,+ \right )\)</span>加法运算是交换群</p>
 <blockquote>
 <ul>
-<li>证明运算封闭（问题）</li>
+<li>证明运算封闭</li>
 </ul>
 </blockquote>
-<p><span class="math inline">\(\forall A,B \in \Gamma\)</span></p>
-<p><span class="math inline">\((A \setminus B) \in \Gamma,(B \setminus A) \in \Gamma,(A \setminus B) \cup (B \setminus A) \in \Gamma\)</span></p>
+<p><span class="math inline">\(\because \forall A,B \in \Gamma\)</span></p>
+<p><span class="math inline">\(\therefore (A \setminus B) \in \Gamma,(B \setminus A) \in \Gamma,(A \setminus B) \cup (B \setminus A) \in \Gamma\)</span></p>
+<p><span class="math inline">\(\therefore \left ( A \cap B^{\mathrm{C}} \right ) \cup \left ( B \cap A^{\mathrm{C}} \right )=\left ( A \cup B \right ) \cap \left ( A \cap B \right )^{\mathrm{C}} \in \Gamma\)</span></p>
 <blockquote>
 <ul>
-<li>证明结合律（问题）</li>
+<li>证明结合律</li>
 </ul>
 </blockquote>
 <p><span class="math inline">\(\forall A,B,C \in \Gamma\)</span></p>
-<p><span class="math inline">\(\because \left ( A+B \right )+C=(A \setminus B) \cup (B \setminus A)+C=\)</span></p>
+<p><span class="math inline">\(\because \left ( A+B \right )+C=(A \setminus B) \cup (B \setminus A)+C=\left ( A \cup B \cup C \right ) \cap \left ( A \cap B \cap C \right )^{\mathrm{C}}\)</span></p>
+<p><span class="math inline">\(\because A+\left ( B+C \right )=A+(B \setminus C) \cup (C \setminus B)=\left ( A \cup B \cup C \right ) \cap \left ( A \cap B \cap C \right )^{\mathrm{C}}\)</span></p>
+<p><span class="math inline">\(\therefore \left ( A+B \right )+C=A+\left ( B+C \right )\)</span></p>
 <blockquote>
 <ul>
 <li>证明有单位元</li>
 </ul>
 </blockquote>
-<p>令<span class="math inline">\(\phi=e\)</span>，且<span class="math inline">\(\phi \in \Gamma\)</span></p>
-<p><span class="math inline">\(\because A+\phi=(A \setminus \phi) \cup (\phi \setminus A)=A\)</span></p>
-<p>又<span class="math inline">\(\because \phi+A=(\phi \setminus A) \cup (A \setminus \phi)=A\)</span></p>
-<p><span class="math inline">\(\therefore A+\phi=\phi+A\)</span></p>
-<p><span class="math inline">\(\therefore \phi\)</span>为单位元</p>
+<p>令<span class="math inline">\(\varnothing=e\)</span>，且<span class="math inline">\(\varnothing \in \Gamma\)</span></p>
+<p><span class="math inline">\(\because A+\varnothing=(A \setminus \varnothing) \cup (\varnothing \setminus A)=A\)</span></p>
+<p>又<span class="math inline">\(\because \varnothing+A=(\varnothing \setminus A) \cup (A \setminus \varnothing)=A\)</span></p>
+<p><span class="math inline">\(\therefore A+\varnothing=\varnothing+A\)</span></p>
+<p><span class="math inline">\(\therefore \varnothing\)</span>为单位元</p>
 <blockquote>
 <ul>
-<li>证明有逆元（问题）</li>
+<li>证明有逆元</li>
 </ul>
 </blockquote>
+<p>令逆元为<span class="math inline">\(B\)</span>，<span class="math inline">\(\forall A \in \mathbb{X}\)</span>，证明<span class="math inline">\(A \circ B=B \circ A=e=\varnothing\)</span></p>
+<p>则<span class="math inline">\(A \circ B=A+B=(A \setminus B) \cup (B \setminus A)=\varnothing\)</span></p>
+<p><span class="math inline">\(\therefore B=A^{\mathrm{C}}\)</span></p>
+<p>同理可证<span class="math inline">\(B \circ A=\varnothing\)</span></p>
+<p><span class="math inline">\(\therefore A \circ B=B \circ A=\varnothing\)</span></p>
+<p>同理可证<span class="math inline">\(A \ast B=A \ast A^{\mathrm{C}}=A \cap A^{\mathrm{C}}=\varnothing\)</span></p>
+<p>（2）<span class="math inline">\(\left ( R,\ast \right )\)</span>乘法运算是半群</p>
+<p><span class="math inline">\(\because \forall A,B \in \Gamma\)</span></p>
+<p><span class="math inline">\(\therefore A \ast B=A \cap B \in \Gamma\)</span></p>
+<p><span class="math inline">\(\because \forall A,B,C \in \Gamma\)</span></p>
+<p><span class="math inline">\(\therefore \left ( A \ast B \right ) \ast C=\left ( A \cap B \right ) \cap C=A \cap B \cap C\)</span></p>
+<p><span class="math inline">\(\therefore A \ast \left ( B \ast C \right )=A \cap \left ( B \cap C \right ) =A \cap B \cap C\)</span></p>
+<p><span class="math inline">\(\therefore A \ast \left ( B \ast C \right )=A \ast \left ( B \ast C \right )\)</span></p>
+<p><span class="math inline">\(\therefore\)</span>乘法运算是半群</p>
+<p>（3）所有元素都是幂等元</p>
+<p><span class="math inline">\(\because \forall A \in \Gamma\)</span></p>
+<p><span class="math inline">\(\therefore A \ast A=A \cap A=A\)</span></p>
+<p><span class="math inline">\(\therefore \Gamma\)</span>中所有元素都是幂等元</p>
+<p>综上所述，<span class="math inline">\(R\)</span>为布尔环。</p>
 <h2 id="第三题">第三题</h2>
 <p>设<span class="math inline">\(V\)</span>是<span class="math inline">\(n\)</span>维线性空间，<span class="math inline">\(W\)</span>是<span class="math inline">\(V\)</span>的一个线性真子空间。</p>
 <blockquote>
