@@ -97,33 +97,75 @@ $\therefore a+a=0$
 
 （1）$\left ( R,+ \right )$加法运算是交换群
 
->* 证明运算封闭（问题）
+>* 证明运算封闭
 
-$\forall A,B \in \Gamma$
+$\because \forall A,B \in \Gamma$
 
-$(A \setminus B) \in \Gamma,(B \setminus A) \in \Gamma,(A \setminus B) \cup (B \setminus A) \in \Gamma$
+$\therefore (A \setminus B) \in \Gamma,(B \setminus A) \in \Gamma,(A \setminus B) \cup (B \setminus A) \in \Gamma$
 
+$\therefore \left ( A \cap B^{\mathrm{C}} \right ) \cup \left ( B \cap A^{\mathrm{C}} \right )=\left ( A \cup B \right ) \cap \left ( A \cap B \right )^{\mathrm{C}} \in \Gamma$
 
-
->* 证明结合律（问题）
+>* 证明结合律
 
 $\forall A,B,C \in \Gamma$
 
-$\because \left ( A+B \right )+C=(A \setminus B) \cup (B \setminus A)+C=$
+$\because \left ( A+B \right )+C=(A \setminus B) \cup (B \setminus A)+C=\left ( A \cup B \cup C \right ) \cap \left ( A \cap B \cap C \right )^{\mathrm{C}}$
+
+$\because A+\left ( B+C \right )=A+(B \setminus C) \cup (C \setminus B)=\left ( A \cup B \cup C \right ) \cap \left ( A \cap B \cap C \right )^{\mathrm{C}}$
+
+$\therefore \left ( A+B \right )+C=A+\left ( B+C \right )$
 
 >* 证明有单位元
 
-令$\phi=e$，且$\phi \in \Gamma$
+令$\varnothing=e$，且$\varnothing \in \Gamma$
 
-$\because A+\phi=(A \setminus \phi) \cup (\phi \setminus A)=A$
+$\because A+\varnothing=(A \setminus \varnothing) \cup (\varnothing \setminus A)=A$
 
-又$\because \phi+A=(\phi \setminus A) \cup (A \setminus \phi)=A$
+又$\because \varnothing+A=(\varnothing \setminus A) \cup (A \setminus \varnothing)=A$
 
-$\therefore A+\phi=\phi+A$
+$\therefore A+\varnothing=\varnothing+A$
 
-$\therefore \phi$为单位元
+$\therefore \varnothing$为单位元
 
->* 证明有逆元（问题）
+>* 证明有逆元
+
+令逆元为$B$，$\forall A \in \mathbb{X}$，证明$A \circ B=B \circ A=e=\varnothing$
+
+则$A \circ B=A+B=(A \setminus B) \cup (B \setminus A)=\varnothing$
+
+$\therefore B=A^{\mathrm{C}}$
+
+同理可证$B \circ A=\varnothing$
+
+$\therefore A \circ B=B \circ A=\varnothing$
+
+同理可证$A \ast B=A \ast A^{\mathrm{C}}=A \cap A^{\mathrm{C}}=\varnothing$
+
+（2）$\left ( R,\ast \right )$乘法运算是半群
+
+$\because \forall A,B \in \Gamma$
+
+$\therefore A \ast B=A \cap B \in \Gamma$
+
+$\because \forall A,B,C \in \Gamma$
+
+$\therefore \left ( A \ast B \right ) \ast C=\left ( A \cap B \right ) \cap C=A \cap B \cap C$
+
+$\therefore A \ast \left ( B \ast C \right )=A \cap \left ( B \cap C \right ) =A \cap B \cap C$
+
+$\therefore A \ast \left ( B \ast C \right )=A \ast \left ( B \ast C \right )$
+
+$\therefore$乘法运算是半群
+
+（3）所有元素都是幂等元
+
+$\because \forall A \in \Gamma$
+
+$\therefore A \ast A=A \cap A=A$
+
+$\therefore \Gamma$中所有元素都是幂等元
+
+综上所述，$R$为布尔环。
 
 ## 第三题
 
