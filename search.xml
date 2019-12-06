@@ -132,6 +132,11 @@
 <li>2、若<span class="math inline">\(\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}\)</span>是<span class="math inline">\(W\)</span>的一组基，把它延拓为<span class="math inline">\(V\)</span>的一组基<span class="math inline">\(\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}, \alpha_{m+1}, \cdots, \alpha_{n}(n&gt;m)\)</span>，试写出商空间<span class="math inline">\(V/W\)</span>一组基，并验证它的线性无关性。</li>
 </ul>
 </blockquote>
+<p>1、商空间<span class="math inline">\(V/W\)</span>的定义</p>
+<p><span class="math inline">\(V/W=\left \{ \alpha +W \mid \alpha \in V \right \}\)</span></p>
+<p>令<span class="math inline">\(\alpha +W=\hat{\alpha}\)</span>，对<span class="math inline">\(\forall \alpha ,\beta \in V\)</span></p>
+<p>有<span class="math inline">\(\hat{\alpha}+\hat{\beta}=\left ( \alpha+W \right )+\left ( \beta+W \right )=\left ( \alpha+\beta \right )+W\)</span></p>
+<p><span class="math inline">\(k\hat{\alpha}=k\left ( \alpha +W \right )=k\alpha +W\)</span></p>
 <h2 id="第四题">第四题</h2>
 <p>设<span class="math inline">\(\left ( X, \rho \right )\)</span>是距离空间，令</p>
 <p><span class="math display">\[\begin{equation}
