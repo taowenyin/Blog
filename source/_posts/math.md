@@ -174,7 +174,15 @@ $\therefore \Gamma$中所有元素都是幂等元
 >* 1、写出商空间$V/W$的定义（只要写出它的元素形式，加法、数乘的定义）。
 >* 2、若$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}$是$W$的一组基，把它延拓为$V$的一组基$\alpha_{1}, \alpha_{2}, \cdots, \alpha_{m}, \alpha_{m+1}, \cdots, \alpha_{n}(n>m)$，试写出商空间$V/W$一组基，并验证它的线性无关性。
 
+1、商空间$V/W$的定义
 
+$V/W=\left \{ \alpha +W \mid \alpha \in V \right \}$
+
+令$\alpha +W=\hat{\alpha}$，对$\forall \alpha ,\beta \in V$
+
+有$\hat{\alpha}+\hat{\beta}=\left ( \alpha+W \right )+\left ( \beta+W \right )=\left ( \alpha+\beta \right )+W$
+
+$k\hat{\alpha}=k\left ( \alpha +W \right )=k\alpha +W$
 
 ## 第四题
 
