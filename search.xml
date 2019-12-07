@@ -137,6 +137,27 @@
 <p>令<span class="math inline">\(\alpha +W=\hat{\alpha}\)</span>，对<span class="math inline">\(\forall \alpha ,\beta \in V\)</span></p>
 <p>有<span class="math inline">\(\hat{\alpha}+\hat{\beta}=\left ( \alpha+W \right )+\left ( \beta+W \right )=\left ( \alpha+\beta \right )+W\)</span></p>
 <p><span class="math inline">\(k\hat{\alpha}=k\left ( \alpha +W \right )=k\alpha +W\)</span></p>
+<p>2、获取商空间<span class="math inline">\(V/W\)</span>一组基</p>
+<p>对<span class="math inline">\(\forall \beta +W \in V/W\)</span>，有<span class="math inline">\(\beta=x_{1} \alpha_{1}+x_{2} \alpha_{2}+\cdots+x_{n} \alpha_{n}\)</span>，则</p>
+<p><span class="math display">\[\begin{equation}
+    \begin{matrix}
+        \beta+W=\left(x_{1} \alpha_{1}+x_{2} \alpha_{2}+\cdots+x_{n} \alpha_{n}\right)+W \\
+        =\left(x_{1} \alpha_{1}+W\right)+\cdots+\left(x_{m} \alpha_{m}+W\right)+\left(x_{m+1} \alpha_{m+1}+W\right)+\cdots+\left(x_{n} \alpha_{n}+W\right) \\
+        =W+\cdots+W+x_{m+1}\left(\alpha_{m+1}+W\right)+\cdots+x_{n}\left(\alpha_{n}+W\right) \\
+        =x_{m+1}\left(\alpha_{m+1}+W\right)+\cdots+x_{n}\left(\alpha_{n}+W\right) \\
+        =x_{m+1}\hat{\alpha_{m+1}}+\cdots+x_{n}\hat{\alpha_{n}}
+    \end{matrix}
+\end{equation}\]</span></p>
+<p>因此<span class="math inline">\(V/W\)</span>中任意向量都可以用<span class="math inline">\(\hat{\alpha_{m+1}},\cdots ,\hat{\alpha_{n}}\)</span>线性表示。</p>
+<p>3、验证这组基的线性无关性<span class="math inline">\(k_{m+1}\hat{\alpha_{m+1}}+\cdots+k_{n}\hat{\alpha_{n}}=\hat{0}\)</span></p>
+<p>设<span class="math inline">\(k_{m+1}\left(\alpha_{m+1}+W\right)+\cdots+k_{n}\left(\alpha_{n}+W\right)=W\)</span></p>
+<p>则<span class="math inline">\(\left ( k_{m+1}\alpha_{m+1}+\cdots+k_{n}\alpha_{n} \right )+W=W\)</span></p>
+<p><span class="math inline">\(\therefore k_{m+1}\alpha_{m+1}+\cdots+k_{n}\alpha_{n} \in W\)</span></p>
+<p><span class="math inline">\(\therefore k_{m+1}\alpha_{m+1}+\cdots+k_{n}\alpha_{n} = -k_{1}\alpha_{1}-\cdots-k_{m}\alpha_{m}\)</span></p>
+<p><span class="math inline">\(\therefore k_{1}\alpha_{1}+\cdots+k_{m}\alpha_{m}+k_{m+1}\alpha_{m+1}+\cdots+k_{n}\alpha_{n}=0\)</span></p>
+<p>因为<span class="math inline">\(\alpha_{1}, \cdots, \alpha_{n}\)</span>是一组线性无关的基</p>
+<p>所以<span class="math inline">\(k_{1}=k_{2}=\cdots=k_{n}=0\)</span></p>
+<p>因此<span class="math inline">\(\hat{\alpha_{m+1}},\cdots,\hat{\alpha_{n}}\)</span>是<span class="math inline">\(V/W\)</span>的一组线性无关基。</p>
 <h2 id="第四题">第四题</h2>
 <p>设<span class="math inline">\(\left ( X, \rho \right )\)</span>是距离空间，令</p>
 <p><span class="math display">\[\begin{equation}
