@@ -184,6 +184,40 @@ $V/W=\left \{ \alpha +W \mid \alpha \in V \right \}$
 
 $k\hat{\alpha}=k\left ( \alpha +W \right )=k\alpha +W$
 
+2、获取商空间$V/W$一组基
+
+对$\forall \beta +W \in V/W$，有$\beta=x_{1} \alpha_{1}+x_{2} \alpha_{2}+\cdots+x_{n} \alpha_{n}$，则
+
+\begin{equation}
+    \begin{matrix}
+        \beta+W=\left(x_{1} \alpha_{1}+x_{2} \alpha_{2}+\cdots+x_{n} \alpha_{n}\right)+W \\
+        =\left(x_{1} \alpha_{1}+W\right)+\cdots+\left(x_{m} \alpha_{m}+W\right)+\left(x_{m+1} \alpha_{m+1}+W\right)+\cdots+\left(x_{n} \alpha_{n}+W\right) \\
+        =W+\cdots+W+x_{m+1}\left(\alpha_{m+1}+W\right)+\cdots+x_{n}\left(\alpha_{n}+W\right) \\
+        =x_{m+1}\left(\alpha_{m+1}+W\right)+\cdots+x_{n}\left(\alpha_{n}+W\right) \\
+        =x_{m+1}\hat{\alpha_{m+1}}+\cdots+x_{n}\hat{\alpha_{n}}
+    \end{matrix}
+\end{equation}
+
+因此$V/W$中任意向量都可以用$\hat{\alpha_{m+1}},\cdots ,\hat{\alpha_{n}}$线性表示。
+
+3、验证这组基的线性无关性$k_{m+1}\hat{\alpha_{m+1}}+\cdots+k_{n}\hat{\alpha_{n}}=\hat{0}$
+
+设$k_{m+1}\left(\alpha_{m+1}+W\right)+\cdots+k_{n}\left(\alpha_{n}+W\right)=W$
+
+则$\left ( k_{m+1}\alpha_{m+1}+\cdots+k_{n}\alpha_{n} \right )+W=W$
+
+$\therefore k_{m+1}\alpha_{m+1}+\cdots+k_{n}\alpha_{n} \in W$
+
+$\therefore k_{m+1}\alpha_{m+1}+\cdots+k_{n}\alpha_{n} = -k_{1}\alpha_{1}-\cdots-k_{m}\alpha_{m}$
+
+$\therefore k_{1}\alpha_{1}+\cdots+k_{m}\alpha_{m}+k_{m+1}\alpha_{m+1}+\cdots+k_{n}\alpha_{n}=0$
+
+因为$\alpha_{1}, \cdots, \alpha_{n}$是一组线性无关的基
+
+所以$k_{1}=k_{2}=\cdots=k_{n}=0$
+
+因此$\hat{\alpha_{m+1}},\cdots,\hat{\alpha_{n}}$是$V/W$的一组线性无关基。
+
 ## 第四题
 
 设$\left ( X, \rho \right )$是距离空间，令
