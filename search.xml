@@ -170,6 +170,34 @@
 <li>3、若<span class="math inline">\(A\)</span>是<span class="math inline">\(\left ( X, d \right )\)</span>中的闭集，求证：<span class="math inline">\(A\)</span>也是<span class="math inline">\(\left ( X, \rho \right )\)</span>中的闭集。</li>
 </ul>
 </blockquote>
+<p>1、证明<span class="math inline">\(\left ( X, d \right )\)</span>也是距离空间：非负性、对称性、三角不等式</p>
+<p>（1）非负性</p>
+<p><span class="math inline">\(\because \rho\)</span>是距离空间</p>
+<p><span class="math inline">\(\therefore \rho(x, y) \geq 0\)</span></p>
+<p><span class="math inline">\(\therefore d(x, y)=\frac{\rho(x, y)}{1+\rho(x, y)} \geq 0\)</span></p>
+<p>（2）对称性</p>
+<p><span class="math inline">\(\because \rho\)</span>是距离空间</p>
+<p><span class="math inline">\(\therefore \rho(x, y) = \rho(y, x)\)</span></p>
+<p><span class="math inline">\(\therefore d(x, y)=\frac{\rho(x, y)}{1+\rho(x, y)} = \frac{\rho(y, x)}{1+\rho(y, x)} = d(y, x)\)</span></p>
+<p>（3）三角不等式</p>
+<p><span class="math inline">\(\because \rho\)</span>是距离空间</p>
+<p><span class="math inline">\(\therefore \rho(x, z) \leq \rho(x, y) + \rho(y, z)\)</span></p>
+<p><span class="math inline">\(\therefore d(x, z)=\frac{\rho(x, z)}{1+\rho(x, z)} \leq \frac{\rho(x, y)+\rho(y, z)}{1+\rho(x, y)+\rho(y, z)}\)</span></p>
+<p><span class="math inline">\(\therefore \frac{\rho(x, y)+\rho(y, z)}{1+\rho(x, y)+\rho(y, z)}=\frac{\rho(x, y)}{1+\rho(x, y)+\rho(y, z)}+\frac{\rho(y, z)}{1+\rho(x, y)+\rho(y, z)}\)</span></p>
+<p><span class="math inline">\(\therefore \frac{\rho(x, y)}{1+\rho(x, y)+\rho(y, z)}+\frac{\rho(y, z)}{1+\rho(x, y)+\rho(y, z)} \leq \frac{\rho(x, y)}{1+\rho(x, y)}+\frac{\rho(y, z)}{1+\rho(y, z)}=d(x,y)+d(y,z)\)</span></p>
+<p><span class="math inline">\(\therefore d(x, z) \leq d(x, y)+d(y, z)\)</span></p>
+<p>因此<span class="math inline">\(\left ( X, d \right )\)</span>是距离空间</p>
+<p>2、证明<span class="math inline">\(d\)</span>收敛到<span class="math inline">\(x\)</span>：随着<span class="math inline">\(x_{n}\)</span>的增加，距离接近于0</p>
+<p><span class="math inline">\(\because X\)</span>中的点列<span class="math inline">\(\left\{x_{n}\right\}_{n=1}^{\infty}\)</span>按距离<span class="math inline">\(\rho\)</span>收敛到<span class="math inline">\(x\)</span></p>
+<p><span class="math inline">\(\therefore \forall \varepsilon &gt; 0,\exists N\)</span>时，当<span class="math inline">\(n&gt;N\)</span>是<span class="math inline">\(\rho \left ( x_{n},x \right ) &lt; \varepsilon\)</span></p>
+<p><span class="math inline">\(\therefore \forall \varepsilon &gt; 0,\exists N\)</span>时，当<span class="math inline">\(n&gt;N\)</span>是<span class="math inline">\(d \left ( x_{n},x \right ) &lt; \frac{\varepsilon}{1+\varepsilon}\)</span></p>
+<p><span class="math inline">\(\therefore \frac{\varepsilon}{1+\varepsilon}\)</span>任意小，并且<span class="math inline">\(\frac{\varepsilon}{1+\varepsilon}&gt;0\)</span></p>
+<p><span class="math inline">\(\therefore \left\{x_{n}\right\}_{n=1}^{\infty}\)</span>也按距离<span class="math inline">\(d\)</span>收敛到<span class="math inline">\(x\)</span></p>
+<p>3、<span class="math inline">\(A\)</span>也是<span class="math inline">\(\left ( X, \rho \right )\)</span>中的闭集</p>
+<p><span class="math inline">\(\because A\)</span>是<span class="math inline">\(\left ( X, d \right )\)</span>中的闭集的充要条件是<span class="math inline">\(A\)</span>中任意一个收敛点列必收敛于<span class="math inline">\(A\)</span>中的一点。</p>
+<p><span class="math inline">\(\therefore X\)</span>中点列<span class="math inline">\(\left\{x_{n}\right\}_{n=1}^{\infty}\)</span>按距离<span class="math inline">\(d\)</span>收敛到<span class="math inline">\(X\)</span>中的一个点<span class="math inline">\(x_{0}\)</span>。</p>
+<p>有第2问结果知道点列<span class="math inline">\(\left\{x_{n}\right\}_{n=1}^{\infty}\)</span>在距离<span class="math inline">\(\rho\)</span>也收敛于<span class="math inline">\(x_{0}\)</span>，并且<span class="math inline">\(x_{0} \in X\)</span>。</p>
+<p><span class="math inline">\(\therefore A\)</span>是<span class="math inline">\(\left ( X, \rho \right )\)</span>中的闭集。</p>
 <h2 id="第五题">第五题</h2>
 <p>设<span class="math inline">\(V\)</span>是数域<span class="math inline">\(P\)</span>上的赋范线性空间，证明：</p>
 <blockquote>
