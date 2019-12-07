@@ -230,6 +230,62 @@ $\therefore k_{1}\alpha_{1}+\cdots+k_{m}\alpha_{m}+k_{m+1}\alpha_{m+1}+\cdots+k_
 >* 2、若$X$中的点列$\left\{x_{n}\right\}_{n=1}^{\infty}$按距离$\rho$收敛到$x$，求证$\left\{x_{n}\right\}_{n=1}^{\infty}$也按距离$d$收敛到$x$
 >* 3、若$A$是$\left ( X, d \right )$中的闭集，求证：$A$也是$\left ( X, \rho \right )$中的闭集。
 
+1、证明$\left ( X, d \right )$也是距离空间：非负性、对称性、三角不等式
+
+（1）非负性
+
+$\because \rho$是距离空间
+
+$\therefore \rho(x, y) \geq 0$
+
+$\therefore d(x, y)=\frac{\rho(x, y)}{1+\rho(x, y)} \geq 0$
+
+（2）对称性
+
+$\because \rho$是距离空间
+
+$\therefore \rho(x, y) = \rho(y, x)$
+
+$\therefore d(x, y)=\frac{\rho(x, y)}{1+\rho(x, y)} = \frac{\rho(y, x)}{1+\rho(y, x)} = d(y, x)$
+
+（3）三角不等式
+
+$\because \rho$是距离空间
+
+$\therefore \rho(x, z) \leq \rho(x, y) + \rho(y, z)$
+
+$\therefore d(x, z)=\frac{\rho(x, z)}{1+\rho(x, z)} \leq \frac{\rho(x, y)+\rho(y, z)}{1+\rho(x, y)+\rho(y, z)}$
+
+$\therefore \frac{\rho(x, y)+\rho(y, z)}{1+\rho(x, y)+\rho(y, z)}=\frac{\rho(x, y)}{1+\rho(x, y)+\rho(y, z)}+\frac{\rho(y, z)}{1+\rho(x, y)+\rho(y, z)}$
+
+$\therefore \frac{\rho(x, y)}{1+\rho(x, y)+\rho(y, z)}+\frac{\rho(y, z)}{1+\rho(x, y)+\rho(y, z)} \leq \frac{\rho(x, y)}{1+\rho(x, y)}+\frac{\rho(y, z)}{1+\rho(y, z)}=d(x,y)+d(y,z)$
+
+$\therefore d(x, z) \leq d(x, y)+d(y, z)$
+
+因此$\left ( X, d \right )$是距离空间
+
+2、证明$d$收敛到$x$：随着$x_{n}$的增加，距离接近于0
+
+$\because X$中的点列$\left\{x_{n}\right\}_{n=1}^{\infty}$按距离$\rho$收敛到$x$
+
+$\therefore \forall \varepsilon > 0,\exists N$时，当$n>N$是$\rho \left ( x_{n},x \right ) < \varepsilon$
+
+$\therefore \forall \varepsilon > 0,\exists N$时，当$n>N$是$d \left ( x_{n},x \right ) < \frac{\varepsilon}{1+\varepsilon}$
+
+$\therefore \frac{\varepsilon}{1+\varepsilon}$任意小，并且$\frac{\varepsilon}{1+\varepsilon}>0$
+
+$\therefore \left\{x_{n}\right\}_{n=1}^{\infty}$也按距离$d$收敛到$x$
+
+3、$A$也是$\left ( X, \rho \right )$中的闭集
+
+$\because A$是$\left ( X, d \right )$中的闭集的充要条件是$A$中任意一个收敛点列必收敛于$A$中的一点。
+
+$\therefore X$中点列$\left\{x_{n}\right\}_{n=1}^{\infty}$按距离$d$收敛到$X$中的一个点$x_{0}$。
+
+有第2问结果知道点列$\left\{x_{n}\right\}_{n=1}^{\infty}$在距离$\rho$也收敛于$x_{0}$，并且$x_{0} \in X$。
+
+$\therefore A$是$\left ( X, \rho \right )$中的闭集。
+
 ## 第五题
 
 设$V$是数域$P$上的赋范线性空间，证明：
