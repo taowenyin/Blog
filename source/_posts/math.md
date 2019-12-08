@@ -291,10 +291,44 @@ $\therefore A$是$\left ( X, \rho \right )$中的闭集。
 设$V$是数域$P$上的赋范线性空间，证明：
 
 >* 1、$V$中的收敛点列$\left\{x_{n}\right\}$的极限是唯一的。
->* 2、$V$中收敛序列$\left\{x_{n}\right\}$必有界，即存在正数$M$，使得$\left\|x_{u}\right\| \leq M(n=1,2, \cdots)$;
+>* 2、$V$中收敛序列$\left\{x_{n}\right\}$必有界，即存在正数$M$，使得$\left\|x_{n}\right\| \leq M(n=1,2, \cdots)$;
 >* 3、如果$V$中序列$\left\{x_{n}\right\}$收敛到$x \in V$，则$\left\{x_{n}\right\}$的任意一个子序列{$\left\{x_{n_{k}}\right\}$}也收敛到$x$；
 >* 4、如果$V$中序列$\left\{x_{n}\right\}$，$\left\{y_{n}\right\}$分别收敛到$x,y \in V$，则对任意$a,b \in P$，有
 
 \begin{equation}
     \lim_{n \rightarrow \infty}\left(a x_{n}+b y_{n}\right)=ax+by
 \end{equation}
+
+1、证明$\left\{x_{n}\right\}$极限的唯一性
+
+设$x,\tilde{x}$都是$x_{n}$的极限，则得到$0\leq d\left ( x,\tilde{x} \right )\leq d\left ( x,x_{n} \right )+d\left ( x_{n},\tilde{x} \right )$
+
+$\therefore$当$n \rightarrow \infty$时，$d\left ( x,x_{n} \right ) \rightarrow \infty,d\left ( x_{n},\tilde{x} \right ) \rightarrow \infty$
+
+$\therefore d\left ( x,\tilde{x} \right )=0$
+
+$\therefore x=\tilde{x}$
+
+2、证明$\left\{x_{n}\right\}$必有界（问题）
+
+由$x_{n} \rightarrow x \left ( n \rightarrow \infty \right )$知，存在正数$K$，使得当$k > K$时，$d\left ( x_{k},x \right )< 1$
+
+\begin{equation}
+    r=max\left \{ 1,d\left ( x_{1},x \right ),\cdots ,d\left ( x_{K-1},x \right ) \right \}+1
+\end{equation}
+
+则$\left\{x_{n}\right\}\subseteq U\left ( x,r \right )$
+
+3、证明任意一个子序列{$\left\{x_{n_{k}}\right\}$}也收敛到$x$（问题）
+
+4、证明$\lim_{n \rightarrow \infty}\left(a x_{n}+b y_{n}\right)=ax+by$（问题）
+
+$\because d\left ( x_{n},y_{n} \right )\leq d\left ( x_{n},x \right )+d\left ( x,y \right )+d\left ( y,y_{n} \right )$
+
+又$\because d\left ( x,y \right )\leq d\left ( x,x_{n} \right )+d\left ( x_{n},y_{n} \right )+d\left ( y_{n},y \right )$
+
+$\therefore \left | d\left ( x_{n},y_{n} \right )-d\left ( x,y \right ) \right |\leq d\left ( x_{n},x \right )+d\left ( y_{n},y \right )$
+
+当$n \rightarrow \infty$时，$d\left ( x_{n},x \right )=x,d\left ( y_{n},y \right )=y$
+
+$\therefore \lim_{n \rightarrow \infty}\left(a x_{n}+b y_{n}\right)=ax+by$
