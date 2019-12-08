@@ -296,7 +296,7 @@ $\therefore A$是$\left ( X, \rho \right )$中的闭集。
 >* 4、如果$V$中序列$\left\{x_{n}\right\}$，$\left\{y_{n}\right\}$分别收敛到$x,y \in V$，则对任意$a,b \in P$，有
 
 \begin{equation}
-    \lim_{n \rightarrow \infty}\left(a x_{n}+b y_{n}\right)=ax+by
+    \underset{n \rightarrow \infty}{lim}\left(a x_{n}+b y_{n}\right)=ax+by
 \end{equation}
 
 1、证明$\left\{x_{n}\right\}$极限的唯一性
@@ -321,7 +321,7 @@ $\therefore x=\tilde{x}$
 
 3、证明任意一个子序列{$\left\{x_{n_{k}}\right\}$}也收敛到$x$（问题）
 
-4、证明$\lim_{n \rightarrow \infty}\left(a x_{n}+b y_{n}\right)=ax+by$（问题）
+4、证明$\underset{n \rightarrow \infty}{lim} \left(a x_{n}+b y_{n}\right)=ax+by$（问题）
 
 $\because d\left ( x_{n},y_{n} \right )\leq d\left ( x_{n},x \right )+d\left ( x,y \right )+d\left ( y,y_{n} \right )$
 
@@ -331,4 +331,4 @@ $\therefore \left | d\left ( x_{n},y_{n} \right )-d\left ( x,y \right ) \right |
 
 当$n \rightarrow \infty$时，$d\left ( x_{n},x \right )=x,d\left ( y_{n},y \right )=y$
 
-$\therefore \lim_{n \rightarrow \infty}\left(a x_{n}+b y_{n}\right)=ax+by$
+$\therefore \underset{n \rightarrow \infty}{lim} \left(a x_{n}+b y_{n}\right)=ax+by$
