@@ -216,13 +216,17 @@
 <p><span class="math inline">\(\therefore\)</span>当<span class="math inline">\(n \rightarrow \infty\)</span>时，<span class="math inline">\(\|x+x_{n} \| \rightarrow 0,\|x_{n}+\tilde{x}\| \rightarrow 0\)</span></p>
 <p><span class="math inline">\(\therefore \|x+\tilde{x} \|=0\)</span></p>
 <p><span class="math inline">\(\therefore x=\tilde{x}\)</span></p>
-<p>2、证明<span class="math inline">\(\left\{x_{n}\right\}\)</span>必有界（问题）</p>
+<p>2、证明<span class="math inline">\(\left\{x_{n}\right\}\)</span>必有界</p>
 <p>由<span class="math inline">\(x_{n} \rightarrow x \left ( n \rightarrow \infty \right )\)</span>知，存在正数<span class="math inline">\(K\)</span>，使得当<span class="math inline">\(k &gt; K\)</span>时，<span class="math inline">\(d\left ( x_{k},x \right )&lt; 1\)</span></p>
 <p><span class="math display">\[\begin{equation}
     r=max\left \{ d\left ( x_{1},x \right ),\cdots ,d\left ( x_{K-1},x \right ),1 \right \}
 \end{equation}\]</span></p>
 <p>则<span class="math inline">\(\left\{x_{n}\right\}\subseteq U\left ( x,r \right )\)</span></p>
-<p>3、证明任意一个子序列{<span class="math inline">\(\left\{x_{n_{k}}\right\}\)</span>}也收敛到<span class="math inline">\(x\)</span>（问题）</p>
+<p>3、证明任意一个子序列{<span class="math inline">\(\left\{x_{n_{k}}\right\}\)</span>}也收敛到<span class="math inline">\(x\)</span></p>
+<p><span class="math inline">\(\because x_{n} \rightarrow x\)</span></p>
+<p><span class="math inline">\(\therefore \exists N\)</span>，使得<span class="math inline">\(n &gt; N\)</span>时有<span class="math inline">\(\left \| x_{n}-x \right \| &lt; \varepsilon\)</span></p>
+<p><span class="math inline">\(\because x_{n_{k}}\)</span>是<span class="math inline">\(x_{n}\)</span>的子列</p>
+<p><span class="math inline">\(\therefore \exists k\)</span>，使得<span class="math inline">\(k&gt;K\)</span>时，有<span class="math inline">\(n_{k}&gt;N\)</span></p>
 <p>4、证明<span class="math inline">\(\underset{n \rightarrow \infty}{lim} \left(a x_{n}+b y_{n}\right)=ax+by\)</span></p>
 <p><span class="math inline">\(\because \left \|\left(a x_{n}+b y_{n}\right)-\left ( ax+by\right ) \right \|=\left \| a\left ( x_{n}-x\right )+b\left ( y_{n}-y\right )\right \|\)</span></p>
 <p><span class="math inline">\(\therefore \left \| a\left ( x_{n}-x\right )+b\left ( y_{n}-y\right )\right \| \leq \left \| a\left ( x_{n}-x\right )\right \|+\left \| b\left ( y_{n}-y\right )\right \|\)</span></p>
@@ -230,6 +234,47 @@
 <p><span class="math inline">\(\therefore \left \|\left(a x_{n}+b y_{n}\right)-\left ( ax+by\right ) \right \| \leq \left | a\right |\left \| x_{n}-x\right \|+\left | b\right |\left \| y_{n}-y\right \|\)</span></p>
 <p>又<span class="math inline">\(\because x_{n}\)</span>收敛到<span class="math inline">\(x\)</span>，并且<span class="math inline">\(y_{n}\)</span>也收敛到<span class="math inline">\(y\)</span></p>
 <p><span class="math inline">\(\therefore \underset{n \rightarrow \infty}{lim} \left(a x_{n}+b y_{n}\right)=ax+by\)</span></p>
+<h2 id="第六题">第六题</h2>
+<p>证<span class="math inline">\(U_{n}\)</span>是循环群，<span class="math inline">\(U_{n}=span\left ( e^{i\frac{2\pi k}{n}} \right )\left ( i=0,1,\cdots,n-1 \right )\)</span></p>
+<p>先证群，再证循环群</p>
+<p>设<span class="math inline">\(\varepsilon ^{k}=e^{\frac{i \cdot 2\pi \cdot k}{n}}\)</span></p>
+<p>当<span class="math inline">\(k=n\)</span>时，<span class="math inline">\(\varepsilon ^{n}=e^{i \cdot 2\pi}=1,\varepsilon ^{0}=e^{0}=1\)</span></p>
+<p><span class="math inline">\(\forall \varepsilon ^{a},\varepsilon ^{a},0\leq a,b\leq n-1\)</span></p>
+<blockquote>
+<ul>
+<li>证明运算封闭</li>
+</ul>
+</blockquote>
+<p><span class="math inline">\(\because \varepsilon ^{a}\cdot \varepsilon ^{b}=e^{i\frac{2\pi a}{n}}\cdot e^{i\frac{2\pi b}{n}}=e^{i\frac{2\pi \left ( a+b \right )}{n}}\)</span></p>
+<p><span class="math inline">\(\therefore \varepsilon ^{a}\cdot \varepsilon ^{b} \in U_{n}\)</span></p>
+<blockquote>
+<ul>
+<li>证明结合律</li>
+</ul>
+</blockquote>
+<p><span class="math inline">\(\because \left ( \varepsilon ^{a}\cdot \varepsilon ^{b} \right )\cdot \varepsilon ^{c}=e^{i\frac{2\pi \left ( a+b \right )}{n}}\cdot e^{i\frac{2\pi c}{n}}=e^{i\frac{2\pi \left ( a+b+c \right )}{n}}\)</span></p>
+<p><span class="math inline">\(\because \varepsilon ^{a} \cdot \left ( \varepsilon ^{b}\cdot \varepsilon ^{c} \right )=e^{i\frac{2\pi a}{n}} \cdot e^{i\frac{2\pi \left ( b+c \right )}{n}}=e^{i\frac{2\pi \left ( a+b+c \right )}{n}}\)</span></p>
+<p><span class="math inline">\(\therefore \left ( \varepsilon ^{a}\cdot \varepsilon ^{b} \right )\cdot \varepsilon ^{c}=\varepsilon ^{a} \cdot \left ( \varepsilon ^{b}\cdot \varepsilon ^{c} \right )\)</span></p>
+<blockquote>
+<ul>
+<li>证明有单位元</li>
+</ul>
+</blockquote>
+<p><span class="math inline">\(\because \varepsilon ^{0}=e ^{0}=1\)</span></p>
+<p>并且<span class="math inline">\(\because \varepsilon ^{k}\cdot \varepsilon ^{0}=\varepsilon ^{k}\)</span></p>
+<p><span class="math inline">\(\therefore \varepsilon ^{0}\)</span>为单位元</p>
+<blockquote>
+<ul>
+<li>证明有逆元</li>
+</ul>
+</blockquote>
+<p><span class="math inline">\(\forall \varepsilon ^{k} \in U_{n}\)</span></p>
+<p>则<span class="math inline">\(\exists \varepsilon ^{n-k}\)</span>使得</p>
+<p><span class="math inline">\(\varepsilon ^{k} \cdot \varepsilon ^{n-k}=\varepsilon ^{n}=1=\varepsilon ^{0}\)</span></p>
+<p><span class="math inline">\(\varepsilon ^{n-k} \cdot \varepsilon ^{k}=\varepsilon ^{0}\)</span></p>
+<p>综上所述<span class="math inline">\(U_{n}\)</span>是群</p>
+<p><span class="math inline">\(\because \varepsilon ^{k}=e^{\frac{i \cdot 2\pi \cdot k}{n}}\)</span>，即生成元是<span class="math inline">\(e^{\frac{i \cdot 2\pi}{n}}\)</span></p>
+<p><span class="math inline">\(\therefore U_{n}=span\left ( e^{i\frac{2\pi k}{n}} \right )\)</span>是循环群</p>
 ]]></content>
       <categories>
         <category>课程</category>
