@@ -301,11 +301,11 @@ $\therefore A$是$\left ( X, \rho \right )$中的闭集。
 
 1、证明$\left\{x_{n}\right\}$极限的唯一性
 
-设$x,\tilde{x}$都是$x_{n}$的极限，则得到$0\leq d\left ( x,\tilde{x} \right )\leq d\left ( x,x_{n} \right )+d\left ( x_{n},\tilde{x} \right )$
+设$x,\tilde{x}$都是$x_{n}$的极限，则得到$0\leq \|x+\tilde{x} \| \leq \|x+x_{n}\|+\|x_{n}+\tilde{x}\|$
 
-$\therefore$当$n \rightarrow \infty$时，$d\left ( x,x_{n} \right ) \rightarrow \infty,d\left ( x_{n},\tilde{x} \right ) \rightarrow \infty$
+$\therefore$当$n \rightarrow \infty$时，$\|x+x_{n} \| \rightarrow 0,\|x_{n}+\tilde{x}\| \rightarrow 0$
 
-$\therefore d\left ( x,\tilde{x} \right )=0$
+$\therefore \|x+\tilde{x} \|=0$
 
 $\therefore x=\tilde{x}$
 
@@ -314,21 +314,23 @@ $\therefore x=\tilde{x}$
 由$x_{n} \rightarrow x \left ( n \rightarrow \infty \right )$知，存在正数$K$，使得当$k > K$时，$d\left ( x_{k},x \right )< 1$
 
 \begin{equation}
-    r=max\left \{ 1,d\left ( x_{1},x \right ),\cdots ,d\left ( x_{K-1},x \right ) \right \}+1
+    r=max\left \{ d\left ( x_{1},x \right ),\cdots ,d\left ( x_{K-1},x \right ),1 \right \}
 \end{equation}
 
 则$\left\{x_{n}\right\}\subseteq U\left ( x,r \right )$
 
 3、证明任意一个子序列{$\left\{x_{n_{k}}\right\}$}也收敛到$x$（问题）
 
-4、证明$\underset{n \rightarrow \infty}{lim} \left(a x_{n}+b y_{n}\right)=ax+by$（问题）
+4、证明$\underset{n \rightarrow \infty}{lim} \left(a x_{n}+b y_{n}\right)=ax+by$
 
-$\because d\left ( x_{n},y_{n} \right )\leq d\left ( x_{n},x \right )+d\left ( x,y \right )+d\left ( y,y_{n} \right )$
+$\because \left \|\left(a x_{n}+b y_{n}\right)-\left ( ax+by\right ) \right \|=\left \| a\left ( x_{n}-x\right )+b\left ( y_{n}-y\right )\right \|$
 
-又$\because d\left ( x,y \right )\leq d\left ( x,x_{n} \right )+d\left ( x_{n},y_{n} \right )+d\left ( y_{n},y \right )$
+$\therefore \left \| a\left ( x_{n}-x\right )+b\left ( y_{n}-y\right )\right \| \leq \left \| a\left ( x_{n}-x\right )\right \|+\left \| b\left ( y_{n}-y\right )\right \|$
 
-$\therefore \left | d\left ( x_{n},y_{n} \right )-d\left ( x,y \right ) \right |\leq d\left ( x_{n},x \right )+d\left ( y_{n},y \right )$
+$\because \left \| a\left ( x_{n}-x\right )\right \|+\left \| b\left ( y_{n}-y\right )\right \|=\left | a\right |\left \| x_{n}-x\right \|+\left | b\right |\left \| y_{n}-y\right \|$
 
-当$n \rightarrow \infty$时，$d\left ( x_{n},x \right )=x,d\left ( y_{n},y \right )=y$
+$\therefore \left \|\left(a x_{n}+b y_{n}\right)-\left ( ax+by\right ) \right \| \leq \left | a\right |\left \| x_{n}-x\right \|+\left | b\right |\left \| y_{n}-y\right \|$
+
+又$\because x_{n}$收敛到$x$，并且$y_{n}$也收敛到$y$
 
 $\therefore \underset{n \rightarrow \infty}{lim} \left(a x_{n}+b y_{n}\right)=ax+by$
