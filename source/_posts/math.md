@@ -309,7 +309,7 @@ $\therefore \|x+\tilde{x} \|=0$
 
 $\therefore x=\tilde{x}$
 
-2、证明$\left\{x_{n}\right\}$必有界（问题）
+2、证明$\left\{x_{n}\right\}$必有界
 
 由$x_{n} \rightarrow x \left ( n \rightarrow \infty \right )$知，存在正数$K$，使得当$k > K$时，$d\left ( x_{k},x \right )< 1$
 
@@ -319,7 +319,15 @@ $\therefore x=\tilde{x}$
 
 则$\left\{x_{n}\right\}\subseteq U\left ( x,r \right )$
 
-3、证明任意一个子序列{$\left\{x_{n_{k}}\right\}$}也收敛到$x$（问题）
+3、证明任意一个子序列{$\left\{x_{n_{k}}\right\}$}也收敛到$x$
+
+$\because x_{n} \rightarrow x$
+
+$\therefore \exists N$，使得$n > N$时有$\left \| x_{n}-x \right \| < \varepsilon$
+
+$\because x_{n_{k}}$是$x_{n}$的子列
+
+$\therefore \exists k$，使得$k>K$时，有$n_{k}>N$
 
 4、证明$\underset{n \rightarrow \infty}{lim} \left(a x_{n}+b y_{n}\right)=ax+by$
 
@@ -334,3 +342,53 @@ $\therefore \left \|\left(a x_{n}+b y_{n}\right)-\left ( ax+by\right ) \right \|
 又$\because x_{n}$收敛到$x$，并且$y_{n}$也收敛到$y$
 
 $\therefore \underset{n \rightarrow \infty}{lim} \left(a x_{n}+b y_{n}\right)=ax+by$
+
+## 第六题
+
+证$U_{n}$是循环群，$U_{n}=span\left ( e^{i\frac{2\pi k}{n}} \right )\left ( i=0,1,\cdots,n-1 \right )$
+
+先证群，再证循环群
+
+设$\varepsilon ^{k}=e^{\frac{i \cdot 2\pi \cdot k}{n}}$
+
+当$k=n$时，$\varepsilon ^{n}=e^{i \cdot 2\pi}=1,\varepsilon ^{0}=e^{0}=1$
+
+$\forall \varepsilon ^{a},\varepsilon ^{a},0\leq a,b\leq n-1$
+
+>* 证明运算封闭
+
+$\because \varepsilon ^{a}\cdot \varepsilon ^{b}=e^{i\frac{2\pi a}{n}}\cdot e^{i\frac{2\pi b}{n}}=e^{i\frac{2\pi \left ( a+b \right )}{n}}$
+
+$\therefore \varepsilon ^{a}\cdot \varepsilon ^{b} \in U_{n}$
+
+>* 证明结合律
+
+$\because \left ( \varepsilon ^{a}\cdot \varepsilon ^{b} \right )\cdot \varepsilon ^{c}=e^{i\frac{2\pi \left ( a+b \right )}{n}}\cdot e^{i\frac{2\pi c}{n}}=e^{i\frac{2\pi \left ( a+b+c \right )}{n}}$
+
+$\because \varepsilon ^{a} \cdot \left ( \varepsilon ^{b}\cdot \varepsilon ^{c} \right )=e^{i\frac{2\pi a}{n}} \cdot e^{i\frac{2\pi \left ( b+c \right )}{n}}=e^{i\frac{2\pi \left ( a+b+c \right )}{n}}$
+
+$\therefore \left ( \varepsilon ^{a}\cdot \varepsilon ^{b} \right )\cdot \varepsilon ^{c}=\varepsilon ^{a} \cdot \left ( \varepsilon ^{b}\cdot \varepsilon ^{c} \right )$
+
+>* 证明有单位元
+
+$\because \varepsilon ^{0}=e ^{0}=1$
+
+并且$\because \varepsilon ^{k}\cdot \varepsilon ^{0}=\varepsilon ^{k}$
+
+$\therefore \varepsilon ^{0}$为单位元
+
+>* 证明有逆元
+
+$\forall \varepsilon ^{k} \in U_{n}$
+
+则$\exists \varepsilon ^{n-k}$使得
+
+$\varepsilon ^{k} \cdot \varepsilon ^{n-k}=\varepsilon ^{n}=1=\varepsilon ^{0}$
+
+$\varepsilon ^{n-k} \cdot \varepsilon ^{k}=\varepsilon ^{0}$
+
+综上所述$U_{n}$是群
+
+$\because \varepsilon ^{k}=e^{\frac{i \cdot 2\pi \cdot k}{n}}$，即生成元是$e^{\frac{i \cdot 2\pi}{n}}$
+
+$\therefore U_{n}=span\left ( e^{i\frac{2\pi k}{n}} \right )$是循环群
