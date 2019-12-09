@@ -212,22 +212,23 @@
     \underset{n \rightarrow \infty}{lim}\left(a x_{n}+b y_{n}\right)=ax+by
 \end{equation}\]</span></p>
 <p>1、证明<span class="math inline">\(\left\{x_{n}\right\}\)</span>极限的唯一性</p>
-<p>设<span class="math inline">\(x,\tilde{x}\)</span>都是<span class="math inline">\(x_{n}\)</span>的极限，则得到<span class="math inline">\(0\leq d\left ( x,\tilde{x} \right )\leq d\left ( x,x_{n} \right )+d\left ( x_{n},\tilde{x} \right )\)</span></p>
-<p><span class="math inline">\(\therefore\)</span>当<span class="math inline">\(n \rightarrow \infty\)</span>时，<span class="math inline">\(d\left ( x,x_{n} \right ) \rightarrow \infty,d\left ( x_{n},\tilde{x} \right ) \rightarrow \infty\)</span></p>
-<p><span class="math inline">\(\therefore d\left ( x,\tilde{x} \right )=0\)</span></p>
+<p>设<span class="math inline">\(x,\tilde{x}\)</span>都是<span class="math inline">\(x_{n}\)</span>的极限，则得到<span class="math inline">\(0\leq \|x+\tilde{x} \| \leq \|x+x_{n}\|+\|x_{n}+\tilde{x}\|\)</span></p>
+<p><span class="math inline">\(\therefore\)</span>当<span class="math inline">\(n \rightarrow \infty\)</span>时，<span class="math inline">\(\|x+x_{n} \| \rightarrow 0,\|x_{n}+\tilde{x}\| \rightarrow 0\)</span></p>
+<p><span class="math inline">\(\therefore \|x+\tilde{x} \|=0\)</span></p>
 <p><span class="math inline">\(\therefore x=\tilde{x}\)</span></p>
 <p>2、证明<span class="math inline">\(\left\{x_{n}\right\}\)</span>必有界（问题）</p>
 <p>由<span class="math inline">\(x_{n} \rightarrow x \left ( n \rightarrow \infty \right )\)</span>知，存在正数<span class="math inline">\(K\)</span>，使得当<span class="math inline">\(k &gt; K\)</span>时，<span class="math inline">\(d\left ( x_{k},x \right )&lt; 1\)</span></p>
 <p><span class="math display">\[\begin{equation}
-    r=max\left \{ 1,d\left ( x_{1},x \right ),\cdots ,d\left ( x_{K-1},x \right ) \right \}+1
+    r=max\left \{ d\left ( x_{1},x \right ),\cdots ,d\left ( x_{K-1},x \right ),1 \right \}
 \end{equation}\]</span></p>
 <p>则<span class="math inline">\(\left\{x_{n}\right\}\subseteq U\left ( x,r \right )\)</span></p>
 <p>3、证明任意一个子序列{<span class="math inline">\(\left\{x_{n_{k}}\right\}\)</span>}也收敛到<span class="math inline">\(x\)</span>（问题）</p>
-<p>4、证明<span class="math inline">\(\underset{n \rightarrow \infty}{lim} \left(a x_{n}+b y_{n}\right)=ax+by\)</span>（问题）</p>
-<p><span class="math inline">\(\because d\left ( x_{n},y_{n} \right )\leq d\left ( x_{n},x \right )+d\left ( x,y \right )+d\left ( y,y_{n} \right )\)</span></p>
-<p>又<span class="math inline">\(\because d\left ( x,y \right )\leq d\left ( x,x_{n} \right )+d\left ( x_{n},y_{n} \right )+d\left ( y_{n},y \right )\)</span></p>
-<p><span class="math inline">\(\therefore \left | d\left ( x_{n},y_{n} \right )-d\left ( x,y \right ) \right |\leq d\left ( x_{n},x \right )+d\left ( y_{n},y \right )\)</span></p>
-<p>当<span class="math inline">\(n \rightarrow \infty\)</span>时，<span class="math inline">\(d\left ( x_{n},x \right )=x,d\left ( y_{n},y \right )=y\)</span></p>
+<p>4、证明<span class="math inline">\(\underset{n \rightarrow \infty}{lim} \left(a x_{n}+b y_{n}\right)=ax+by\)</span></p>
+<p><span class="math inline">\(\because \left \|\left(a x_{n}+b y_{n}\right)-\left ( ax+by\right ) \right \|=\left \| a\left ( x_{n}-x\right )+b\left ( y_{n}-y\right )\right \|\)</span></p>
+<p><span class="math inline">\(\therefore \left \| a\left ( x_{n}-x\right )+b\left ( y_{n}-y\right )\right \| \leq \left \| a\left ( x_{n}-x\right )\right \|+\left \| b\left ( y_{n}-y\right )\right \|\)</span></p>
+<p><span class="math inline">\(\because \left \| a\left ( x_{n}-x\right )\right \|+\left \| b\left ( y_{n}-y\right )\right \|=\left | a\right |\left \| x_{n}-x\right \|+\left | b\right |\left \| y_{n}-y\right \|\)</span></p>
+<p><span class="math inline">\(\therefore \left \|\left(a x_{n}+b y_{n}\right)-\left ( ax+by\right ) \right \| \leq \left | a\right |\left \| x_{n}-x\right \|+\left | b\right |\left \| y_{n}-y\right \|\)</span></p>
+<p>又<span class="math inline">\(\because x_{n}\)</span>收敛到<span class="math inline">\(x\)</span>，并且<span class="math inline">\(y_{n}\)</span>也收敛到<span class="math inline">\(y\)</span></p>
 <p><span class="math inline">\(\therefore \underset{n \rightarrow \infty}{lim} \left(a x_{n}+b y_{n}\right)=ax+by\)</span></p>
 ]]></content>
       <categories>
