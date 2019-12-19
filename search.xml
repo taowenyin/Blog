@@ -31,9 +31,20 @@
 <li>实验表明，所提出的MLDF能够在9个基础数据集和6给多标签方法上达到最佳性能。此外，度量感知特征重用机制和度量感知层增长机制被证明是必要的。此外，实验也表明，在基础树模型的使用，以及防止过拟合方面具有很高的灵活性。</li>
 </ul>
 </blockquote>
-<p>表格1：定义6个多标签性的损失函数，<span class="math inline">\(\downarrow\)</span>表示越低性能越好，<span class="math inline">\(\uparrow\)</span>表示越高性能越好</p>
-<img src="/ml-df/six-loss-function.png" class title="六个损失函数">
 <h1 id="准备工作">准备工作</h1>
+<p>本节将介绍各种性能度量方法，然后介绍基于树的多标签方法，这些方法是MLDF的基础。</p>
+<h2 id="多标签性能度量">多标签性能度量</h2>
+<p>多标签分类任务是从训练集<span class="math inline">\(\left \{ \left ( x_{i},y_{i} \right )\mid 1\leq i\leq m,x_{i}\in \mathbb{R}^{d},y_{i}\in \left \{ 0,1 \right \}^l \right \}\)</span>中获取一个分类器<span class="math inline">\(H\)</span>。假设多标签学习模型首先产生一个实数方程<span class="math inline">\(F:\mathcal{X}\rightarrow \left [ 0,1 \right ]^{l}\)</span>，该函数是标签相关性的置信度函数。通过阈值化可以从函数<span class="math inline">\(F\)</span>获得多标签分类器<span class="math inline">\(H:\mathcal{X}\rightarrow \left \{ 0,1 \right \}^{l}\)</span>。</p>
+<p>多标签学习的性能度量有许多种，本文中使用了6个被广泛使用的评价指标。表1显示的就是这个评价指标的数学表达，<span class="math inline">\(\mathcal{Y}\)</span>表示正确的标签集，<span class="math inline">\(\mathcal{Y}_{i}\)</span>表示第<span class="math inline">\(i\)</span>行的标签矩阵，'<span class="math inline">\(+\)</span>'（'<span class="math inline">\(-\)</span>'）表示相关性（不相关）标记。Hanmming损失和宏观AUC是基于标签的度量，而one-error、coverage、ranking损失和平均精度是基于实例的度量。<span class="math inline">\(f_{ij}\)</span>表示第<span class="math inline">\(i\)</span>个实例在第<span class="math inline">\(j\)</span>个标签上的置信度，<span class="math inline">\(h_{ij}\)</span>表示第<span class="math inline">\(i\)</span>个实例在第<span class="math inline">\(j\)</span>个标签上的预测结果，<span class="math inline">\(rank_{F}\left ( x_{i},j \right )\)</span>表示实例<span class="math inline">\(x_{i}\)</span>在第<span class="math inline">\(j\)</span>个标签上的排序。例如<span class="math inline">\(f\left ( x_{i} \right )=\left [ 0.2,0.8,0.4 \right ]\)</span>，那么当阈值为0.5时，就可以得到<span class="math inline">\(h\left ( x_{i},j \right )=\left [ 0,1,0 \right ]\)</span>。此外，还可以得到<span class="math inline">\(\mathcal{Y}_{i}^{-}=\left \{ 1,3 \right \}\)</span>和<span class="math inline">\(\mathcal{Y}_{i}^{+}=\left \{ 2 \right \}\)</span>。当<span class="math inline">\(f_{i2}=0.8\)</span>时，可以得到<span class="math inline">\(rank_{F}\left ( x_{i},2 \right )=1\)</span>。</p>
+<p>表1：定义6个多标签性的损失函数，<span class="math inline">\(\downarrow\)</span>表示越低性能越好，<span class="math inline">\(\uparrow\)</span>表示越高性能越好</p>
+<img src="/ml-df/six-loss-function.png" class title="六个损失函数">
+<h2 id="基于树的多标签方法">基于树的多标签方法</h2>
+<p>基于树的夺标方法，如ML-C4.5和PCT都是通过多分类树方法来进行适配。ML-C4.5从C4.5进行适配，允许树的叶中有多个标签，其熵计算公式通过对每个标签的熵求和得到。预测聚类树（PCT）递归地将所有样本划分为更小的聚类，同时向下移动树。在测试过程中，多标签树的叶节点通过计算相关实例所在叶节点上不同类别训练实例的概率，返回样本属于每个类别的概率向量。最后，保存在每个叶节点中的信息就是该实例属于哪个标签的概率。</p>
+<p>一棵树的能力是很有限的，但是一群树就可以大大提高性能。随机森林的预测聚类树（RF-PCT）和随机森林的ML-C4.5（RFML-C4.5）都是使用PCT和ML-C4.5作为基础分类器的聚合。与随机森林相同，这些森林都是使用Bagging，并且选择不同的特征集来获得不同基础分类器的多样性。给定一个测试实例，森林将通过平均所有树的结果来生成标签分布的估计值。</p>
+<h1 id="提出的方法">提出的方法</h1>
+<h2 id="mldf的框架">MLDF的框架</h2>
+<img src="/ml-df/mldf-framework.png" class title="MLDF框架">
+<p>图1：MLDF框架，每层都集成了2个不同的森林，上面是黑色，下面是蓝色</p>
 <h1 id="参考资料">参考资料</h1>
 <p>[1] <a href="https://www.zhuanzhi.ai/document/430049ace146346a4859fa4c111b1a16" target="_blank" rel="noopener">周志华团队：深度森林挑战多标签学习，9大数据集超越传统方法</a></p>
 ]]></content>
