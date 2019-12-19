@@ -45,6 +45,25 @@
 <h2 id="mldf的框架">MLDF的框架</h2>
 <img src="/ml-df/mldf-framework.png" class title="MLDF框架">
 <p>图1：MLDF框架，每层都集成了2个不同的森林，上面是黑色，下面是蓝色</p>
+<p>图1是MLDF框架。不同的多标签森林（上面的黑色森林和下面的蓝色森林）被集成在MLDF中的每一层。每一层<span class="math inline">\(layer_{t}\)</span>会获取对应的表达结果<span class="math inline">\(H^{t}\)</span>，并把表达结果传递给度量感知特征重用部分，度量感知特征重用部分在不同性能度量指标的指导下，通过重用在<span class="math inline">\(layer_{t-1}\)</span>学习到的特征<span class="math inline">\(G^{t-1}\)</span>来更新自己。新的特征<span class="math inline">\(G^{t}\)</span>（蓝色部分）将会与原始输入特征（红色部分）进行串联，从而形成一个整体并输入到下一层中。</p>
+<p>在MLDF中，每个层都是一个集成森林。其中至关重要的就是多样的森林增长方法，通过这些方法来提高集成森林的性能。在传统的多分类问题中，每个特征随机取一个分裂点的极端随机树被用在多粒度级联森林（gcForest）。对于多标签学习问题，通过改变生成树时提取节点的方法来适配该方法。在MLDF中，以RF-PCT（随机森林的预测聚类树）来作为森林的基础模块，并且通过两个在森林中不同的方法来生成树节点，一个是考虑了每个特征的所有可能的分割点（RF-PCT），另一个则是随机考虑一个分割点（ERF-PCT）。因此，其他多标签树方法能够被集成到每一层中，如RFML-C4.5。</p>
+<p>在2.2节中，当给一个实例，那么森林将会产生一个标签分布估计，可以把这个标签分布估计作为实例对于每个标签的置信度。每一层中的表达学习将采用度量感知特征重用，并把原始的输入特征输入到下一层中。具有丰富标签信息的实值表达将会被输入到下一层中，以便在下一层中MLDF更好的利用标签之间的相关性。</p>
+<p>表2：6个多标签度量的置信度计算方法，<span class="math inline">\(p_{i \cdot}\)</span>或<span class="math inline">\(p_{\cdot j}\)</span>已经按降序排序</p>
+<img src="/ml-df/six-measure-confidence.png" class title="置信度计算">
+<p>假设森林已经完成了学习，如图1所示，整个预测的过程可以总结如下：</p>
+<blockquote>
+<ul>
+<li>把实例预处理为标准矩阵<span class="math inline">\(X\)</span>。</li>
+<li>把实例矩阵<span class="math inline">\(X\)</span>传递给第一层，并且得到第一层的表达<span class="math inline">\(H^{1}\)</span>。</li>
+<li>通过采用度量感知特征重用机制获取了<span class="math inline">\(G^{1}\)</span>。</li>
+<li>把<span class="math inline">\(G^{1}\)</span>与原始的输入特征<span class="math inline">\(X\)</span>进行串联，并且把它们输入到下一层。</li>
+<li>经过多层后，得到最终的预测结果。</li>
+</ul>
+</blockquote>
+<h2 id="度量感知特征重用">度量感知特征重用</h2>
+<p>PCT的特征分割准则与性能度量没有直接的关系，虽然度量的方式不同，但是每层生成的表达<span class="math inline">\(H^{t}\)</span>是相同的。因此，在不同度量指导下提出了度量感知特征重用机制来增强每层的表达。度量感知特征重用机制的核心思想是，如果当前层的置信度低于训练中确定的阈值，则在当前层上部分重用前一层的较好表达，从而使度量性能更好。因此，问题就在于如何根据用户需求确定具体的多标签度量的置信度。受多类分类问题置信度计算方法的启发，设计了不同多标签度量下的置信度计算方法。</p>
+<img src="/ml-df/measure-aware-feature-reuse.png" class title="度量感知特征重用算法">
+<p>图2：度量感知特征重用算法</p>
 <h1 id="参考资料">参考资料</h1>
 <p>[1] <a href="https://www.zhuanzhi.ai/document/430049ace146346a4859fa4c111b1a16" target="_blank" rel="noopener">周志华团队：深度森林挑战多标签学习，9大数据集超越传统方法</a></p>
 ]]></content>
