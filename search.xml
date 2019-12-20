@@ -48,8 +48,6 @@
 <p>图1是MLDF框架。不同的多标签森林（上面的黑色森林和下面的蓝色森林）被集成在MLDF中的每一层。每一层<span class="math inline">\(layer_{t}\)</span>会获取对应的表达结果<span class="math inline">\(H^{t}\)</span>，并把表达结果传递给度量感知特征重用部分，度量感知特征重用部分在不同性能度量指标的指导下，通过重用在<span class="math inline">\(layer_{t-1}\)</span>学习到的特征<span class="math inline">\(G^{t-1}\)</span>来更新自己。新的特征<span class="math inline">\(G^{t}\)</span>（蓝色部分）将会与原始输入特征（红色部分）进行串联，从而形成一个整体并输入到下一层中。</p>
 <p>在MLDF中，每个层都是一个集成森林。其中至关重要的就是多样的森林增长方法，通过这些方法来提高集成森林的性能。在传统的多分类问题中，每个特征随机取一个分裂点的极端随机树被用在多粒度级联森林（gcForest）。对于多标签学习问题，通过改变生成树时提取节点的方法来适配该方法。在MLDF中，以RF-PCT（随机森林的预测聚类树）来作为森林的基础模块，并且通过两个在森林中不同的方法来生成树节点，一个是考虑了每个特征的所有可能的分割点（RF-PCT），另一个则是随机考虑一个分割点（ERF-PCT）。因此，其他多标签树方法能够被集成到每一层中，如RFML-C4.5。</p>
 <p>在2.2节中，当给一个实例，那么森林将会产生一个标签分布估计，可以把这个标签分布估计作为实例对于每个标签的置信度。每一层中的表达学习将采用度量感知特征重用，并把原始的输入特征输入到下一层中。具有丰富标签信息的实值表达将会被输入到下一层中，以便在下一层中MLDF更好的利用标签之间的相关性。</p>
-<p>表2：6个多标签度量的置信度计算方法，<span class="math inline">\(p_{i \cdot}\)</span>或<span class="math inline">\(p_{\cdot j}\)</span>已经按降序排序</p>
-<img src="/ml-df/six-measure-confidence.png" class title="置信度计算">
 <p>假设森林已经完成了学习，如图1所示，整个预测的过程可以总结如下：</p>
 <blockquote>
 <ul>
@@ -62,8 +60,25 @@
 </blockquote>
 <h2 id="度量感知特征重用">度量感知特征重用</h2>
 <p>PCT的特征分割准则与性能度量没有直接的关系，虽然度量的方式不同，但是每层生成的表达<span class="math inline">\(H^{t}\)</span>是相同的。因此，在不同度量指导下提出了度量感知特征重用机制来增强每层的表达。度量感知特征重用机制的核心思想是，如果当前层的置信度低于训练中确定的阈值，则在当前层上部分重用前一层的较好表达，从而使度量性能更好。因此，问题就在于如何根据用户需求确定具体的多标签度量的置信度。受多类分类问题置信度计算方法的启发，设计了不同多标签度量下的置信度计算方法。</p>
+<p>Hamming损失主要关注单比特的正确性，one-error关注接近于1的元素，而其他损失函数则关注每行或者每列的排名。因此，设计合理的方法计算各种测度的置信度是关键。表2总结了每个度量方法的计算方式。矩阵<span class="math inline">\(P\)</span>是<span class="math inline">\(H^{t}\)</span>的平均，并且元素<span class="math inline">\(p_{ij}\)</span>表示<span class="math inline">\(Pr\left [ \hat{y}_{ij}=1 \right ]\)</span>。为了方便，当基于实例（标签）进行度量时，将按照降序排列<span class="math inline">\(P\)</span>中的每一行（列）的元素。特别对于Hanmming损失而言，作者计算了比特为正例或负例的置信度最大值。例如，当预测向量<span class="math inline">\(p_{\cdot j}=\left [ 0.9,0.6,0.4,0.3 \right ]\)</span>时，则置信度<span class="math inline">\(\alpha_{j}=\frac{1}{4}\left ( 0.9+0.6+0.6+0.7 \right )=0.7\)</span>。对于排名损失，作者计算了排名损失为零的概率，这意味着正例签领先于负例标签。例如，当预测向量<span class="math inline">\(p_{\cdot j}=\left [ 0.9,0.6,0.4,0.3 \right ]\)</span>时，那么就有5种可能的基准排序导致排序损失为零。因此，这座通过对这五种情况的概率求和来得到置信度。而macro-AUC的置信度和平均精度使用相似的方法进行定义。</p>
+<p>表2：6个多标签度量的置信度计算方法，<span class="math inline">\(p_{i \cdot}\)</span>或<span class="math inline">\(p_{\cdot j}\)</span>已经按降序排序</p>
+<img src="/ml-df/six-measure-confidence.png" class title="置信度计算">
+<p>算法1总结的了度量感知特征重用的计算过程。由于基于标签度量和基于实例度量的多样性，因此就需要分别处理它们。特别是，基于标签的度量在计算置信度时是基于<span class="math inline">\(H^{t}\)</span>，而基于实例的度量在计算置信度时是基于每一行。在置信度计算完成后，如果置信度<span class="math inline">\(\alpha^{t}\)</span>低于阈值，那么就需要修正前一层的表达<span class="math inline">\(G^{t-1}\)</span>，最后用修正后的表达来修更新当前层<span class="math inline">\(G^{t}\)</span>表达。</p>
+<p>算法1：度量感知特征重用算法</p>
 <img src="/ml-df/measure-aware-feature-reuse.png" class title="度量感知特征重用算法">
-<p>图2：度量感知特征重用算法</p>
+<p>整个度量感知特征重用的过程并不依赖于真正的标签，而是通过训练过程中确定的阈值来判断每层表达的优劣。算法2就是确认阈值的过程，当评价指标的结果在<span class="math inline">\(layer_{t}\)</span>变差时，那么就把置信度<span class="math inline">\(\alpha^{t}\)</span>保存至置信度集<span class="math inline">\(S\)</span>中。然后，基于置信度集<span class="math inline">\(S\)</span>的阈值<span class="math inline">\(\theta_{t}\)</span>就被确认。简单地说，我们可以取<span class="math inline">\(S\)</span>的平均值。因为，置信度与度量的含义是一直的，因此阈值<span class="math inline">\(\theta_{t}\)</span>能够在度量感知特征重用中被有效的利用。</p>
+<p>算法2：度量阈值的确认</p>
+<img src="/ml-df/determine-threshold.png" class title="度量阈值的确认">
+<h2 id="度量感知层增长">度量感知层增长</h2>
+<p>虽然度量感知特征重用可以在各种度量指标下有效的增强各层的表达，但是这种机制不能对层增长进行影响，同时降低在训练过程中发生的过拟合问题。为了降低过拟合，并控制模型的复杂度，作者提出了度量感知层增长机制。</p>
+<p>假如使用相同的数据来填充森林，并且直接进行预测，那么过拟合的风险就会增加。MLDF使用K-Fold交叉验证来缓解这个问题。对于某一个Fold，根据在其他Fold中训练的实例来对当前森林进行训练，并对当前Fold进行预测。每一层的表达生成通过窗帘每一个森林的预测来得到。</p>
+<p>MLDF采用逐层构建。算法3展示了在MLDF训练过程中使用度量感知层增长的过程。输入为具有最大深度<span class="math inline">\(T\)</span>的层，评价指标<span class="math inline">\(M\)</span>，以及训练数据集<span class="math inline">\(\left \{ X,Y \right \}\)</span>。假设模型已经增长到<span class="math inline">\(T\)</span>层，那么训练将会停止。通常来说，每一层都会选择一个RF-PCT和一个ERF-PCT，并且随机选择<span class="math inline">\(\sqrt{d}\)</span>个特征作为每个森林候选特征。如森林的数量和树的深度等个这些MLDF中训练森林用到的参数都会在训练之前预先确定。为了希望每个层能够学习不同的表达，因此就需要为第<span class="math inline">\(i\)</span>层设置森林增长时，每个树的最大深度，或预先设置树的数量。在初始步骤中，记录了训练数据在每层中的性能向量<span class="math inline">\(p\)</span>需要根据不同的度量进行初始化。在每层中，首先需要拟合森林（Line3），并且获取每层的表达<span class="math inline">\(H^{t}\)</span>（Line4）。因此，就需要确认阈值<span class="math inline">\(\theta_{t}\)</span>（Line5），并且通过度量感知特征重用机制生成信息的表达（Line6）。最后把层<span class="math inline">\(layer_{t}\)</span>加到模型集<span class="math inline">\(S\)</span>中（Line14）。</p>
+<p>层的成长是进行度量感知完成。在拟合完一层后，就需要计算度量的评价值。当度量值在最近的三层中没有太好的表现时（Line11），MLDF中层将会停止生长。同时，在训练集中性能最好的那个层的索引将会被记录，用于后续的预测。按照奥卡姆剃刀准则（Occam's razor rule），当性能相似时，越简单的模型越好。不过，虽然模型的性能并没有明显的改进，但最终的模型集应该保留至模型集<span class="math inline">\(S=\left \{ layer_{1},layer_{2},\cdots ,layer_{L} \right \}\)</span>中，并且之后的层将被删除。</p>
+<p>算法3：度量感知层增长</p>
+<img src="/ml-df/measure-aware-layer-growth.png" class title="度量感知层增长">
+<p>不同的度量代表不同的用户需求，此时就需要根据不同的情况设置一个<span class="math inline">\(M\)</span>来记录所需的度量内容。因此就可以获得特定度量所对应的模型。一方面，模型的复杂度由<span class="math inline">\(M\)</span>进行控制，另一方面，与其他在训练过程中不能明确地考虑性能指标方法相比（如PCT），MLDF则具有更灵活，具有更好性能的特点。</p>
+<h1 id="结论">结论</h1>
+<p>在未来，MLDF的效率将会进一步提高，通过在森林训练过程中重用一些组件。虽然MLDF可以利用高阶的标签相关性，但在实验中只显示了二阶相关性。作者将试图找到一种如何使用高阶相关性的方法。此外，作者还计划在MLDF中嵌入FastXML等极端多标签树方法，并测试其在极端规模的多标签问题上的性能。</p>
 <h1 id="参考资料">参考资料</h1>
 <p>[1] <a href="https://www.zhuanzhi.ai/document/430049ace146346a4859fa4c111b1a16" target="_blank" rel="noopener">周志华团队：深度森林挑战多标签学习，9大数据集超越传统方法</a></p>
 ]]></content>
