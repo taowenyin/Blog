@@ -1,5 +1,5 @@
 ---
-title: 多标签学习算法的综述
+title: 【2013】A Review on Multi-Label Learning Algorithms
 mathjax: true
 date: 2019-11-24 07:26:13
 updated: {{ date }}

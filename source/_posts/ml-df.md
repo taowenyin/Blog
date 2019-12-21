@@ -1,5 +1,5 @@
 ---
-title: Multi-Label Learning with Deep Forest
+title: 【2019】Multi-Label Learning with Deep Forest
 mathjax: true
 date: 2019-12-17 20:00:29
 updated: {{ date }}

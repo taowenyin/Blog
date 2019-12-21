@@ -1,5 +1,5 @@
 ---
-title: LightMC：A Dynamic And Efficient Multiclass Decomposition Algorithm
+title: 【2019】LightMC：A Dynamic And Efficient Multiclass Decomposition Algorithm
 date: 2019-11-16 20:49:01
 mathjax: true
 updated: {{ date }}
