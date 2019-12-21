@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Multi-Label Learning with Deep Forest</title>
+    <title>【2018】Deep Forest</title>
+    <url>/deep-forest/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>论文</category>
+      </categories>
+      <tags>
+        <tag>集成学习</tag>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【2019】Multi-Label Learning with Deep Forest</title>
     <url>/ml-df/</url>
     <content><![CDATA[<h1 id="摘要">摘要</h1><p>在对标签学习中，每个实例都都与多个标签相关，因此多标签学习的关键就是在构建模型中如何利用标签之间的相关性。深度神经网络方法经常把特征和标签信息进行联合放到一个潜在的空间，从而挖掘出标签之间的相关性。然而，这些方法的成功高度依赖于模型深度的精确选择。深度森林（Deep Forest）是一个基于树模型集成的深度学习框架，并且不依赖于反向传播。作者认为深度森林模型的优势在于非常适合解决多标签问题。MLDF方法具有两个机制：</p><a id="more"></a>
 
@@ -91,7 +103,7 @@
       </tags>
   </entry>
   <entry>
-    <title>基于事件分析的告知学生综合评价模型构建与研究</title>
+    <title>【2019】基于事件分析的告知学生综合评价模型构建与研究</title>
     <url>/base-on-event-analysis/</url>
     <content><![CDATA[<p><strong>期刊：</strong>《职业技术教育》，2019，40(21)：38-43</p><p><strong>作者：</strong>陶文寅，潘嘹</p><h1 id="摘要">摘要</h1><p>以事件数据分析理论为切入点，通过评估学生在校事件分值，建立学生在校事件影响力估算公式，结合高职学生的行为特点，初步构建高职学生综合评价模型，并通过事件模拟评估该模型的有效性。结果表明，基于事件分析的高职学生综合评价模型能够准确、客观地评价高职学生的在校表现，有效克服了主观评价体系中的缺点，为定量分析高职学生的在校表现提供了理论基础。</p><a id="more"></a>
 
@@ -842,7 +854,7 @@
       </tags>
   </entry>
   <entry>
-    <title>多标签学习算法的综述</title>
+    <title>【2013】A Review on Multi-Label Learning Algorithms</title>
     <url>/review-multilabel-alg/</url>
     <content><![CDATA[<h1 id="介绍">介绍</h1><p>在传统的单标签监督学习中，<span class="math inline">\(x\)</span>表示一个实体空间，<span class="math inline">\(y\)</span>表示一个标签空间，而传统的监督学习就是通过训练集</p><p><span class="math display">\[\begin{align}
     \left \{ \left ( x_{i} | y_{i} \right ) | 1 \leq i \leq m \right \}
@@ -2260,7 +2272,7 @@
       </categories>
   </entry>
   <entry>
-    <title>DeepGBM：A Deep Learning Framework Distilled by GBDT for Online Prediction Tasks</title>
+    <title>【2019】DeepGBM：A Deep Learning Framework Distilled by GBDT for Online Prediction Tasks</title>
     <url>/deepgbm/</url>
     <content><![CDATA[<h1 id="摘要">0.摘要</h1><p>在现实应用中，在线预测是最基本的任务。典型的在线预测任务具备两个特征，分别是表格式的输入空间和在线数据生成。具体说，就是表格式输入空间表示既有稀疏分类特征也有稠密的数值特征，而在线数据生成则是具有连续生成具有动态分布数据的任务。因此，利用表格输入空间进行有效学习和快速适应在线生成的数据是获取在线预测模型的两个重要挑战。虽然采用GBDT和NN已经在实践中被广泛使用，当时它们都有其自身的缺点。特别地，GBDT很难适应动态生成的在线数据，并且在面对稀疏的分类特征时往往是无效的；另一方面，在面对稠密的数值特征时，NN很难获取令人满意的性能。在这篇文章中，作者提出了一个新的学习框架——DeepGBM，该框架集成了NN和GBDT的优点并提出了两个新的NN组件：</p><a id="more"></a>
 
@@ -2395,7 +2407,7 @@
       </tags>
   </entry>
   <entry>
-    <title>LightMC：A Dynamic And Efficient Multiclass Decomposition Algorithm</title>
+    <title>【2019】LightMC：A Dynamic And Efficient Multiclass Decomposition Algorithm</title>
     <url>/lightmc/</url>
     <content><![CDATA[<h1 id="摘要">0.摘要</h1><p>解决多分类问题目前的做法有三种，分别是OVA（一对多）、OVO（一对一）和ECOC（纠错输出码），其中OVA和OVO非常简单，但是忽略了类与类之间的关系，而ECOC虽然考虑了类与类之间的关系，但是其性能取决与编码矩阵和解码策略，而要通过找到一个合适的解码策略来发现一个有效的编码矩阵是非常耗时和不确定的。因此，作者提出了一个高效的动态多类分解算法LightMC。该算法不同于以往的固定编码矩阵和解码策略，LightMC采用可微的解码策略，在每次迭代中通过反向传播来训练基础学习器，使其能够动态地优化编码矩阵和解码策略，从而提高多分类的总体精度。</p><a id="more"></a>
 
@@ -2567,7 +2579,7 @@
       </tags>
   </entry>
   <entry>
-    <title>LightGBM：A Highly Efficient Gradient Boosting Decision Tree</title>
+    <title>【2017】LightGBM：A Highly Efficient Gradient Boosting Decision Tree</title>
     <url>/lightgbm/</url>
     <content><![CDATA[<h1 id="介绍">1.介绍</h1><p>以往的GBDT中，当数据特征纬度较高、数据量较大时，其算法的效率和可扩展性都不是很理想，主要原因是需要针对每一个特征的信息增益来确认其分割特征点。为了解决这个问题，作者提出两个新方法，分别是GOSS（Gradient-based One-Side Sampling，基于梯度的单边采样）和EFB（Exclusive Feature Bundling，互斥特征捆绑）。</p><a id="more"></a>
 
