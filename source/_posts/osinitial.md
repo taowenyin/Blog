@@ -5,8 +5,7 @@ date: 2019-11-21 20:18:31
 updated: {{ date }}
 top: true
 tags:
-categories: 
-- 资源
+categories: [资源]
 ---
 
 # Linux常用软件安装

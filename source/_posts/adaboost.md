@@ -3,11 +3,8 @@ title: AdaBoost理解和推导
 date: 2019-11-11 19:13:30
 mathjax: true
 updated: {{ date }}
-tags: 
-- 集成学习
-- 机器学习
-categories: 
-- 机器学习
+tags: [集成学习, 机器学习]
+categories: [机器学习]
 ---
 
 # 1.AdaBoost介绍

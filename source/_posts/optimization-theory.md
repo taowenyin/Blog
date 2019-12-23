@@ -3,8 +3,7 @@ title: 最优化理论和应用
 mathjax: true
 date: 2019-12-02 15:30:44
 updated: {{ date }}
-categories: 
-- 课程
+categories: [课程]
 ---
 
 # 向量空间与矩阵

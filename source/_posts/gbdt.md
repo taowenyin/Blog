@@ -3,11 +3,8 @@ title: GBDT理解和推导
 date: 2019-11-12 21:22:53
 mathjax: true
 updated: {{ date }}
-tags:
-- 集成学习
-- 机器学习
-categories: 
-- 机器学习
+tags: [集成学习, 机器学习]
+categories: [机器学习]
 ---
 
 # 1.GBDT介绍

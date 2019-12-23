@@ -3,12 +3,8 @@ title: 【2019】DeepGBM：A Deep Learning Framework Distilled by GBDT for Onlin
 mathjax: true
 date: 2019-11-18 08:48:53
 updated: {{ date }}
-tags:
-- 集成学习
-- 机器学习
-- 深度学习
-categories: 
-- 论文
+tags: [集成学习, 机器学习, 深度学习]
+categories: [论文]
 ---
 
 # 0.摘要

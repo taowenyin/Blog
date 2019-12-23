@@ -3,11 +3,8 @@ title: 【2017】LightGBM：A Highly Efficient Gradient Boosting Decision Tree
 date: 2019-11-12 21:18:48
 mathjax: true
 updated: {{ date }}
-tags:
-- 集成学习
-- 机器学习
-categories: 
-- 论文
+tags: [集成学习, 机器学习]
+categories: [论文]
 ---
 
 # 1.介绍

@@ -4,10 +4,8 @@ mathjax: true
 date: 2019-11-26 21:41:49
 updated: {{ date }}
 top: true
-tags:
-- 机器学习
-categories: 
-- 资源
+tags: [机器学习]
+categories: [资源]
 ---
 
 # 国际顶级会议
