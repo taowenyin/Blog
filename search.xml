@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>优化理论和优化</title>
+    <title>优化理论和应用</title>
     <url>/optimization-theory-applications/</url>
-    <content><![CDATA[<h1 id="基础知识">基础知识</h1><h2 id="线性相关">线性相关</h2><p>向量集<span class="math inline">\(\left \{ \mathbf{a_{1}},\mathbf{a_{2}},\cdots ,\mathbf{a_{k}} \right \}\)</span>是线性相关，当且仅当集合中的一个向量可以表示为其他向量的线性组合。</p><p>必要条件：<span class="math inline">\(\alpha_{1}\mathbf{a_{1}}+\alpha_{2}\mathbf{a_{2}}+\cdots +\alpha_{k}\mathbf{a_{k}}=\mathbf{0}\)</span></p><a id="more"></a>
-
-
-
-<p>充分条件：<span class="math inline">\(\left ( -1 \right )\mathbf{a_{1}}+\alpha_{2}\mathbf{a_{2}}+\cdots +\alpha_{k}\mathbf{a_{k}}=\mathbf{0}\)</span></p>
-<h2 id="二次型函数">二次型函数</h2>
-<p><span class="math display">\[f\left ( \mathbf{x} \right )=\mathbf{x}^{\top}\mathbf{Q}\mathbf{x}\]</span></p>
-<p>对于任意非零向量<span class="math inline">\(\mathbf{x}\)</span>，都有<span class="math inline">\(\mathbf{x}^{\top}\mathbf{Q}\mathbf{x} &gt; 0\)</span>，那么<span class="math inline">\(\mathbf{Q}\)</span>是正定的。如果<span class="math inline">\(\mathbf{x}^{\top}\mathbf{Q}\mathbf{x} \geq 0\)</span>，那么<span class="math inline">\(\mathbf{Q}\)</span>是半正定的。相反，还是负定和半负定。</p>
-<h2 id="矩阵范数">矩阵范数</h2>
-<p><span class="math display">\[\left \| \mathbf{A} \right \|_{F}=\left ( \sum_{i=1}^{m}\sum_{j=1}^{n}\left ( a_{ij} \right )^{2} \right )^{\frac{1}{2}}\]</span></p>
-<h1 id="介绍">介绍</h1>
-<h2 id="优化问题">优化问题</h2>
-<p><span class="math display">\[\begin{matrix}
+    <content><![CDATA[<h1 id="介绍">介绍</h1><h2 id="优化问题">优化问题</h2><p><span class="math display">\[\begin{matrix}
     minimize &amp; f_{0}\left ( \mathbf{x} \right ) &amp; \\ 
     st. &amp; f_{i}\left ( \mathbf{x} \right ) \leq b_{i} &amp; i=1,\cdots ,M\\ 
     variables &amp; \mathbf{x} &amp; 
-\end{matrix}\]</span></p>
+\end{matrix}\]</span></p><a id="more"></a>
+
+
 <p><span class="math inline">\(\mathbf{x}=\left(x_{1}, \dots, x_{n}\right)^{\top}\)</span>：优化变量</p>
 <p><span class="math inline">\(f_{0}: \mathbb{R}^{n} \rightarrow \mathbb{R}\)</span>：目标函数</p>
 <p><span class="math inline">\(f_{i}: \mathbb{R}^{n} \rightarrow \mathbb{R}, i=1, \ldots, M\)</span>：约束函数</p>
@@ -77,6 +67,50 @@
 <li>5、按照目标：单目标优化和多目标优化。</li>
 </ul>
 </blockquote>
+<h1 id="基础知识">基础知识</h1>
+<h2 id="符号说明">符号说明</h2>
+<p>1、<span class="math inline">\(\mathbb{X}\)</span>是一个集合，<span class="math inline">\(x \in \mathbb{X}\)</span>表示<span class="math inline">\(x\)</span>是<span class="math inline">\(\mathbb{X}\)</span>中的元素。</p>
+<p>2、<span class="math inline">\(\{x 1, x 2, x 3, \ldots\}\)</span>和<span class="math inline">\(\{x: x \in \mathbb{R}, x&gt;5\}\)</span>都可以表示一个集合。</p>
+<p>3、<span class="math inline">\(\mathbb{X}\)</span>和<span class="math inline">\(\mathbb{Y}\)</span>都是集合，如果<span class="math inline">\(\mathbb{X} \subset \mathbb{Y}\)</span>，那么表示<span class="math inline">\(\mathbb{X}\)</span>是<span class="math inline">\(\mathbb{Y}\)</span>的子集。</p>
+<p>4、<span class="math inline">\(f: \mathbb{X} \rightarrow \mathbb{Y}\)</span>表示<span class="math inline">\(f\)</span>是从集合<span class="math inline">\(\mathbb{X}\)</span>到<span class="math inline">\(\mathbb{Y}\)</span>的函数。</p>
+<p>5、<span class="math inline">\(\overset{\triangle}{=}\)</span>表示“定义为”。</p>
+<p>6、假设定义n阶向量<span class="math inline">\(\mathbf{a}=\left[\begin{array}{c}{a_{1}} \\ {a_{2}} \\ {\vdots} \\ {a_{n}}\end{array}\right]\)</span>，那么<span class="math inline">\(\mathbf{a}^{\top}=\left[a_{1}, a_{2}, \ldots, a_{n}\right]\)</span>。</p>
+<h2 id="线性相关">线性相关</h2>
+<p>向量集<span class="math inline">\(\left \{ \mathbf{a_{1}},\mathbf{a_{2}},\cdots ,\mathbf{a_{k}} \right \}\)</span>是线性相关，当且仅当集合中的一个向量可以表示为其他向量的线性组合。</p>
+<p>必要条件：<span class="math inline">\(\alpha_{1}\mathbf{a_{1}}+\alpha_{2}\mathbf{a_{2}}+\cdots +\alpha_{k}\mathbf{a_{k}}=\mathbf{0}\)</span>，并且其中至少有一个<span class="math inline">\(\alpha_{i} \neq 0\)</span>，否则就是不相关。</p>
+<p>充分条件：<span class="math inline">\(\left ( -1 \right )\mathbf{a_{1}}+\alpha_{2}\mathbf{a_{2}}+\cdots +\alpha_{k}\mathbf{a_{k}}=\mathbf{0}\)</span></p>
+<h2 id="二次型函数">二次型函数</h2>
+<p><span class="math display">\[f\left ( \mathbf{x} \right )=\mathbf{x}^{\top}\mathbf{Q}\mathbf{x}\]</span></p>
+<p>对于任意非零向量<span class="math inline">\(\mathbf{x}\)</span>，都有<span class="math inline">\(\mathbf{x}^{\top}\mathbf{Q}\mathbf{x} &gt; 0\)</span>，并且如果<span class="math inline">\(\mathbf{Q}=\mathbf{Q}^{T}\)</span>，那么<span class="math inline">\(\mathbf{Q}\)</span>是正定的。如果<span class="math inline">\(\mathbf{x}^{\top}\mathbf{Q}\mathbf{x} \geq 0\)</span>，那么<span class="math inline">\(\mathbf{Q}\)</span>是半正定的。相反，还是负定和半负定。</p>
+<h3 id="二次规划">二次规划</h3>
+<p><span class="math display">\[\begin{matrix}
+    minimize &amp; \mathbf{x}^{\top}\mathbf{Q}\mathbf{x} + \mathbf{c}^{\top}\mathbf{x} \\ 
+    st. &amp; \mathbf{Ax}\leq \mathbf{b}\\ 
+\end{matrix}\]</span></p>
+<h3 id="线性规划最优控制">线性规划最优控制</h3>
+<p><span class="math display">\[\begin{matrix}
+    minimize &amp; J\left(u, x_{0}, t_{0}, t_{f}\right)=\int_{t_{0}}^{t_{f}}\left[x^{T}(t) Q(t) x(t)+u^{T}(t) R(t) u(t)\right] d t+x\left(t_{f}\right)^{T} S x\left(t_{f}\right) &amp; \\ 
+    st. &amp; \dot{x}=A(t) x+B(t) u(t)\\ 
+\end{matrix}\]</span></p>
+<h2 id="矩阵">矩阵</h2>
+<h3 id="矩阵范数">矩阵范数</h3>
+<p><span class="math display">\[\left \| \mathbf{A} \right \|_{F}=\left ( \sum_{i=1}^{m}\sum_{j=1}^{n}\left ( a_{ij} \right )^{2} \right )^{\frac{1}{2}}\]</span></p>
+<h3 id="线性方程">线性方程</h3>
+<p>假设有矩阵$<span class="math inline">\(\mathbf{A}=\left[\mathbf{a}_{1}, \mathbf{a}_{2}, \ldots, \mathbf{a}_{n}\right]\)</span>，那么就可以用<span class="math inline">\(\mathbf{A x}=\mathbf{b}\)</span>表示一个线性方程。</p>
+<h3 id="内积">内积</h3>
+<p>假设<span class="math inline">\(\mathbf{x}, \mathbf{y} \in \mathbb{R}^{n}\)</span>，那么内积就可以表示为<span class="math inline">\(\left \langle \mathbf{x}, \mathbf{y} \right \rangle=\sum_{i=1}^{n} x_{i} y_{i}=\mathbf{x}^{T} \mathbf{y}\)</span></p>
+<h2 id="几何概念">几何概念</h2>
+<h3 id="线段">线段</h3>
+<p>线段的定义：<span class="math inline">\(\mathbf{z}=\alpha \mathbf{x}+(1-\alpha) \mathbf{y}\)</span>，并且<span class="math inline">\(\alpha \in \left [ 0,1 \right ]\)</span>。</p>
+<h3 id="超平面">超平面</h3>
+<p>假设<span class="math inline">\(u_{1}, u_{2}, \ldots, u_{n}, v \in \mathbb{R}\)</span>，其中至少有一个<span class="math inline">\(u_{i}\)</span>是非零，并且所有点的集合<span class="math inline">\(\mathbf{x}=\left[x_{1}, x_{2}, \ldots, x_{n}\right]^{T}\)</span>组成的线性方程</p>
+<p><span class="math display">\[u_{1} x_{1}+u_{2} x_{2}+\ldots+u_{n} x_{n}=v\]</span></p>
+<p>称为超平面。</p>
+<p>当<span class="math inline">\(n=2\)</span>时，超平面为一条直线。</p>
+<p>当<span class="math inline">\(n=3\)</span>时，超平面为一个平面。</p>
+<p>即超平面为源空间维度的<span class="math inline">\(n-1\)</span>。</p>
+<p>当<span class="math inline">\(u_{1} x_{1}+u_{2} x_{2}+\ldots+u_{n} x_{n} \geq v\)</span>，表示正半空间。<span class="math inline">\(H_{+}=\left\{\mathbf{x} \in \mathbb{R}^{n}: \mathbf{u}^{T} \mathbf{x} \geq v\right\}\)</span>。</p>
+<p>当<span class="math inline">\(u_{1} x_{1}+u_{2} x_{2}+\ldots+u_{n} x_{n} \leq v\)</span>，表示正半空间。<span class="math inline">\(H_{-}=\left\{\mathbf{x} \in \mathbb{R}^{n}: \mathbf{u}^{T} \mathbf{x} \leq v\right\}\)</span>。</p>
 ]]></content>
       <categories>
         <category>课程</category>
