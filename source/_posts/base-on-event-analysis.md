@@ -3,10 +3,8 @@ title: 【2019】基于事件分析的告知学生综合评价模型构建与研
 mathjax: true
 date: 2019-12-14 20:13:20
 updated: {{ date }}
-tags:
-- 教育教学
-categories: 
-- 发表
+tags: [教育教学]
+categories: [发表]
 ---
 
 **期刊：**《职业技术教育》，2019，40(21)：38-43

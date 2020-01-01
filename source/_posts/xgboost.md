@@ -3,11 +3,8 @@ title: XGBoost理解和推导
 date: 2019-11-12 21:18:48
 mathjax: true
 updated: {{ date }}
-tags:
-- 集成学习
-- 机器学习
-categories: 
-- 机器学习
+tags: [集成学习, 机器学习]
+categories: [机器学习]
 ---
 
 # 1.XGBoost介绍

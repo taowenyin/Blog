@@ -3,8 +3,7 @@ title: 高等工程应用数学
 mathjax: true
 date: 2019-12-04 22:44:11
 updated: {{ date }}
-categories: 
-- 课程
+categories: [课程]
 ---
 
 # 考试题目

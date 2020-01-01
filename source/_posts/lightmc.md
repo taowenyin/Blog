@@ -3,11 +3,8 @@ title: 【2019】LightMC：A Dynamic And Efficient Multiclass Decomposition Algo
 date: 2019-11-16 20:49:01
 mathjax: true
 updated: {{ date }}
-tags:
-- 集成学习
-- 机器学习
-categories: 
-- 论文
+tags: [集成学习, 机器学习]
+categories: [论文]
 ---
 
 # 0.摘要
