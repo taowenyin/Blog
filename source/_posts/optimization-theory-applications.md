@@ -134,6 +134,10 @@ $$\left \| \mathbf{A} \right \|_{F}=\left ( \sum_{i=1}^{m}\sum_{j=1}^{n}\left ( 
 
 假设$\mathbf{x}, \mathbf{y} \in \mathbb{R}^{n}$，那么内积就可以表示为$\left \langle \mathbf{x}, \mathbf{y} \right \rangle=\sum_{i=1}^{n} x_{i} y_{i}=\mathbf{x}^{T} \mathbf{y}$
 
+### 特征值和特征矩阵
+
+令$\mathbf{A}$是$n \times n$的矩阵，$\lambda$是一个标量，$\mathbf{v}$是一个非0矩阵，如果$\mathbf{Av}=\lambda \mathbf{v}$，那么$\lambda$就是特征值，\mathbf{v}就是特征矩阵。
+
 ## 几何概念
 
 ### 线段
@@ -157,3 +161,75 @@ $$u_{1} x_{1}+u_{2} x_{2}+\ldots+u_{n} x_{n}=v$$
 当$u_{1} x_{1}+u_{2} x_{2}+\ldots+u_{n} x_{n} \geq v$，表示正半空间。$H_{+}=\left\{\mathbf{x} \in \mathbb{R}^{n}: \mathbf{u}^{T} \mathbf{x} \geq v\right\}$。
 
 当$u_{1} x_{1}+u_{2} x_{2}+\ldots+u_{n} x_{n} \leq v$，表示正半空间。$H_{-}=\left\{\mathbf{x} \in \mathbb{R}^{n}: \mathbf{u}^{T} \mathbf{x} \leq v\right\}$。
+
+### 凸集
+
+假设$\Theta \in \mathbb{R}^{n}$是一个集合，那么如果集合中的任意两个向量$\mathbf{u}$和$\mathbf{v}$组成的线段中的点也在集合中，那么该集合为凸集，即$\alpha \mathbf{u}+(1-\alpha) \mathbf{v} \in \Theta$，且$\alpha \in[0,1]$。
+
+凸集的例子：空集、由一个点组成的集合、一条直线和线段、子空间、超平面、半空间、$\mathbb{R}^{n}$。
+
+### 凸包
+
+$\textbf{conv} \mathbb{C}=\left \{ \theta_{1} \mathbf{x}_{1}+\cdots+\theta_{k} \mathbf{x}_{k} \mid \mathbf{x}_{i} \in \mathbb{C}, \theta_{i} \geq 0, i=1, \ldots, k,\theta_{1}+\cdots+\theta_{k}=1 \right \}$
+
+### 领域
+
+点$\mathbf{x} \in \mathbb{R}^{n}$的邻域可以定义为$\left\{\mathbf{y} \in \mathbb{R}^{n}:\|\mathbf{y}-\mathbf{x}\|<\varepsilon\right\}$，其中$\varepsilon$为正值。
+
+## 微积分
+
+1、给定$f: \mathbb{R}^{n} \rightarrow \mathbb{R}$，那么$f$的梯度是一个函数$\nabla f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{n}$，记作$\nabla f(\mathbf{x})=\left[\begin{array}{c}{\frac{\partial f}{\partial x_{1}}(\mathbf{x})} \\ {\vdots} \\ {\frac{\partial f}{\partial x_{n}}(\mathbf{x})}\end{array}\right]$，其中$\nabla f(\mathbf{x})$是一个在$\mathbb{R}^{n}$中的向量，记作$\nabla f(\mathbf{x})=D f(\mathbf{x})^{\top}$。
+
+2、给定$f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}$，$f=\left[f_{1}, \ldots, f_{m}\right]^{\top}$，那么$f$的微分方程$D f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m \times n}$为$D f(x)=\left[\begin{array}{ccc}{\frac{\partial f_{1}}{\partial x_{1}}(\mathbf{x})} & {\dots} & {\frac{\partial f_{1}}{\partial x_{n}}(\mathbf{x})} \\ {\vdots} & {} & {\vdots} \\ {\frac{\partial f_{m}}{\partial x_{1}}(\mathbf{x})} & {\cdots} & {\frac{\partial f_{m}}{\partial x_{n}}(\mathbf{x})}\end{array}\right]$。
+
+3、如果$f$是二阶可微，那么$\mathbf{F}=D^{2} f=\left[\begin{array}{cccc}{\frac{\partial^{2} f}{\partial x_{1}^{2}}} & {\frac{\partial^{2} f}{\partial x_{2} \partial x_{1}}} & {\cdots} & {\frac{\partial^{2} f}{\partial x_{n} \partial x_{1}}} \\ {\frac{\partial^{2} f}{\partial x_{1} \partial x_{2}}} & {\frac{\partial^{2} f}{\partial x_{2}^{2}}} & {\cdots} & {\frac{\partial^{2} f}{\partial x_{n} \partial x_{1}}} \\ {\vdots} & {\vdots} & {\ddots} & {\vdots} \\ {\frac{\partial^{2} f}{\partial x_{1} \partial x_{n}}} & {\frac{\partial^{2} f}{\partial x_{2} \partial x_{n}}} & {\cdots} & {\frac{\partial^{2} f}{\partial x_{n}^{2}}}\end{array}\right]$，该矩阵称为$f$的黑塞矩阵（Hessian）。
+
+## 水平集和梯度
+
+$\nabla f\left(\mathbf{x}_{0}\right)$是$f$在$\mathbf{x}_{0}$点处最大增长率方向。
+
+# 无约束优化问题
+
+## 局部极小点x
+
+$\mathbf{x}^{\ast}$是局部极小点的条件是$\nabla f\left(\mathbf{x}^{\ast}\right)=0$。
+
+## 可行方向
+
+如果存在$\alpha_{0}>0$，并且满足$\alpha \in\left[0, \alpha_{0}\right]$，使得$\mathbf{x}+\alpha \mathbf{d} \in \Omega$，那么$\mathbf{d} \in \mathbb{R}^{n}, \mathbf{d} \neq 0$就是$\mathbf{x} \in \Omega$中的可行方向。
+
+### 方向导数
+
+当可行方向$\mathbf{d}$是单位向量时，那么函数$f$在$\mathbf{x}$处沿方向$\mathbf{d}$的增长率可以用内积表示，即$\frac{\partial f}{\partial \mathbf{d}}(\mathbf{x})=\mathbf{d}^{\top} \nabla f(\mathbf{x})=\nabla f(\mathbf{x})^{\top} \mathbf{d}=\left \langle \nabla f(\mathbf{x}), \mathbf{d} \right \rangle$。
+
+### FONC（一阶必要条件）
+
+如果$\mathbf{x}^{\ast}$是函数$f$在$\Omega$上的局部极小点，那么对于$\mathbf{x}^{\ast}$处的任意可行方向$\mathbf{d}$都有$\mathbf{d}^{T} \nabla f\left(\mathbf{x}^{\ast}\right) \geq 0$。
+
+### SONC（二阶必要条件）
+
+如果$f$在约束集$\Omega$上二阶连续可导，并且$\mathbf{x}^{\ast}$是函数$f$在$\Omega$上的局部极小点，$\mathbf{d}$是$\mathbf{x}^{\ast}$处的可行方向，并且$\mathbf{d}^{T} \nabla f\left(\mathbf{x}^{\ast}\right) = 0$，则$\mathbf{d}^{T} F\left(\mathbf{x}^{\ast}\right) \mathbf{d} \geq 0$，其中$F$为函数$f$的黑塞矩阵。
+
+### SOSC（二阶充分条件）
+
+如果$f$在约束集$\Omega$上二阶连续可导，如果同时满足$\nabla f\left(\mathbf{x}^{\ast}\right)=0$和$F\left(\mathbf{x}^{\ast}\right)>0$，那么$\mathbf{X}^{\ast}$为严格局部极小点。
+
+# 一维搜索方法
+
+## 介绍
+
+该方法主要使用迭代搜索算法或线搜法，基本流程是：
+
+>* 1、赋一个初值$x^{\left ( 0 \right )}$。
+>* 2、生成迭代序列$x^{\left ( 1 \right )},x^{\left ( 2 \right )},\cdots$。
+>* 3、每次迭代，下一个$x^{\left ( k+1 \right )}$依赖于上一个$x^{\left ( k \right )}$。
+
+目标函数$f$，一阶导数${f}'$，二阶导数${f}''$。
+
+常用的一维搜索算法：
+
+>* 1、黄金分割法。（只使用目标函数$f$）
+>* 2、斐波那契数列方法。（只使用目标函数$f$）
+>* 3、二分法。（只使用目标函数的一阶导数${f}'$）
+>* 4、割线法。（只使用目标函数的一阶导数${f}'$）
+>* 5、牛顿法。（只使用目标函数的一阶导数${f}'$和二阶导数${f}''$）
