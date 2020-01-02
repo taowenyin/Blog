@@ -233,3 +233,106 @@ $\mathbf{x}^{\ast}$是局部极小点的条件是$\nabla f\left(\mathbf{x}^{\ast
 >* 3、二分法。（只使用目标函数的一阶导数${f}'$）
 >* 4、割线法。（只使用目标函数的一阶导数${f}'$）
 >* 5、牛顿法。（只使用目标函数的一阶导数${f}'$和二阶导数${f}''$）
+
+## 泰勒公式
+
+泰勒公式是许多数值方法和优化模型的基础。
+
+假设$f: \mathbb{R} \rightarrow \mathbb{R}$在区间$[a, b]$上是$m$次连续可微函数。假设$h=[b-a]$，那么$f$的第$i$阶导数$f^{(i)}$为
+
+$$f(b)=f(a)+\frac{h}{1 !} f^{(1)}(a)+\frac{h^{2}}{2 !} f^{(2)}(a)+\ldots+\frac{h^{m-1}}{(m-1) !} f^{(m-1)}(a)+R_{m}$$
+
+其中$R_{m}$为余项
+
+$$R_{m}=\frac{h^{m}(1-\theta)^{m-1}}{(m-1) !} f^{(m)}(a+\theta h)=\frac{h^{m}}{m !}\left(a+\theta^{\prime} h\right)$$
+
+其中$\theta, \theta^{\prime} \in(0,1)$。
+
+## 牛顿法（牛顿切线法）
+
+牛顿法主要有两方面的应用
+
+1、求方程根：使用一阶导数求实值函数的根。
+
+2、优化：使用一阶和二阶导数求一个实值函数优化器的逼近。
+
+> 1、目标：
+
+求$x^{\ast}$，使得$g\left(x^{\ast}\right)=0$
+
+> 2、核心思想：
+
+基于泰勒公式展开，构建新的函数来逼近原函数。
+
+$$f(x)=g\left(x_{0}\right)+\left(x-x_{0}\right) g^{\prime}\left(x_{0}\right)$$
+
+由于$f(x)$是$g\left(x\right)$的近似。因此，要求的$f(x)$极小点，那么就要满足一阶必要条件，即$f(x)=0$，那么上式就可以得到
+
+$$x=x_{0}-\frac{g\left(x_{0}\right)}{g^{\prime}\left(x_{0}\right)}$$
+
+从而得到整个迭代过程为
+
+$$x_{k+1}=x_{k}-\frac{g\left(x_{k}\right)}{g^{\prime}\left(x_{k}\right)}$$
+
+> 3、几何角度
+
+几何上来说，就是找到$x^{\left ( k \right )}$出的切线与$x$轴的交点作为$x^{\left ( k+1 \right )}$，然后再以$x^{\left ( k+1 \right )}$点的切线找到$x^{\left ( k+2 \right )}$，一次类推最终逼近极值点。
+
+> 4、注意事项
+
+如果$\frac{g\left(x_{k}\right)}{g^{\prime}\left(x_{k}\right)}$的比值不是足够小时，牛顿法可能就会失效，因为会错过极小值，所以初始点的选择很重要。
+
+## 牛顿优化法
+
+构建一个在$x^{(k)}$点的原函数、一阶函数和二界函数，并且构建一个逼近于原函数$f(x)$的近似函数
+
+$$q(x)=f\left(x^{(k)}\right)+f^{\prime}\left(x^{(k)}\right)\left(x-x^{(k)}\right)+\frac{1}{2} f^{\prime \prime}\left(x^{(k)}\right)\left(x-x^{(k)}\right)^{2}$$
+
+其中$q(x)$与$f(x)$的一阶和二阶导数相比配
+
+$q\left(x^{(k)}\right)=f\left(x^{(k)}\right)$
+
+$q^{\prime}\left(x^{(k)}\right)=f^{\prime}\left(x^{(k)}\right)$
+
+$q^{\prime \prime}\left(x^{(k)}\right)=f^{\prime \prime}\left(x^{(k)}\right)$
+
+原先去$f$的最小值，现在去近似函数$q$的最小值。
+
+按照一阶必要条件（FONC）可以得到
+
+$$q^{\prime}(x)=f^{\prime}\left(x^{(k)}\right)+f^{\prime \prime}\left(x^{(k)}\right)\left(x-x^{(k)}\right)=0$$
+
+令$x=x^{(k+1)}$，那么就可以得到
+
+$$x^{(k+1)}=x^{(k)}-\frac{f^{\prime}\left(x^{(k)}\right)}{f^{\prime \prime}\left(x^{(k)}\right)}$$
+
+注意，对于区间内任何$x$都有$f^{\prime \prime}(x)>0$，那么牛顿法能正常工作，但如果对于一些$x$造成$f^{\prime \prime}(x)<0$，那么牛顿法可能就会收敛到极大点，而不是极小点。
+
+## 割线法
+
+如果函数二阶不可导，那么二阶导数就可以近似为
+
+$$f^{\prime \prime}\left(x^{(k)}\right) \approx \frac{f^{\prime}\left(x^{(k)}\right)-f^{\prime}\left(x^{(k-1)}\right)}{x^{(k)}-x^{(k-1)}}$$
+
+因此，就可以得到割线法公式
+
+$$x^{(k+1)}=x^{(k)}-\frac{x^{(k)}-x^{(k-1)}}{f^{\prime}\left(x^{(k)}\right)-f^{\prime}\left(x^{(k-1)}\right)} f^{\prime}\left(x^{(k)}\right)$$
+
+该方法需要有两个初始值，分别是$x^{(k)}$和$x^{(k-1)}$。
+
+## 多维优化问题中的一维搜索
+
+一维搜索方法在多维优化问题中扮演非常重要的角色。特别是对于多维优化问题的迭代求解算法，通常每次迭代都会包括一维搜索过程。
+
+令目标函数$f: \mathbb{R}^{n} \rightarrow \mathbb{R}$，寻找$f$极小值的迭代算法为
+
+$$\mathbf{x}^{(k+1)}=\mathbf{x}^{(k)}+\alpha_{k} \mathbf{d}^{(k)}$$
+
+其中$\mathbf{x}^{(0)}$为给定的初始点，$\alpha_{k} \geq 0$为步长，其确定方式为使下面函数最小
+
+$$\phi_{k}(\alpha)=f\left(\mathbf{x}^{(k)}+\alpha \mathbf{d}^{(k)}\right)$$
+
+其中$\mathbf{d}$为搜索方向。通过一维搜索确定$\alpha_{k}$后，可以使得$f\left(\mathbf{x}^{(k+1)}\right) < f\left(\mathbf{x}^{(k)}\right)$。
+
+# 梯度方法
+
