@@ -160,6 +160,65 @@
 <li>5、牛顿法。（只使用目标函数的一阶导数<span class="math inline">\({f}&#39;\)</span>和二阶导数<span class="math inline">\({f}&#39;&#39;\)</span>）</li>
 </ul>
 </blockquote>
+<h2 id="泰勒公式">泰勒公式</h2>
+<p>泰勒公式是许多数值方法和优化模型的基础。</p>
+<p>假设<span class="math inline">\(f: \mathbb{R} \rightarrow \mathbb{R}\)</span>在区间<span class="math inline">\([a, b]\)</span>上是<span class="math inline">\(m\)</span>次连续可微函数。假设<span class="math inline">\(h=[b-a]\)</span>，那么<span class="math inline">\(f\)</span>的第<span class="math inline">\(i\)</span>阶导数<span class="math inline">\(f^{(i)}\)</span>为</p>
+<p><span class="math display">\[f(b)=f(a)+\frac{h}{1 !} f^{(1)}(a)+\frac{h^{2}}{2 !} f^{(2)}(a)+\ldots+\frac{h^{m-1}}{(m-1) !} f^{(m-1)}(a)+R_{m}\]</span></p>
+<p>其中<span class="math inline">\(R_{m}\)</span>为余项</p>
+<p><span class="math display">\[R_{m}=\frac{h^{m}(1-\theta)^{m-1}}{(m-1) !} f^{(m)}(a+\theta h)=\frac{h^{m}}{m !}\left(a+\theta^{\prime} h\right)\]</span></p>
+<p>其中<span class="math inline">\(\theta, \theta^{\prime} \in(0,1)\)</span>。</p>
+<h2 id="牛顿法牛顿切线法">牛顿法（牛顿切线法）</h2>
+<p>牛顿法主要有两方面的应用</p>
+<p>1、求方程根：使用一阶导数求实值函数的根。</p>
+<p>2、优化：使用一阶和二阶导数求一个实值函数优化器的逼近。</p>
+<blockquote>
+<p>1、目标：</p>
+</blockquote>
+<p>求<span class="math inline">\(x^{\ast}\)</span>，使得<span class="math inline">\(g\left(x^{\ast}\right)=0\)</span></p>
+<blockquote>
+<p>2、核心思想：</p>
+</blockquote>
+<p>基于泰勒公式展开，构建新的函数来逼近原函数。</p>
+<p><span class="math display">\[f(x)=g\left(x_{0}\right)+\left(x-x_{0}\right) g^{\prime}\left(x_{0}\right)\]</span></p>
+<p>由于<span class="math inline">\(f(x)\)</span>是<span class="math inline">\(g\left(x\right)\)</span>的近似。因此，要求的<span class="math inline">\(f(x)\)</span>极小点，那么就要满足一阶必要条件，即<span class="math inline">\(f(x)=0\)</span>，那么上式就可以得到</p>
+<p><span class="math display">\[x=x_{0}-\frac{g\left(x_{0}\right)}{g^{\prime}\left(x_{0}\right)}\]</span></p>
+<p>从而得到整个迭代过程为</p>
+<p><span class="math display">\[x_{k+1}=x_{k}-\frac{g\left(x_{k}\right)}{g^{\prime}\left(x_{k}\right)}\]</span></p>
+<blockquote>
+<p>3、几何角度</p>
+</blockquote>
+<p>几何上来说，就是找到<span class="math inline">\(x^{\left ( k \right )}\)</span>出的切线与<span class="math inline">\(x\)</span>轴的交点作为<span class="math inline">\(x^{\left ( k+1 \right )}\)</span>，然后再以<span class="math inline">\(x^{\left ( k+1 \right )}\)</span>点的切线找到<span class="math inline">\(x^{\left ( k+2 \right )}\)</span>，一次类推最终逼近极值点。</p>
+<blockquote>
+<p>4、注意事项</p>
+</blockquote>
+<p>如果<span class="math inline">\(\frac{g\left(x_{k}\right)}{g^{\prime}\left(x_{k}\right)}\)</span>的比值不是足够小时，牛顿法可能就会失效，因为会错过极小值，所以初始点的选择很重要。</p>
+<h2 id="牛顿优化法">牛顿优化法</h2>
+<p>构建一个在<span class="math inline">\(x^{(k)}\)</span>点的原函数、一阶函数和二界函数，并且构建一个逼近于原函数<span class="math inline">\(f(x)\)</span>的近似函数</p>
+<p><span class="math display">\[q(x)=f\left(x^{(k)}\right)+f^{\prime}\left(x^{(k)}\right)\left(x-x^{(k)}\right)+\frac{1}{2} f^{\prime \prime}\left(x^{(k)}\right)\left(x-x^{(k)}\right)^{2}\]</span></p>
+<p>其中<span class="math inline">\(q(x)\)</span>与<span class="math inline">\(f(x)\)</span>的一阶和二阶导数相比配</p>
+<p><span class="math inline">\(q\left(x^{(k)}\right)=f\left(x^{(k)}\right)\)</span></p>
+<p><span class="math inline">\(q^{\prime}\left(x^{(k)}\right)=f^{\prime}\left(x^{(k)}\right)\)</span></p>
+<p><span class="math inline">\(q^{\prime \prime}\left(x^{(k)}\right)=f^{\prime \prime}\left(x^{(k)}\right)\)</span></p>
+<p>原先去<span class="math inline">\(f\)</span>的最小值，现在去近似函数<span class="math inline">\(q\)</span>的最小值。</p>
+<p>按照一阶必要条件（FONC）可以得到</p>
+<p><span class="math display">\[q^{\prime}(x)=f^{\prime}\left(x^{(k)}\right)+f^{\prime \prime}\left(x^{(k)}\right)\left(x-x^{(k)}\right)=0\]</span></p>
+<p>令<span class="math inline">\(x=x^{(k+1)}\)</span>，那么就可以得到</p>
+<p><span class="math display">\[x^{(k+1)}=x^{(k)}-\frac{f^{\prime}\left(x^{(k)}\right)}{f^{\prime \prime}\left(x^{(k)}\right)}\]</span></p>
+<p>注意，对于区间内任何<span class="math inline">\(x\)</span>都有<span class="math inline">\(f^{\prime \prime}(x)&gt;0\)</span>，那么牛顿法能正常工作，但如果对于一些<span class="math inline">\(x\)</span>造成<span class="math inline">\(f^{\prime \prime}(x)&lt;0\)</span>，那么牛顿法可能就会收敛到极大点，而不是极小点。</p>
+<h2 id="割线法">割线法</h2>
+<p>如果函数二阶不可导，那么二阶导数就可以近似为</p>
+<p><span class="math display">\[f^{\prime \prime}\left(x^{(k)}\right) \approx \frac{f^{\prime}\left(x^{(k)}\right)-f^{\prime}\left(x^{(k-1)}\right)}{x^{(k)}-x^{(k-1)}}\]</span></p>
+<p>因此，就可以得到割线法公式</p>
+<p><span class="math display">\[x^{(k+1)}=x^{(k)}-\frac{x^{(k)}-x^{(k-1)}}{f^{\prime}\left(x^{(k)}\right)-f^{\prime}\left(x^{(k-1)}\right)} f^{\prime}\left(x^{(k)}\right)\]</span></p>
+<p>该方法需要有两个初始值，分别是<span class="math inline">\(x^{(k)}\)</span>和<span class="math inline">\(x^{(k-1)}\)</span>。</p>
+<h2 id="多维优化问题中的一维搜索">多维优化问题中的一维搜索</h2>
+<p>一维搜索方法在多维优化问题中扮演非常重要的角色。特别是对于多维优化问题的迭代求解算法，通常每次迭代都会包括一维搜索过程。</p>
+<p>令目标函数<span class="math inline">\(f: \mathbb{R}^{n} \rightarrow \mathbb{R}\)</span>，寻找<span class="math inline">\(f\)</span>极小值的迭代算法为</p>
+<p><span class="math display">\[\mathbf{x}^{(k+1)}=\mathbf{x}^{(k)}+\alpha_{k} \mathbf{d}^{(k)}\]</span></p>
+<p>其中<span class="math inline">\(\mathbf{x}^{(0)}\)</span>为给定的初始点，<span class="math inline">\(\alpha_{k} \geq 0\)</span>为步长，其确定方式为使下面函数最小</p>
+<p><span class="math display">\[\phi_{k}(\alpha)=f\left(\mathbf{x}^{(k)}+\alpha \mathbf{d}^{(k)}\right)\]</span></p>
+<p>其中<span class="math inline">\(\mathbf{d}\)</span>为搜索方向。通过一维搜索确定<span class="math inline">\(\alpha_{k}\)</span>后，可以使得<span class="math inline">\(f\left(\mathbf{x}^{(k+1)}\right) &lt; f\left(\mathbf{x}^{(k)}\right)\)</span>。</p>
+<h1 id="梯度方法">梯度方法</h1>
 ]]></content>
       <categories>
         <category>课程</category>
