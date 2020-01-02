@@ -99,6 +99,8 @@
 <p>假设有矩阵$<span class="math inline">\(\mathbf{A}=\left[\mathbf{a}_{1}, \mathbf{a}_{2}, \ldots, \mathbf{a}_{n}\right]\)</span>，那么就可以用<span class="math inline">\(\mathbf{A x}=\mathbf{b}\)</span>表示一个线性方程。</p>
 <h3 id="内积">内积</h3>
 <p>假设<span class="math inline">\(\mathbf{x}, \mathbf{y} \in \mathbb{R}^{n}\)</span>，那么内积就可以表示为<span class="math inline">\(\left \langle \mathbf{x}, \mathbf{y} \right \rangle=\sum_{i=1}^{n} x_{i} y_{i}=\mathbf{x}^{T} \mathbf{y}\)</span></p>
+<h3 id="特征值和特征矩阵">特征值和特征矩阵</h3>
+<p>令<span class="math inline">\(\mathbf{A}\)</span>是<span class="math inline">\(n \times n\)</span>的矩阵，<span class="math inline">\(\lambda\)</span>是一个标量，<span class="math inline">\(\mathbf{v}\)</span>是一个非0矩阵，如果<span class="math inline">\(\mathbf{Av}=\lambda \mathbf{v}\)</span>，那么<span class="math inline">\(\lambda\)</span>就是特征值，就是特征矩阵。</p>
 <h2 id="几何概念">几何概念</h2>
 <h3 id="线段">线段</h3>
 <p>线段的定义：<span class="math inline">\(\mathbf{z}=\alpha \mathbf{x}+(1-\alpha) \mathbf{y}\)</span>，并且<span class="math inline">\(\alpha \in \left [ 0,1 \right ]\)</span>。</p>
@@ -111,6 +113,53 @@
 <p>即超平面为源空间维度的<span class="math inline">\(n-1\)</span>。</p>
 <p>当<span class="math inline">\(u_{1} x_{1}+u_{2} x_{2}+\ldots+u_{n} x_{n} \geq v\)</span>，表示正半空间。<span class="math inline">\(H_{+}=\left\{\mathbf{x} \in \mathbb{R}^{n}: \mathbf{u}^{T} \mathbf{x} \geq v\right\}\)</span>。</p>
 <p>当<span class="math inline">\(u_{1} x_{1}+u_{2} x_{2}+\ldots+u_{n} x_{n} \leq v\)</span>，表示正半空间。<span class="math inline">\(H_{-}=\left\{\mathbf{x} \in \mathbb{R}^{n}: \mathbf{u}^{T} \mathbf{x} \leq v\right\}\)</span>。</p>
+<h3 id="凸集">凸集</h3>
+<p>假设<span class="math inline">\(\Theta \in \mathbb{R}^{n}\)</span>是一个集合，那么如果集合中的任意两个向量<span class="math inline">\(\mathbf{u}\)</span>和<span class="math inline">\(\mathbf{v}\)</span>组成的线段中的点也在集合中，那么该集合为凸集，即<span class="math inline">\(\alpha \mathbf{u}+(1-\alpha) \mathbf{v} \in \Theta\)</span>，且<span class="math inline">\(\alpha \in[0,1]\)</span>。</p>
+<p>凸集的例子：空集、由一个点组成的集合、一条直线和线段、子空间、超平面、半空间、<span class="math inline">\(\mathbb{R}^{n}\)</span>。</p>
+<h3 id="凸包">凸包</h3>
+<p><span class="math inline">\(\textbf{conv} \mathbb{C}=\left \{ \theta_{1} \mathbf{x}_{1}+\cdots+\theta_{k} \mathbf{x}_{k} \mid \mathbf{x}_{i} \in \mathbb{C}, \theta_{i} \geq 0, i=1, \ldots, k,\theta_{1}+\cdots+\theta_{k}=1 \right \}\)</span></p>
+<h3 id="领域">领域</h3>
+<p>点<span class="math inline">\(\mathbf{x} \in \mathbb{R}^{n}\)</span>的邻域可以定义为<span class="math inline">\(\left\{\mathbf{y} \in \mathbb{R}^{n}:\|\mathbf{y}-\mathbf{x}\|&lt;\varepsilon\right\}\)</span>，其中<span class="math inline">\(\varepsilon\)</span>为正值。</p>
+<h2 id="微积分">微积分</h2>
+<p>1、给定<span class="math inline">\(f: \mathbb{R}^{n} \rightarrow \mathbb{R}\)</span>，那么<span class="math inline">\(f\)</span>的梯度是一个函数<span class="math inline">\(\nabla f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{n}\)</span>，记作<span class="math inline">\(\nabla f(\mathbf{x})=\left[\begin{array}{c}{\frac{\partial f}{\partial x_{1}}(\mathbf{x})} \\ {\vdots} \\ {\frac{\partial f}{\partial x_{n}}(\mathbf{x})}\end{array}\right]\)</span>，其中<span class="math inline">\(\nabla f(\mathbf{x})\)</span>是一个在<span class="math inline">\(\mathbb{R}^{n}\)</span>中的向量，记作<span class="math inline">\(\nabla f(\mathbf{x})=D f(\mathbf{x})^{\top}\)</span>。</p>
+<p>2、给定<span class="math inline">\(f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}\)</span>，<span class="math inline">\(f=\left[f_{1}, \ldots, f_{m}\right]^{\top}\)</span>，那么<span class="math inline">\(f\)</span>的微分方程<span class="math inline">\(D f: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m \times n}\)</span>为<span class="math inline">\(D f(x)=\left[\begin{array}{ccc}{\frac{\partial f_{1}}{\partial x_{1}}(\mathbf{x})} &amp; {\dots} &amp; {\frac{\partial f_{1}}{\partial x_{n}}(\mathbf{x})} \\ {\vdots} &amp; {} &amp; {\vdots} \\ {\frac{\partial f_{m}}{\partial x_{1}}(\mathbf{x})} &amp; {\cdots} &amp; {\frac{\partial f_{m}}{\partial x_{n}}(\mathbf{x})}\end{array}\right]\)</span>。</p>
+<p>3、如果<span class="math inline">\(f\)</span>是二阶可微，那么<span class="math inline">\(\mathbf{F}=D^{2} f=\left[\begin{array}{cccc}{\frac{\partial^{2} f}{\partial x_{1}^{2}}} &amp; {\frac{\partial^{2} f}{\partial x_{2} \partial x_{1}}} &amp; {\cdots} &amp; {\frac{\partial^{2} f}{\partial x_{n} \partial x_{1}}} \\ {\frac{\partial^{2} f}{\partial x_{1} \partial x_{2}}} &amp; {\frac{\partial^{2} f}{\partial x_{2}^{2}}} &amp; {\cdots} &amp; {\frac{\partial^{2} f}{\partial x_{n} \partial x_{1}}} \\ {\vdots} &amp; {\vdots} &amp; {\ddots} &amp; {\vdots} \\ {\frac{\partial^{2} f}{\partial x_{1} \partial x_{n}}} &amp; {\frac{\partial^{2} f}{\partial x_{2} \partial x_{n}}} &amp; {\cdots} &amp; {\frac{\partial^{2} f}{\partial x_{n}^{2}}}\end{array}\right]\)</span>，该矩阵称为<span class="math inline">\(f\)</span>的黑塞矩阵（Hessian）。</p>
+<h2 id="水平集和梯度">水平集和梯度</h2>
+<p><span class="math inline">\(\nabla f\left(\mathbf{x}_{0}\right)\)</span>是<span class="math inline">\(f\)</span>在<span class="math inline">\(\mathbf{x}_{0}\)</span>点处最大增长率方向。</p>
+<h1 id="无约束优化问题">无约束优化问题</h1>
+<h2 id="局部极小点x">局部极小点x</h2>
+<p><span class="math inline">\(\mathbf{x}^{\ast}\)</span>是局部极小点的条件是<span class="math inline">\(\nabla f\left(\mathbf{x}^{\ast}\right)=0\)</span>。</p>
+<h2 id="可行方向">可行方向</h2>
+<p>如果存在<span class="math inline">\(\alpha_{0}&gt;0\)</span>，并且满足<span class="math inline">\(\alpha \in\left[0, \alpha_{0}\right]\)</span>，使得<span class="math inline">\(\mathbf{x}+\alpha \mathbf{d} \in \Omega\)</span>，那么<span class="math inline">\(\mathbf{d} \in \mathbb{R}^{n}, \mathbf{d} \neq 0\)</span>就是<span class="math inline">\(\mathbf{x} \in \Omega\)</span>中的可行方向。</p>
+<h3 id="方向导数">方向导数</h3>
+<p>当可行方向<span class="math inline">\(\mathbf{d}\)</span>是单位向量时，那么函数<span class="math inline">\(f\)</span>在<span class="math inline">\(\mathbf{x}\)</span>处沿方向<span class="math inline">\(\mathbf{d}\)</span>的增长率可以用内积表示，即<span class="math inline">\(\frac{\partial f}{\partial \mathbf{d}}(\mathbf{x})=\mathbf{d}^{\top} \nabla f(\mathbf{x})=\nabla f(\mathbf{x})^{\top} \mathbf{d}=\left \langle \nabla f(\mathbf{x}), \mathbf{d} \right \rangle\)</span>。</p>
+<h3 id="fonc一阶必要条件">FONC（一阶必要条件）</h3>
+<p>如果<span class="math inline">\(\mathbf{x}^{\ast}\)</span>是函数<span class="math inline">\(f\)</span>在<span class="math inline">\(\Omega\)</span>上的局部极小点，那么对于<span class="math inline">\(\mathbf{x}^{\ast}\)</span>处的任意可行方向<span class="math inline">\(\mathbf{d}\)</span>都有<span class="math inline">\(\mathbf{d}^{T} \nabla f\left(\mathbf{x}^{\ast}\right) \geq 0\)</span>。</p>
+<h3 id="sonc二阶必要条件">SONC（二阶必要条件）</h3>
+<p>如果<span class="math inline">\(f\)</span>在约束集<span class="math inline">\(\Omega\)</span>上二阶连续可导，并且<span class="math inline">\(\mathbf{x}^{\ast}\)</span>是函数<span class="math inline">\(f\)</span>在<span class="math inline">\(\Omega\)</span>上的局部极小点，<span class="math inline">\(\mathbf{d}\)</span>是<span class="math inline">\(\mathbf{x}^{\ast}\)</span>处的可行方向，并且<span class="math inline">\(\mathbf{d}^{T} \nabla f\left(\mathbf{x}^{\ast}\right) = 0\)</span>，则<span class="math inline">\(\mathbf{d}^{T} F\left(\mathbf{x}^{\ast}\right) \mathbf{d} \geq 0\)</span>，其中<span class="math inline">\(F\)</span>为函数<span class="math inline">\(f\)</span>的黑塞矩阵。</p>
+<h3 id="sosc二阶充分条件">SOSC（二阶充分条件）</h3>
+<p>如果<span class="math inline">\(f\)</span>在约束集<span class="math inline">\(\Omega\)</span>上二阶连续可导，如果同时满足<span class="math inline">\(\nabla f\left(\mathbf{x}^{\ast}\right)=0\)</span>和<span class="math inline">\(F\left(\mathbf{x}^{\ast}\right)&gt;0\)</span>，那么<span class="math inline">\(\mathbf{X}^{\ast}\)</span>为严格局部极小点。</p>
+<h1 id="一维搜索方法">一维搜索方法</h1>
+<h2 id="介绍-1">介绍</h2>
+<p>该方法主要使用迭代搜索算法或线搜法，基本流程是：</p>
+<blockquote>
+<ul>
+<li>1、赋一个初值<span class="math inline">\(x^{\left ( 0 \right )}\)</span>。</li>
+<li>2、生成迭代序列<span class="math inline">\(x^{\left ( 1 \right )},x^{\left ( 2 \right )},\cdots\)</span>。</li>
+<li>3、每次迭代，下一个<span class="math inline">\(x^{\left ( k+1 \right )}\)</span>依赖于上一个<span class="math inline">\(x^{\left ( k \right )}\)</span>。</li>
+</ul>
+</blockquote>
+<p>目标函数<span class="math inline">\(f\)</span>，一阶导数<span class="math inline">\({f}&#39;\)</span>，二阶导数<span class="math inline">\({f}&#39;&#39;\)</span>。</p>
+<p>常用的一维搜索算法：</p>
+<blockquote>
+<ul>
+<li>1、黄金分割法。（只使用目标函数<span class="math inline">\(f\)</span>）</li>
+<li>2、斐波那契数列方法。（只使用目标函数<span class="math inline">\(f\)</span>）</li>
+<li>3、二分法。（只使用目标函数的一阶导数<span class="math inline">\({f}&#39;\)</span>）</li>
+<li>4、割线法。（只使用目标函数的一阶导数<span class="math inline">\({f}&#39;\)</span>）</li>
+<li>5、牛顿法。（只使用目标函数的一阶导数<span class="math inline">\({f}&#39;\)</span>和二阶导数<span class="math inline">\({f}&#39;&#39;\)</span>）</li>
+</ul>
+</blockquote>
 ]]></content>
       <categories>
         <category>课程</category>
