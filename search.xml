@@ -319,6 +319,20 @@
 <p>2、可以合并一个步长以确保下降</p>
 <p>3、对于二次型，一步收敛。</p>
 <h1 id="共轭方向法">共轭方向法</h1>
+<h2 id="介绍-3">介绍</h2>
+<p>共轭方向法的效率和计算复杂度位于最速下降法和牛顿法之间。</p>
+<p>共轭方向法有如下特征：</p>
+<p>1、对于<span class="math inline">\(n\)</span>维二次型问题，能够在<span class="math inline">\(n\)</span>步内得到结果。</p>
+<p>2、共轭方向法的典型代表共轭梯度法不需要计算黑塞矩阵。</p>
+<p>3、不需要存储<span class="math inline">\(n \times n\)</span>矩阵，也不需要求逆。</p>
+<p>4、比最速下降法复杂。</p>
+<p>通常情况下比最速下降法性能更好，但不如牛顿法。迭代搜索方法效率的关键因素是每次迭代的搜索方向。对于某些函数，最佳搜索方向是Q-共轭方向。</p>
+<h2 id="共轭向量">共轭向量</h2>
+<p>1、给定对称举证<span class="math inline">\(\mathbf{Q} \in \mathbb{R}^{n \times n}\)</span>。</p>
+<p>2、如果两个向量<span class="math inline">\(\mathbf{d}(1)\)</span>和<span class="math inline">\(\mathbf{d}(2)\)</span>是Q共轭，那么<span class="math inline">\(\mathbf{d}^{(1) \top} \mathbf{Q} \mathbf{d}^{(2)}=0\)</span>。</p>
+<p>3、假设<span class="math inline">\(\mathbf{Q}\)</span>是对称<span class="math inline">\({n \times n}\)</span>举证，那么对于方向<span class="math inline">\(\mathbf{d}^{(0)}, \mathbf{d}^{(1)}, \mathbf{d}^{(2)}, \ldots, \mathbf{d}^{(m)}\)</span>如果是Q共轭的话，那么对于所有<span class="math inline">\(i \neq j\)</span>都有<span class="math inline">\(\mathbf{d}^{(i) \top} \mathbf{Q} \mathbf{d}^{(j)}=0\)</span>。</p>
+<p>4、如果<span class="math inline">\(\mathbf{Q}=\mathbf{I}\)</span>，那么共轭变为正交。</p>
+<h2 id="共轭方向算法">共轭方向算法</h2>
 ]]></content>
       <categories>
         <category>课程</category>
