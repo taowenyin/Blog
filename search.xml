@@ -219,6 +219,57 @@
 <p><span class="math display">\[\phi_{k}(\alpha)=f\left(\mathbf{x}^{(k)}+\alpha \mathbf{d}^{(k)}\right)\]</span></p>
 <p>其中<span class="math inline">\(\mathbf{d}\)</span>为搜索方向。通过一维搜索确定<span class="math inline">\(\alpha_{k}\)</span>后，可以使得<span class="math inline">\(f\left(\mathbf{x}^{(k+1)}\right) &lt; f\left(\mathbf{x}^{(k)}\right)\)</span>。</p>
 <h1 id="梯度方法">梯度方法</h1>
+<p>常用的梯度方法</p>
+<blockquote>
+<p>梯度下降</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>1、固定步长的梯度下降</li>
+<li>2、最速梯度下降</li>
+<li>3、随机梯度下降</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>共轭梯度</p>
+</blockquote>
+<h2 id="介绍-2">介绍</h2>
+<p>因为<span class="math inline">\(\mathbf{d}=\nabla f(\mathbf{x})\)</span>是增长率最大的方向，因此<span class="math inline">\(\mathbf{d}=-\nabla f(\mathbf{x})\)</span>就是下降最快的方向。</p>
+<p>梯度下降算法的核心实现：</p>
+<p><span class="math display">\[\mathbf{x}^{(k+1)}=\mathbf{x}^{(k)}-\alpha_{k} \nabla f\left(\mathbf{x}^{(k)}\right)\]</span></p>
+<p>其中<span class="math inline">\(\alpha_{k}\)</span>是步长，<span class="math inline">\(\nabla f\left(\mathbf{x}^{(k)}\right)\)</span>是方向。</p>
+<p>1、<span class="math inline">\(\alpha_{k}\)</span>选择的影响：</p>
+<blockquote>
+<p>当<span class="math inline">\(\alpha_{k}\)</span>太小，那么迭代的次数就会变多。</p>
+</blockquote>
+<blockquote>
+<p>当<span class="math inline">\(\alpha_{k}\)</span>太大，那么就会在最优点之间来回震荡。</p>
+</blockquote>
+<p>2、<span class="math inline">\(\alpha_{k}\)</span>的选择有许多方法：</p>
+<blockquote>
+<p>可以在每次迭代中使<span class="math inline">\(\alpha_{k}\)</span>固定，也可以让<span class="math inline">\(\alpha_{k}\)</span>随迭代变化而变化。</p>
+</blockquote>
+<blockquote>
+<p>动态计算<span class="math inline">\(\alpha_{k}\)</span></p>
+</blockquote>
+<p><span class="math display">\[\alpha_{k}=\arg \min _{\alpha \geq 0} f\left(\mathbf{x}^{(\mathbf{k})}-\alpha \nabla f\left(\mathbf{x}^{(k)}\right)\right)\]</span></p>
+<h2 id="最速下降法">最速下降法</h2>
+<blockquote>
+<p>该方法时一个梯度法。</p>
+</blockquote>
+<blockquote>
+<p>选择步长以实现目标函数在每个单独步骤中的最大减少量。</p>
+</blockquote>
+<p><span class="math display">\[\alpha_{k}=\arg \min _{\alpha \geq 0} f\left(\mathbf{x}^{(\mathbf{k})}-\alpha \nabla f\left(\mathbf{x}^{(\mathbf{k})}\right)\right)\]</span></p>
+<p>最速下降法的基本过程：x</p>
+<blockquote>
+<ul>
+<li>1、每一步以<span class="math inline">\(\mathbf{x}^{(\mathbf{k})}\)</span>开始。</li>
+<li>2、通过线搜法沿着方向<span class="math inline">\(-\nabla f\left(\mathbf{x}^{(\mathbf{k})}\right)\)</span>获取最小的<span class="math inline">\(\mathbf{x}^{(\mathbf{k}+\mathbf{1})}\)</span>。</li>
+</ul>
+</blockquote>
+<p>在最速下降法中，假如<span class="math inline">\(\left\{\mathbf{x}^{(\mathbf{k})}\right\}_{k=0}^{\infty}\)</span>是每次迭代得到的值，那么对于每个<span class="math inline">\(k\)</span>，都有<span class="math inline">\(\mathbf{x}^{(\mathbf{k}+\mathbf{1})}-\mathbf{x}^{(\mathbf{k})}\)</span>与<span class="math inline">\(\mathbf{x}^{(\mathbf{k}+2)}-\mathbf{x}^{(\mathbf{k}+1)}\)</span>正交。</p>
+<p>当<span class="math inline">\(\mathbf{x}^{(\mathbf{k}+\mathbf{1})}=\mathbf{x}^{(\mathbf{k})}\)</span>，那么这种情况就是算法停止的条件。</p>
 ]]></content>
       <categories>
         <category>课程</category>
