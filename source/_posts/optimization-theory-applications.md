@@ -336,3 +336,53 @@ $$\phi_{k}(\alpha)=f\left(\mathbf{x}^{(k)}+\alpha \mathbf{d}^{(k)}\right)$$
 
 # 梯度方法
 
+常用的梯度方法
+
+> 梯度下降
+
+>* 1、固定步长的梯度下降
+>* 2、最速梯度下降
+>* 3、随机梯度下降
+
+> 共轭梯度
+
+## 介绍
+
+因为$\mathbf{d}=\nabla f(\mathbf{x})$是增长率最大的方向，因此$\mathbf{d}=-\nabla f(\mathbf{x})$就是下降最快的方向。
+
+梯度下降算法的核心实现：
+
+$$\mathbf{x}^{(k+1)}=\mathbf{x}^{(k)}-\alpha_{k} \nabla f\left(\mathbf{x}^{(k)}\right)$$
+
+其中$\alpha_{k}$是步长，$\nabla f\left(\mathbf{x}^{(k)}\right)$是方向。
+
+1、$\alpha_{k}$选择的影响：
+
+> 当$\alpha_{k}$太小，那么迭代的次数就会变多。
+
+> 当$\alpha_{k}$太大，那么就会在最优点之间来回震荡。
+
+2、$\alpha_{k}$的选择有许多方法：
+
+> 可以在每次迭代中使$\alpha_{k}$固定，也可以让$\alpha_{k}$随迭代变化而变化。
+
+> 动态计算$\alpha_{k}$
+
+$$\alpha_{k}=\arg \min _{\alpha \geq 0} f\left(\mathbf{x}^{(\mathbf{k})}-\alpha \nabla f\left(\mathbf{x}^{(k)}\right)\right)$$
+
+## 最速下降法
+
+> 该方法时一个梯度法。
+
+> 选择步长以实现目标函数在每个单独步骤中的最大减少量。
+
+$$\alpha_{k}=\arg \min _{\alpha \geq 0} f\left(\mathbf{x}^{(\mathbf{k})}-\alpha \nabla f\left(\mathbf{x}^{(\mathbf{k})}\right)\right)$$
+
+最速下降法的基本过程：x
+
+>* 1、每一步以$\mathbf{x}^{(\mathbf{k})}$开始。
+>* 2、通过线搜法沿着方向$-\nabla f\left(\mathbf{x}^{(\mathbf{k})}\right)$获取最小的$\mathbf{x}^{(\mathbf{k}+\mathbf{1})}$。
+
+在最速下降法中，假如$\left\{\mathbf{x}^{(\mathbf{k})}\right\}_{k=0}^{\infty}$是每次迭代得到的值，那么对于每个$k$，都有$\mathbf{x}^{(\mathbf{k}+\mathbf{1})}-\mathbf{x}^{(\mathbf{k})}$与$\mathbf{x}^{(\mathbf{k}+2)}-\mathbf{x}^{(\mathbf{k}+1)}$正交。
+
+当$\mathbf{x}^{(\mathbf{k}+\mathbf{1})}=\mathbf{x}^{(\mathbf{k})}$，那么这种情况就是算法停止的条件。
