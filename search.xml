@@ -270,6 +270,26 @@
 </blockquote>
 <p>在最速下降法中，假如<span class="math inline">\(\left\{\mathbf{x}^{(\mathbf{k})}\right\}_{k=0}^{\infty}\)</span>是每次迭代得到的值，那么对于每个<span class="math inline">\(k\)</span>，都有<span class="math inline">\(\mathbf{x}^{(\mathbf{k}+\mathbf{1})}-\mathbf{x}^{(\mathbf{k})}\)</span>与<span class="math inline">\(\mathbf{x}^{(\mathbf{k}+2)}-\mathbf{x}^{(\mathbf{k}+1)}\)</span>正交。</p>
 <p>当<span class="math inline">\(\mathbf{x}^{(\mathbf{k}+\mathbf{1})}=\mathbf{x}^{(\mathbf{k})}\)</span>，那么这种情况就是算法停止的条件。</p>
+<blockquote>
+<p>梯度收敛的总结</p>
+</blockquote>
+<p>1、如果目标函数<span class="math inline">\(f\)</span>是凸的，则通过满足Wolfe条件的线搜索来选择步长，则相应的梯度法是全局收敛的。</p>
+<p>2、如果目标函数是二次型<span class="math inline">\(f(\mathbf{x})=\frac{1}{2} \mathbf{x}^{T} Q \mathbf{x}-\mathbf{b}^{T} \mathbf{x}\)</span>，并且<span class="math inline">\(Q\)</span>是正定的，那么最速梯度法是全局收敛。</p>
+<p>3、如果目标函数是二次型<span class="math inline">\(f(\mathbf{x})=\frac{1}{2} \mathbf{x}^{T} Q \mathbf{x}-\mathbf{b}^{T} \mathbf{x}\)</span>，并且<span class="math inline">\(Q\)</span>是正定的，那么固定步长梯度法也是全局收敛，并且<span class="math inline">\(0&lt;\alpha&lt;\frac{2}{\lambda_{\max }(Q)}\)</span>。</p>
+<p>给定一个序列<span class="math inline">\(\left\{\mathbf{x}^{(k)}\right\}\)</span>，该序列收敛到<span class="math inline">\(\mathbf{x}^{\ast}\)</span>。当<span class="math inline">\(\lim _{k \rightarrow \infty}\left\|\mathbf{x}^{(k)}-\mathbf{x}^{*}\right\|=0\)</span>时，那么收敛的阶数是<span class="math inline">\(p\)</span>，并且<span class="math inline">\(p \in \mathbb{R}\)</span>。</p>
+<p>当<span class="math inline">\(p=1\)</span>（一阶收敛），并且<span class="math inline">\(\lim _{k \rightarrow \infty} \frac{\left\|\mathbf{x}^{(k+1)}-\mathbf{x}^{*}\right\|}{\left\|\mathbf{x}^{(k)}-\mathbf{x}^{*}\right\|^{p}}=1\)</span>，那么收敛是次线性的。</p>
+<p>当<span class="math inline">\(p=1\)</span>（一阶收敛），并且<span class="math inline">\(\lim _{k \rightarrow \infty} \frac{\left\|\mathbf{x}^{(k+1)}-\mathbf{x}^{*}\right\|}{\left\|\mathbf{x}^{(k)}-\mathbf{x}^{*}\right\|^{p}}&lt;1\)</span>，那么收敛是线性的。</p>
+<p>当<span class="math inline">\(p&gt;1\)</span>，那么收敛是超线性的。</p>
+<p>当<span class="math inline">\(p=2\)</span>（二阶收敛），那么收敛是二次型的。</p>
+<p>当<span class="math inline">\(p=3\)</span>（三阶收敛），那么收敛是立方的。</p>
+<blockquote>
+<p>例子</p>
+</blockquote>
+<p>假设<span class="math inline">\(x^{\left ( k \right )}=\frac{1}{k}\)</span>，并且<span class="math inline">\(x^{\left ( k \right )} \rightarrow 0\)</span>，那么<span class="math inline">\(\frac{\left|x^{(k+1)}\right|}{\left|x^{(k)}\right|^{p}}=\frac{\frac{1}{k+1}}{\frac{1}{k^{p}}}=\frac{k^{p}}{k+1}\)</span></p>
+<p>当<span class="math inline">\(p &gt; 1\)</span>时，上式趋近于<span class="math inline">\(\infty\)</span>。</p>
+<p>当<span class="math inline">\(p &lt; 1\)</span>时，上式收敛到0。</p>
+<p>当<span class="math inline">\(p = 1\)</span>时，上式收敛到1。</p>
+<p>因此，收敛的阶数为1。</p>
 ]]></content>
       <categories>
         <category>课程</category>
