@@ -418,3 +418,20 @@ $$\alpha_{k}=\arg \min _{\alpha \geq 0} f\left(\mathbf{x}^{(\mathbf{k})}-\alpha 
 当$p = 1$时，上式收敛到1。
 
 因此，收敛的阶数为1。
+
+# 牛顿法
+
+## 基本思想
+
+1、给定一个初值点。
+
+给定$f: \mathbb{R}^{n} \rightarrow \mathbb{R}$，并且当前迭代为$\mathbf{x}^{(k)}$，下一步计算$\mathbf{x}^{(k+1)}$。
+
+2、构造目标函数的二次逼近，该目标函数与该点上的第一和第二导数值相匹配。
+
+$$q(\mathbf{x})=f\left(\mathbf{x}^{(k)}\right)+\left(\mathbf{x}-\mathbf{x}^{(k)}\right)^{\top} \mathbf{g}^{(k)}+\frac{1}{2}\left(\mathbf{x}-\mathbf{x}^{(k)}\right)^{\top} \mathbf{F}\left(\mathbf{x}^{(k)}\right)\left(\mathbf{x}-\mathbf{x}^{(k)}\right)$$
+
+3、最小化近似二次函数代替原来的目标函数。
+
+4、使用近似函数的极小值作为起点，迭代地重复该过程。
+
