@@ -293,11 +293,32 @@
 <h1 id="牛顿法">牛顿法</h1>
 <h2 id="基本思想">基本思想</h2>
 <p>1、给定一个初值点。</p>
-<p>给定<span class="math inline">\(f: \mathbb{R}^{n} \rightarrow \mathbb{R}\)</span>，并且当前迭代为<span class="math inline">\(\mathbf{x}^{(k)}\)</span>，下一步计算<span class="math inline">\(\mathbf{x}^{(k+1)}\)</span>。</p>
 <p>2、构造目标函数的二次逼近，该目标函数与该点上的第一和第二导数值相匹配。</p>
-<p><span class="math display">\[q(\mathbf{x})=f\left(\mathbf{x}^{(k)}\right)+\left(\mathbf{x}-\mathbf{x}^{(k)}\right)^{\top} \mathbf{g}^{(k)}+\frac{1}{2}\left(\mathbf{x}-\mathbf{x}^{(k)}\right)^{\top} \mathbf{F}\left(\mathbf{x}^{(k)}\right)\left(\mathbf{x}-\mathbf{x}^{(k)}\right)\]</span></p>
 <p>3、最小化近似二次函数代替原来的目标函数。</p>
 <p>4、使用近似函数的极小值作为起点，迭代地重复该过程。</p>
+<h2 id="牛顿法没有步阶大小或者步阶为1">牛顿法（没有步阶大小，或者步阶为1）</h2>
+<p>1、给定<span class="math inline">\(f: \mathbb{R}^{n} \rightarrow \mathbb{R}\)</span>，并且当前迭代为<span class="math inline">\(\mathbf{x}^{(k)}\)</span>。</p>
+<p>2、通过二次型近似函数<span class="math inline">\(f\)</span>求<span class="math inline">\(\mathbf{x}^{(k+1)}\)</span>。</p>
+<p><span class="math display">\[q(\mathbf{x})=f\left(\mathbf{x}^{(k)}\right)+\left(\mathbf{x}-\mathbf{x}^{(k)}\right)^{\top} \mathbf{g}^{(k)}+\frac{1}{2}\left(\mathbf{x}-\mathbf{x}^{(k)}\right)^{\top} \mathbf{F}\left(\mathbf{x}^{(k)}\right)\left(\mathbf{x}-\mathbf{x}^{(k)}\right)\]</span></p>
+<p>3、最小化<span class="math inline">\(q\)</span>来迭代下一个<span class="math inline">\(\mathbf{x}^{(k+1)}\)</span>。</p>
+<p>4、假设<span class="math inline">\(\mathbf{g}^{(k)}=\nabla f\left(\mathbf{x}^{(k)}\right)\)</span>。通过一阶必要条件，可以知道<span class="math inline">\(\nabla q\left(\mathbf{x}^{(k)}\right)=0\)</span>。</p>
+<p><span class="math display">\[\nabla q\left(\mathbf{x}^{(k)}\right)=\mathbf{g}^{(k)}+\mathbf{F}\left(\mathbf{x}^{(k)}\right)\left(\mathbf{x}-\mathbf{x}^{(k)}\right)=0\]</span></p>
+<p>5、牛顿算法</p>
+<p><span class="math display">\[\mathbf{x}^{(k+1)}=\mathbf{x}^{(k)}-\mathbf{F}\left(\mathbf{x}^{(k)}\right)^{-1} \mathbf{g}^{(k)}\]</span></p>
+<p>搜索方向</p>
+<p><span class="math display">\[\mathbf{d}^{(k)}=-\mathbf{F}\left(\mathbf{x}^{(k)}\right)^{-1} \mathbf{g}^{(k)}=\mathbf{x}^{(k+1)}-\mathbf{x}^{(k)}\]</span></p>
+<h2 id="levenberg-marquardt修正">Levenberg-Marquardt修正</h2>
+<p>如果黑塞矩阵<span class="math inline">\(\mathbf{F}\left(\mathbf{x}^{(k)}\right)\)</span>不正定，那么搜索方向就会使下降方向<span class="math inline">\(\mathbf{d}^{(k)}=-\mathbf{F}\left(\mathbf{x}^{(k)}\right)^{-1} \mathbf{g}^{(k)}\)</span>可能不会是下降方向，因此Levenberg-Marquardt修正解决了这个问题。</p>
+<p><span class="math display">\[\mathbf{x}^{(k+1)}=\mathbf{x}^{(k)}-\alpha_{k}\left(\mathbf{F}\left(\mathbf{x}^{(k)}\right)+\mu_{k} \mathbf{I}\right)^{-1} \mathbf{g}^{(k)}\]</span></p>
+<p>其中<span class="math inline">\(\mu_{k} \geq 0\)</span>，<span class="math inline">\(F\)</span>为对称矩阵。</p>
+<p>1、<span class="math inline">\(\mu_{k} \rightarrow 0\)</span>：Levenberg-Marquardt修正逐步接近牛顿法。</p>
+<p>2、<span class="math inline">\(\mu_{k} \rightarrow \infty\)</span>：Levenberg-Marquardt修正表现出步长较小时的梯度方法的特征。</p>
+<p>实际应用中，<span class="math inline">\(\mu_{k}\)</span>的初始值较小，然后逐步增加，直到出现下降特征，即<span class="math inline">\(f\left ( \mathbf{x}^{k+1} \right ) &lt; f\left ( \mathbf{x}^{k} \right )\)</span>为止。</p>
+<h2 id="牛顿法总结">牛顿法总结</h2>
+<p>1、如果起始点与最小值足够近，牛顿法的效果会很好。</p>
+<p>2、可以合并一个步长以确保下降</p>
+<p>3、对于二次型，一步收敛。</p>
+<h1 id="共轭方向法">共轭方向法</h1>
 ]]></content>
       <categories>
         <category>课程</category>
