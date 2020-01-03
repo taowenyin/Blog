@@ -425,13 +425,54 @@ $$\alpha_{k}=\arg \min _{\alpha \geq 0} f\left(\mathbf{x}^{(\mathbf{k})}-\alpha 
 
 1、给定一个初值点。
 
-给定$f: \mathbb{R}^{n} \rightarrow \mathbb{R}$，并且当前迭代为$\mathbf{x}^{(k)}$，下一步计算$\mathbf{x}^{(k+1)}$。
-
 2、构造目标函数的二次逼近，该目标函数与该点上的第一和第二导数值相匹配。
-
-$$q(\mathbf{x})=f\left(\mathbf{x}^{(k)}\right)+\left(\mathbf{x}-\mathbf{x}^{(k)}\right)^{\top} \mathbf{g}^{(k)}+\frac{1}{2}\left(\mathbf{x}-\mathbf{x}^{(k)}\right)^{\top} \mathbf{F}\left(\mathbf{x}^{(k)}\right)\left(\mathbf{x}-\mathbf{x}^{(k)}\right)$$
 
 3、最小化近似二次函数代替原来的目标函数。
 
 4、使用近似函数的极小值作为起点，迭代地重复该过程。
 
+## 牛顿法（没有步阶大小，或者步阶为1）
+
+1、给定$f: \mathbb{R}^{n} \rightarrow \mathbb{R}$，并且当前迭代为$\mathbf{x}^{(k)}$。
+
+2、通过二次型近似函数$f$求$\mathbf{x}^{(k+1)}$。
+
+$$q(\mathbf{x})=f\left(\mathbf{x}^{(k)}\right)+\left(\mathbf{x}-\mathbf{x}^{(k)}\right)^{\top} \mathbf{g}^{(k)}+\frac{1}{2}\left(\mathbf{x}-\mathbf{x}^{(k)}\right)^{\top} \mathbf{F}\left(\mathbf{x}^{(k)}\right)\left(\mathbf{x}-\mathbf{x}^{(k)}\right)$$
+
+3、最小化$q$来迭代下一个$\mathbf{x}^{(k+1)}$。
+
+4、假设$\mathbf{g}^{(k)}=\nabla f\left(\mathbf{x}^{(k)}\right)$。通过一阶必要条件，可以知道$\nabla q\left(\mathbf{x}^{(k)}\right)=0$。
+
+$$\nabla q\left(\mathbf{x}^{(k)}\right)=\mathbf{g}^{(k)}+\mathbf{F}\left(\mathbf{x}^{(k)}\right)\left(\mathbf{x}-\mathbf{x}^{(k)}\right)=0$$
+
+5、牛顿算法
+
+$$\mathbf{x}^{(k+1)}=\mathbf{x}^{(k)}-\mathbf{F}\left(\mathbf{x}^{(k)}\right)^{-1} \mathbf{g}^{(k)}$$
+
+搜索方向
+
+$$\mathbf{d}^{(k)}=-\mathbf{F}\left(\mathbf{x}^{(k)}\right)^{-1} \mathbf{g}^{(k)}=\mathbf{x}^{(k+1)}-\mathbf{x}^{(k)}$$
+
+## Levenberg-Marquardt修正
+
+如果黑塞矩阵$\mathbf{F}\left(\mathbf{x}^{(k)}\right)$不正定，那么搜索方向就会使下降方向$\mathbf{d}^{(k)}=-\mathbf{F}\left(\mathbf{x}^{(k)}\right)^{-1} \mathbf{g}^{(k)}$可能不会是下降方向，因此Levenberg-Marquardt修正解决了这个问题。
+
+$$\mathbf{x}^{(k+1)}=\mathbf{x}^{(k)}-\alpha_{k}\left(\mathbf{F}\left(\mathbf{x}^{(k)}\right)+\mu_{k} \mathbf{I}\right)^{-1} \mathbf{g}^{(k)}$$
+
+其中$\mu_{k} \geq 0$，$F$为对称矩阵。
+
+1、$\mu_{k} \rightarrow 0$：Levenberg-Marquardt修正逐步接近牛顿法。
+
+2、$\mu_{k} \rightarrow \infty$：Levenberg-Marquardt修正表现出步长较小时的梯度方法的特征。
+
+实际应用中，$\mu_{k}$的初始值较小，然后逐步增加，直到出现下降特征，即$f\left ( \mathbf{x}^{k+1} \right ) < f\left ( \mathbf{x}^{k} \right )$为止。
+
+## 牛顿法总结
+
+1、如果起始点与最小值足够近，牛顿法的效果会很好。
+
+2、可以合并一个步长以确保下降
+
+3、对于二次型，一步收敛。
+
+# 共轭方向法
