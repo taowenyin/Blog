@@ -290,6 +290,14 @@
 <p>当<span class="math inline">\(p &lt; 1\)</span>时，上式收敛到0。</p>
 <p>当<span class="math inline">\(p = 1\)</span>时，上式收敛到1。</p>
 <p>因此，收敛的阶数为1。</p>
+<h1 id="牛顿法">牛顿法</h1>
+<h2 id="基本思想">基本思想</h2>
+<p>1、给定一个初值点。</p>
+<p>给定<span class="math inline">\(f: \mathbb{R}^{n} \rightarrow \mathbb{R}\)</span>，并且当前迭代为<span class="math inline">\(\mathbf{x}^{(k)}\)</span>，下一步计算<span class="math inline">\(\mathbf{x}^{(k+1)}\)</span>。</p>
+<p>2、构造目标函数的二次逼近，该目标函数与该点上的第一和第二导数值相匹配。</p>
+<p><span class="math display">\[q(\mathbf{x})=f\left(\mathbf{x}^{(k)}\right)+\left(\mathbf{x}-\mathbf{x}^{(k)}\right)^{\top} \mathbf{g}^{(k)}+\frac{1}{2}\left(\mathbf{x}-\mathbf{x}^{(k)}\right)^{\top} \mathbf{F}\left(\mathbf{x}^{(k)}\right)\left(\mathbf{x}-\mathbf{x}^{(k)}\right)\]</span></p>
+<p>3、最小化近似二次函数代替原来的目标函数。</p>
+<p>4、使用近似函数的极小值作为起点，迭代地重复该过程。</p>
 ]]></content>
       <categories>
         <category>课程</category>
