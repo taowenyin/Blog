@@ -386,3 +386,35 @@ $$\alpha_{k}=\arg \min _{\alpha \geq 0} f\left(\mathbf{x}^{(\mathbf{k})}-\alpha 
 在最速下降法中，假如$\left\{\mathbf{x}^{(\mathbf{k})}\right\}_{k=0}^{\infty}$是每次迭代得到的值，那么对于每个$k$，都有$\mathbf{x}^{(\mathbf{k}+\mathbf{1})}-\mathbf{x}^{(\mathbf{k})}$与$\mathbf{x}^{(\mathbf{k}+2)}-\mathbf{x}^{(\mathbf{k}+1)}$正交。
 
 当$\mathbf{x}^{(\mathbf{k}+\mathbf{1})}=\mathbf{x}^{(\mathbf{k})}$，那么这种情况就是算法停止的条件。
+
+> 梯度收敛的总结
+
+1、如果目标函数$f$是凸的，则通过满足Wolfe条件的线搜索来选择步长，则相应的梯度法是全局收敛的。
+
+2、如果目标函数是二次型$f(\mathbf{x})=\frac{1}{2} \mathbf{x}^{T} Q \mathbf{x}-\mathbf{b}^{T} \mathbf{x}$，并且$Q$是正定的，那么最速梯度法是全局收敛。
+
+3、如果目标函数是二次型$f(\mathbf{x})=\frac{1}{2} \mathbf{x}^{T} Q \mathbf{x}-\mathbf{b}^{T} \mathbf{x}$，并且$Q$是正定的，那么固定步长梯度法也是全局收敛，并且$0<\alpha<\frac{2}{\lambda_{\max }(Q)}$。
+
+给定一个序列$\left\{\mathbf{x}^{(k)}\right\}$，该序列收敛到$\mathbf{x}^{\ast}$。当$\lim _{k \rightarrow \infty}\left\|\mathbf{x}^{(k)}-\mathbf{x}^{*}\right\|=0$时，那么收敛的阶数是$p$，并且$p \in \mathbb{R}$。
+
+当$p=1$（一阶收敛），并且$\lim _{k \rightarrow \infty} \frac{\left\|\mathbf{x}^{(k+1)}-\mathbf{x}^{*}\right\|}{\left\|\mathbf{x}^{(k)}-\mathbf{x}^{*}\right\|^{p}}=1$，那么收敛是次线性的。
+
+当$p=1$（一阶收敛），并且$\lim _{k \rightarrow \infty} \frac{\left\|\mathbf{x}^{(k+1)}-\mathbf{x}^{*}\right\|}{\left\|\mathbf{x}^{(k)}-\mathbf{x}^{*}\right\|^{p}}<1$，那么收敛是线性的。
+
+当$p>1$，那么收敛是超线性的。
+
+当$p=2$（二阶收敛），那么收敛是二次型的。
+
+当$p=3$（三阶收敛），那么收敛是立方的。
+
+> 例子
+
+假设$x^{\left ( k \right )}=\frac{1}{k}$，并且$x^{\left ( k \right )} \rightarrow 0$，那么$\frac{\left|x^{(k+1)}\right|}{\left|x^{(k)}\right|^{p}}=\frac{\frac{1}{k+1}}{\frac{1}{k^{p}}}=\frac{k^{p}}{k+1}$
+
+当$p > 1$时，上式趋近于$\infty$。
+
+当$p < 1$时，上式收敛到0。
+
+当$p = 1$时，上式收敛到1。
+
+因此，收敛的阶数为1。
