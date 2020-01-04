@@ -790,3 +790,177 @@ $$\mathbf{H}_{k+1}^{B F G S}=\mathbf{H}_{k}+\left(1+\frac{\Delta \mathbf{g}^{(k)
 6、需要进行一些修改（例如，在每次迭代后将方向向量重新初始化为负梯度）。
 
 7、广泛应用。
+
+# 线性规划
+
+## 标准型线性规划
+
+\begin{matrix}
+    minimize & \mathbf{c}^{T} \mathbf{x}\\ 
+    st. & \mathbf{A x}=\mathbf{b}\\ 
+     & \mathbf{x} \geq 0
+\end{matrix}
+
+其中$\mathbf{A}$是$m \times n$，$m < n$，$\operatorname{rank}(\mathbf{A})=m$，并且$\mathbf{b} \geq 0$。
+
+如果把LP问题转化为标准型？
+
+1、如果问题是最大化，则简单地将目标函数乘以-1以最小化。
+
+2、如果$\mathbf{A}$不是满秩，那么就移除一行或多行。
+
+3、如果$\mathbf{b}$的一个分量是负的，比如第$i$个分量，将第$i$个约束乘以-1，右边就得到正的。
+
+## 不等式约束的情况
+
+### 转化为标准型：松弛变量
+
+假设有一个不等式约束
+
+$$a_{1} x_{1}+a_{2} x_{2}+\cdots+a_{n} x_{n} \leq b$$
+
+通过引入松弛变量，可以将上述不等式约束转化为标准等式约束。
+
+具体来说，上述约束相当于
+
+$$\begin{matrix}
+    a_{1} x_{1}+a_{2} x_{2}+\dots+a_{n} x_{n}+x_{n+1}=b \\ 
+    x_{n+1} \geq 0
+\end{matrix}$$
+
+其中松弛变量为$x_{n+1}$。
+
+### 转化为标准型：剩余变量
+
+假设有一个不等式约束
+
+$$a_{1} x_{1}+a_{2} x_{2}+\cdots+a_{n} x_{n} \geq b$$
+
+可以通过引入一个剩余变量将上述不等式约束转化为标准等式约束
+
+具体来说，上述约束相当于
+
+$$\begin{matrix}
+    a_{1} x_{1}+a_{2} x_{2}+\cdots+a_{n} x_{n}-x_{n+1}=b \\ 
+    x_{n+1} \geq 0
+\end{matrix}$$
+
+### 转化为标准型：非正变量
+
+假设变量中的一个（比如$x_{1}$）有下面的约束
+
+$$x_{1} \leq 0$$
+
+可以通过将$x_{1}$的每一次出现都改为它的负数，从而把这个变量转换成通常的非负变量$x_{1}^{\prime}=-x_{1}$
+
+假如有约束
+
+$$\begin{matrix}
+    a_{1} x_{1}+a_{2} x_{2}+\cdots+a_{n} x_{n}=b \\ 
+    x_{1} \leq 0
+\end{matrix}$$
+
+通过引入$x_{1}^{\prime}=-x_{1}$得到下面的约束
+
+$$\begin{matrix}
+    -a_{1} x_{1}^{\prime}+a_{2} x_{2}+\cdots+a_{n} x_{n}=b \\ 
+    x_{1}^{\prime} \geq 0
+\end{matrix}$$
+
+### 转化为标准型：自由变量
+
+假设变量中的一个（比如$x_{1}$）没有非负性约束（例如不存在$x_{1} \geq 0$约束）
+
+通过引入变量$u_{1} \geq 0$和$v_{1} \geq 0$，并且使用$u_{1}-v_{1}$来替代$\mathcal{X}_{1}$
+
+例如有约束
+
+$$a_{1} x_{1}+a_{2} x_{2}+\cdots+a_{n} x_{n}=b$$
+
+那么就可以等价为
+
+$$\begin{matrix}
+    a_{1}\left(u_{1}-v_{1}\right)+a_{2} x_{2}+\cdots+a_{n} x_{n}=b \\ 
+    u_{1}, v_{1} \geq 0
+\end{matrix}$$
+
+## 基本解决方案
+
+\begin{matrix}
+    minimize & \mathbf{c}^{T} \mathbf{x}\\ 
+    st. & \mathbf{A x}=\mathbf{b}\\ 
+     & \mathbf{x} \geq 0
+\end{matrix}
+
+其中$\mathbf{A}$是$m \times n$，$m < n$，$\operatorname{rank}(\mathbf{A})=m$，并且$\mathbf{b} \geq 0$。
+
+线性方程组有解的条件
+
+1、如果$\operatorname{rank}[\mathbf{A}]=\operatorname{rank}[\mathbf{A}, \mathbf{b}]$，那么线性方程有解。
+
+2、$\operatorname{rank}[\mathbf{A}]=n$，那么线性方程的解不唯一。
+
+3、$\operatorname{rank}[\mathbf{A}] < n$，那么线性方程有无穷解。
+
+当$m < n$，有无穷多个点\mathbf{x}满足$\mathbf{A x}=\mathbf{b}$。
+
+如果有矩阵$\mathbf{A}$，以及矩阵$\mathbf{A}$中的一组$m$个线性无关列向量，那么$\mathbf{A}=[\mathbf{B}, \mathbf{D}]$，其中$\mathbf{D}$是$m \times(n-m)$维矩阵。
+
+那么就可以求解方程$\mathbf{B} \mathbf{x}_{B}=\mathbf{b}$，并且方程的解为$\mathbf{x}_{B}=\mathbf{B}^{-1} \mathbf{b}$。
+
+让$\mathbf{x}=\left[\mathbf{x}_{B}^{T}, \mathbf{0}^{T}\right]^{T}$，那么$\mathbf{x}$就是方程$\mathbf{A x}=\mathbf{b}$的解。
+
+1、如果$\mathbf{x}$满足$\mathbf{A x}=\mathbf{b}$，那么$\mathbf{x}$就是基本解。
+
+2、如果$\mathbf{x}$满足$\mathbf{A x}=\mathbf{b}$，且$\mathbf{x} \geq 0$，那么$\mathbf{x} \geq 0$是可行解，可行解也是基本可行解。
+
+3、如果$\mathbf{x}$中有一些为0，那么基本可行解就是退化的基本解。
+
+4、如果$\mathbf{x}$满足基本可行解，但其中有一些为0，那么就是退化的基本可行解。
+
+## 基本解的性质
+
+> 定义
+
+对于任何满足约束条件$\mathbf{A x}=\mathbf{b}$，$\mathbf{x} \geq 0$的向量$\mathbf{x}$，如果它能够使目标函数$\mathbf{c}^{T} \mathbf{x}$取得极小值，那么就将其称为最有可行解。如果最有可行解是基本解，那么它就是最有基本可行解。
+
+> 定理
+
+1、如果存在可行解，那么一定存在基本可行解。
+
+2、如果存在最优可行解，那么一定存在最优基本可行解。
+
+有个定理后
+
+1、线性规划的基本定理将求解线性规划问题的任务简化为搜索基本可行解的任务。
+
+2、只需要检查最优性的基本可行解。
+
+3、基本解的数量最大可以是
+
+$$\left(\begin{array}{c}
+{n} \\
+{m}
+\end{array}\right)=\frac{n !}{m !(n-m) !}$$
+
+其中$m$是秩，$n$是维度。
+
+4、注意，虽然这个数字是有限的，但它可能非常大。
+
+## 几何视角下的线性规划
+
+> 定理：如果可行集$\mathbf{A x}=\mathbf{b}, \quad \mathbf{x} \geq 0$存在，那么它一定是凸集。
+
+1、约束集的极值点等价于基本可行解（BFS）
+
+2、几何上，BFS对应于约束集的“角”点（顶点）。
+
+3、如果可行集是非空的，那么它有一个顶点。
+
+4、如果问题有一个极小值（最优），那么其中一个顶点就是一个极小值。
+
+可以得到
+
+1、极值点集等于基本可行解集。
+
+2、结合LP的基本定理，可以看出求解LP问题只需要考察约束集的极值点。
