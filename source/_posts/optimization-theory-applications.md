@@ -505,3 +505,59 @@ $$\mathbf{x}^{(k+1)}=\mathbf{x}^{(k)}-\alpha_{k}\left(\mathbf{F}\left(\mathbf{x}
 
 ## 共轭方向算法
 
+考虑算法$\mathbf{x}^{(k+1)}=\mathbf{x}^{(k)}+\alpha_{k} \mathbf{d}^{(k)}$，其中$\alpha_{k}=\arg \min _{\alpha \geq 0} f\left(\mathbf{x}^{(k)}+\alpha \mathbf{d}^{(k)}\right)$。
+
+应用到二次型则是$f(\mathbf{x})=\frac{1}{2} \mathbf{x}^{\top} \mathbf{Q} \mathbf{x}-\mathbf{x}^{T} \mathbf{b}$，其中$\mathbf{Q}=\mathbf{Q}^{\top} > 0$。
+
+如果给定起始点$\mathbf{x}^{\left ( 0 \right )}$，和一组关于$\mathbf{Q}$的共轭方向$\mathbf{d}^{(0)}, \mathbf{d}^{(1)}, \ldots, \mathbf{d}^{(n-1)}$，那么迭代公式为（$k \geq 0$表示迭代次数）：
+
+$$\mathbf{g}^{\left ( k \right )}=\nabla f\left ( \mathbf{x}^{k} \right )=\mathbf{Q}\mathbf{x}^{\left ( k \right )}-\mathbf{b}$$
+
+$$\alpha_{k}=-\frac{\mathbf{g}^{(k) \top} \mathbf{d}^{(k)}}{\mathbf{d}^{(k) \top} \mathbf{Q} \mathbf{d}^{(k)}}$$
+
+$$\mathbf{x}^{\left ( k+1 \right )}=\mathbf{x}^{\left ( k \right )}+\alpha_{k}\mathbf{d}^{\left ( k \right )}$$
+
+对于二次型来说，共轭方向算法有如下优势：对于任意的起始点$\mathbf{x}^{(0)}$，基本的共轭方向算法都能在$n$次迭代之内收敛到唯一的全局极小点$\mathbf{x}^{\star}$，即$\mathbf{x}^{(n)}=\mathbf{x}^{\star}$。
+
+## 共轭梯度法
+
+1、共轭梯度法在计算过程中计算方向。
+
+2、在每个迭代，搜索方向方向都是前一个搜索方向和当前梯度的线性组合。
+
+3、使其与前面产生的搜索方向组成$\mathbf{Q}$共轭方向。
+
+> 算法流程
+
+1、考虑二次型目标函数：$f(\mathbf{x})=\frac{1}{2} \mathbf{x}^{\top} \mathbf{Q} \mathbf{x}-\mathbf{x}^{\top} \mathbf{b}, \mathbf{x} \in \mathbb{R}$
+
+2、起始点$\mathbf{x}^{(0)}$，搜索方向采用最速下降法的方向，即函数$f$在$\mathbf{x}^{(0)}$处的梯度负方向：$\mathbf{d}^{(0)}=-\mathbf{g}^{(0)}$。
+
+3、因此$\mathbf{x}^{(1)}=\mathbf{x}^{(0)}+\alpha_{0} \mathbf{d}^{(0)}$，并且$\alpha_{0}=\arg \min _{\alpha \geq 0} f\left(\mathbf{x}^{(0)}+\alpha \mathbf{d}^{(0)}\right)=-\frac{\mathbf{g}^{(0) \top} \mathbf{d}^{(0)}}{\mathbf{d}^{(0) \top} \mathbf{Q} \mathbf{d}^{(0)}}$。
+
+4、接下来，搜索方向$\mathbf{d}^{(1)}$应该和$\mathbf{d}^{(0)}$关于$\mathbf{Q}$共轭。
+
+5、将$\mathbf{d}^{(1)}$写成$\mathbf{g}^{(1)}$和$\mathbf{d}^{(0)}$的线性组合：$\mathbf{d}^{(1)}=-\mathbf{g}^{(1)}+\beta_{0} \mathbf{d}^{(0)}$。
+
+6、$\beta_{k}$可以使$\mathbf{d}^{(k+1)}$和$\mathbf{d}^{(0)}, \mathbf{d}^{(1)}, \ldots, \mathbf{d}^{(k)}$组成$\mathbf{Q}$共轭方向：$\beta_{k}=\frac{\mathbf{g}^{(k+1) \top} \mathbf{Q} \mathbf{d}^{(k)}}{\mathbf{d}^{(k) \top} \mathbf{Q} \mathbf{d}^{(k)}}$。
+
+> 三种修正公式，将$\mathbf{Q}$从$\beta$计算中消除
+
+1、Hestenes-Stiefel公式：$\beta_{k}=\frac{\mathbf{g}^{(k+1) \top}\left[\mathbf{g}^{(k+1)-\mathbf{g}^{(k)}}\right]}{\mathbf{d}^{(k) \top}\left[\mathbf{g}^{(k+1)}-\mathbf{g}^{(k)}\right]}$
+
+2、Polak-Ribiere公式：$\beta_{k}=\frac{\mathrm{g}^{(k+1) \top}\left[\mathrm{g}^{(k+1)}-\mathrm{g}(k)\right]}{\mathrm{g}^{(k+1) \top} \mathrm{g}^{(k)}}$
+
+3、Fletcher-Reeves公式：$\beta_{k}=\frac{\mathbf{g}^{(k+1) \top} \mathbf{g}^{(k+1)}}{\mathbf{g}^{(k) \top} \mathbf{g}^{(k)}}$
+
+### 共轭梯度法在非二次型问题
+
+假如$f$是二次型，那么上面三个修正公式等价，如果不是二次型，那么算法不能在$n$步内进行收敛，并且随着迭代的进行搜索方向将不与$\mathbf{Q}$共轭。常用的解决方法是经过$n$或$n+1$次迭代后，重新将搜索方向初始化为目标函数梯度的负方向，然后继续搜索知道满足停止规则。
+
+对于非二次型目标函数中，一维搜索精度非常重要，并且一维搜索精度是共轭梯度法性能的关键，如果采用不精确的一维搜索方法，那么建议使用Hestenes-Stiefel公式。
+
+Powell公式（Polak-Ribiere公式修正）
+
+$$\beta_{k}=\max \left[0, \frac{\mathbf{g}^{(k+1) \top}\left[\mathbf{g}^{(k+1)}-\mathbf{g}^{(k)}\right]}{\mathbf{g}^{(k) \top} \mathbf{g}^{(k)}}\right]$$
+
+# 拟牛顿法
+
