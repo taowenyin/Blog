@@ -333,6 +333,38 @@
 <p>3、假设<span class="math inline">\(\mathbf{Q}\)</span>是对称<span class="math inline">\({n \times n}\)</span>举证，那么对于方向<span class="math inline">\(\mathbf{d}^{(0)}, \mathbf{d}^{(1)}, \mathbf{d}^{(2)}, \ldots, \mathbf{d}^{(m)}\)</span>如果是Q共轭的话，那么对于所有<span class="math inline">\(i \neq j\)</span>都有<span class="math inline">\(\mathbf{d}^{(i) \top} \mathbf{Q} \mathbf{d}^{(j)}=0\)</span>。</p>
 <p>4、如果<span class="math inline">\(\mathbf{Q}=\mathbf{I}\)</span>，那么共轭变为正交。</p>
 <h2 id="共轭方向算法">共轭方向算法</h2>
+<p>考虑算法<span class="math inline">\(\mathbf{x}^{(k+1)}=\mathbf{x}^{(k)}+\alpha_{k} \mathbf{d}^{(k)}\)</span>，其中<span class="math inline">\(\alpha_{k}=\arg \min _{\alpha \geq 0} f\left(\mathbf{x}^{(k)}+\alpha \mathbf{d}^{(k)}\right)\)</span>。</p>
+<p>应用到二次型则是<span class="math inline">\(f(\mathbf{x})=\frac{1}{2} \mathbf{x}^{\top} \mathbf{Q} \mathbf{x}-\mathbf{x}^{T} \mathbf{b}\)</span>，其中<span class="math inline">\(\mathbf{Q}=\mathbf{Q}^{\top} &gt; 0\)</span>。</p>
+<p>如果给定起始点<span class="math inline">\(\mathbf{x}^{\left ( 0 \right )}\)</span>，和一组关于<span class="math inline">\(\mathbf{Q}\)</span>的共轭方向<span class="math inline">\(\mathbf{d}^{(0)}, \mathbf{d}^{(1)}, \ldots, \mathbf{d}^{(n-1)}\)</span>，那么迭代公式为（<span class="math inline">\(k \geq 0\)</span>表示迭代次数）：</p>
+<p><span class="math display">\[\mathbf{g}^{\left ( k \right )}=\nabla f\left ( \mathbf{x}^{k} \right )=\mathbf{Q}\mathbf{x}^{\left ( k \right )}-\mathbf{b}\]</span></p>
+<p><span class="math display">\[\alpha_{k}=-\frac{\mathbf{g}^{(k) \top} \mathbf{d}^{(k)}}{\mathbf{d}^{(k) \top} \mathbf{Q} \mathbf{d}^{(k)}}\]</span></p>
+<p><span class="math display">\[\mathbf{x}^{\left ( k+1 \right )}=\mathbf{x}^{\left ( k \right )}+\alpha_{k}\mathbf{d}^{\left ( k \right )}\]</span></p>
+<p>对于二次型来说，共轭方向算法有如下优势：对于任意的起始点<span class="math inline">\(\mathbf{x}^{(0)}\)</span>，基本的共轭方向算法都能在<span class="math inline">\(n\)</span>次迭代之内收敛到唯一的全局极小点<span class="math inline">\(\mathbf{x}^{\star}\)</span>，即<span class="math inline">\(\mathbf{x}^{(n)}=\mathbf{x}^{\star}\)</span>。</p>
+<h2 id="共轭梯度法">共轭梯度法</h2>
+<p>1、共轭梯度法在计算过程中计算方向。</p>
+<p>2、在每个迭代，搜索方向方向都是前一个搜索方向和当前梯度的线性组合。</p>
+<p>3、使其与前面产生的搜索方向组成<span class="math inline">\(\mathbf{Q}\)</span>共轭方向。</p>
+<blockquote>
+<p>算法流程</p>
+</blockquote>
+<p>1、考虑二次型目标函数：<span class="math inline">\(f(\mathbf{x})=\frac{1}{2} \mathbf{x}^{\top} \mathbf{Q} \mathbf{x}-\mathbf{x}^{\top} \mathbf{b}, \mathbf{x} \in \mathbb{R}\)</span></p>
+<p>2、起始点<span class="math inline">\(\mathbf{x}^{(0)}\)</span>，搜索方向采用最速下降法的方向，即函数<span class="math inline">\(f\)</span>在<span class="math inline">\(\mathbf{x}^{(0)}\)</span>处的梯度负方向：<span class="math inline">\(\mathbf{d}^{(0)}=-\mathbf{g}^{(0)}\)</span>。</p>
+<p>3、因此<span class="math inline">\(\mathbf{x}^{(1)}=\mathbf{x}^{(0)}+\alpha_{0} \mathbf{d}^{(0)}\)</span>，并且<span class="math inline">\(\alpha_{0}=\arg \min _{\alpha \geq 0} f\left(\mathbf{x}^{(0)}+\alpha \mathbf{d}^{(0)}\right)=-\frac{\mathbf{g}^{(0) \top} \mathbf{d}^{(0)}}{\mathbf{d}^{(0) \top} \mathbf{Q} \mathbf{d}^{(0)}}\)</span>。</p>
+<p>4、接下来，搜索方向<span class="math inline">\(\mathbf{d}^{(1)}\)</span>应该和<span class="math inline">\(\mathbf{d}^{(0)}\)</span>关于<span class="math inline">\(\mathbf{Q}\)</span>共轭。</p>
+<p>5、将<span class="math inline">\(\mathbf{d}^{(1)}\)</span>写成<span class="math inline">\(\mathbf{g}^{(1)}\)</span>和<span class="math inline">\(\mathbf{d}^{(0)}\)</span>的线性组合：<span class="math inline">\(\mathbf{d}^{(1)}=-\mathbf{g}^{(1)}+\beta_{0} \mathbf{d}^{(0)}\)</span>。</p>
+<p>6、<span class="math inline">\(\beta_{k}\)</span>可以使<span class="math inline">\(\mathbf{d}^{(k+1)}\)</span>和<span class="math inline">\(\mathbf{d}^{(0)}, \mathbf{d}^{(1)}, \ldots, \mathbf{d}^{(k)}\)</span>组成<span class="math inline">\(\mathbf{Q}\)</span>共轭方向：<span class="math inline">\(\beta_{k}=\frac{\mathbf{g}^{(k+1) \top} \mathbf{Q} \mathbf{d}^{(k)}}{\mathbf{d}^{(k) \top} \mathbf{Q} \mathbf{d}^{(k)}}\)</span>。</p>
+<blockquote>
+<p>三种修正公式，将<span class="math inline">\(\mathbf{Q}\)</span>从<span class="math inline">\(\beta\)</span>计算中消除</p>
+</blockquote>
+<p>1、Hestenes-Stiefel公式：<span class="math inline">\(\beta_{k}=\frac{\mathbf{g}^{(k+1) \top}\left[\mathbf{g}^{(k+1)-\mathbf{g}^{(k)}}\right]}{\mathbf{d}^{(k) \top}\left[\mathbf{g}^{(k+1)}-\mathbf{g}^{(k)}\right]}\)</span></p>
+<p>2、Polak-Ribiere公式：<span class="math inline">\(\beta_{k}=\frac{\mathrm{g}^{(k+1) \top}\left[\mathrm{g}^{(k+1)}-\mathrm{g}(k)\right]}{\mathrm{g}^{(k+1) \top} \mathrm{g}^{(k)}}\)</span></p>
+<p>3、Fletcher-Reeves公式：<span class="math inline">\(\beta_{k}=\frac{\mathbf{g}^{(k+1) \top} \mathbf{g}^{(k+1)}}{\mathbf{g}^{(k) \top} \mathbf{g}^{(k)}}\)</span></p>
+<h3 id="共轭梯度法在非二次型问题">共轭梯度法在非二次型问题</h3>
+<p>假如<span class="math inline">\(f\)</span>是二次型，那么上面三个修正公式等价，如果不是二次型，那么算法不能在<span class="math inline">\(n\)</span>步内进行收敛，并且随着迭代的进行搜索方向将不与<span class="math inline">\(\mathbf{Q}\)</span>共轭。常用的解决方法是经过<span class="math inline">\(n\)</span>或<span class="math inline">\(n+1\)</span>次迭代后，重新将搜索方向初始化为目标函数梯度的负方向，然后继续搜索知道满足停止规则。</p>
+<p>对于非二次型目标函数中，一维搜索精度非常重要，并且一维搜索精度是共轭梯度法性能的关键，如果采用不精确的一维搜索方法，那么建议使用Hestenes-Stiefel公式。</p>
+<p>Powell公式（Polak-Ribiere公式修正）</p>
+<p><span class="math display">\[\beta_{k}=\max \left[0, \frac{\mathbf{g}^{(k+1) \top}\left[\mathbf{g}^{(k+1)}-\mathbf{g}^{(k)}\right]}{\mathbf{g}^{(k) \top} \mathbf{g}^{(k)}}\right]\]</span></p>
+<h1 id="拟牛顿法">拟牛顿法</h1>
 ]]></content>
       <categories>
         <category>课程</category>
