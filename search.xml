@@ -516,6 +516,112 @@
 <p>5、对于非二次问题，拟牛顿算法通常不会在<span class="math inline">\(n\)</span>步内收敛。</p>
 <p>6、需要进行一些修改（例如，在每次迭代后将方向向量重新初始化为负梯度）。</p>
 <p>7、广泛应用。</p>
+<h1 id="线性规划">线性规划</h1>
+<h2 id="标准型线性规划">标准型线性规划</h2>
+<span class="math display">\[\begin{matrix}
+    minimize &amp; \mathbf{c}^{T} \mathbf{x}\\ 
+    st. &amp; \mathbf{A x}=\mathbf{b}\\ 
+     &amp; \mathbf{x} \geq 0
+\end{matrix}\]</span>
+<p>其中<span class="math inline">\(\mathbf{A}\)</span>是<span class="math inline">\(m \times n\)</span>，<span class="math inline">\(m &lt; n\)</span>，<span class="math inline">\(\operatorname{rank}(\mathbf{A})=m\)</span>，并且<span class="math inline">\(\mathbf{b} \geq 0\)</span>。</p>
+<p>如果把LP问题转化为标准型？</p>
+<p>1、如果问题是最大化，则简单地将目标函数乘以-1以最小化。</p>
+<p>2、如果<span class="math inline">\(\mathbf{A}\)</span>不是满秩，那么就移除一行或多行。</p>
+<p>3、如果<span class="math inline">\(\mathbf{b}\)</span>的一个分量是负的，比如第<span class="math inline">\(i\)</span>个分量，将第<span class="math inline">\(i\)</span>个约束乘以-1，右边就得到正的。</p>
+<h2 id="不等式约束的情况">不等式约束的情况</h2>
+<h3 id="转化为标准型松弛变量">转化为标准型：松弛变量</h3>
+<p>假设有一个不等式约束</p>
+<p><span class="math display">\[a_{1} x_{1}+a_{2} x_{2}+\cdots+a_{n} x_{n} \leq b\]</span></p>
+<p>通过引入松弛变量，可以将上述不等式约束转化为标准等式约束。</p>
+<p>具体来说，上述约束相当于</p>
+<p><span class="math display">\[\begin{matrix}
+    a_{1} x_{1}+a_{2} x_{2}+\dots+a_{n} x_{n}+x_{n+1}=b \\ 
+    x_{n+1} \geq 0
+\end{matrix}\]</span></p>
+<p>其中松弛变量为<span class="math inline">\(x_{n+1}\)</span>。</p>
+<h3 id="转化为标准型剩余变量">转化为标准型：剩余变量</h3>
+<p>假设有一个不等式约束</p>
+<p><span class="math display">\[a_{1} x_{1}+a_{2} x_{2}+\cdots+a_{n} x_{n} \geq b\]</span></p>
+<p>可以通过引入一个剩余变量将上述不等式约束转化为标准等式约束</p>
+<p>具体来说，上述约束相当于</p>
+<p><span class="math display">\[\begin{matrix}
+    a_{1} x_{1}+a_{2} x_{2}+\cdots+a_{n} x_{n}-x_{n+1}=b \\ 
+    x_{n+1} \geq 0
+\end{matrix}\]</span></p>
+<h3 id="转化为标准型非正变量">转化为标准型：非正变量</h3>
+<p>假设变量中的一个（比如<span class="math inline">\(x_{1}\)</span>）有下面的约束</p>
+<p><span class="math display">\[x_{1} \leq 0\]</span></p>
+<p>可以通过将<span class="math inline">\(x_{1}\)</span>的每一次出现都改为它的负数，从而把这个变量转换成通常的非负变量<span class="math inline">\(x_{1}^{\prime}=-x_{1}\)</span></p>
+<p>假如有约束</p>
+<p><span class="math display">\[\begin{matrix}
+    a_{1} x_{1}+a_{2} x_{2}+\cdots+a_{n} x_{n}=b \\ 
+    x_{1} \leq 0
+\end{matrix}\]</span></p>
+<p>通过引入<span class="math inline">\(x_{1}^{\prime}=-x_{1}\)</span>得到下面的约束</p>
+<p><span class="math display">\[\begin{matrix}
+    -a_{1} x_{1}^{\prime}+a_{2} x_{2}+\cdots+a_{n} x_{n}=b \\ 
+    x_{1}^{\prime} \geq 0
+\end{matrix}\]</span></p>
+<h3 id="转化为标准型自由变量">转化为标准型：自由变量</h3>
+<p>假设变量中的一个（比如<span class="math inline">\(x_{1}\)</span>）没有非负性约束（例如不存在<span class="math inline">\(x_{1} \geq 0\)</span>约束）</p>
+<p>通过引入变量<span class="math inline">\(u_{1} \geq 0\)</span>和<span class="math inline">\(v_{1} \geq 0\)</span>，并且使用<span class="math inline">\(u_{1}-v_{1}\)</span>来替代<span class="math inline">\(\mathcal{X}_{1}\)</span></p>
+<p>例如有约束</p>
+<p><span class="math display">\[a_{1} x_{1}+a_{2} x_{2}+\cdots+a_{n} x_{n}=b\]</span></p>
+<p>那么就可以等价为</p>
+<p><span class="math display">\[\begin{matrix}
+    a_{1}\left(u_{1}-v_{1}\right)+a_{2} x_{2}+\cdots+a_{n} x_{n}=b \\ 
+    u_{1}, v_{1} \geq 0
+\end{matrix}\]</span></p>
+<h2 id="基本解决方案">基本解决方案</h2>
+<span class="math display">\[\begin{matrix}
+    minimize &amp; \mathbf{c}^{T} \mathbf{x}\\ 
+    st. &amp; \mathbf{A x}=\mathbf{b}\\ 
+     &amp; \mathbf{x} \geq 0
+\end{matrix}\]</span>
+<p>其中<span class="math inline">\(\mathbf{A}\)</span>是<span class="math inline">\(m \times n\)</span>，<span class="math inline">\(m &lt; n\)</span>，<span class="math inline">\(\operatorname{rank}(\mathbf{A})=m\)</span>，并且<span class="math inline">\(\mathbf{b} \geq 0\)</span>。</p>
+<p>线性方程组有解的条件</p>
+<p>1、如果<span class="math inline">\(\operatorname{rank}[\mathbf{A}]=\operatorname{rank}[\mathbf{A}, \mathbf{b}]\)</span>，那么线性方程有解。</p>
+<p>2、<span class="math inline">\(\operatorname{rank}[\mathbf{A}]=n\)</span>，那么线性方程的解不唯一。</p>
+<p>3、<span class="math inline">\(\operatorname{rank}[\mathbf{A}] &lt; n\)</span>，那么线性方程有无穷解。</p>
+<p>当<span class="math inline">\(m &lt; n\)</span>，有无穷多个点满足<span class="math inline">\(\mathbf{A x}=\mathbf{b}\)</span>。</p>
+<p>如果有矩阵<span class="math inline">\(\mathbf{A}\)</span>，以及矩阵<span class="math inline">\(\mathbf{A}\)</span>中的一组<span class="math inline">\(m\)</span>个线性无关列向量，那么<span class="math inline">\(\mathbf{A}=[\mathbf{B}, \mathbf{D}]\)</span>，其中<span class="math inline">\(\mathbf{D}\)</span>是<span class="math inline">\(m \times(n-m)\)</span>维矩阵。</p>
+<p>那么就可以求解方程<span class="math inline">\(\mathbf{B} \mathbf{x}_{B}=\mathbf{b}\)</span>，并且方程的解为<span class="math inline">\(\mathbf{x}_{B}=\mathbf{B}^{-1} \mathbf{b}\)</span>。</p>
+<p>让<span class="math inline">\(\mathbf{x}=\left[\mathbf{x}_{B}^{T}, \mathbf{0}^{T}\right]^{T}\)</span>，那么<span class="math inline">\(\mathbf{x}\)</span>就是方程<span class="math inline">\(\mathbf{A x}=\mathbf{b}\)</span>的解。</p>
+<p>1、如果<span class="math inline">\(\mathbf{x}\)</span>满足<span class="math inline">\(\mathbf{A x}=\mathbf{b}\)</span>，那么<span class="math inline">\(\mathbf{x}\)</span>就是基本解。</p>
+<p>2、如果<span class="math inline">\(\mathbf{x}\)</span>满足<span class="math inline">\(\mathbf{A x}=\mathbf{b}\)</span>，且<span class="math inline">\(\mathbf{x} \geq 0\)</span>，那么<span class="math inline">\(\mathbf{x} \geq 0\)</span>是可行解，可行解也是基本可行解。</p>
+<p>3、如果<span class="math inline">\(\mathbf{x}\)</span>中有一些为0，那么基本可行解就是退化的基本解。</p>
+<p>4、如果<span class="math inline">\(\mathbf{x}\)</span>满足基本可行解，但其中有一些为0，那么就是退化的基本可行解。</p>
+<h2 id="基本解的性质">基本解的性质</h2>
+<blockquote>
+<p>定义</p>
+</blockquote>
+<p>对于任何满足约束条件<span class="math inline">\(\mathbf{A x}=\mathbf{b}\)</span>，<span class="math inline">\(\mathbf{x} \geq 0\)</span>的向量<span class="math inline">\(\mathbf{x}\)</span>，如果它能够使目标函数<span class="math inline">\(\mathbf{c}^{T} \mathbf{x}\)</span>取得极小值，那么就将其称为最有可行解。如果最有可行解是基本解，那么它就是最有基本可行解。</p>
+<blockquote>
+<p>定理</p>
+</blockquote>
+<p>1、如果存在可行解，那么一定存在基本可行解。</p>
+<p>2、如果存在最优可行解，那么一定存在最优基本可行解。</p>
+<p>有个定理后</p>
+<p>1、线性规划的基本定理将求解线性规划问题的任务简化为搜索基本可行解的任务。</p>
+<p>2、只需要检查最优性的基本可行解。</p>
+<p>3、基本解的数量最大可以是</p>
+<p><span class="math display">\[\left(\begin{array}{c}
+{n} \\
+{m}
+\end{array}\right)=\frac{n !}{m !(n-m) !}\]</span></p>
+<p>其中<span class="math inline">\(m\)</span>是秩，<span class="math inline">\(n\)</span>是维度。</p>
+<p>4、注意，虽然这个数字是有限的，但它可能非常大。</p>
+<h2 id="几何视角下的线性规划">几何视角下的线性规划</h2>
+<blockquote>
+<p>定理：如果可行集<span class="math inline">\(\mathbf{A x}=\mathbf{b}, \quad \mathbf{x} \geq 0\)</span>存在，那么它一定是凸集。</p>
+</blockquote>
+<p>1、约束集的极值点等价于基本可行解（BFS）</p>
+<p>2、几何上，BFS对应于约束集的“角”点（顶点）。</p>
+<p>3、如果可行集是非空的，那么它有一个顶点。</p>
+<p>4、如果问题有一个极小值（最优），那么其中一个顶点就是一个极小值。</p>
+<p>可以得到</p>
+<p>1、极值点集等于基本可行解集。</p>
+<p>2、结合LP的基本定理，可以看出求解LP问题只需要考察约束集的极值点。</p>
 ]]></content>
       <categories>
         <category>课程</category>
