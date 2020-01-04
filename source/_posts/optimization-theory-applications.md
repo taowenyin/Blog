@@ -557,7 +557,236 @@ $$\mathbf{x}^{\left ( k+1 \right )}=\mathbf{x}^{\left ( k \right )}+\alpha_{k}\m
 
 Powell公式（Polak-Ribiere公式修正）
 
-$$\beta_{k}=\max \left[0, \frac{\mathbf{g}^{(k+1) \top}\left[\mathbf{g}^{(k+1)}-\mathbf{g}^{(k)}\right]}{\mathbf{g}^{(k) \top} \mathbf{g}^{(k)}}\right]$$
+$$\beta_{k}=\max \left[0, \frac{\mathbf{g}^{(k+1) \top}\left[\mathbf{g}^{(k+1)} - \mathbf{g}^{(k)}\right]}{\mathbf{g}^{(k) \top} \mathbf{g}^{(k)}}\right]$$
 
 # 拟牛顿法
 
+## 回顾牛顿法
+
+牛顿法
+
+$$\mathbf{x}^{(k+1)}=\mathbf{x}^{(k)}-F\left(\mathbf{x}^{(k)}\right)^{-1} \mathbf{g}^{(k)}$$
+
+保证下降性能的改进
+
+$$\mathbf{x}^{(k+1)}=\mathbf{x}^{(k)}-\alpha_{k} F\left(\mathbf{x}^{(k)}\right)^{-1} \mathbf{g}^{(k)}$$
+
+且
+
+$$\alpha_{k}=\arg \min _{\alpha \geq 0} f\left(\mathbf{x}^{(k)}-\alpha F\left(\mathbf{x}^{(k)}\right)^{-1} \mathbf{g}^{(k)}\right)$$
+
+牛顿法特性：
+
+1、如果起始点足够接近最小值，那么牛顿法就会快速收敛。
+
+2、需要计算黑塞矩阵的逆。
+
+## 基本思想
+
+1、拟牛顿法：只是用梯度来近似黑塞逆。
+
+2、使用$\mathbf{H}_{k}$来代替原先牛顿算法中的黑塞逆矩阵。
+
+3、拟牛顿算法把牛顿算法近似为$\mathbf{x}^{(k+1)}=\mathbf{x}^{(k)}-\alpha_{k} \mathbf{H}_{k} \mathbf{g}^{(k)}$
+
+4、在每次迭代时，通过$\mathbf{x}^{(k)}$、$\mathbf{x}^{(k+1)}$、$\mathbf{g}^{(k)}$、$\mathbf{g}^{(k+1)}$、$\mathbf{H}_{k}$来计算并更新得到$\mathbf{H}^{(k+1)}$。
+
+## 拟牛顿法
+
+1、$\mathbf{H}_{k}$是黑塞逆的近似。
+
+2、$\mathbf{H}_{k}$模仿了$\mathbf{F}\left(\mathbf{x}^{(k)}\right)^{-1}$的三个特性。
+
+>* $\mathbf{H}_{k}$是对称矩阵。
+>* $\mathbf{H}_{k}$是正定的，保证下降特性。
+>* $\mathbf{H}_{k}$具有“割线”特性。
+
+3、这是$\mathbf{H}_{k}$序列满足的条件，也是拟牛顿法的基础。
+
+> 拟牛顿法算法
+
+$$\begin{aligned}
+&\mathbf{d}^{(k)}=-\mathbf{H}_{k} \mathbf{g}^{(k)}\\
+&\alpha_{k}=\arg \min _{\alpha \geq 0} f\left(\mathbf{x}^{(k)}+\alpha \mathbf{d}^{(k)}\right)=-\frac{\mathbf{g}^{(k) T} \mathbf{d}^{(k)}}{\mathbf{d}^{(k) T} Q \mathbf{d}^{(k)}}\\
+&\mathbf{x}^{(k+1)}=\mathbf{x}^{(k)}+\alpha_{k} \mathbf{d}^{(k)}
+\end{aligned}$$
+
+其中$\mathbf{H}_{0}, \mathbf{H}_{1}, \dots$是对称矩阵。
+
+在二次型情况下，上述矩阵必须满足
+
+$$\mathbf{H}_{k+1} \Delta \mathbf{g}^{(i)}=\Delta \mathbf{x}^{(i)}, \quad 0 \leq i \leq k$$
+
+拟牛顿法是共轭方向法，因此如果将拟牛顿法应用到二次型中，并且黑塞矩阵$\mathbf{Q}=\mathbf{Q}^{T}$，对于$0 \leq k < n-1$，就有
+
+$$\mathbf{H}_{k+1} \Delta \mathbf{g}^{(i)}=\Delta \mathbf{x}^{(i)}, \quad 0 \leq i \leq k$$
+
+其中$\mathbf{H}_{k+1} = \mathbf{H}_{k+1}^{\top}$。如果$\alpha_{i} \neq 0,0 \leq i \leq k$，那么$\mathbf{d}^{(0)}, \ldots, \mathbf{d}^{(k+1)}$是$\mathbf{Q}$共轭。
+
+生成$\mathbf{H}_{k}$有三个方法，分别是
+
+>* 1、秩1法
+>* 2、DFP法
+>* 3、BFGS法
+
+并且这些方法都有下面的形式
+
+$$\mathbf{H}_{k+1}=\mathbf{H}_{k}+\mathbf{U}_{k}$$
+
+其中$\mathbf{U}_{k}$使用$\mathbf{H}_{k}$、$\Delta \mathbf{g}^{(k)}$和$\Delta \mathbf{x}^{(k)}$计算得到。
+
+## 秩1法
+
+> 公式
+
+$$\mathbf{U}_{k}=\alpha_{k} \mathbf{z}^{(k)} \mathbf{z}^{(k) T}$$
+
+其中$\alpha_{k} \in \mathbb{R}$，并且$\mathbf{z}^{(k)} \in \mathbb{R}^{n}$。同时
+
+$$\operatorname{rank} \mathbf{z}^{(k)} \mathbf{z}^{(k) T}=\operatorname{rank}\left(\left[\begin{array}{c}
+{z_{1}^{(k)}} \\
+{\vdots} \\
+{z_{n}^{(k)}}
+\end{array}\right]\left[\begin{array}{ccc}
+{z_{1}^{(k)}} & {\cdots} & {z_{n}^{(k)}}
+\end{array}\right]\right)=1$$
+
+根据推导得到
+
+$$\mathbf{U}_{k}=\frac{\left(\Delta \mathbf{x}^{(k)}-\mathbf{H}_{k} \Delta \mathbf{g}^{(k)}\right)\left(\Delta \mathbf{x}^{(k)}-\mathbf{H}_{k} \Delta \mathbf{g}^{(k)}\right)^{T}}{\left(\Delta \mathbf{x}^{(k)}-\mathbf{H}_{k} \Delta \mathbf{g}^{(k)}\right)^{T} \Delta \mathbf{g}^{(k)}}$$
+
+所以
+
+$$\alpha_{k}=\frac{1}{\left(\Delta \mathbf{x}^{(k)}-\mathbf{H}_{k} \Delta \mathbf{g}^{(k)}\right)^{T} \Delta \mathbf{g}^{(k)}}$$
+
+$$\mathbf{z}^{(k)}=\Delta \mathbf{x}^{(k)}-\mathbf{H}_{k} \Delta \mathbf{g}^{(k)}$$
+
+> 总结整个流程
+
+1、首先把目标函数$f$转化为二次型函数$f(\mathbf{x})=\frac{1}{2} \mathbf{x}^{T} Q \mathbf{x}-\mathbf{b}^{T} \mathbf{x}$。
+
+2、根据二次型函数获得函数$f$在$\mathbf{x}^{(k)}$的梯度$\mathbf{g}^{(k)}$。
+
+3、根据$\mathbf{x}$的维度$n$创建$n$维度的单位矩阵$\mathbf{H}_{0}$。
+
+4、根据$\mathbf{d}^{(k)}=-\mathbf{H}_{k} \mathbf{g}^{(k)}$计算方向向量$\mathbf{d}^{(0)}$。
+
+5、由于目标函数为二次型，因此根据步长公式$\alpha_{k}=\arg \min _{\alpha \geq 0} f\left(\mathbf{x}^{(k)}+\alpha \mathbf{d}^{(k)}\right)=-\frac{\mathbf{g}^{(k) T} \mathbf{d}^{(k)}}{\mathbf{d}^{(k) T} Q \mathbf{d}^{(k)}}$得到步长$\alpha_{0}$。
+
+6、根据$\mathbf{x}^{(k+1)}=\mathbf{x}^{(k)}+\alpha_{k} \mathbf{d}^{(k)}$计算得到$\mathbf{x}^{(1)}$。
+
+7、根据上式计算得到$\Delta \mathbf{x}^{(0)}$，$\Delta \mathbf{x}^{(k)}=\alpha_{k} \mathbf{d}^{(k)}$。
+
+8、根据二次型公式计算梯度得到$\mathbf{g}^{(1)}$，$\mathbf{g}^{(k)}=Q \mathbf{x}^{(k)}$.
+
+9、根据$\mathbf{g}^{(1)}$得到$\Delta \mathbf{g}^{(0)}$，$\mathbf{g}^{(k+1)}-\mathbf{g}^{(k)}$。
+
+10、根据秩1法得到$\alpha_{k}$，$\Delta \mathbf{g}^{(0) T}\left(\Delta \mathbf{x}^{(0)}-\mathbf{H}_{0} \Delta \mathbf{g}^{(0)}\right)$。
+
+11、计算得到$\mathbf{U}_{k}$。
+
+12、得到$\mathbf{d}^{(1)}$的方向向量。
+
+13、从第五步开始迭代执行$n$次得到$\mathbf{x}^{*}$。
+
+> 不足
+
+1、$\mathbf{H}_{k}$不一定是正定，这将导致$\mathbf{d}^{(k)}=-\mathbf{H}_{k} \mathbf{g}^{(k)}$不一定是下降方向。
+
+2、当$\Delta \mathbf{g}^{(k) T}\left(\Delta \mathbf{x}^{(k)}-\mathbf{H}_{k} \Delta \mathbf{g}^{(k)}\right) \approx 0$时，$\mathbf{H}_{k+1}$的计算有困难。
+
+## DFP算法（变尺度算法）
+
+> 公式
+
+$$\mathbf{U}_{k}=\frac{\Delta \mathbf{x}^{(k)} \Delta \mathbf{x}^{(k) T}}{\Delta \mathbf{x}^{(k) T} \Delta \mathbf{g}^{(k)}}-\frac{\mathbf{H}_{k} \Delta \mathbf{g}^{(k)} \Delta \mathbf{g}^{(k) T} \mathbf{H}_{k}}{\Delta \mathbf{g}^{(k) T} \mathbf{H}_{k} \Delta \mathbf{g}^{(k)}}$$
+
+所以
+
+$$\mathbf{H}_{k+1}=\mathbf{H}_{k}+\frac{\Delta \mathbf{x}^{(k)} \Delta \mathbf{x}^{(k) T}}{\Delta \mathbf{x}^{(k) T} \Delta \mathbf{g}^{(k)}}-\frac{\mathbf{H}_{k} \Delta \mathbf{g}^{(k)} \Delta \mathbf{g}^{(k) T} \mathbf{H}_{k}}{\Delta \mathbf{g}^{(k) T} \mathbf{H}_{k} \Delta \mathbf{g}^{(k)}}$$
+
+> 特性
+
+1、DFP算法是拟牛顿算法（满足拟牛顿条件）。
+
+2、当DFP算法用于二次型时，并且黑塞举证$\mathbf{Q}=\mathbf{Q}^{T}$，那么就有
+
+$$\mathbf{H}_{k+1} \Delta \mathbf{g}^{(i)}=\Delta \mathbf{x}^{(i)}, \quad 0 \leq i \leq k$$
+
+3、DFP算法也是一个共轭方向算法。
+
+4、定理：如果$\mathbf{g}^{(k)} \neq 0$，那么在DFP中，$\mathbf{H}_{k}$一定是正定矩阵。
+
+5、DFP使得$\mathbf{H}_{k}$具有正定性。
+
+6、DFP优于秩1算法。
+
+7、DFP算法在某些情况下可能会有问题（例如：非常大的非二次问题）。
+
+## BFGS算法
+
+> 公式
+
+$$\mathbf{U}_{k}=\left(1+\frac{\Delta \mathbf{g}^{(k) T} \mathbf{H}_{k} \Delta \mathbf{g}^{(k) T}}{\Delta \mathbf{g}^{(k) T} \Delta \mathbf{x}^{(k)}}\right) \frac{\Delta \mathbf{x}^{(k)} \Delta \mathbf{x}^{(k) T}}{\Delta \mathbf{x}^{(k) T} \Delta \mathbf{g}^{(k)}}-\frac{\mathbf{H}_{k} \Delta \mathbf{g}^{(k)} \Delta \mathbf{x}^{(k) T}+\left(\mathbf{H}_{k} \Delta \mathbf{g}^{(k)} \Delta \mathbf{x}^{(k) T}\right)^{T}}{\Delta \mathbf{g}^{(k) T} \Delta \mathbf{x}^{(k)}}$$
+
+$$\mathbf{H}_{k+1}=\mathbf{H}_{k}+\mathbf{U}_{k}$$
+
+> 特性
+
+1、BFGS使用互补性，从DFP中导出。
+
+2、考虑拟牛顿条件，Hessian逆的近似应满足
+
+$$\mathbf{H}_{k+1} \Delta \mathbf{g}^{(i)}=\Delta \mathbf{x}^{(i)}, \quad 0 \leq i \leq k$$
+
+3、令$\mathbf{B}_{k}$是一个黑塞矩阵的近似（$\mathbf{B}_{k}^{-1}=\mathbf{H}_{k}$）,那么就可以得到
+
+$$\mathbf{B}_{k+1} \Delta \mathbf{x}^{(i)}=\Delta \mathbf{g}^{(i)}, \quad 0 \leq i \leq k$$
+
+将上述条件称为“互补拟牛顿”条件。
+
+之前的公式对于更新$\mathbf{B}_{k+1}$不是很有用，因为我们需要的是逆黑塞
+
+$$\mathbf{H}_{k+1}^{B F G S}=\left(\mathbf{B}_{k+1}\right)^{-1}$$
+
+存在一些计算逆的技巧，如下面的Sherman Morrison公式所示
+
+引理：如果矩阵$\mathbf{A}$不是奇异矩阵，$\mathbf{u}$和$\mathbf{v}$是列向量，满足$1+\mathbf{v}^{T} \mathbf{A}^{-1} \mathbf{u} \neq 0$，那么$\mathbf{A}+\mathbf{u} \mathbf{v}^{T}$非奇异，其逆矩阵可以用$\mathbf{A}^{-1}$来表示
+
+$$\left(\mathbf{A}+\mathbf{u v}^{T}\right)^{-1}=\mathbf{A}^{-1}-\frac{\left(\mathbf{A}^{-1} \mathbf{u}\right)\left(\mathbf{v}^{T} \mathbf{A}^{-1}\right)}{1+\mathbf{v}^{T} \mathbf{A}^{-1} \mathbf{u}}$$
+
+因此可以知道如果$\mathbf{A}^{-1}$已知，
+
+如果$\mathbf{A}^{-1}$是已知的，那么这个公式提供了一种“数值廉价”的方法来计算由矩阵$\mathbf{A}$校正的$\mathbf{u} \mathbf{v}^{T}$的逆。
+
+此时，上面的公式就变为
+
+$$\mathbf{B}_{k+1}=\mathbf{B}_{k}+\mathbf{u}_{1} \mathbf{v}_{1}^{T}+\mathbf{u}_{2} \mathbf{v}_{2}^{T}$$
+
+因此
+
+$$\mathbf{B}_{k+1}^{-1}=\left(\mathbf{B}_{k}+\mathbf{u}_{1} \mathbf{v}_{1}^{T}+\mathbf{u}_{2} \mathbf{v}_{2}^{T}\right)^{-1}$$
+
+将引理应用于$\mathbf{B}_{k+1}$2次，并使用$\mathbf{H}_{k}$替换$\mathbf{B}_{k}^{-1}$，就可以得到
+
+$$\mathbf{H}_{k+1}^{B F G S}=\mathbf{H}_{k}+\left(1+\frac{\Delta \mathbf{g}^{(k) T} \mathbf{H}_{k} \Delta \mathbf{g}^{(k) T}}{\Delta \mathbf{g}^{(k) T} \Delta \mathbf{x}^{(k)}}\right) \frac{\Delta \mathbf{x}^{(k)} \Delta \mathbf{x}^{(k) T}}{\Delta \mathbf{x}^{(k) T} \Delta \mathbf{g}^{(k)}}- \frac{\mathbf{H}_{k} \Delta \mathbf{g}^{(k)} \Delta \mathbf{x}^{(k) T}+\left(\mathbf{H}_{k} \Delta \mathbf{g}^{(k)} \Delta \mathbf{x}^{(k) T}\right)^{T}}{\Delta \mathbf{g}^{(k) T} \Delta \mathbf{x}^{(k)}}$$
+
+从而更新了$\mathbf{H}_{k}$。
+
+1、BFGS是DFP的“补充”公式
+
+2、由于互补性，BFGS公式继承了DFP的性质
+
+>* 满足拟牛顿条件。
+>* BFGS具有共轭方向性质。
+>* BFGS继承了DFP的正定性，即当$\mathbf{g}^{(k)} \neq 0$，并且$\mathbf{H}_{k}>0$，那么$\mathbf{H}_{k+1}^{B F G S}>0$。
+
+3、当直线搜索准确时，BFGS具有相当强的鲁棒性（可以节省直线搜索部分的时间）。
+
+4、BFGS通常比DFP公式有效得多。
+
+5、对于非二次问题，拟牛顿算法通常不会在$n$步内收敛。
+
+6、需要进行一些修改（例如，在每次迭代后将方向向量重新初始化为负梯度）。
+
+7、广泛应用。
