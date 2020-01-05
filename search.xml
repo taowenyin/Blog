@@ -741,6 +741,63 @@
 </ul>
 </blockquote>
 <p>注意，求解过程中引入的松弛变量，并不必须为整数。</p>
+<h1 id="仅含等式约束的优化问题重新看">仅含等式约束的优化问题（重新看）</h1>
+<p><span class="math display">\[\begin{matrix}
+    minimize &amp; f\left ( \mathbf{x} \right ) &amp; \\ 
+    st. &amp; \mathbf{h}_{i}(\mathbf{x})=\mathbf{0} &amp; i=1, \ldots, m
+\end{matrix}\]</span></p>
+<p>其中<span class="math inline">\(\mathbf{h}=\left[h_{1}, \dots, h_{m}\right]^{T}\)</span>，并且<span class="math inline">\(\mathbf{h}: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}, m &lt; n\)</span>。如果函数<span class="math inline">\(\mathbf{h}\)</span>是连续可微的，那么<span class="math inline">\(\mathbf{h} \in \mathcal{C}^{1}\)</span>。</p>
+<p>定义（<span class="math inline">\(m=1\)</span>的情况）：当<span class="math inline">\(\nabla h\left(\mathbf{x}^{*}\right) \neq 0\)</span>时，那么可行点<span class="math inline">\(\mathbf{x}^{*}\)</span>为该约束的正则点。</p>
+<p>如果<span class="math inline">\(S\)</span>上的所有点都是正则点，那么曲面<span class="math inline">\(S\)</span>的维数是<span class="math inline">\(n-m\)</span>。</p>
+<h2 id="拉格朗日条件">拉格朗日条件</h2>
+<p>首先定义<span class="math inline">\(m=1\)</span>的简单情况</p>
+<p><span class="math display">\[\begin{matrix}
+    minimize &amp; f\left ( \mathbf{x} \right ) &amp; \\ 
+    st. &amp; \mathbf{h}\left ( \mathbf{x} \right )=0
+\end{matrix}\]</span></p>
+<p>其中<span class="math inline">\(f: \mathbb{R}^{n} \rightarrow \mathbb{R}\)</span>，<span class="math inline">\(h: \mathbb{R}^{n} \rightarrow \mathbb{R}\)</span></p>
+<p>（<span class="math inline">\(m=1\)</span>的情况）假设<span class="math inline">\(\mathbf{x}^{*}\)</span>局部最小值，并且是正则点。那么存在一个标量<span class="math inline">\(\lambda^{*}\)</span>，使得</p>
+<p><span class="math display">\[\nabla f\left(\mathbf{x}^{*}\right)+\lambda^{*} \nabla h\left(\mathbf{x}^{*}\right)=0\]</span></p>
+<p>换句话说，<span class="math inline">\(\nabla f\left(\mathbf{x}^{*}\right)\)</span>和<span class="math inline">\(\nabla h\left(\mathbf{x}^{*}\right)\)</span>是平行的，<span class="math inline">\(\lambda^{*}\)</span>称为拉格朗日乘子。</p>
+<h1 id="含不等式约束的优化问题">含不等式约束的优化问题</h1>
+<p>1、<span class="math inline">\(\mu^{*} \geq 0\)</span></p>
+<p>2、<span class="math inline">\(D f\left(\mathbf{x}^{*}\right)+\mu^{* T} D \mathbf{g}\left(\mathbf{x}^{*}\right)=\mathbf{0}^{T}\)</span></p>
+<p>3、<span class="math inline">\(\mu^{* T} \mathbf{g}\left(\mathbf{x}^{*}\right)=0\)</span></p>
+<p>4、<span class="math inline">\(\mathbf{g}\left(\mathbf{x}^{*}\right) \leq 0\)</span></p>
+<h1 id="凸优化问题-1">凸优化问题</h1>
+<p>如果<span class="math inline">\(\Omega\)</span>是凸集，那么任意<span class="math inline">\(\mathbf{y}, \mathbf{z} \in \Omega\)</span>，并且<span class="math inline">\(\alpha \in(0,1)\)</span>，都有<span class="math inline">\(\alpha \mathbf{y}+(1-\alpha) \mathbf{z} \in \Omega\)</span>。</p>
+<h2 id="证明omegamathbfx-mathbfx-geq-0是凸集">证明<span class="math inline">\(\Omega=\{\mathbf{x}: \mathbf{x} \geq 0\}\)</span>是凸集</h2>
+<p>1、假设<span class="math inline">\(\mathbf{y}, \mathbf{z} \in \Omega\)</span>，并且<span class="math inline">\(\alpha \in(0,1)\)</span>。</p>
+<p>2、那么<span class="math inline">\(\mathbf{x}=\alpha \mathbf{y}+(1-\alpha) \mathbf{z} \in \Omega\)</span>。</p>
+<p>3、若要要属于<span class="math inline">\(\Omega\)</span>，那么<span class="math inline">\(\mathbf{x}\)</span>中每个都必须<span class="math inline">\(\geq 0\)</span>。</p>
+<p>4、每个<span class="math inline">\(\mathbf{x}=\left[x_{1}, \ldots, x_{n}\right]^{T}\)</span>满足<span class="math inline">\(x_{i}=\alpha y_{i}+(1-\alpha) z_{i}\)</span>。</p>
+<p>5、就可以知道<span class="math inline">\(y_{i}, z_{i}, \alpha, 1-\alpha \geq 0\)</span>。</p>
+<p>6、因此，<span class="math inline">\(x_{i} \geq 0\)</span>，所以<span class="math inline">\(\mathbf{x} \geq 0\)</span>，即<span class="math inline">\(\mathbf{x} \in \Omega\)</span>，所以<span class="math inline">\(\Omega\)</span>是凸集。</p>
+<h2 id="凸方程">凸方程</h2>
+<blockquote>
+<p>定理：如果一个方程<span class="math inline">\(f\)</span>在<span class="math inline">\(\Omega\)</span>上是凸函数，那么任何不同的<span class="math inline">\(\mathbf{x}, \mathbf{y} \in \Omega\)</span>，并且<span class="math inline">\(\alpha \in(0,1)\)</span>，都有</p>
+</blockquote>
+<p><span class="math display">\[f(\alpha \mathbf{x}+(1-\alpha) \mathbf{y}) \leq \alpha f(\mathbf{x})+(1-\alpha) f(\mathbf{y})\]</span></p>
+<p>如果<span class="math inline">\(f\)</span>是严格凸函数，那么<span class="math inline">\(\leq\)</span>会替换为<span class="math inline">\(&lt;\)</span>。</p>
+<h2 id="验证二次型的凸函数">验证二次型的凸函数</h2>
+<blockquote>
+<p>命题：假设有二次型函数<span class="math inline">\(f(\mathbf{x})=\mathbf{x}^{T} \mathbf{Q} \mathbf{x}\)</span>，并且<span class="math inline">\(\mathbf{Q}=\mathbf{Q}^{T}\)</span>。假如<span class="math inline">\(\Omega\)</span>为凸集，那么<span class="math inline">\(f\)</span>是在<span class="math inline">\(\Omega\)</span>上是凸集的条件是</p>
+</blockquote>
+<p><span class="math display">\[(\mathbf{x}-\mathbf{y})^{T} \mathbf{Q}(\mathbf{x}-\mathbf{y}) \geq 0\]</span></p>
+<p>并且所有的<span class="math inline">\(\mathbf{x}, \mathbf{y} \in \Omega\)</span>。</p>
+<h2 id="凸函数的另一个解释">凸函数的另一个解释</h2>
+<blockquote>
+<p>定理：函数<span class="math inline">\(f\)</span>是凸函数的条件是所有<span class="math inline">\(\mathbf{x}, \mathbf{y} \in \Omega\)</span>，并且</p>
+</blockquote>
+<p><span class="math display">\[f(\mathbf{y}) \geq f(\mathbf{x})+D f(\mathbf{x})(\mathbf{y}-\mathbf{x})\]</span></p>
+<blockquote>
+<p>定理：如果函数<span class="math inline">\(f\)</span>是凸函数，那么黑塞矩阵<span class="math inline">\(\mathbf{F}(\mathbf{x}) \geq 0\)</span>，并且<span class="math inline">\(\mathbf{x} \in \Omega\)</span>。</p>
+</blockquote>
+<h2 id="凸优化的fons">凸优化的FONS</h2>
+<p>1、约束：对于所有的可行方向<span class="math inline">\(\mathbf{d}\)</span>，都有<span class="math inline">\(\mathbf{d}^{T} \nabla f\left(\mathbf{x}^{*}\right) \geq 0\)</span>。</p>
+<p>2、<span class="math inline">\(\nabla f\left(\mathbf{x}^{*}\right)=0\)</span>。</p>
+<p>3、满足朗格朗日条件<span class="math inline">\(\Omega=\{\mathbf{x}: \mathbf{h}(\mathbf{x})=0\}\)</span>。</p>
+<p>4、满足KKT条件<span class="math inline">\(\Omega=\{\mathbf{x}: \mathbf{h}(\mathbf{x})=0, \mathbf{g}(\mathbf{x}) \leq 0\}\)</span>。</p>
 ]]></content>
       <categories>
         <category>课程</category>
