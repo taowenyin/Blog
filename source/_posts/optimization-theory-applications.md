@@ -964,3 +964,132 @@ $$\left(\begin{array}{c}
 1、极值点集等于基本可行解集。
 
 2、结合LP的基本定理，可以看出求解LP问题只需要考察约束集的极值点。
+
+# 整数规划问题
+
+整数规划的一般形式
+
+\begin{matrix}
+    minimize & f(\mathbf{x})\\ 
+    st. & \mathbf{g}(\mathbf{x}) \leq 0\\ 
+     & \mathbf{x} \in \mathbb{Z}^{n}
+\end{matrix}
+
+整数规划问题是一个NP难问题。
+
+## 整数线性规划
+
+\begin{matrix}
+    minimize & \mathbf{c}^{\top} \mathbf{x}\\ 
+    st. & \mathbf{Ax}=\mathbf{b}\\ 
+     & \mathbf{x} \geq \mathbf{0}\\
+     & \mathbf{x} \in \mathbb{Z}^{n}\\
+\end{matrix}
+
+## 解决ILP的方法
+
+1、把ILP变为LP问题
+
+2、特殊情况：幺模矩阵
+
+3、精确方法
+
+>* 1、割平面法
+>* 2、动态规划法
+>* 3、分支边界法
+>* 4、分支切割法
+
+4、启发式方法
+
+## 幺模矩阵
+
+> 定义：对于$m \times n$的整型矩阵$\mathbf{A} \in \mathbb{Z}^{m \times n}(m 《 n)$，如果其所有$m$阶非零子式为$\pm 1$，那么矩阵$\mathbf{A}$就是幺模矩阵。
+
+假设线性方程$\mathbf{A x}=\mathbf{b}$，其中$\mathbf{A} \in \mathbb{Z}^{m \times n}(m \leq n)$，$\mathbf{B}$是一个基矩阵（由$m$个线性无关的列向量组成$m \times m$矩阵），$\mathbf{A}$的幺模矩阵是$|\operatorname{det} \mathbf{B}|=1$的所有$\mathbf{B}$。
+
+> 引理：对于线性方程$\mathbf{A x}=\mathbf{b}$，其中$\mathbf{A} \in \mathbb{Z}^{m \times n}(m \leq n)$是幺模矩阵，并且$\mathbf{b} \in \mathbb{Z}^{m}$，那么它的所有基本解都是整数解。
+
+> 推论：如果线性规划的约束方程$\mathbf{A x}=\mathbf{b}, \mathbf{x} \geq 0$，其中$\mathbf{A}$是幺模矩阵，$\mathbf{A} \in \mathbb{Z}^{m \times n}$，并且$\mathbf{b} \in \mathbb{Z}^{m}$，那么所有的基本可行解都是整数。
+
+> 定义：对于一个$m \times n$的整数矩阵$\mathbf{A} \in \mathbb{Z}^{m \times n}$，如果它的所有非零子式都是$\pm 1$，那么矩阵$\mathbf{A}$就是幺模矩阵。
+
+> 推论：考虑线性规划的约束条件$[\mathbf{A}, \mathbf{I}] \mathbf{x}=\mathbf{b}, \mathbf{x} \geq 0$，其中$\mathbf{A} \in \mathbb{Z}^{m \times n}$是完全幺模矩阵，$\mathbf{b} \in \mathbb{Z}^{m}$，那么他的所有基本可行解都是整数解。
+
+## 割平面法
+
+### 主要思想
+
+1、通过LP松弛来解决ILP问题。
+
+2、验证解
+
+>* 如果最优化解是整型，那么就得到解。
+>* 如果不是，那么就需要增加约束来移除在可行集中的非整数最优解。
+
+3、重复该过程，直到最优解为整数向量。
+
+### 流程
+
+1、引入向下取整操作，表示为$\lfloor x\rfloor$。
+
+2、定义整数线性规划问题
+
+\begin{matrix}
+    minimize & \mathbf{c}^{\top} \mathbf{x}\\ 
+    st. & \mathbf{Ax}=\mathbf{b}\\ 
+     & \mathbf{x} \geq \mathbf{0}\\
+     & \mathbf{x} \in \mathbb{Z}^{n}\\
+\end{matrix}
+
+3、我们首先得到线性规划问题的最优基本可行解。
+
+\begin{matrix}
+    minimize & \mathbf{c}^{T} \mathbf{x}\\ 
+    st. & \mathbf{A x}=\mathbf{b}\\ 
+     & \mathbf{x} \geq 0
+\end{matrix}
+
+4、假设前$m$列向量组成了最有基本可行解的基矩阵，则相应的增广矩阵为
+
+$$\begin{array}{cccccccccc}
+{a_{1}} & {a_{2}} & {\cdots} & {a_{i}} & {\cdots} & {a_{m}} & {a_{m+1}} & {\cdots} & {a_{n}} & {y_{0}} \\
+{1} & {0} & {\cdots} & {0} & {\cdots} & {0} & {y_{1, m+1}} & {\cdots} & {y_{1, n}} & {y_{10}} \\
+{0} & {1} & {\cdots} & {0} & {\cdots} & {0} & {y_{2, m+1}} & {\cdots} & {y_{2, n}} & {y_{20}} \\
+{\vdots} & {\vdots} & {} & {\vdots} & {} & {\vdots} & {} & {} & {} & {\vdots} \\
+{0} & {0} & {\cdots} & {1} & {\cdots} & {0} & {y_{i, m+1}} & {\cdots} & {y_{i, n}} & {y_{i 0}} \\
+{\vdots} & {\vdots} & {} & {\vdots} & {} & {\vdots} & {} & {} & {\vdots} & {\vdots} \\
+{0} & {0} & {\cdots} & {0} & {\cdots} & {1} & {y_{m, m+1}} & {\cdots} & {y_{m, n}} & {y_{m 0}}
+\end{array}$$
+
+5、假设最有基本可行解中的第$i$个元素$y_{i 0}$不是整数。注意，任何可行向量$\mathbf{X}$都满足等式约束
+
+$$x_{i}+\sum_{j=m+1}^{n} y_{i j} x_{j}=y_{i 0}$$
+
+6、利用上式就可以构造出新增的约束条件。
+
+>* 从可行集中消除当前最优非整数解。
+>* 保持任何整数可行解。
+
+$$x_{i}+\sum_{j=m+1}^{n}\left\lfloor y_{i j}\right\rfloor x_{j} \leq y_{i 0}$$
+
+>* 因为$\left\lfloor y_{i j}\right\rfloor \leq y_{i j}$，所以对于任何满足上面等式约束的向量$\mathbf{x} \geq 0$，也满足这一不等式约束。
+>* 任何可行解$\mathbf{X}$都满足该不等式约束。
+
+此外，对于任何整数可行向量$\mathbf{x}$，不等式约束的左边都是整数，因此，任意整数可行解$\mathbf{x}$还满足
+
+$$x_{i}+\sum_{j=m+1}^{n}\left\lfloor y_{i j}\right\rfloor x_{j} \leq\left\lfloor y_{i 0}\right\rfloor$$
+
+>* 将前面的等式约束减去不等式约束，可以得到任意整数可行解$\mathbf{x}$都满足的约束条件。
+
+$$\sum_{j=m+1}^{n}\left(y_{i j}-\left\lfloor y_{i j}\right\rfloor\right) x_{j} \geq y_{i 0}-\left\lfloor y_{i 0}\right\rfloor$$
+
+>* 通过引入一个剩余变量$x_{n+1}$可以把上面新的LP变为标准形式。
+
+$$\sum_{j=m+1}^{n}\left(y_{i j}-\left\lfloor y_{i j}\right\rfloor\right) x_{j}-x_{n+1}=y_{i 0}-\left\lfloor y_{i 0}\right\rfloor$$
+
+7、现在可以用单纯形法求解新的线性规划，并检查得到的最优基本可行解。
+
+>* 如果是整型，那么计算结束。
+>* 如果不是，那么就引入其他割面，并重复上面的过程。
+
+注意，求解过程中引入的松弛变量，并不必须为整数。
