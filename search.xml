@@ -622,6 +622,125 @@
 <p>可以得到</p>
 <p>1、极值点集等于基本可行解集。</p>
 <p>2、结合LP的基本定理，可以看出求解LP问题只需要考察约束集的极值点。</p>
+<h1 id="整数规划问题">整数规划问题</h1>
+<p>整数规划的一般形式</p>
+<span class="math display">\[\begin{matrix}
+    minimize &amp; f(\mathbf{x})\\ 
+    st. &amp; \mathbf{g}(\mathbf{x}) \leq 0\\ 
+     &amp; \mathbf{x} \in \mathbb{Z}^{n}
+\end{matrix}\]</span>
+<p>整数规划问题是一个NP难问题。</p>
+<h2 id="整数线性规划">整数线性规划</h2>
+<span class="math display">\[\begin{matrix}
+    minimize &amp; \mathbf{c}^{\top} \mathbf{x}\\ 
+    st. &amp; \mathbf{Ax}=\mathbf{b}\\ 
+     &amp; \mathbf{x} \geq \mathbf{0}\\
+     &amp; \mathbf{x} \in \mathbb{Z}^{n}\\
+\end{matrix}\]</span>
+<h2 id="解决ilp的方法">解决ILP的方法</h2>
+<p>1、把ILP变为LP问题</p>
+<p>2、特殊情况：幺模矩阵</p>
+<p>3、精确方法</p>
+<blockquote>
+<ul>
+<li>1、割平面法</li>
+<li>2、动态规划法</li>
+<li>3、分支边界法</li>
+<li>4、分支切割法</li>
+</ul>
+</blockquote>
+<p>4、启发式方法</p>
+<h2 id="幺模矩阵">幺模矩阵</h2>
+<blockquote>
+<p>定义：对于<span class="math inline">\(m \times n\)</span>的整型矩阵<span class="math inline">\(\mathbf{A} \in \mathbb{Z}^{m \times n}(m 《 n)\)</span>，如果其所有<span class="math inline">\(m\)</span>阶非零子式为<span class="math inline">\(\pm 1\)</span>，那么矩阵<span class="math inline">\(\mathbf{A}\)</span>就是幺模矩阵。</p>
+</blockquote>
+<p>假设线性方程<span class="math inline">\(\mathbf{A x}=\mathbf{b}\)</span>，其中<span class="math inline">\(\mathbf{A} \in \mathbb{Z}^{m \times n}(m \leq n)\)</span>，<span class="math inline">\(\mathbf{B}\)</span>是一个基矩阵（由<span class="math inline">\(m\)</span>个线性无关的列向量组成<span class="math inline">\(m \times m\)</span>矩阵），<span class="math inline">\(\mathbf{A}\)</span>的幺模矩阵是<span class="math inline">\(|\operatorname{det} \mathbf{B}|=1\)</span>的所有<span class="math inline">\(\mathbf{B}\)</span>。</p>
+<blockquote>
+<p>引理：对于线性方程<span class="math inline">\(\mathbf{A x}=\mathbf{b}\)</span>，其中<span class="math inline">\(\mathbf{A} \in \mathbb{Z}^{m \times n}(m \leq n)\)</span>是幺模矩阵，并且<span class="math inline">\(\mathbf{b} \in \mathbb{Z}^{m}\)</span>，那么它的所有基本解都是整数解。</p>
+</blockquote>
+<blockquote>
+<p>推论：如果线性规划的约束方程<span class="math inline">\(\mathbf{A x}=\mathbf{b}, \mathbf{x} \geq 0\)</span>，其中<span class="math inline">\(\mathbf{A}\)</span>是幺模矩阵，<span class="math inline">\(\mathbf{A} \in \mathbb{Z}^{m \times n}\)</span>，并且<span class="math inline">\(\mathbf{b} \in \mathbb{Z}^{m}\)</span>，那么所有的基本可行解都是整数。</p>
+</blockquote>
+<blockquote>
+<p>定义：对于一个<span class="math inline">\(m \times n\)</span>的整数矩阵<span class="math inline">\(\mathbf{A} \in \mathbb{Z}^{m \times n}\)</span>，如果它的所有非零子式都是<span class="math inline">\(\pm 1\)</span>，那么矩阵<span class="math inline">\(\mathbf{A}\)</span>就是幺模矩阵。</p>
+</blockquote>
+<blockquote>
+<p>推论：考虑线性规划的约束条件<span class="math inline">\([\mathbf{A}, \mathbf{I}] \mathbf{x}=\mathbf{b}, \mathbf{x} \geq 0\)</span>，其中<span class="math inline">\(\mathbf{A} \in \mathbb{Z}^{m \times n}\)</span>是完全幺模矩阵，<span class="math inline">\(\mathbf{b} \in \mathbb{Z}^{m}\)</span>，那么他的所有基本可行解都是整数解。</p>
+</blockquote>
+<h2 id="割平面法">割平面法</h2>
+<h3 id="主要思想">主要思想</h3>
+<p>1、通过LP松弛来解决ILP问题。</p>
+<p>2、验证解</p>
+<blockquote>
+<ul>
+<li>如果最优化解是整型，那么就得到解。</li>
+<li>如果不是，那么就需要增加约束来移除在可行集中的非整数最优解。</li>
+</ul>
+</blockquote>
+<p>3、重复该过程，直到最优解为整数向量。</p>
+<h3 id="流程">流程</h3>
+<p>1、引入向下取整操作，表示为<span class="math inline">\(\lfloor x\rfloor\)</span>。</p>
+<p>2、定义整数线性规划问题</p>
+<span class="math display">\[\begin{matrix}
+    minimize &amp; \mathbf{c}^{\top} \mathbf{x}\\ 
+    st. &amp; \mathbf{Ax}=\mathbf{b}\\ 
+     &amp; \mathbf{x} \geq \mathbf{0}\\
+     &amp; \mathbf{x} \in \mathbb{Z}^{n}\\
+\end{matrix}\]</span>
+<p>3、我们首先得到线性规划问题的最优基本可行解。</p>
+<span class="math display">\[\begin{matrix}
+    minimize &amp; \mathbf{c}^{T} \mathbf{x}\\ 
+    st. &amp; \mathbf{A x}=\mathbf{b}\\ 
+     &amp; \mathbf{x} \geq 0
+\end{matrix}\]</span>
+<p>4、假设前<span class="math inline">\(m\)</span>列向量组成了最有基本可行解的基矩阵，则相应的增广矩阵为</p>
+<p><span class="math display">\[\begin{array}{cccccccccc}
+{a_{1}} &amp; {a_{2}} &amp; {\cdots} &amp; {a_{i}} &amp; {\cdots} &amp; {a_{m}} &amp; {a_{m+1}} &amp; {\cdots} &amp; {a_{n}} &amp; {y_{0}} \\
+{1} &amp; {0} &amp; {\cdots} &amp; {0} &amp; {\cdots} &amp; {0} &amp; {y_{1, m+1}} &amp; {\cdots} &amp; {y_{1, n}} &amp; {y_{10}} \\
+{0} &amp; {1} &amp; {\cdots} &amp; {0} &amp; {\cdots} &amp; {0} &amp; {y_{2, m+1}} &amp; {\cdots} &amp; {y_{2, n}} &amp; {y_{20}} \\
+{\vdots} &amp; {\vdots} &amp; {} &amp; {\vdots} &amp; {} &amp; {\vdots} &amp; {} &amp; {} &amp; {} &amp; {\vdots} \\
+{0} &amp; {0} &amp; {\cdots} &amp; {1} &amp; {\cdots} &amp; {0} &amp; {y_{i, m+1}} &amp; {\cdots} &amp; {y_{i, n}} &amp; {y_{i 0}} \\
+{\vdots} &amp; {\vdots} &amp; {} &amp; {\vdots} &amp; {} &amp; {\vdots} &amp; {} &amp; {} &amp; {\vdots} &amp; {\vdots} \\
+{0} &amp; {0} &amp; {\cdots} &amp; {0} &amp; {\cdots} &amp; {1} &amp; {y_{m, m+1}} &amp; {\cdots} &amp; {y_{m, n}} &amp; {y_{m 0}}
+\end{array}\]</span></p>
+<p>5、假设最有基本可行解中的第<span class="math inline">\(i\)</span>个元素<span class="math inline">\(y_{i 0}\)</span>不是整数。注意，任何可行向量<span class="math inline">\(\mathbf{X}\)</span>都满足等式约束</p>
+<p><span class="math display">\[x_{i}+\sum_{j=m+1}^{n} y_{i j} x_{j}=y_{i 0}\]</span></p>
+<p>6、利用上式就可以构造出新增的约束条件。</p>
+<blockquote>
+<ul>
+<li>从可行集中消除当前最优非整数解。</li>
+<li>保持任何整数可行解。</li>
+</ul>
+</blockquote>
+<p><span class="math display">\[x_{i}+\sum_{j=m+1}^{n}\left\lfloor y_{i j}\right\rfloor x_{j} \leq y_{i 0}\]</span></p>
+<blockquote>
+<ul>
+<li>因为<span class="math inline">\(\left\lfloor y_{i j}\right\rfloor \leq y_{i j}\)</span>，所以对于任何满足上面等式约束的向量<span class="math inline">\(\mathbf{x} \geq 0\)</span>，也满足这一不等式约束。</li>
+<li>任何可行解<span class="math inline">\(\mathbf{X}\)</span>都满足该不等式约束。</li>
+</ul>
+</blockquote>
+<p>此外，对于任何整数可行向量<span class="math inline">\(\mathbf{x}\)</span>，不等式约束的左边都是整数，因此，任意整数可行解<span class="math inline">\(\mathbf{x}\)</span>还满足</p>
+<p><span class="math display">\[x_{i}+\sum_{j=m+1}^{n}\left\lfloor y_{i j}\right\rfloor x_{j} \leq\left\lfloor y_{i 0}\right\rfloor\]</span></p>
+<blockquote>
+<ul>
+<li>将前面的等式约束减去不等式约束，可以得到任意整数可行解<span class="math inline">\(\mathbf{x}\)</span>都满足的约束条件。</li>
+</ul>
+</blockquote>
+<p><span class="math display">\[\sum_{j=m+1}^{n}\left(y_{i j}-\left\lfloor y_{i j}\right\rfloor\right) x_{j} \geq y_{i 0}-\left\lfloor y_{i 0}\right\rfloor\]</span></p>
+<blockquote>
+<ul>
+<li>通过引入一个剩余变量<span class="math inline">\(x_{n+1}\)</span>可以把上面新的LP变为标准形式。</li>
+</ul>
+</blockquote>
+<p><span class="math display">\[\sum_{j=m+1}^{n}\left(y_{i j}-\left\lfloor y_{i j}\right\rfloor\right) x_{j}-x_{n+1}=y_{i 0}-\left\lfloor y_{i 0}\right\rfloor\]</span></p>
+<p>7、现在可以用单纯形法求解新的线性规划，并检查得到的最优基本可行解。</p>
+<blockquote>
+<ul>
+<li>如果是整型，那么计算结束。</li>
+<li>如果不是，那么就引入其他割面，并重复上面的过程。</li>
+</ul>
+</blockquote>
+<p>注意，求解过程中引入的松弛变量，并不必须为整数。</p>
 ]]></content>
       <categories>
         <category>课程</category>
