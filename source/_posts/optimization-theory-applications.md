@@ -1093,3 +1093,95 @@ $$\sum_{j=m+1}^{n}\left(y_{i j}-\left\lfloor y_{i j}\right\rfloor\right) x_{j}-x
 >* 如果不是，那么就引入其他割面，并重复上面的过程。
 
 注意，求解过程中引入的松弛变量，并不必须为整数。
+
+# 仅含等式约束的优化问题（重新看）
+
+$$\begin{matrix}
+    minimize & f\left ( \mathbf{x} \right ) & \\ 
+    st. & \mathbf{h}_{i}(\mathbf{x})=\mathbf{0} & i=1, \ldots, m
+\end{matrix}$$
+
+其中$\mathbf{h}=\left[h_{1}, \dots, h_{m}\right]^{T}$，并且$\mathbf{h}: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}, m < n$。如果函数$\mathbf{h}$是连续可微的，那么$\mathbf{h} \in \mathcal{C}^{1}$。
+
+定义（$m=1$的情况）：当$\nabla h\left(\mathbf{x}^{*}\right) \neq 0$时，那么可行点$\mathbf{x}^{*}$为该约束的正则点。
+
+如果$S$上的所有点都是正则点，那么曲面$S$的维数是$n-m$。
+
+## 拉格朗日条件
+
+首先定义$m=1$的简单情况
+
+$$\begin{matrix}
+    minimize & f\left ( \mathbf{x} \right ) & \\ 
+    st. & \mathbf{h}\left ( \mathbf{x} \right )=0
+\end{matrix}$$
+
+其中$f: \mathbb{R}^{n} \rightarrow \mathbb{R}$，$h: \mathbb{R}^{n} \rightarrow \mathbb{R}$
+
+（$m=1$的情况）假设$\mathbf{x}^{*}$局部最小值，并且是正则点。那么存在一个标量$\lambda^{*}$，使得
+
+$$\nabla f\left(\mathbf{x}^{*}\right)+\lambda^{*} \nabla h\left(\mathbf{x}^{*}\right)=0$$
+
+换句话说，$\nabla f\left(\mathbf{x}^{*}\right)$和$\nabla h\left(\mathbf{x}^{*}\right)$是平行的，$\lambda^{*}$称为拉格朗日乘子。
+
+# 含不等式约束的优化问题
+
+1、$\mu^{*} \geq 0$
+
+2、$D f\left(\mathbf{x}^{*}\right)+\mu^{* T} D \mathbf{g}\left(\mathbf{x}^{*}\right)=\mathbf{0}^{T}$
+
+3、$\mu^{* T} \mathbf{g}\left(\mathbf{x}^{*}\right)=0$
+
+4、$\mathbf{g}\left(\mathbf{x}^{*}\right) \leq 0$
+
+# 凸优化问题
+
+如果$\Omega$是凸集，那么任意$\mathbf{y}, \mathbf{z} \in \Omega$，并且$\alpha \in(0,1)$，都有$\alpha \mathbf{y}+(1-\alpha) \mathbf{z} \in \Omega$。
+
+## 证明$\Omega=\{\mathbf{x}: \mathbf{x} \geq 0\}$是凸集
+
+1、假设$\mathbf{y}, \mathbf{z} \in \Omega$，并且$\alpha \in(0,1)$。
+
+2、那么$\mathbf{x}=\alpha \mathbf{y}+(1-\alpha) \mathbf{z} \in \Omega$。
+
+3、若要要属于$\Omega$，那么$\mathbf{x}$中每个都必须$\geq 0$。
+
+4、每个$\mathbf{x}=\left[x_{1}, \ldots, x_{n}\right]^{T}$满足$x_{i}=\alpha y_{i}+(1-\alpha) z_{i}$。
+
+5、就可以知道$y_{i}, z_{i}, \alpha, 1-\alpha \geq 0$。
+
+6、因此，$x_{i} \geq 0$，所以$\mathbf{x} \geq 0$，即$\mathbf{x} \in \Omega$，所以$\Omega$是凸集。
+
+## 凸方程
+
+> 定理：如果一个方程$f$在$\Omega$上是凸函数，那么任何不同的$\mathbf{x}, \mathbf{y} \in \Omega$，并且$\alpha \in(0,1)$，都有
+
+$$f(\alpha \mathbf{x}+(1-\alpha) \mathbf{y}) \leq \alpha f(\mathbf{x})+(1-\alpha) f(\mathbf{y})$$
+
+如果$f$是严格凸函数，那么$\leq$会替换为$<$。
+
+## 验证二次型的凸函数
+
+> 命题：假设有二次型函数$f(\mathbf{x})=\mathbf{x}^{T} \mathbf{Q} \mathbf{x}$，并且$\mathbf{Q}=\mathbf{Q}^{T}$。假如$\Omega$为凸集，那么$f$是在$\Omega$上是凸集的条件是
+
+$$(\mathbf{x}-\mathbf{y})^{T} \mathbf{Q}(\mathbf{x}-\mathbf{y}) \geq 0$$
+
+并且所有的$\mathbf{x}, \mathbf{y} \in \Omega$。
+
+## 凸函数的另一个解释
+
+> 定理：函数$f$是凸函数的条件是所有$\mathbf{x}, \mathbf{y} \in \Omega$，并且
+
+$$f(\mathbf{y}) \geq f(\mathbf{x})+D f(\mathbf{x})(\mathbf{y}-\mathbf{x})$$
+
+> 定理：如果函数$f$是凸函数，那么黑塞矩阵$\mathbf{F}(\mathbf{x}) \geq 0$，并且$\mathbf{x} \in \Omega$。
+
+## 凸优化的FONS
+
+1、约束：对于所有的可行方向$\mathbf{d}$，都有$\mathbf{d}^{T} \nabla f\left(\mathbf{x}^{*}\right) \geq 0$。
+
+2、$\nabla f\left(\mathbf{x}^{*}\right)=0$。
+
+3、满足朗格朗日条件$\Omega=\{\mathbf{x}: \mathbf{h}(\mathbf{x})=0\}$。
+
+4、满足KKT条件$\Omega=\{\mathbf{x}: \mathbf{h}(\mathbf{x})=0, \mathbf{g}(\mathbf{x}) \leq 0\}$。
