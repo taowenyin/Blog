@@ -37,7 +37,7 @@ sudo apt-get install libreoffice
 ## Shutter
 
 ```bash
-sudo add-apt-repository ppa:shutter/ppa
+sudo add-apt-repository ppa:ubuntuhandbook1/shutter
 sudo apt-get update
 sudo apt-get install shutter
 ```
