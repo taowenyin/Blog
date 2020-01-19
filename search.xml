@@ -2435,7 +2435,7 @@
 <h2 id="libreoffice">LibreOffice</h2>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:libreoffice/ppa</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install libreoffice</span><br></pre></td></tr></table></figure>
 <h2 id="shutter">Shutter</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:shutter/ppa</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install shutter</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:ubuntuhandbook1/shutter</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install shutter</span><br></pre></td></tr></table></figure>
 <h2 id="vscode">VSCode</h2>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install curl</span><br><span class="line">curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor &gt; microsoft.gpg</span><br><span class="line">sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg</span><br><span class="line">sudo sh -c <span class="string">'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" &gt; /etc/apt/sources.list.d/vscode.list'</span></span><br><span class="line">sudo apt-get install apt-transport-https</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install code</span><br></pre></td></tr></table></figure>
 <h2 id="deluge">Deluge</h2>
