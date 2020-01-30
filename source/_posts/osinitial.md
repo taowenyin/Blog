@@ -534,9 +534,9 @@ sudo apt-fast install pinta
 
 ## KCPTUN配置
 
-[下载地址](https://pan.baidu.com/s/1gV_sWFxGODWA2NioEReCVw)
+[下载地址](https://pan.baidu.com/s/1oO8y4A38DDgPGnKy6ioZrA)
 
-提取码: xftw
+提取码: hbmv
 
 # 系统配置
 
