@@ -1,6 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ROS问题集锦</title>
+    <url>/ros-qa/</url>
+    <content><![CDATA[<h1 id="ros机械臂控制问题集锦">ROS机械臂控制问题集锦</h1><p><a href="https://blog.csdn.net/weixin_39579805" target="_blank" rel="noopener">参考链接</a></p>]]></content>
+      <categories>
+        <category>ROS</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
+        <tag>QA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Gazebo模型</title>
+    <url>/ros-gazebo-model/</url>
+    <content><![CDATA[<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="attribute">https://bitbucket.org/osrf/gazebo_models/downloads/</span></span><br></pre></td></tr></table></figure><p>下载并解压缩后放到/home/taowenyin/.gazebo/models目录下</p>]]></content>
+      <categories>
+        <category>ROS</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
+        <tag>Gazebo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ROS键盘检测</title>
+    <url>/ros-keyboard/</url>
+    <content><![CDATA[<blockquote>
+<ul>
+<li>1、进入官网下载keyboard_reader（<a href="https://github.com/UTNuclearRoboticsPublic/keyboard_reader" target="_blank" rel="noopener">官网</a>）。</li>
+</ul>
+</blockquote><blockquote>
+<ul>
+<li>2、复制keyboard_reader文件夹到ROS工作空间的src目录中。</li>
+</ul>
+</blockquote><blockquote>
+<ul>
+<li>3、修改keyboard_reader.cpp文件中的第118行内容。</li>
+</ul>
+</blockquote><blockquote>
+<ul>
+<li>4、修改keyboard_reader.cpp文件中的第51行内容，以选择正确的键盘。</li>
+</ul>
+</blockquote><a id="more"></a>
+
+
+
+<blockquote>
+<ul>
+<li>5、在ROS工作空间中执行catkin_make指令进行编译。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>6、keyboard_reader项目的做法主要是创建一个“keyboard”话题，并发送自定义的Key.msg消息</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>7、创建订阅。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>8、修改package.xml，添加keyboard_reader依赖。</li>
+</ul>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build_depend</span>&gt;</span>keyboard_reader<span class="tag">&lt;/<span class="name">build_depend</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">build_export_depend</span>&gt;</span>keyboard_reader<span class="tag">&lt;/<span class="name">build_export_depend</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">exec_depend</span>&gt;</span>keyboard_reader<span class="tag">&lt;/<span class="name">exec_depend</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>9、修改CMakeLists.txt，添加keyboard_reader依赖。</li>
+</ul>
+</blockquote>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line">find_package(catkin REQUIRED COMPONENTS</span><br><span class="line">  roscpp</span><br><span class="line">  rospy</span><br><span class="line">  std_msgs</span><br><span class="line">  keyboard_reader <span class="comment"># 添加的内容</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加MSG依赖</span></span><br><span class="line">add_dependencies(&lt;package_name&gt; &lt;depend_package_name&gt;_generate_messages_cpp)</span><br><span class="line">add_dependencies(ros_keyboard keyboard_reader_generate_messages_cpp)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>ROS</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
+        <tag>调试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ROS节点调试</title>
+    <url>/ros-debug/</url>
+    <content><![CDATA[<blockquote>
+<ul>
+<li>1、将下面两行加入到CMakeLists.txt中</li>
+</ul>
+</blockquote><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> (CMAKE_CXX_FLAGS <span class="string">"<span class="variable">$&#123;CMAKE_CXX_FLAGS&#125;</span> -g"</span>)</span><br><span class="line"><span class="built_in">set</span> (CMAKE_VERBOSE_MAKEFILE ON)</span><br></pre></td></tr></table></figure><blockquote>
+<ul>
+<li>2、修改launch.json中的program</li>
+</ul>
+</blockquote><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$&#123;workspaceFolder&#125;</span>/devel/lib/&lt;package_name&gt;/&lt;node_name&gt;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>ROS</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
+        <tag>调试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ROS串口标准库serial的编译与使用</title>
+    <url>/ros-serial-compile/</url>
+    <content><![CDATA[<p><a href="http://wjwwood.io/serial/" target="_blank" rel="noopener">参考链接</a></p><blockquote>
+<ul>
+<li>1、下载serial库</li>
+</ul>
+</blockquote><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/wjwwood/serial.git</span><br></pre></td></tr></table></figure><blockquote>
+<ul>
+<li>2、编译serial库</li>
+</ul>
+</blockquote><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install doxygen</span><br><span class="line"><span class="built_in">cd</span> serial</span><br><span class="line">make</span><br><span class="line">make <span class="built_in">test</span></span><br><span class="line">make docs</span><br><span class="line">make install</span><br><span class="line">make uninstall（卸载）</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+
+
+
+<blockquote>
+<ul>
+<li>3、复制到ros库</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cp -R /tmp/usr/<span class="built_in">local</span>/include/ /opt/ros/kinetic/</span><br><span class="line">cp -R /tmp/usr/<span class="built_in">local</span>/lib/ /opt/ros/kinetic/</span><br><span class="line">cp -R /tmp/usr/<span class="built_in">local</span>/share/ /opt/ros/kinetic/</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>4、创建serial依赖的功能包</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">catkin_create_pkg &lt;package_name&gt; serial std_msgs roscpp rospy</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>ROS</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
+        <tag>串口通信</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>rosserial-stm32的编译与安装</title>
+    <url>/ros-serial-stm32/</url>
+    <content><![CDATA[<p><a href="https://blog.csdn.net/m0_38089090/article/details/79870815" target="_blank" rel="noopener">参考链接1</a></p><p><a href="https://blog.csdn.net/qq_37416258/article/details/84844051" target="_blank" rel="noopener">参考链接2</a></p><blockquote>
+<ul>
+<li>1、安装ROS串口库，指令如下。</li>
+</ul>
+</blockquote><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install ros-kinetic-rosserial</span><br></pre></td></tr></table></figure><blockquote>
+<ul>
+<li>2、进入官网下载rosserial_stm32（<a href="http://wiki.ros.org/rosserial" target="_blank" rel="noopener">官网</a>）。</li>
+</ul>
+</blockquote><blockquote>
+<ul>
+<li>3、把下载后的文件解压并重命名为rosserial_stm32，进入ROS的工作空间。</li>
+</ul>
+</blockquote><a id="more"></a>
+
+
+
+
+
+<blockquote>
+<ul>
+<li>4、复制rosserial_stm32文件夹到ROS工作空间的src目录中。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>5、在ROS工作空间中执行catkin_make指令进行编译。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>【可能需要的步骤】执行安装指令，并载入环境安装目录中的环境变量，指令如下。</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">catkin_make install</span><br><span class="line"><span class="built_in">source</span> ROS工作空间/install/setup.bash</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>6、进入STM32CubeMx创建的项目目录，并执行如下指令。</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun rosserial_stm32 make_libraries.py .</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>7、修改Inc目录下的STM32Hardware.h文件，并把头文件中的“stm32f3xx_halxxx.h”修改为“stm32f1xx_halxxx.h”。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>8、修改main.c-&gt;main.cpp。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>9、修改CMakeLists.txt中的PROJECT(HelloSTM32ROS C CXX ASM)为PROJECT(HelloSTM32ROS CXX C ASM)。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>10、修改Inc目录下的STM32Hardware.h文件中的定时器和串口对象。</li>
+</ul>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extern</span> TIM_HandleTypeDef htim2;</span><br><span class="line"><span class="keyword">extern</span> UART_HandleTypeDef huart1;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>11、添加roscore文件夹和mainpp.cpp、mainpp.h，并完成相应内容。（注：文件名和文件夹名可以自定义）</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>12、使用该库需要启动rosserial作为数据传递的中介。</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun rosserial_python serial_node.py</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>ROS</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
+        <tag>串口通信</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Anaconda环境下的ROS配置</title>
+    <url>/ros-anaconda/</url>
+    <content><![CDATA[<p>1、安装Anaconda</p><p>2、创建Python2.7的环境catkin_ws（可以自行修改成需要的名字）</p><p>3、执行环境切换命令<code>source activate catkin_ws</code></p><p>4、安装相关依赖<code>pip install -U rospkg</code></p><p>5、在PyCharm中添加ros-python</p><p>（1）File-&gt;Settings-&gt;Project Interpreter-&gt;右边小齿轮-&gt;Show All-&gt;选中正在使用的python</p><a id="more"></a>
+
+
+
+
+
+<p>（2）点击右边最下面的图标，打开Interpreter Path</p>
+<p>（3）添加<code>/opt/ros/indigo/lib/python2.7/dist-packages</code></p>
+<p>6、编写代码，所有的Python顶部必须添加<code>#!/usr/bin/env python</code></p>
+]]></content>
+      <categories>
+        <category>ROS</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
+        <tag>环境配置</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>优化理论和应用</title>
     <url>/optimization-theory-applications/</url>
     <content><![CDATA[<h1 id="介绍">介绍</h1><h2 id="优化问题">优化问题</h2><p><span class="math display">\[\begin{matrix}
@@ -2996,172 +3241,6 @@
 </ul>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-<h1 id="ros开发记录">ROS开发记录</h1>
-<h2 id="rosserial_stm32的编译与安装">rosserial_stm32的编译与安装</h2>
-<p><a href="https://blog.csdn.net/m0_38089090/article/details/79870815" target="_blank" rel="noopener">参考链接1</a></p>
-<p><a href="https://blog.csdn.net/qq_37416258/article/details/84844051" target="_blank" rel="noopener">参考链接2</a></p>
-<blockquote>
-<ul>
-<li>1、安装ROS串口库，指令如下。</li>
-</ul>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install ros-kinetic-rosserial</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>2、进入官网下载rosserial_stm32（<a href="http://wiki.ros.org/rosserial" target="_blank" rel="noopener">官网</a>）。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>3、把下载后的文件解压并重命名为rosserial_stm32，进入ROS的工作空间。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>4、复制rosserial_stm32文件夹到ROS工作空间的src目录中。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>5、在ROS工作空间中执行catkin_make指令进行编译。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>【可能需要的步骤】执行安装指令，并载入环境安装目录中的环境变量，指令如下。</li>
-</ul>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">catkin_make install</span><br><span class="line"><span class="built_in">source</span> ROS工作空间/install/setup.bash</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>6、进入STM32CubeMx创建的项目目录，并执行如下指令。</li>
-</ul>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun rosserial_stm32 make_libraries.py .</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>7、修改Inc目录下的STM32Hardware.h文件，并把头文件中的“stm32f3xx_halxxx.h”修改为“stm32f1xx_halxxx.h”。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>8、修改main.c-&gt;main.cpp。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>9、修改CMakeLists.txt中的PROJECT(HelloSTM32ROS C CXX ASM)为PROJECT(HelloSTM32ROS CXX C ASM)。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>10、修改Inc目录下的STM32Hardware.h文件中的定时器和串口对象。</li>
-</ul>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extern</span> TIM_HandleTypeDef htim2;</span><br><span class="line"><span class="keyword">extern</span> UART_HandleTypeDef huart1;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>11、添加roscore文件夹和mainpp.cpp、mainpp.h，并完成相应内容。（注：文件名和文件夹名可以自定义）</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>12、使用该库需要启动rosserial作为数据传递的中介。</li>
-</ul>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun rosserial_python serial_node.py</span><br></pre></td></tr></table></figure>
-<h2 id="ros串口标准库serial的编译与使用">ROS串口标准库serial的编译与使用</h2>
-<p><a href="http://wjwwood.io/serial/" target="_blank" rel="noopener">参考链接</a></p>
-<blockquote>
-<ul>
-<li>1、下载serial库</li>
-</ul>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/wjwwood/serial.git</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>2、编译serial库</li>
-</ul>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install doxygen</span><br><span class="line"><span class="built_in">cd</span> serial</span><br><span class="line">make</span><br><span class="line">make <span class="built_in">test</span></span><br><span class="line">make docs</span><br><span class="line">make install</span><br><span class="line">make uninstall（卸载）</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>3、复制到ros库</li>
-</ul>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cp -R /tmp/usr/<span class="built_in">local</span>/include/ /opt/ros/kinetic/</span><br><span class="line">cp -R /tmp/usr/<span class="built_in">local</span>/lib/ /opt/ros/kinetic/</span><br><span class="line">cp -R /tmp/usr/<span class="built_in">local</span>/share/ /opt/ros/kinetic/</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>4、创建serial依赖的功能包</li>
-</ul>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">catkin_create_pkg &lt;package_name&gt; serial std_msgs roscpp rospy</span><br></pre></td></tr></table></figure>
-<h2 id="ros机械臂控制问题集锦">ROS机械臂控制问题集锦</h2>
-<p><a href="https://blog.csdn.net/weixin_39579805" target="_blank" rel="noopener">参考链接</a></p>
-<h2 id="ros节点调试">ROS节点调试</h2>
-<blockquote>
-<ul>
-<li>1、将下面两行加入到CMakeLists.txt中</li>
-</ul>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> (CMAKE_CXX_FLAGS <span class="string">"<span class="variable">$&#123;CMAKE_CXX_FLAGS&#125;</span> -g"</span>)</span><br><span class="line"><span class="built_in">set</span> (CMAKE_VERBOSE_MAKEFILE ON)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>2、修改launch.json中的program</li>
-</ul>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$&#123;workspaceFolder&#125;</span>/devel/lib/&lt;package_name&gt;/&lt;node_name&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="ros键盘检测">ROS键盘检测</h2>
-<blockquote>
-<ul>
-<li>1、进入官网下载keyboard_reader（<a href="https://github.com/UTNuclearRoboticsPublic/keyboard_reader" target="_blank" rel="noopener">官网</a>）。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>2、复制keyboard_reader文件夹到ROS工作空间的src目录中。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>3、修改keyboard_reader.cpp文件中的第118行内容。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>4、修改keyboard_reader.cpp文件中的第51行内容，以选择正确的键盘。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>5、在ROS工作空间中执行catkin_make指令进行编译。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>6、keyboard_reader项目的做法主要是创建一个“keyboard”话题，并发送自定义的Key.msg消息</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>7、创建订阅。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>8、修改package.xml，添加keyboard_reader依赖。</li>
-</ul>
-</blockquote>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build_depend</span>&gt;</span>keyboard_reader<span class="tag">&lt;/<span class="name">build_depend</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">build_export_depend</span>&gt;</span>keyboard_reader<span class="tag">&lt;/<span class="name">build_export_depend</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">exec_depend</span>&gt;</span>keyboard_reader<span class="tag">&lt;/<span class="name">exec_depend</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>9、修改CMakeLists.txt，添加keyboard_reader依赖。</li>
-</ul>
-</blockquote>
-<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line">find_package(catkin REQUIRED COMPONENTS</span><br><span class="line">  roscpp</span><br><span class="line">  rospy</span><br><span class="line">  std_msgs</span><br><span class="line">  keyboard_reader <span class="comment"># 添加的内容</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加MSG依赖</span></span><br><span class="line">add_dependencies(&lt;package_name&gt; &lt;depend_package_name&gt;_generate_messages_cpp)</span><br><span class="line">add_dependencies(ros_keyboard keyboard_reader_generate_messages_cpp)</span><br></pre></td></tr></table></figure>
-<h2 id="gazebo模型">Gazebo模型</h2>
-<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="attribute">https://bitbucket.org/osrf/gazebo_models/downloads/</span></span><br></pre></td></tr></table></figure>
-<p>下载并解压缩后放到/home/taowenyin/.gazebo/models目录下</p>
 ]]></content>
       <categories>
         <category>资源</category>
