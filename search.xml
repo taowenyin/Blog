@@ -310,6 +310,7 @@ W_{0}^{t+1}=W_{0}^{t}-\gamma_{t} \xi\left(y, \mathbf{x}^{*}\right) \mathbf{w}_{y
 ]]></content>
       <categories>
         <category>论文</category>
+        <category>多标签学习</category>
       </categories>
       <tags>
         <tag>深度学习</tag>
@@ -1553,6 +1554,7 @@ W_{0}^{t+1}=W_{0}^{t}-\gamma_{t} \xi\left(y, \mathbf{x}^{*}\right) \mathbf{w}_{y
 ]]></content>
       <categories>
         <category>论文</category>
+        <category>多标签学习</category>
       </categories>
       <tags>
         <tag>深度学习</tag>
@@ -2978,7 +2980,7 @@ W_{0}^{t+1}=W_{0}^{t}-\gamma_{t} \xi\left(y, \mathbf{x}^{*}\right) \mathbf{w}_{y
 ]]></content>
       <categories>
         <category>论文</category>
-        <category>综述</category>
+        <category>多标签学习</category>
       </categories>
       <tags>
         <tag>机器学习</tag>
