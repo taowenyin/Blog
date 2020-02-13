@@ -4,7 +4,7 @@ mathjax: true
 date: 2019-11-24 07:26:13
 updated: {{ date }}
 tags: [机器学习, 多标签分类]
-categories: [论文, 综述]
+categories: [论文, 多标签学习]
 ---
 
 # 介绍

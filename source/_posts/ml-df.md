@@ -4,7 +4,7 @@ mathjax: true
 date: 2019-12-17 20:00:29
 updated: {{ date }}
 tags: [多标签学习, 深度学习]
-categories: [论文]
+categories: [论文, 多标签学习]
 ---
 
 # 摘要
