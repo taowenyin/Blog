@@ -148,7 +148,6 @@ r_{k}(z)=\frac{1}{\sum_{(x, h) \in \mathcal{D}_{k}} h} \sum_{(x, h) \in \mathcal
 <p><a href="https://github.com/dmlc/rabit" target="_blank" rel="noopener">分布式XGBoost源代码</a></p>
 <p><a href="https://www.kaggle.com/c/ClaimPredictionChallenge" target="_blank" rel="noopener">Allstate insurance claim数据集</a></p>
 <p><a href="https://archive.ics.uci.edu/ml/datasets/HIGGS" target="_blank" rel="noopener">Higgs boson数据集</a></p>
-<p><a href="https://archive.ics.uci.edu/ml/datasets/HIGGS" target="_blank" rel="noopener">Higgs boson数据集</a></p>
 <p><a href="http://labs.criteo.com/downloads/download-terabyteclick-logs/" target="_blank" rel="noopener">Criteo数据集</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/65805298" target="_blank" rel="noopener">超级女王XGBoost到底“绝”在哪里？</a></p>
 <p><a href="https://mp.weixin.qq.com/s?__biz=Mzg2MjI5Mzk0MA==&amp;mid=2247484256&amp;idx=1&amp;sn=9417deb81a2ebffb5e81603425badab7&amp;chksm=ce0b59bbf97cd0ad03e79a87e8f0b8e9479768203046357305a4a5483f2de316580ccff6b7cf&amp;mpshare=1&amp;scene=1&amp;srcid=1109RvBiOxncgoKzk6aNypZR&amp;sharer_sharetime=1573614979764&amp;sharer_shareid=98178f12e3ad48ff6ea4030d6be95e39&amp;pass_ticket=ya68GxkXVWyQO%2Fydmx5oO9LpFScrK%2BdaKW%2BrLyBrVg5f9LKKBiLd1F6CgRa%2BfPeg#rd" target="_blank" rel="noopener">XGBoost超详细推导，终于有人讲明白了！</a></p>
