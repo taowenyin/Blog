@@ -262,8 +262,6 @@ $$\sum_{i=1}^{n} \frac{1}{2} h_{i}\left(f_{t}\left(\mathbf{x}_{i}\right)-g_{i} /
 
 [Higgs boson数据集](https://archive.ics.uci.edu/ml/datasets/HIGGS)
 
-[Higgs boson数据集](https://archive.ics.uci.edu/ml/datasets/HIGGS)
-
 [Criteo数据集](http://labs.criteo.com/downloads/download-terabyteclick-logs/)
 
 [超级女王XGBoost到底“绝”在哪里？](https://zhuanlan.zhihu.com/p/65805298)
