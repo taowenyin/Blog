@@ -1157,16 +1157,8 @@ Port 443
 ssh -T git@github.com
 ```
 
-## 修改Ubuntu性能
-
->* 高性能模式
+## Ubuntu性能修改插件
 
 ```bash
-echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
-```
-
->* 省电模式
-
-```bash
-echo powersave | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+sudo apt-get install indicator-cpufreq
 ```
