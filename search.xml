@@ -3558,19 +3558,8 @@ W_{0}^{t+1}=W_{0}^{t}-\gamma_{t} \xi\left(y, \mathbf{x}^{*}\right) \mathbf{w}_{y
 </ul>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-<h2 id="修改ubuntu性能">修改Ubuntu性能</h2>
-<blockquote>
-<ul>
-<li>高性能模式</li>
-</ul>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>省电模式</li>
-</ul>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> powersave | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor</span><br></pre></td></tr></table></figure>
+<h2 id="ubuntu性能修改插件">Ubuntu性能修改插件</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install indicator-cpufreq</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>资源</category>
