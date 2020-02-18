@@ -10,6 +10,7 @@
 <th style="text-align: center;">正例</th>
 <th style="text-align: center;">反例</th>
 <th style="text-align: center;">总数</th>
+<th style="text-align: center;">推荐领域</th>
 </tr>
 </thead>
 <tbody>
@@ -18,6 +19,22 @@
 <td style="text-align: center;">4825</td>
 <td style="text-align: center;">747</td>
 <td style="text-align: center;">5574</td>
+<td style="text-align: center;">分类、聚类</td>
+</tr>
+</tbody>
+</table><h1 id="kaggle"><a href="https://www.kaggle.com/" target="_blank" rel="noopener">kaggle</a></h1><h2 id="sentiment-analysis-on-movie-reviews影评中的情感分析"><a href="https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews/overview" target="_blank" rel="noopener">Sentiment Analysis on Movie Reviews（影评中的情感分析）</a></h2><table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">特点</th>
+<th style="text-align: center;">类别数</th>
+<th style="text-align: center;">总数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">文本数据</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">156060</td>
 </tr>
 </tbody>
 </table>]]></content>
