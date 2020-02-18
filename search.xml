@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>各类数据集说明</title>
+    <url>/dataset-description/</url>
+    <content><![CDATA[<h1 id="uci"><a href="http://archive.ics.uci.edu/ml/datasets.php" target="_blank" rel="noopener">UCI</a></h1><h2 id="sms-spam-collection-data-set垃圾短信数据集"><a href="http://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection" target="_blank" rel="noopener">SMS Spam Collection Data Set（垃圾短信数据集）</a></h2><table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">特点</th>
+<th style="text-align: center;">正例</th>
+<th style="text-align: center;">反例</th>
+<th style="text-align: center;">总数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">文本数据</td>
+<td style="text-align: center;">4825</td>
+<td style="text-align: center;">747</td>
+<td style="text-align: center;">5574</td>
+</tr>
+</tbody>
+</table>]]></content>
+      <categories>
+        <category>数据集</category>
+      </categories>
+  </entry>
+  <entry>
     <title>【2016】XGBoost：A Scalable Tree Boosting System</title>
     <url>/xgboost/</url>
     <content><![CDATA[<h1 id="摘要">摘要</h1><p>Tree Boosting是一个高效且被广泛使用的机器学习方法。在本文中，作者描述了一个名叫XGBoost的可扩展的端到端的Tree Boosting系统，该系统能够被数据科学家广泛的应用在许多机器学习的挑战中，从而获取最新的结果。作者为稀疏数据和加权分位点提出了一个全新的稀疏感知算法来近似树的学习。更重要的是，作者提供了有关缓存访问模式、数据压缩和分片的方法，以构建一个可伸缩的Tree Boosting系统。通过结合这些方法，XGBoost可以使用比现有系统少得多的资源来可扩展到有数十亿级实例的数据集。</p><a id="more"></a>
