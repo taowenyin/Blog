@@ -28,6 +28,7 @@
 <th style="text-align: center;">特点</th>
 <th style="text-align: center;">类别数</th>
 <th style="text-align: center;">总数</th>
+<th style="text-align: center;">推荐领域</th>
 </tr>
 </thead>
 <tbody>
@@ -35,6 +36,7 @@
 <td style="text-align: center;">文本数据</td>
 <td style="text-align: center;">5</td>
 <td style="text-align: center;">156060</td>
+<td style="text-align: center;">分类、聚类</td>
 </tr>
 </tbody>
 </table>]]></content>
