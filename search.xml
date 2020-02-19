@@ -39,7 +39,34 @@
 <td style="text-align: center;">分类、聚类</td>
 </tr>
 </tbody>
-</table>]]></content>
+</table><a id="more"></a>
+
+
+
+
+
+<h2 id="internet-advertisements-data-set网络广告"><a href="http://archive.ics.uci.edu/ml/datasets/Internet+Advertisements" target="_blank" rel="noopener">Internet Advertisements Data Set（网络广告）</a></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">特点</th>
+<th style="text-align: center;">正例</th>
+<th style="text-align: center;">反例</th>
+<th style="text-align: center;">总数</th>
+<th style="text-align: center;">推荐领域</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">图片数据</td>
+<td style="text-align: center;">2821</td>
+<td style="text-align: center;">458</td>
+<td style="text-align: center;">3279</td>
+<td style="text-align: center;">分类</td>
+</tr>
+</tbody>
+</table>
+]]></content>
       <categories>
         <category>数据集</category>
       </categories>
