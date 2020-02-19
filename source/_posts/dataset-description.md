@@ -23,3 +23,9 @@ categories: [数据集]
 | 特点 | 类别数 | 总数 | 推荐领域 |
 | :---: | :---: | :---: | :---: |
 | 文本数据 | 5 | 156060 | 分类、聚类 |
+
+## [Internet Advertisements Data Set（网络广告）](http://archive.ics.uci.edu/ml/datasets/Internet+Advertisements)
+
+| 特点 | 正例 | 反例 | 总数 | 推荐领域 |
+| :---: | :---: | :---: | :---: | :---: |
+| 图片数据 | 2821 | 458 | 3279 | 分类 |
