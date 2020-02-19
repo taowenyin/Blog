@@ -20,6 +20,6 @@ categories: [数据集]
 
 ## [Sentiment Analysis on Movie Reviews（影评中的情感分析）](https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews/overview)
 
-| 特点 | 类别数 | 总数 |
-| :----: | :----: | :----: |
-| 文本数据 | 5 | 156060 |
+| 特点 | 类别数 | 总数 | 推荐领域 |
+| :----: | :----: | :----: | :---: |
+| 文本数据 | 5 | 156060 | 分类、聚类 |
