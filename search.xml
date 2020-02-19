@@ -22,7 +22,33 @@
 <td style="text-align: center;">分类、聚类</td>
 </tr>
 </tbody>
-</table><h1 id="kaggle"><a href="https://www.kaggle.com/" target="_blank" rel="noopener">kaggle</a></h1><h2 id="sentiment-analysis-on-movie-reviews影评中的情感分析"><a href="https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews/overview" target="_blank" rel="noopener">Sentiment Analysis on Movie Reviews（影评中的情感分析）</a></h2><table>
+</table><h2 id="internet-advertisements-data-set网络广告"><a href="http://archive.ics.uci.edu/ml/datasets/Internet+Advertisements" target="_blank" rel="noopener">Internet Advertisements Data Set（网络广告）</a></h2><table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">特点</th>
+<th style="text-align: center;">正例</th>
+<th style="text-align: center;">反例</th>
+<th style="text-align: center;">总数</th>
+<th style="text-align: center;">推荐领域</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">图片数据</td>
+<td style="text-align: center;">2821</td>
+<td style="text-align: center;">458</td>
+<td style="text-align: center;">3279</td>
+<td style="text-align: center;">分类</td>
+</tr>
+</tbody>
+</table><a id="more"></a>
+
+
+
+
+<h1 id="kaggle"><a href="https://www.kaggle.com/" target="_blank" rel="noopener">kaggle</a></h1>
+<h2 id="sentiment-analysis-on-movie-reviews影评中的情感分析"><a href="https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews/overview" target="_blank" rel="noopener">Sentiment Analysis on Movie Reviews（影评中的情感分析）</a></h2>
+<table>
 <thead>
 <tr class="header">
 <th style="text-align: center;">特点</th>
@@ -39,29 +65,23 @@
 <td style="text-align: center;">分类、聚类</td>
 </tr>
 </tbody>
-</table><a id="more"></a>
-
-
-
-
-
-<h2 id="internet-advertisements-data-set网络广告"><a href="http://archive.ics.uci.edu/ml/datasets/Internet+Advertisements" target="_blank" rel="noopener">Internet Advertisements Data Set（网络广告）</a></h2>
+</table>
+<h1 id="其他">其他</h1>
+<h2 id="newsgroups新闻组文档"><a href="http://qwone.com/~jason/20Newsgroups/" target="_blank" rel="noopener">20 Newsgroups（新闻组文档）</a></h2>
 <table>
 <thead>
 <tr class="header">
 <th style="text-align: center;">特点</th>
-<th style="text-align: center;">正例</th>
-<th style="text-align: center;">反例</th>
+<th style="text-align: center;">类别数</th>
 <th style="text-align: center;">总数</th>
 <th style="text-align: center;">推荐领域</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">图片数据</td>
-<td style="text-align: center;">2821</td>
-<td style="text-align: center;">458</td>
-<td style="text-align: center;">3279</td>
+<td style="text-align: center;">文本数据</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">20000</td>
 <td style="text-align: center;">分类</td>
 </tr>
 </tbody>
