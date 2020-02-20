@@ -1162,3 +1162,46 @@ ssh -T git@github.com
 ```bash
 sudo apt-get install indicator-cpufreq
 ```
+
+# 游戏模拟器
+
+## 3DS
+
+>* 1、安装软件包
+
+```bash
+sudo add-apt-repository ppa:alexlarsson/flatpak
+sudo apt-get update
+sudo apt-get install flatpak
+```
+
+>* 2、安装模拟器
+
+```bash
+# Install Flathub as a dependency, required for org.kde.Platform.
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# Install Citra Nightly and Citra Canary
+flatpak install https://flatpak.citra-emu.org/citra-nightly.flatpakref
+flatpak install https://flatpak.citra-emu.org/citra-canary.flatpakref
+```
+
+>* 3、下载CIA转CCI工具[makerom](https://github.com/jakcron/Project_CTR/releases)
+
+>* 4、下载解密工具[3ds_decrypt_v2](https://pan.baidu.com/s/1Cz0x4MFtJjrobnex-9nw7Q)，密码: p57o
+
+>* 5、游戏下载网址[爱CIA](https://lovecia.com/)
+
+>* 6、准备Python2环境，并安装pycrypto工具
+
+>* 7、CIA转CCI指令
+
+```bash
+makerom -ciatocci XX.cia
+```
+
+>* 8、CCI解密
+
+```bash
+python 3ds_decrypt_v2.py XX.cci
+```
