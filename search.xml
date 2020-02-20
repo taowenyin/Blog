@@ -3651,6 +3651,52 @@ W_{0}^{t+1}=W_{0}^{t}-\gamma_{t} \xi\left(y, \mathbf{x}^{*}\right) \mathbf{w}_{y
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
 <h2 id="ubuntu性能修改插件">Ubuntu性能修改插件</h2>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install indicator-cpufreq</span><br></pre></td></tr></table></figure>
+<h1 id="游戏模拟器">游戏模拟器</h1>
+<h2 id="ds">3DS</h2>
+<blockquote>
+<ul>
+<li>1、安装软件包</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:alexlarsson/flatpak</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install flatpak</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>2、安装模拟器</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Install Flathub as a dependency, required for org.kde.Platform.</span></span><br><span class="line">flatpak remote-add --<span class="keyword">if</span>-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo</span><br><span class="line"></span><br><span class="line"><span class="comment"># Install Citra Nightly and Citra Canary</span></span><br><span class="line">flatpak install https://flatpak.citra-emu.org/citra-nightly.flatpakref</span><br><span class="line">flatpak install https://flatpak.citra-emu.org/citra-canary.flatpakref</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>3、下载CIA转CCI工具<a href="https://github.com/jakcron/Project_CTR/releases" target="_blank" rel="noopener">makerom</a></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>4、下载解密工具<a href="https://pan.baidu.com/s/1Cz0x4MFtJjrobnex-9nw7Q" target="_blank" rel="noopener">3ds_decrypt_v2</a>，密码: p57o</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>5、游戏下载网址<a href="https://lovecia.com/" target="_blank" rel="noopener">爱CIA</a></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>6、准备Python2环境，并安装pycrypto工具</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>7、CIA转CCI指令</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">makerom -ciatocci XX.cia</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>8、CCI解密</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python 3ds_decrypt_v2.py XX.cci</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>资源</category>
