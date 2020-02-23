@@ -486,9 +486,9 @@ sudo apt-fast install pinta
 
 ## 常用字体
 
-[下载地址](https://pan.baidu.com/s/17htdYo6VgNKE6sjbywqKxQ)
+[下载地址](https://pan.baidu.com/s/1Vo017nCS7fQzwjM3YiRPtA)
 
-提取码: jqs7
+提取码: shv2
 
 ## Git Key
 
