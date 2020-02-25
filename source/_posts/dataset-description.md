@@ -22,6 +22,12 @@ categories: [数据集]
 | :---: | :---: | :---: | :---: | :---: |
 | 图片数据 | 2821 | 458 | 3279 | 分类 |
 
+## [Iris Data Set（鸢尾花数据集）](http://archive.ics.uci.edu/ml/datasets/Iris)
+
+| 特点 | 类别数 | 总数 | 特征数 | 推荐领域 |
+| :---: | :---: | :---: | :---: | :---: |
+| 文本数据 | 3 | 150 | 4 | 分类 |
+
 # [kaggle](https://www.kaggle.com/)
 
 ## [Sentiment Analysis on Movie Reviews（影评中的情感分析）](https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews/overview)
