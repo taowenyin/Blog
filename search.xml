@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>SVM（支持向量机）</title>
+    <url>/svm/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>决策树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>各类数据集说明</title>
     <url>/dataset-description/</url>
     <content><![CDATA[<h1 id="uci"><a href="http://archive.ics.uci.edu/ml/datasets.php" target="_blank" rel="noopener">UCI</a></h1><h2 id="sms-spam-collection-data-set垃圾短信数据集"><a href="http://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection" target="_blank" rel="noopener">SMS Spam Collection Data Set（垃圾短信数据集）</a></h2><table>
