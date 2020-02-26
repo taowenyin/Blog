@@ -2107,8 +2107,8 @@ W_{0}^{t+1}=W_{0}^{t}-\gamma_{t} \xi\left(y, \mathbf{x}^{*}\right) \mathbf{w}_{y
   </entry>
   <entry>
     <title>决策树</title>
-    <url>/dt/</url>
-    <content><![CDATA[<img src="/dt/dt.png" class title="决策树"><h1 id="原理">原理</h1><p>决策树是一种<strong>非参数监督</strong>学习方法，用于分类和回归任务。对于离散值的构建的树模型，一般为分类树，而用连续值构建的树模型，一般为回归树。</p><blockquote>
+    <url>/decision-tree/</url>
+    <content><![CDATA[<img src="/decision-tree/dt.png" class title="决策树"><h1 id="原理">原理</h1><p>决策树是一种<strong>非参数监督</strong>学习方法，用于分类和回归任务。对于离散值的构建的树模型，一般为分类树，而用连续值构建的树模型，一般为回归树。</p><blockquote>
 <ul>
 <li>决策树的本质：从训练集中归纳出一组分类规则，或者说是由训练数据集估计条件概率模型。</li>
 <li>决策树学习的损失函数：正则化的极大似然函数。</li>
@@ -2128,7 +2128,7 @@ W_{0}^{t+1}=W_{0}^{t}-\gamma_{t} \xi\left(y, \mathbf{x}^{*}\right) \mathbf{w}_{y
 <p>（2）选择哪个属性作为子节点？</p>
 <p>（3）停止并获得目标状态的条件？即产生一个叶节点</p>
 <p>2、剪枝：<code>为防止过拟合</code>，就需要给决策树瘦身（并不需要精确的判断所有属性）。</p>
-<img src="/dt/overfitting.png" class title="过拟合">
+<img src="/decision-tree/overfitting.png" class title="过拟合">
 <p>上图中的1表示欠拟合，2表示具有较好泛化性，3表示过拟合。</p>
 <p><strong>泛化能力：</strong>指分类器是通过训练集获得的分类能力。如果对训练集分类的过于精准，即过度依赖于训练数据，那么得到的决策树其容错率就会比较低，泛化能力差。因为训练集只是全部数据的抽样，并不能体现全部数据的特点。</p>
 <p><strong>预剪枝：</strong>在决策树构造时就进行剪枝。即在构造的过程中对节点进行评估，如果对某个节点进行划分，在验证集中不能带来准确性的提升，那么对这个节点进行划分就没有意义，这时就会把当前节点作为<code>叶节点</code>，不对其进行划分。预剪枝降低了过拟合的风险，显著减少了决策树的训练时间开销和测试时间开销，但可能带来欠拟合的风险 。</p>
@@ -2144,7 +2144,7 @@ W_{0}^{t+1}=W_{0}^{t}-\gamma_{t} \xi\left(y, \mathbf{x}^{*}\right) \mathbf{w}_{y
 <p>创建分支的伪代码createBranch()如下所示：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">If so <span class="keyword">return</span> 类标签：</span><br><span class="line">Else</span><br><span class="line">    寻找划分数据集的最好特征</span><br><span class="line">    划分数据集</span><br><span class="line">    创建分支节点</span><br><span class="line">        <span class="keyword">for</span> 每个划分的子集</span><br><span class="line">            调用函数createBranch()并增加返回结果到分支节点中</span><br><span class="line">        <span class="keyword">return</span> 分支节点</span><br></pre></td></tr></table></figure>
 <h2 id="示例">示例</h2>
-<img src="/dt/example1.png" class title="示例">
+<img src="/decision-tree/example1.png" class title="示例">
 <p>该示例是用于构造是否去打篮球的决策树，其中的属性有天气、温度、湿度、刮风。</p>
 <h1 id="纯度与信息熵">纯度与信息熵</h1>
 <h2 id="纯度">纯度</h2>
@@ -2189,7 +2189,7 @@ W_{0}^{t+1}=W_{0}^{t}-\gamma_{t} \xi\left(y, \mathbf{x}^{*}\right) \mathbf{w}_{y
     Gain(D, A)=H(D)-H(D|A)=Entropy(D)-\sum_{i=1}^{k} \frac{\left|D_{i}\right|}{|D|} Entropy\left(D_{i}\right)
 \end{equation}\]</span></p>
 <p>其中<span class="math inline">\(D\)</span>表示父节点，<span class="math inline">\(D_{i}\)</span>是子节点，<span class="math inline">\(A\)</span>是在父节点<span class="math inline">\(D\)</span>中选择的属性，<span class="math inline">\(\frac{\left|D_{i}\right|}{|D|}\)</span>表示以父节点的分叉属性<span class="math inline">\(A\)</span>为例，子节点在父节点出现的概率。<strong>该式可以理解为由于特征<span class="math inline">\(A\)</span>而使得对数据集<span class="math inline">\(D\)</span>的分类的不确定减少的程度。</strong></p>
-<img src="/dt/infogain.png" class title="信息增益">
+<img src="/decision-tree/infogain.png" class title="信息增益">
 <p><span class="math display">\[\begin{equation}
     Gain(D, A)=Entropy(D)-\left(\frac{3}{10} Entropy\left(D_{1}\right)+\frac{7}{10} Entropy\left(D_{2}\right)\right)
 \end{equation}\]</span></p>
@@ -2203,7 +2203,7 @@ W_{0}^{t+1}=W_{0}^{t}-\gamma_{t} \xi\left(y, \mathbf{x}^{*}\right) \mathbf{w}_{y
 <li>Step5：循环Step4从而得到整棵树。</li>
 </ul>
 </blockquote>
-<img src="/dt/dt-split.png" class title="节点分裂">
+<img src="/decision-tree/dt-split.png" class title="节点分裂">
 <h2 id="缺陷">缺陷</h2>
 <p>1、ID3没有剪枝策略，容易过拟合。</p>
 <p>2、ID3算法中倾向于选择出现概率比较多的属性。例如，“编号”属性容易将会被选为最优属性。</p>
