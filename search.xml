@@ -181,6 +181,151 @@
 </tr>
 </tbody>
 </table>
+<h1 id="libsvm-dataset"><a href="https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/" target="_blank" rel="noopener">LIBSVM Dataset</a></h1>
+<h2 id="scene-classification多标签场景分类"><a href="https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multilabel.html#scene-classification" target="_blank" rel="noopener">scene-classification（多标签场景分类）</a></h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">特点</th>
+<th style="text-align: center;">类别数</th>
+<th style="text-align: center;">总数</th>
+<th style="text-align: center;">推荐领域</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">图像数据</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">2407</td>
+<td style="text-align: center;">多标签分类</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">编号</th>
+<th style="text-align: center;">类别</th>
+<th style="text-align: center;">训练图片</th>
+<th style="text-align: center;">测试图片</th>
+<th style="text-align: center;">合计</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">海滩（Beach）</td>
+<td style="text-align: center;">194</td>
+<td style="text-align: center;">175</td>
+<td style="text-align: center;">369</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">日落（Sunset）</td>
+<td style="text-align: center;">165</td>
+<td style="text-align: center;">199</td>
+<td style="text-align: center;">364</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">落叶（Fall foliage）</td>
+<td style="text-align: center;">184</td>
+<td style="text-align: center;">176</td>
+<td style="text-align: center;">360</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">田（Field）</td>
+<td style="text-align: center;">161</td>
+<td style="text-align: center;">166</td>
+<td style="text-align: center;">327</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0,3</td>
+<td style="text-align: center;">海滩+田（Beach+Field）</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2,3</td>
+<td style="text-align: center;">落叶+田（Fall foliage+Field）</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">23</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">山（Mountain）</td>
+<td style="text-align: center;">223</td>
+<td style="text-align: center;">182</td>
+<td style="text-align: center;">405</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0,4</td>
+<td style="text-align: center;">海滩+山（Beach+Mountain）</td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">38</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2,4</td>
+<td style="text-align: center;">落叶+山（Fall foliage+Mountain）</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3,4</td>
+<td style="text-align: center;">田+山（Field+Mountain）</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">49</td>
+<td style="text-align: center;">75</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2,3,4</td>
+<td style="text-align: center;">田+落叶+山（Field+Fall foliage+Mountain）</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">城市（Urban）</td>
+<td style="text-align: center;">210</td>
+<td style="text-align: center;">195</td>
+<td style="text-align: center;">405</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0,5</td>
+<td style="text-align: center;">海滩+城市（Beach+Urban）</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">19</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3,5</td>
+<td style="text-align: center;">田+城市（Field+Urban）</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">4,5</td>
+<td style="text-align: center;">山+城市（Mountain+Urban）</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">合计</td>
+<td style="text-align: center;">1211</td>
+<td style="text-align: center;">1196</td>
+<td style="text-align: center;">2407</td>
+</tr>
+</tbody>
+</table>
 <h1 id="其他">其他</h1>
 <h2 id="newsgroups新闻组文档"><a href="http://qwone.com/~jason/20Newsgroups/" target="_blank" rel="noopener">20 Newsgroups（新闻组文档）</a></h2>
 <table>
