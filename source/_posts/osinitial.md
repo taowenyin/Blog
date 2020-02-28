@@ -221,6 +221,14 @@ cd ..
 make install
 ```
 
+## Xournal++
+
+```bash
+sudo add-apt-repository ppa:andreasbutti/xournalpp-master
+sudo apt-get update
+sudo apt-get install xournalpp
+```
+
 ## FTP的安装与设置
 
 ```bash
