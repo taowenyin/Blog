@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>S1-统计学习及监督学习概论</title>
+    <url>/slm-introduction/</url>
+    <content><![CDATA[<p>推导下述正态分布均值的极大似然估计和贝叶斯估计</p><p>数据<span class="math inline">\(x_{1}, \dots, x_{n}\)</span>来自正态分布<span class="math inline">\(\mathrm{N}\left(\mu, \sigma^{2}\right)\)</span>，其中<span class="math inline">\(\sigma^{2}\)</span>已知。</p><p>（1）根据样本<span class="math inline">\(x_{1}, \dots, x_{n}\)</span>写出<span class="math inline">\(\mu\)</span>的极大似然估计。</p><a id="more"></a>
+
+
+<p>已经正态分布的概率密度函数<span class="math inline">\(f(x)=\frac{1}{\sqrt{2\pi } \sigma } \exp \left(-\frac{(x-\mu)^{2}}{2 \sigma^{2}}\right)\)</span></p>
+<p><span class="math inline">\(\begin{aligned} \because L\left(\mu, \sigma^{2}\right) &amp; = p\left(\mathbf{x_{1}}=x_{1} \mid \mu, \sigma^{2}\right) \ast \cdots \ast p\left(\mathbf{x_{n}}=x_{n} \mid \mu, \sigma^{2}\right) \\  &amp; = \prod_{i=1}^{n} p\left(\mathbf{x_{i}}=x_{i} \mid \mu, \sigma^{2}\right) \\  &amp; = \prod_{i=1}^{n} \frac{1}{\sqrt{2 \pi}\sigma} \exp \left(-\frac{\left(x_{i}-\mu\right)^{2}}{2 \sigma^{2}}\right) \\  &amp; = \left(\frac{1}{\sqrt{2 \pi} \sigma}\right)^{n} \exp \left(-\sum_{i=1}^{n} \frac{\left(x_{i}-\mu\right)^{2}}{2 \sigma^{2}}\right) \\  &amp; = \left(2 \pi \sigma^{2}\right)^{-\frac{n}{2}} \exp \left(-\sum_{i=1}^{n} \frac{\left(x_{i}-\mu\right)^{2}}{2 \sigma^{2}}\right) \end{aligned}\)</span></p>
+<p>两边取对数</p>
+<p><span class="math inline">\(\begin{aligned} \therefore \ln L\left (\mu, \sigma^{2} \right ) &amp;= \ln\left [ \left(2 \pi \sigma^{2}\right)^{-\frac{n}{2}} \exp \left(-\sum_{i=1}^{n} \frac{\left(x_{i}-\mu\right)^{2}}{2 \sigma^{2}}\right)\right ]\\  &amp; = \ln \left(2 \pi \sigma^{2}\right)^{-\frac{n}{2}} + \ln \exp \left(-\sum_{i=1}^{n} \frac{\left(x_{i}-\mu\right)^{2}}{2 \sigma^{2}}\right) \\  &amp; = -\frac{n}{2} \ln 2 \pi \sigma^{2} - \sum_{i=1}^{n} \frac{\left(x_{i}-\mu\right)^{2}}{2 \sigma^{2}} \\  &amp; = -\frac{n}{2}\left(\ln {2 \pi}+\ln \sigma^{2}\right) - \frac{1}{2 \sigma^{2}} \sum_{i=1}^{n}\left(x_{i}-\mu\right)^{2} \\  &amp; = -\frac{n}{2} \ln {2 \pi} -\frac{n}{2}\ln {\sigma^{2}} - \frac{1}{2 \sigma^{2}} \sum_{i=1}^{n}\left(x_{i}-\mu\right)^{2} \end{aligned}\)</span></p>
+<p>要求最大似然<span class="math inline">\(\mu\)</span>，就是对<span class="math inline">\(\ln L\left (\mu, \sigma^{2} \right )\)</span>进行求导，并且使导数等于0。</p>
+<p><span class="math inline">\(\frac{\partial \ln L\left (\mu, \sigma^{2} \right )}{\partial \mu}=-\frac{1}{\sigma^{2}} \sum_{i=1}^{n}\left(x_{i}-\mu\right)^{2}=0\)</span></p>
+<p><span class="math inline">\(\therefore \sum_{i=1}^{n}\left(x_{i}-\mu\right)^{2}=0\)</span></p>
+<p><span class="math inline">\(\therefore \mu=\frac{1}{n} \sum_{i=1}^{n} x_{i}=\bar{x}\)</span></p>
+<p>所以<span class="math inline">\(\mu\)</span>极大似然估计为<span class="math inline">\(\hat{\mu}=\bar{x}\)</span></p>
+]]></content>
+      <categories>
+        <category>统计学习方法</category>
+      </categories>
+  </entry>
+  <entry>
     <title>scikit-learn中的SVM（支持向量机）</title>
     <url>/svm/</url>
     <content><![CDATA[<h1 id="工程实践">工程实践</h1><h2 id="函数原型">函数原型</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC(</span><br><span class="line">            C=<span class="number">1.0</span>, kernel=<span class="string">'rbf'</span>, degree=<span class="number">3</span>, gamma=<span class="string">'scale'</span>,</span><br><span class="line">            coef0=<span class="number">0.0</span>, shrinking=<span class="literal">True</span>, probability=<span class="literal">False</span>,</span><br><span class="line">            tol=<span class="number">1e-3</span>, cache_size=<span class="number">200</span>, class_weight=<span class="literal">None</span>,</span><br><span class="line">            verbose=<span class="literal">False</span>, max_iter=<span class="number">-1</span>, decision_function_shape=<span class="string">'ovr'</span>,</span><br><span class="line">            break_ties=<span class="literal">False</span>, random_state=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure><a id="more"></a>
