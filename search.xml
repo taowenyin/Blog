@@ -53,7 +53,7 @@
 </blockquote>
 <p>1、极大似然估计是假设未知参数<span class="math inline">\(\theta\)</span>是一个固定值，因此目标是找到这个<span class="math inline">\(\theta\)</span>，使得数据集<span class="math inline">\(maxP\left (D \mid \theta \right )\)</span>发生的概率最大。</p>
 <p>2、贝叶斯估计则是假设未知参数<span class="math inline">\(\theta\)</span>服从一定的概率分布，因此目标是是在数据集<span class="math inline">\(D\)</span>发生的情况下，哪个<span class="math inline">\(\theta\)</span>的概率最大<span class="math inline">\(maxP\left (\theta \mid D \right )\)</span>。</p>
-<p>3、当数据集的数量较大时，<span class="math inline">\(\mu\)</span>极大似然估计为<span class="math inline">\(\hat{\mu}=\bar{x}\)</span>较为可信。</p>
+<p>3、当数据集的数量较大时，极大似然估计与贝叶斯估计相似，<span class="math inline">\(\mu\)</span>的估计都为<span class="math inline">\(\hat{\mu}=\bar{x}\)</span>较为可信。</p>
 <p>4、当数据集的数量较小时，<span class="math inline">\(\mu\)</span>极大似然估计<span class="math inline">\(\hat{\mu}=\bar{x}\)</span>就与真实的<span class="math inline">\(\hat{\mu}\)</span>不同，即不可信。因此，此时贝叶斯估计更加合适。</p>
 ]]></content>
       <categories>
