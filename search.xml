@@ -3,10 +3,88 @@
   <entry>
     <title>S1-统计学习及监督学习概论</title>
     <url>/slm-introduction/</url>
-    <content><![CDATA[<h1 id="作业">作业</h1><p>推导下述正态分布均值的极大似然估计和贝叶斯估计</p><p>数据<span class="math inline">\(x_{1}, \dots, x_{n}\)</span>来自正态分布<span class="math inline">\(\mathrm{N}\left(\mu, \sigma^{2}\right)\)</span>，其中<span class="math inline">\(\sigma^{2}\)</span>已知。</p><p>（1）根据样本<span class="math inline">\(x_{1}, \dots, x_{n}\)</span>写出<span class="math inline">\(\mu\)</span>的极大似然估计。</p><a id="more"></a>
+    <content><![CDATA[<h1 id="统计学习">统计学习</h1><p>统计学习组成由监督学习（supervised learning）、无监督学习（unsupervised learning）、强化学习（reinforcement learning）等组成。</p><ol type="1">
+<li>假设空间（hypothesis space）：从给定的、有限的、用于学习的训练数据（training data）集合出发，假设数据是独立同分布产生的；并且假设学习的模型属于某个函数的集合。</li>
+<li>评价准则（evaluation criterion）：从假设空间选取一个最有模型，使它对已知的训练数据及位置的测试数据（test data）在给定的评价准则下有最优的预测，最优模型的选取由算法实现。</li>
+</ol><a id="more"></a>
 
 
-
+<p>统计学习方法包括：模型的假设空间（模型）、模型选择的准则（策略）和模型学习算法（算法）。</p>
+<p>统计学习方法的步骤：</p>
+<blockquote>
+<ul>
+<li>Step1：得到一个有限的训练数据集合；</li>
+<li>Step2：确定包含所有可能的模型的假设空间，即学习模型的集合；</li>
+<li>Step3：确定模型选择的准则，即学习的策略；</li>
+<li>Step4：实现求解最优模型的算法，即学习的算法；</li>
+<li>Step5：通过学习方法选择最优模型；</li>
+<li>Step6：利用学习的最优模型对新数据进行预测或分析。</li>
+</ul>
+</blockquote>
+<h1 id="统计学习的分类">统计学习的分类</h1>
+<h2 id="基本分类">基本分类</h2>
+<h3 id="监督学习">监督学习</h3>
+<p>从标注数据中学习预测模型的机器学习问题。<strong>监督学习的本质是学习输入到输出的映射的统计规律。</strong> 模型可以实现分类和回归。</p>
+<p>监督学习的模型可以是概率模型或非概率模型，即条件概率分布<span class="math inline">\(P\left ( Y \mid X\right )\)</span>或决策函数<span class="math inline">\(Y=f\left ( X\right )\)</span>。</p>
+<h3 id="无监督学习">无监督学习</h3>
+<p>从无标注数据中学习预测模型的机器学习问题。<strong>无监督学习的本质是学习数据中的统计规律或潜在结构。</strong> 模型可以实现聚类、降维或概率估计。</p>
+<p>无监督学习的模型可以表示为<span class="math inline">\(z = g\left ( x\right )\)</span>，条件概率分布为<span class="math inline">\(P\left ( z \mid x\right )\)</span>或<span class="math inline">\(P\left ( x \mid z\right )\)</span>。</p>
+<h3 id="强化学习">强化学习</h3>
+<p>智能系统在与环境的连续互动中学习最优行为策略的机器学习问题。<strong>强化学习的本质是学习最优的序贯决策。</strong> 强化学习的马尔科夫决策过程是状态、奖励、动作序列上的随机过程，有五元组组成<span class="math inline">\(\left \langle S, A, P, r, \gamma \right \rangle\)</span>。</p>
+<blockquote>
+<ul>
+<li><span class="math inline">\(S\)</span>：有限状态（state）的集合；</li>
+<li><span class="math inline">\(A\)</span>：有限动作（action）的集合；</li>
+<li><span class="math inline">\(P\)</span>：状态转移概率（transition probability）函数<span class="math inline">\(P\left(s^{\prime} | s, a\right)=P\left(s_{t+1} = s^{\prime} | s_{t}=s, a_{t}=a\right)\)</span>；</li>
+<li><span class="math inline">\(r\)</span>：奖励函数（reward function）<span class="math inline">\(r(s, a)=E\left(r_{t+1} | s_{t}=s, a_{t}=a\right)\)</span>；</li>
+<li><span class="math inline">\(\gamma\)</span>：衰减系数（discount factor）<span class="math inline">\(\gamma \in[0,1]\)</span>；</li>
+</ul>
+</blockquote>
+<p>强化学习的目标是在所有可能的策略中选出价值函数最大的策略。</p>
+<p>强化学习分为有模型方法（马尔科夫决策过程）和无模型方法（基于策略、基于价值）。</p>
+<h3 id="半监督学习">半监督学习</h3>
+<p>利用标注数据和未标注数据学习预测模型的机器学习问题。旨在利用未标注数据中的信息，辅助标注数据进行监督学习，以较低的成本达到很好的学习效果。</p>
+<h3 id="主动学习">主动学习</h3>
+<p>机器不断主动给出实例进行标注，然后利用标注数据学习预测模型的机器学习问题。旨在找出对学习最优帮助的实例进行标注，以最小的标注代价，达到较好的学习效果。</p>
+<h2 id="按模型分类">按模型分类</h2>
+<p>1、概率和非概率模型</p>
+<p>条件概率分布<span class="math inline">\(P\left ( y \mid x\right )\)</span>和函数<span class="math inline">\(y=f\left ( x\right )\)</span>可以进行相互转化。条件概率分布最大化后得到函数，函数归一化后得到条件概率分布。</p>
+<p>无论模型如何复杂，均可以用最基本的加法规则和乘法跪在进行概率推理。</p>
+<p><span class="math display">\[\begin{matrix}
+\text{加法规则:} &amp; P\left ( x\right ) = \underset{y}{\sum}P\left ( x,y\right )\\ 
+\text{乘法规则:} &amp; P\left ( x,y\right ) = P\left ( x\right )P\left ( y\mid x\right )
+\end{matrix}\]</span></p>
+<p>其中<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>是随机变量</p>
+<p>2、线性模型与非线性模型</p>
+<p>如果模型<span class="math inline">\(y=f\left ( x\right )\)</span>是线性函数，那么模型是线性模型，否则就是非线性模型。</p>
+<p>3、参数模型和非参数模型</p>
+<p>参数模型：模型的参数维度固定。</p>
+<p>非参数模型：模型的参数维度不固定，甚至无穷大。</p>
+<h2 id="按技巧分类">按技巧分类</h2>
+<p>1、贝叶斯学习</p>
+<p>假设随机变量<span class="math inline">\(D\)</span>表示数据，随机变量<span class="math inline">\(\theta\)</span>表示模型参数。根据贝叶斯定理，可以用下面公式计算后验概率<span class="math inline">\(P(\theta | D)\)</span>：</p>
+<p><span class="math display">\[P(\theta | D)=\frac{P(\theta) P(D | \theta)}{P(D)}\]</span></p>
+<p>其中<span class="math inline">\(P(\theta)\)</span>是先验概率，<span class="math inline">\(P(\theta | D)\)</span>是似然概率。</p>
+<p>2、核方法</p>
+<p>使用核函数表示和学习非线性模型的一种机器学习方法。</p>
+<h1 id="统计学习方法三要素">统计学习方法三要素</h1>
+<p>经验风险最小化求得的最优模型就是</p>
+<p><span class="math display">\[\min _{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^{N} L\left(y_{i}, f\left(x_{i}\right)\right)\]</span></p>
+<p>其中<span class="math inline">\(\mathcal{F}\)</span>是假设空间。</p>
+<p>当样本足够大时，经验风险最小化能保证很好的学习效果。但是当样本容量很小时，经验风险的效果就未必很好，会产生“过拟合”现象。</p>
+<p>结构化风险最小化（正则化）是为了防止过拟合而提出的。结构风险在经验风险的基础上加上了模型复杂度的正则化向或惩罚项。</p>
+<p><span class="math display">\[R_{\mathrm{srm}}(f)=\frac{1}{N} \sum_{i=1}^{N} L\left(y_{i}, f\left(x_{i}\right)\right)+\lambda J(f)\]</span></p>
+<p>其中<span class="math inline">\(J(f)\)</span>表示模型复杂度。<span class="math inline">\(\lambda \geqslant 0\)</span>是系数，用以权衡经验风险和模型复杂度。</p>
+<h1 id="正则化与交叉验证">正则化与交叉验证</h1>
+<p>在回归问题中，损失函数是平方项，那么正则化项可以是参数向量的<span class="math inline">\(L_{2}\)</span>范数。</p>
+<p><span class="math display">\[L(w)=\frac{1}{N} \sum_{i=1}^{N}\left(f\left(x_{i} ; w\right)-y_{i}\right)^{2}+\frac{\lambda}{2}\|w\|^{2}\]</span></p>
+<p>其中<span class="math inline">\(\|w\|\)</span>表示参数向量<span class="math inline">\(w\)</span>的<span class="math inline">\(L_{2}\)</span>范数，<span class="math inline">\(\frac{1}{2}\)</span>是为了在求导时约掉。</p>
+<p>参数向量<span class="math inline">\(w\)</span>也可以是<span class="math inline">\(L_{1}\)</span>范数。</p>
+<p><span class="math display">\[L(w)=\frac{1}{N} \sum_{i=1}^{N}\left(f\left(x_{i} ; w\right)-y_{i}\right)^{2}+\lambda\|w\|_{1}\]</span></p>
+<h1 id="作业">作业</h1>
+<p>推导下述正态分布均值的极大似然估计和贝叶斯估计</p>
+<p>数据<span class="math inline">\(x_{1}, \dots, x_{n}\)</span>来自正态分布<span class="math inline">\(\mathrm{N}\left(\mu, \sigma^{2}\right)\)</span>，其中<span class="math inline">\(\sigma^{2}\)</span>已知。</p>
+<p>（1）根据样本<span class="math inline">\(x_{1}, \dots, x_{n}\)</span>写出<span class="math inline">\(\mu\)</span>的极大似然估计。</p>
 <p>已经正态分布的概率密度函数<span class="math inline">\(f(x)=\frac{1}{\sqrt{2\pi } \sigma } \exp \left(-\frac{(x-\mu)^{2}}{2 \sigma^{2}}\right)\)</span></p>
 <blockquote>
 <p>第一步：写出似然函数</p>
