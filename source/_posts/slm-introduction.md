@@ -72,17 +72,17 @@ $\begin{aligned}
 
 > 第三步：要求概率最大的$\mu$，就是对$\mu$进行求导，并且使导数等于0。
 
-$\frac{\partial \ln L\left (\mu \mid x_{1}, \dots, x_{n}\right )}{\partial \mu}=-\frac{\mu}{\tau^{2}} - \frac{1}{\sigma^{2}} \sum_{i=1}^{n}\left(x_{i}-\mu\right)=0$
+$\frac{\partial \ln L\left (\mu \mid x_{1}, \dots, x_{n}\right )}{\partial \mu}=-\frac{\mu}{\tau^{2}} + \frac{1}{\sigma^{2}} \sum_{i=1}^{n}\left(x_{i}-\mu\right)=0$
 
 > 第四步：求解贝叶斯方程
 
-$\therefore \sum_{i=1}^{n}\left(x_{i}-\mu\right) = - \frac{\mu \cdot \sigma^{2}}{\tau^{2}}$
+$\therefore \sum_{i=1}^{n}\left(x_{i}-\mu\right) = \frac{\mu \cdot \sigma^{2}}{\tau^{2}}$
 
-$\therefore \sum_{i=1}^{n}x_{i} - n \cdot \mu = - \frac{\mu \cdot \sigma^{2}}{\tau^{2}}$
+$\therefore \sum_{i=1}^{n}x_{i} - n \cdot \mu = \frac{\mu \cdot \sigma^{2}}{\tau^{2}}$
 
-$\therefore \sum_{i=1}^{n}x_{i} = n \cdot \mu - \frac{\mu \cdot \sigma^{2}}{\tau^{2}} = \mu \left (n - \frac{\sigma^{2}}{\tau^{2}} \right )$
+$\therefore \sum_{i=1}^{n}x_{i} = n \cdot \mu + \frac{\mu \cdot \sigma^{2}}{\tau^{2}} = \mu \left (n + \frac{\sigma^{2}}{\tau^{2}} \right )$
 
-$\therefore \hat{\mu}=\frac{\sum_{i=1}^{n}x_{i}}{n - \frac{\sigma^{2}}{\tau^{2}}}$
+$\therefore \hat{\mu}=\frac{\sum_{i=1}^{n}x_{i}}{n + \frac{\sigma^{2}}{\tau^{2}}}$
 
 ---
 
