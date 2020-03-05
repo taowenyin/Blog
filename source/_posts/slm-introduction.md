@@ -3,7 +3,6 @@ title: S1-统计学习及监督学习概论
 mathjax: true
 date: 2020-02-29 09:47:22
 updated: {{ date }}
-top: true
 tags:
 categories: [统计学习方法]
 ---

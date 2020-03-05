@@ -3,7 +3,6 @@ title: S2-感知机
 mathjax: true
 date: 2020-03-05 09:50:44
 updated: {{ date }}
-top: true
 tags:
 categories: [统计学习方法]
 ---
@@ -229,3 +228,7 @@ $\therefore k \eta \gamma \leqslant \hat{w}_{k} \cdot \hat{w}_{\mathrm{opt}} \le
 $\therefore k \eta \gamma \leqslant \sqrt{k\eta^{2}R^{2}}$
 
 $\therefore k \leqslant\left(\frac{R}{\gamma}\right)^{2}$
+
+# 作业
+
+1、
