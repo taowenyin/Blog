@@ -134,6 +134,8 @@ a_{n}^{T} a_{1} &amp; a_{n}^{T} a_{2} &amp; \cdots &amp; a_{n}^{T} a_{n}
 <p><span class="math inline">\(\therefore k \eta \gamma \leqslant \hat{w}_{k} \cdot \hat{w}_{\mathrm{opt}} \leqslant\left\|\hat{w}_{k}\right\| \leqslant \sqrt{k\eta^{2}R^{2}}\)</span></p>
 <p><span class="math inline">\(\therefore k \eta \gamma \leqslant \sqrt{k\eta^{2}R^{2}}\)</span></p>
 <p><span class="math inline">\(\therefore k \leqslant\left(\frac{R}{\gamma}\right)^{2}\)</span></p>
+<h1 id="作业">作业</h1>
+<p>1、</p>
 ]]></content>
       <categories>
         <category>统计学习方法</category>
