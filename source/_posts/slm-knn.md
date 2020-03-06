@@ -1,5 +1,5 @@
 ---
-title: S3-k近邻法
+title: S3-$k$近邻法
 mathjax: true
 date: 2020-03-06 15:50:16
 updated: {{ date }}
