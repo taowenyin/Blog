@@ -1,6 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>【2004】Learning multi-label scene classification</title>
+    <url>/learning-multi-label-scene-classification/</url>
+    <content><![CDATA[<h1 id="摘要">摘要</h1><p>在分类模式识别中，各个类通常是互斥的，并且是提前定义好的。当类在特征空间中重叠时会容易发生分类错误。作者研究一种不同的情况，即类之间并不是互斥。这种情况出现在语义场景和文档分类以及医学诊断中。我们提出了一个框架来处理这些问题，并将其应用到语义场景分类问题中，其中一个自然场景可能包含多个对象，使得场景可以由多个类标签来描述。作者提出了一个框架来处理这些问题，并将其应用到语义场景分类问题中，每个自然场景可能包含多个对象，使得场景可以由多个类标签来描述。这一问题对经典的模式识别范式提出了挑战，需要更深入的研究。作者讨论了在这种情况下场景训练和测试的方法，并介绍了评估单个示例、类召回和精确性以及总体精确性的新指标。实验表明，我们的方法适用于场景分类，而且，我们的工作似乎可以推广到其他性质相同的分类问题。</p><a id="more"></a>
+
+<h1 id="多标签分类">多标签分类</h1>
+<p>本节作者将表述一个训练和测试多标签数据可能的方法。使用“ <span class="math inline">\(+\)</span> ”和“<span class="math inline">\(\times\)</span>”分别表示两类数据，如果实例同时属于“<span class="math inline">\(+\)</span>”和“<span class="math inline">\(\times\)</span>”，那么该实例就用“<span class="math inline">\(\ast\)</span>”表示。</p>
+<h2 id="多标签的训练模型">多标签的训练模型</h2>
+<p>对于多标签分类，首先要解决的问题就是如何进行训练。具体来说，就是如何在训练阶段对带有多标签的实例进行训练。</p>
+<p>在前期的工作中，研究人员会根据主管判断，把多标签数据标记为更像的那一类。例如，如果海滩覆盖了图像的大部分，或者在数据收集时碰巧有人在寻找海滩场景，则有海滩沿线酒店的图像将被标记为海滩。如果在作者的实例中，“<span class="math inline">\(\ast\)</span>”中的一部分数据将会被标记为“<span class="math inline">\(+\)</span>”，另一部分被标记为“<span class="math inline">\(\times\)</span>”。作者把这种模型称为<span class="math inline">\(Model-s\)</span>（<span class="math inline">\(s\)</span>表示“单标签”类）。</p>
+<p>另一个可能的方式是当训练数据时，只是简单的忽略多标签数据。如果在作者的实例中，那么所有的“<span class="math inline">\(\ast\)</span>”号数据都会被丢弃。作者把这种模型称为<span class="math inline">\(Model-i\)</span>（<span class="math inline">\(i\)</span>表示“忽略”的意思）。</p>
+<p>要实现对每类数据的正确分类，最简单的方法就是将带有多标签的数据（“<span class="math inline">\(\ast\)</span>”类）视为一个新类，并为这个新类构建一个模型。作者把这种模型称为<span class="math inline">\(Model-n\)</span>（<span class="math inline">\(n\)</span>表示“新”类的意思）。但是，这种方法有个严重的问题就是属于多标签的数据类在构建模型时会非常稀疏。表1展示了作者训练数据的图像种类。属于一个以上类别的图像数量占整个数据集的7%以上，但很多类别的数量非常小。当有些场景被赋予一个以上的类别时，这是一个重要的问题。</p>
+<p>表1：数据集</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">编号</th>
+<th style="text-align: center;">类别</th>
+<th style="text-align: center;">训练图片</th>
+<th style="text-align: center;">测试图片</th>
+<th style="text-align: center;">合计</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">海滩（Beach）</td>
+<td style="text-align: center;">194</td>
+<td style="text-align: center;">175</td>
+<td style="text-align: center;">369</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">日落（Sunset）</td>
+<td style="text-align: center;">165</td>
+<td style="text-align: center;">199</td>
+<td style="text-align: center;">364</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">落叶（Fall foliage）</td>
+<td style="text-align: center;">184</td>
+<td style="text-align: center;">176</td>
+<td style="text-align: center;">360</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">田（Field）</td>
+<td style="text-align: center;">161</td>
+<td style="text-align: center;">166</td>
+<td style="text-align: center;">327</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0,3</td>
+<td style="text-align: center;">海滩<span class="math inline">\(+\)</span>田（Beach<span class="math inline">\(+\)</span>Field）</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2,3</td>
+<td style="text-align: center;">落叶<span class="math inline">\(+\)</span>田（Fall foliage<span class="math inline">\(+\)</span>Field）</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">23</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">山（Mountain）</td>
+<td style="text-align: center;">223</td>
+<td style="text-align: center;">182</td>
+<td style="text-align: center;">405</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0,4</td>
+<td style="text-align: center;">海滩<span class="math inline">\(+\)</span>山（Beach<span class="math inline">\(+\)</span>Mountain）</td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">38</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2,4</td>
+<td style="text-align: center;">落叶<span class="math inline">\(+\)</span>山（Fall foliage<span class="math inline">\(+\)</span>Mountain）</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3,4</td>
+<td style="text-align: center;">田<span class="math inline">\(+\)</span>山（Field<span class="math inline">\(+\)</span>Mountain）</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">49</td>
+<td style="text-align: center;">75</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2,3,4</td>
+<td style="text-align: center;">田<span class="math inline">\(+\)</span>落叶<span class="math inline">\(+\)</span>山（Field<span class="math inline">\(+\)</span>Fall foliage<span class="math inline">\(+\)</span>Mountain）</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">城市（Urban）</td>
+<td style="text-align: center;">210</td>
+<td style="text-align: center;">195</td>
+<td style="text-align: center;">405</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0,5</td>
+<td style="text-align: center;">海滩<span class="math inline">\(+\)</span>城市（Beach<span class="math inline">\(+\)</span>Urban）</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">19</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3,5</td>
+<td style="text-align: center;">田<span class="math inline">\(+\)</span>城市（Field<span class="math inline">\(+\)</span>Urban）</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">4,5</td>
+<td style="text-align: center;">山<span class="math inline">\(+\)</span>城市（Mountain<span class="math inline">\(+\)</span>Urban）</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">合计</td>
+<td style="text-align: center;">1211</td>
+<td style="text-align: center;">1196</td>
+<td style="text-align: center;">2407</td>
+</tr>
+</tbody>
+</table>
+<p>一种新的方法是在训练时多次使用多标签数据，使用每个示例作为它所属的每个类的正示例。在作者的实例中，作者认为当训练“<span class="math inline">\(+\)</span>”模型时，那么“<span class="math inline">\(\ast\)</span>”就属于“<span class="math inline">\(+\)</span>”类，当训练“<span class="math inline">\(\times\)</span>”模型时，那么“<span class="math inline">\(\ast\)</span>”就属于“<span class="math inline">\(+\)</span>”类。需要注意的时，“<span class="math inline">\(\ast\)</span>”并不是作为“<span class="math inline">\(+\)</span>”或者“<span class="math inline">\(\times\)</span>”数据的反例。作者称这种方式为“交叉训练”。生成的类决策曲面如图3所示。在区域A中同时包含了“<span class="math inline">\(+\)</span>”类和“<span class="math inline">\(\times\)</span>”类。当对A区域的测试图像进行分类时，模型“<span class="math inline">\(+\)</span>”和“<span class="math inline">\(\times\)</span>”应将其分类为自己所属的类。按照测试标签准则，图像将有“<span class="math inline">\(+\)</span>”和“<span class="math inline">\(\times\)</span>”这两个标签。这个方法解决了稀疏数据的问题，因为作者使用了每个模型的相关数据。与<span class="math inline">\(Model-n\)</span>这个训练方法相比较，交叉训练能够更加有效的使用训练数据，因为交叉训练模型比<span class="math inline">\(Model-n\)</span>模型包含更多的训练数据。试验表明，交叉训练在多标签分类中是有效的。作者把这种方法称作<span class="math inline">\(Model-x\)</span>（<span class="math inline">\(x\)</span>表示交叉训练）。</p>
+<img src="/learning-multi-label-scene-classification/cross-training.png" class title="交叉训练说明">
+<p>图3：交叉训练说明</p>
+<p>有人说交叉训练模型可能会给具有多标签的实例带来更多的权重。如果使用基于密度估计的分类器（如ANN），那么确实会如此。作者认识到，使用每个类别都有输出节点的神经网络来处理多标签分类也是很自然的。但是，作者在他的研究中使用了SVM模型，该模型在场景分类和文本分类中具有更高的精度和更好的泛化性。直观地说，多标签图像很可能是那些接近决策边界的图像，这使得它们对于支持向量机类型分类器特别有价值。在实际应用中，多标签图像的稀疏性也使得使用这些图像成为必然。如果图像中存在多个分类，那么就可需要通过标签分布来进行采样来。</p>
+<h2 id="多标签的测试准则">多标签的测试准则</h2>
+<p>在本节中，作者将讨论用于测试的多标签准则。如上所述，一些类组合的稀疏性使得在构建模型时，不会为每个多标签构建禁止我们构建<span class="math inline">\(Model-n\)</span>模型。因此，作者基于基础类别进行模型的构建。作者接下来将讨论如果通过基类模型输出来获取多标签。</p>
+<p>为了简化作者的讨论，作者使用SVM作为实例的分类器。在一对多方法中，为每个基础类训练一个分类器，并在每个分类器上输出测试示例的分数。这些分数能够通过一个逻辑函数映射为一个伪概率，这些输出的值能够被认为是测试实例相应类别的置信度。</p>
+<p>对于标准的二分类SVM，如果实例的SVM值为正，那么该实例就标记为正例。在一对多的方法中，如果SVM输出了多个正值，那么实例会根据SVM输出的最大值的类别来标记对应的分类。对于一些实例也可能，可能由于特征的缺失，使得有的SVM输出为负值。</p>
+<p>为了把一对多方法扩展到多标签分类中，作者使用下面三个标记准则来进行实验。</p>
+<blockquote>
+<ul>
+<li>P准则：把SVM输出为正值的测试数据都标记为相应的分类。如果输出值都是负值，那么就把测试数据标记为“未知”。（“P”表示正值的意思）</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>T准则：与P准则类似，但在处理SVM输出值都为负值的实例上有所不同。假如所有的SVM输出都为负值，那么就把测试实例标记为输出值最大的那个对应的分类。（“T”表示最大的意思）</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>C准则：</li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>论文</category>
+        <category>多标签学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>多标签学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>S3-$k$近邻法</title>
     <url>/slm-knn/</url>
     <content><![CDATA[<h1 id="k近邻算法"><span class="math inline">\(k\)</span>近邻算法</h1><p>输入：训练数据集</p><p><span class="math display">\[T=\left\{\left(x_{1}, y_{1}\right),\left(x_{2}, y_{2}\right), \cdots,\left(x_{N}, y_{N}\right)\right\}\]</span></p><p>其中，<span class="math inline">\(x_{i} \in \mathcal{X} \subseteq \mathbf{R}^{n}\)</span>为实例的特征向量，<span class="math inline">\(y_{i} \in \mathcal{Y}=\left\{c_{1}, c_{2}, \cdots, c_{K}\right\}\)</span>为实例的类别，<span class="math inline">\(i=1,2, \cdots, N\)</span>；实例特征向量<span class="math inline">\(x\)</span>；</p><a id="more"></a>
