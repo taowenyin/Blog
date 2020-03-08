@@ -149,19 +149,48 @@
 <p>为了把一对多方法扩展到多标签分类中，作者使用下面三个标记准则来进行实验。</p>
 <blockquote>
 <ul>
-<li>P准则：把SVM输出为正值的测试数据都标记为相应的分类。如果输出值都是负值，那么就把测试数据标记为“未知”。（“P”表示正值的意思）</li>
+<li><p>P准则：把SVM输出为正值的测试数据都标记为相应的分类。如果输出值都是负值，那么就把测试数据标记为“未知”。（“P”表示正值的意思）</p></li>
+<li><p>T准则：与P准则类似，但在处理SVM输出值都为负值的实例上有所不同。假如所有的SVM输出都为负值，那么就把测试实例标记为输出值最大的那个对应的分类。（“T”表示最大的意思）</p></li>
+<li><p>C准则：决定一个实例是否标记为某个标签，依赖于SVM分数最高的几个成绩之间的接近程度，而与得分的正、负无关。如果对于某个实例来说，如果前<span class="math inline">\(M\)</span>个分数足够的接近，那么这些分数对因的标签就是该实例的标签。<strong>作者使用最大后验概率（MAP）来确定一个阈值</strong>，该阈值的作用就是判断SVM的输出值是否足够的接近。（“C”表示接近的意思）</p></li>
 </ul>
 </blockquote>
+<p>使用两个类别来形式化C准则，并进行说明：</p>
+<p>给定一个实例<span class="math inline">\(x\)</span>，并且两个SVM分类器分别输出对于两个分类<span class="math inline">\(c_{1}\)</span>和<span class="math inline">\(c_{2}\)</span>的两个值<span class="math inline">\(s_{1}\)</span>和<span class="math inline">\(s_{2}\)</span>。假设<span class="math inline">\(s_{1}&gt;s_{2}\)</span>，并且<span class="math inline">\(dif=s_{1}-s_{2}&gt;0\)</span>。那么问题是，实例<span class="math inline">\(x\)</span>是标记为<span class="math inline">\(c_{1}\)</span>，还是表示为<span class="math inline">\(c_{1}\)</span>和<span class="math inline">\(c_{2}\)</span>。</p>
+<p>作者使用最大后验概率（MAP）来解决这个问题：</p>
+<p>假设<span class="math inline">\(E_{1}\)</span>：实例<span class="math inline">\(x\)</span>只有一个标签<span class="math inline">\(c_{1}\)</span>的事件。</p>
+<p>假设<span class="math inline">\(E_{2}\)</span>：实例<span class="math inline">\(x\)</span>有两个标签<span class="math inline">\(c_{1}\)</span>和<span class="math inline">\(c_{2}\)</span>的事件。</p>
+<p>那么最大后验概率MAP可以表示为</p>
+<p><span class="math display">\[\begin{aligned}
+E &amp;=\arg \max _{i} p\left(E_{i} | dif\right) \\
+&amp;=\arg \max _{i} p\left(E_{i}\right) \cdot p\left(dif | E_{i}\right)
+\end{aligned}\]</span></p>
+<p>其中<span class="math inline">\(p\left(dif | E_{i}\right)\)</span>的概率能够通过训练数据计算得到。利用交叉训练得到的SVM模型对训练图像进行分类。<span class="math inline">\(DIF_{1}\)</span>和<span class="math inline">\(DIF_{2}\)</span>两个不同的集合，具体如下：</p>
 <blockquote>
 <ul>
-<li>T准则：与P准则类似，但在处理SVM输出值都为负值的实例上有所不同。假如所有的SVM输出都为负值，那么就把测试实例标记为输出值最大的那个对应的分类。（“T”表示最大的意思）</li>
+<li><p><span class="math inline">\(DIF_{1}\)</span>：对于每个正确标记的单类训练图像，前两个SVM得分之间的差异集合。</p></li>
+<li><p><span class="math inline">\(DIF_{2}\)</span>：每个多类图像对应多个类的支持向量机得分之间的差异集。</p></li>
 </ul>
 </blockquote>
-<blockquote>
-<ul>
-<li>C准则：</li>
-</ul>
-</blockquote>
+<p>作者将Gamma分布拟合到这两个集合，因为数据是非负的，而且它可能是最佳拟合。图4就展示了在实验过程中两个不同的数据集直方图和分布。图4（c）展示了通过将Gamma分布与直方图拟合得到这两个分布。图4（d）展示了把（c）中的分布乘以<span class="math inline">\(p\left(E_{i}\right)\)</span>得到曲线。交叉点<span class="math inline">\(T_{x}\)</span>的<span class="math inline">\(x\)</span>轴就是所需的阈值。假如两个SVM的差值比<span class="math inline">\(T_{x}\)</span>大，那么<span class="math inline">\(E=E_{1}\)</span>，即属于分类<span class="math inline">\(c_{1}\)</span>，否则<span class="math inline">\(E=E_{2}\)</span>，即属于<span class="math inline">\(c_{1}\)</span>和<span class="math inline">\(c_{2}\)</span>分类。</p>
+<img src="/learning-multi-label-scene-classification/threshold-determination.png" class title="两个不同数据集的直方图和分布">
+<p>图4：C准则下的阈值确定的直方图和分布。（a）<span class="math inline">\(DIF_{1}\)</span>的直方图；（b）<span class="math inline">\(DIF_{2}\)</span>的直方图；（c）<span class="math inline">\(p\left(dif | E_{1}\right)\)</span>和<span class="math inline">\(p\left(dif | E_{2}\right)\)</span>分布曲线（d）<span class="math inline">\(p\left(E_{1}\right) \cdot p\left(dif | E_{1}\right)\)</span>和<span class="math inline">\(p\left(E_{2}\right) \cdot p\left(dif | E_{2}\right)\)</span>分布曲线</p>
+<p>选择<span class="math inline">\(T_{x}\)</span>作为判断的阈值，可以将模型的分类误差最小化。给定任意阈值<span class="math inline">\(T\)</span>，分类误差如图5中的阴影区域。只有当阈值<span class="math inline">\(T\)</span>是两条曲线的交点时，着色区域的面积才最小化，即<span class="math inline">\(p\left(E_{1}\right) * p\left(dif | E_{1}\right)=p\left(E_{2}\right) * p\left(dif | E_{2}\right)\)</span></p>
+<img src="/learning-multi-label-scene-classification/decision-error.png" class title="使用阈值$T$的决策误差">
+<p>图5：使用阈值<span class="math inline">\(T\)</span>的决策误差</p>
+<h1 id="多标签分类结果的评价">多标签分类结果的评价</h1>
+<p>多标签分类的性能评价不同于但标签分类的性能评价。标准的评价指标包括准确度、召回率、精度和F指标。在多标签分类中，评价更为复杂，因为结果可能完全正确或者部分正确或者完全错误。以属于<span class="math inline">\(c_{1}\)</span>和<span class="math inline">\(c_{2}\)</span>类的实例为例。可以得到如下中的一个结果</p>
+<p>1、<span class="math inline">\(c_{1}\)</span>和<span class="math inline">\(c_{2}\)</span>（完全正确）</p>
+<p>2、<span class="math inline">\(c_{1}\)</span>（完全正确）</p>
+<p>3、<span class="math inline">\(c_{1}\)</span>和<span class="math inline">\(c_{3}\)</span>（部分正确）</p>
+<p>4、<span class="math inline">\(c_{1}\)</span>、<span class="math inline">\(c_{3}\)</span>和<span class="math inline">\(c_{4}\)</span>（部分正确）</p>
+<p>5、<span class="math inline">\(c_{3}\)</span><span class="math inline">\(和\)</span>c_{4}$（完全错误）</p>
+<p>以上五个结果的正确性程度不同。</p>
+<p>Schapire和Singer使用了三种度量方式，都是为排序任务所定制的：One-error，覆盖率和精度。精度是一种可以用来评估整个系统的测量方法。</p>
+<p><span class="math display">\[\operatorname{precision}_{S}(h)=\frac{1}{m} \sum_{i=1}^{m} \frac{1}{\left|Y_{i}\right|} \sum_{l \in Y_{i}} \frac{\left|\left\{l^{\prime} \in Y_{i} | \operatorname{rank}_{h}\left(x_{i}, l^{\prime}\right) \leqslant \operatorname{rank}_{h}\left(x_{i}, l\right)\right\}\right|}{\operatorname{rank}_{h}\left(x_{i}, l\right)}\]</span></p>
+<p>其中<span class="math inline">\(h\)</span>表示分类器，<span class="math inline">\(S\)</span>表示训练集，<span class="math inline">\(m\)</span>是所有测试集的数量，<span class="math inline">\(Y_{i}\)</span>是一个测试实例的标准标签集，<span class="math inline">\(x_{i}\)</span>是测试的实例，<span class="math inline">\(\operatorname{rank}_{h}\left(x_{i}, l^{\prime}\right)\)</span>是关于实例<span class="math inline">\(x_{i}\)</span>的预测分类器<span class="math inline">\(h\)</span>输出关于标签<span class="math inline">\(l\)</span>的排序。</p>
+<p>作者提供2个新方法来评价多标签分类系统</p>
+<h2 id="alpha评价"><span class="math inline">\(\alpha\)</span>评价</h2>
+<h2 id="基于类别的评价">基于类别的评价</h2>
 ]]></content>
       <categories>
         <category>论文</category>
