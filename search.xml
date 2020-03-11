@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>S4-朴素贝叶斯</title>
+    <url>/slm-naive-bayes/</url>
+    <content><![CDATA[<h1 id="朴素贝叶斯的学习与分类">朴素贝叶斯的学习与分类</h1><h2 id="基本方法">基本方法</h2><p>设输入空间<span class="math inline">\(\mathcal{X} \subseteq \mathbf{R}^{n}\)</span>是<span class="math inline">\(n\)</span>维向量的集合，输出空间为类标记集合<span class="math inline">\(\mathcal{Y}=\left\{c_{1}, c_{2}, \cdots, c_{K}\right\}\)</span>。输入为特征向量<span class="math inline">\(x \in \mathcal{X}\)</span>，输出维类标记<span class="math inline">\(y \in \mathcal{Y}\)</span>。<span class="math inline">\(X\)</span>是定义在输入空间<span class="math inline">\(\mathcal{X}\)</span>上的随机向量，<span class="math inline">\(Y\)</span>是定义在输出空间<span class="math inline">\(\mathcal{Y}\)</span>上的随机变量。<span class="math inline">\(P(X, Y)\)</span>是<span class="math inline">\(X\)</span>和<span class="math inline">\(Y\)</span>的联合概率分布。训练数据集</p><a id="more"></a>
+
+
+<p><span class="math display">\[T=\left\{\left(x_{1}, y_{1}\right),\left(x_{2}, y_{2}\right), \cdots,\left(x_{N}, y_{N}\right)\right\}\]</span></p>
+<p>由<span class="math inline">\(P(X, Y)\)</span>独立同分布产生。</p>
+<p>朴素贝叶斯法通过训练数据集学习联合概率分布<span class="math inline">\(P(X, Y)=P\left(X=x | Y=c_{k}\right)P\left(Y=c_{k}\right)\)</span>。</p>
+<ol type="1">
+<li>先验概率分布，<span class="math inline">\(P\left(Y=c_{k}\right), \quad k=1,2, \cdots, K\)</span></li>
+<li>条件概率分布，<span class="math inline">\(k=1,2, \cdots, K\)</span></li>
+</ol>
+<p><span class="math display">\[P\left(X=x | Y=c_{k}\right)=P\left(X^{(1)}=x^{(1)}, \cdots, X^{(n)}=x^{(n)} | Y=c_{k}\right)=\prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)\]</span></p>
+<ol start="3" type="1">
+<li>得到了联合概率分布<span class="math inline">\(P(X, Y)\)</span></li>
+</ol>
+<p>朴素贝叶斯实际上学习到了生成数据的机制，<strong>所以属于生成模型。</strong> 条件独立假设等于是说用于分类的特征在类确定的条件下是条件独立的，这一假设使朴素贝叶斯法变得简单，但有时牺牲了一定的分类准确率。</p>
+<p>朴素贝叶斯法分类时，对给定的输入<span class="math inline">\(x\)</span>，通过学习到的模型计算后验概率分布<span class="math inline">\(P\left(Y=c_{k} | X=x\right)\)</span>，将后验概率最大的类作为<span class="math inline">\(x\)</span>的类输出。后验概率计算根据贝叶斯定理得到：</p>
+<p><span class="math display">\[P\left(Y=c_{k} | X=x\right) =\frac{P\left(X=x | Y=c_{k}\right) P\left(Y=c_{k}\right)}{\underset{k}{\sum} P\left(X=x | Y=c_{k}\right) P\left(Y=c_{k}\right)}\]</span></p>
+<p>代入条件概率分布得到</p>
+<p><span class="math display">\[P\left(Y=c_{k} | X=x\right) =\frac{P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\underset{k}{\sum} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}\]</span></p>
+<p>于是，朴素贝叶斯分类器可表示为</p>
+<p><span class="math display">\[y=f\left ( x\right )=arg\ \underset{c_{k}}{max}\frac{P\left(Y=c_{k}\right) \underset{j}{\prod} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\underset{k}{\sum} P\left(Y=c_{k}\right) \underset{j}{\prod} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}\]</span></p>
+<p>由于上式分母对所有<span class="math inline">\(c_{k}\)</span>都相同，所以</p>
+<p><span class="math display">\[y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \underset{j}{\prod} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)\]</span></p>
+<h2 id="后验概率最大化的含义">后验概率最大化的含义</h2>
+<p>假设采用0-1损失函数</p>
+<p><span class="math display">\[L(Y, f(X))=\left\{\begin{array}{ll}
+1, &amp; Y \neq f(X) \\
+0, &amp; Y=f(X)
+\end{array}\right.\]</span></p>
+<p>式中<span class="math inline">\(f(X)\)</span>是分类决策函数，那么期望风险函数为</p>
+<p><span class="math display">\[R_{\exp }(f)=E[L(Y, f(X))]\]</span></p>
+<p>由于期望是根据联合分布<span class="math inline">\(P(X, Y)\)</span>得到。因此，条件期望为</p>
+<p><span class="math display">\[R_{\mathrm{exp}}(f)=E_{X} \sum_{k=1}^{K}\left[L\left(c_{k}, f(X)\right)\right] P\left(c_{k} | X\right)\]</span></p>
+<p>为了使期望风险最小化，只需要对<span class="math inline">\(X=x\)</span>逐个极小化，由此得到：</p>
+<p><span class="math display">\[\begin{aligned}
+f(x) &amp;=\arg \min _{y \in \mathcal{Y}} \sum_{k=1}^{K} L\left(c_{k}, y\right) P\left(c_{k} | X=x\right) \\
+&amp;=\arg \min _{y \in \mathcal{Y}} \sum_{k=1}^{K} P\left(y \neq c_{k} | X=x\right) \\
+&amp;=\arg \min _{y \in \mathcal{Y}}\left(1-P\left(y=c_{k} | X=x\right)\right) \\
+&amp;=\arg \max _{y \in \mathcal{Y}} P\left(y=c_{k} | X=x\right)
+\end{aligned}\]</span></p>
+<p>因此，根据风险最小化准则就得到了后验概率最大化准则：</p>
+<p><span class="math display">\[f(x)=\arg \max _{c_{k}} P\left(c_{k} | X=x\right)\]</span></p>
+]]></content>
+      <categories>
+        <category>统计学习方法</category>
+      </categories>
+  </entry>
+  <entry>
     <title>【2004】Learning multi-label scene classification</title>
     <url>/learning-multi-label-scene-classification/</url>
     <content><![CDATA[<h1 id="摘要">摘要</h1><p>在分类模式识别中，各个类通常是互斥的，并且是提前定义好的。当类在特征空间中重叠时会容易发生分类错误。作者研究一种不同的情况，即类之间并不是互斥。这种情况出现在语义场景和文档分类以及医学诊断中。我们提出了一个框架来处理这些问题，并将其应用到语义场景分类问题中，其中一个自然场景可能包含多个对象，使得场景可以由多个类标签来描述。作者提出了一个框架来处理这些问题，并将其应用到语义场景分类问题中，每个自然场景可能包含多个对象，使得场景可以由多个类标签来描述。这一问题对经典的模式识别范式提出了挑战，需要更深入的研究。作者讨论了在这种情况下场景训练和测试的方法，并介绍了评估单个示例、类召回和精确性以及总体精确性的新指标。实验表明，我们的方法适用于场景分类，而且，我们的工作似乎可以推广到其他性质相同的分类问题。</p><a id="more"></a>
