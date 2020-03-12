@@ -19,11 +19,11 @@
 </ol>
 <p>朴素贝叶斯实际上学习到了生成数据的机制，<strong>所以属于生成模型。</strong> 条件独立假设等于是说用于分类的特征在类确定的条件下是条件独立的，这一假设使朴素贝叶斯法变得简单，但有时牺牲了一定的分类准确率。</p>
 <p>朴素贝叶斯法分类时，对给定的输入<span class="math inline">\(x\)</span>，通过学习到的模型计算后验概率分布<span class="math inline">\(P\left(Y=c_{k} | X=x\right)\)</span>，将后验概率最大的类作为<span class="math inline">\(x\)</span>的类输出。后验概率计算根据贝叶斯定理得到：</p>
-<p><span class="math display">\[P\left(Y=c_{k} | X=x\right) =\frac{P\left(X=x | Y=c_{k}\right) P\left(Y=c_{k}\right)}{\underset{k}{\sum} P\left(X=x | Y=c_{k}\right) P\left(Y=c_{k}\right)}\]</span></p>
+<p><span class="math display">\[P\left(Y=c_{k} | X=x\right) =\frac{P\left(X=x | Y=c_{k}\right) P\left(Y=c_{k}\right)}{P\left(X=x\right)}=\frac{P\left(X=x | Y=c_{k}\right) P\left(Y=c_{k}\right)}{\underset{k}{\sum} P\left(X=x | Y=c_{k}\right) P\left(Y=c_{k}\right)}\]</span></p>
 <p>代入条件概率分布得到</p>
-<p><span class="math display">\[P\left(Y=c_{k} | X=x\right) =\frac{P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\underset{k}{\sum} P\left(Y=c_{k}\right) \prod_{j} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}\]</span></p>
+<p><span class="math display">\[P\left(Y=c_{k} | X=x\right) =\frac{P\left(Y=c_{k}\right) \underset{j}{\prod} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\underset{k}{\sum} P\left(Y=c_{k}\right) \underset{j}{\prod} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}\]</span></p>
 <p>于是，朴素贝叶斯分类器可表示为</p>
-<p><span class="math display">\[y=f\left ( x\right )=arg\ \underset{c_{k}}{max}\frac{P\left(Y=c_{k}\right) \underset{j}{\prod} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\underset{k}{\sum} P\left(Y=c_{k}\right) \underset{j}{\prod} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}\]</span></p>
+<p><span class="math display">\[y=f\left ( x\right )=\arg \underset{c_{k}}{max}\frac{P\left(Y=c_{k}\right) \underset{j}{\prod} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}{\underset{k}{\sum} P\left(Y=c_{k}\right) \underset{j}{\prod} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)}\]</span></p>
 <p>由于上式分母对所有<span class="math inline">\(c_{k}\)</span>都相同，所以</p>
 <p><span class="math display">\[y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \underset{j}{\prod} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)\]</span></p>
 <h2 id="后验概率最大化的含义">后验概率最大化的含义</h2>
@@ -45,6 +45,34 @@ f(x) &amp;=\arg \min _{y \in \mathcal{Y}} \sum_{k=1}^{K} L\left(c_{k}, y\right) 
 \end{aligned}\]</span></p>
 <p>因此，根据风险最小化准则就得到了后验概率最大化准则：</p>
 <p><span class="math display">\[f(x)=\arg \max _{c_{k}} P\left(c_{k} | X=x\right)\]</span></p>
+<h1 id="朴素贝叶斯法的参数估计">朴素贝叶斯法的参数估计</h1>
+<h2 id="学习和分类算法">学习和分类算法</h2>
+<p>输入训练数据<span class="math inline">\(T=\left\{\left(x_{1}, y_{1}\right),\left(x_{2}, y_{2}\right), \cdots,\left(x_{N}, y_{N}\right)\right\}\)</span>，其中<span class="math inline">\(x_{i}=\left(x_{i}^{(1)}, x_{i}^{(2)}, \cdots , x_{i}^{(n)}\right)^{\mathrm{T}}\)</span>，<span class="math inline">\(x_{i}^{(j)}\)</span>是第<span class="math inline">\(i\)</span>个样本的第<span class="math inline">\(j\)</span>个特征，<span class="math inline">\(x_{i}^{(j)} \in\left\{a_{j 1}, a_{j 2}, \cdots, a_{j S_{j}}\right\}\)</span>，<span class="math inline">\(a_{j l}\)</span>是第<span class="math inline">\(j\)</span>个特征可能取的第<span class="math inline">\(l\)</span>个值，<span class="math inline">\(j=1,2, \cdots, n\)</span>，<span class="math inline">\(l=1,2, \cdots, S_{j}\)</span>，<span class="math inline">\(y_{i} \in\left\{c_{1}, c_{2}, \cdots, c_{K}\right\}\)</span></p>
+<p>输出：实例<span class="math inline">\(x\)</span>的分类</p>
+<ol type="1">
+<li>计算先验概率及条件概率</li>
+</ol>
+<p><span class="math display">\[P\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}{N}, \quad k=1,2, \cdots, K\]</span></p>
+<p><span class="math display">\[P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)}\]</span></p>
+<p><span class="math display">\[j=1,2, \cdots, n ; \quad l=1,2, \cdots, S_{j} ; \quad k=1,2, \cdots, K\]</span></p>
+<ol start="2" type="1">
+<li>对于给定的实例<span class="math inline">\(x=\left(x^{(1)}, x^{(2)}, \cdots, x^{(n)}\right)^{\mathrm{T}}\)</span>，计算</li>
+</ol>
+<p><span class="math display">\[P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right), \quad k=1,2, \cdots, K\]</span></p>
+<ol start="3" type="1">
+<li>确定实例<span class="math inline">\(x\)</span>的类</li>
+</ol>
+<p><span class="math display">\[y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \prod_{j=1}^{n} P\left(X^{(j)}=x^{(j)} | Y=c_{k}\right)\]</span></p>
+<h2 id="贝叶斯估计">贝叶斯估计</h2>
+<p>由于上节采用极大似然估计，因此会出现0的情况，即某个类别没有数据，从而造成分类偏差。为了解决这个问题，就把上节的算法采用条件贝叶斯估计，即<span class="math inline">\(P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)\)</span>变为</p>
+<p><span class="math display">\[P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(x_{i}^{(j)}=a_{j l}, y_{i}=c_{k}\right)+\lambda}{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+S_{j} \lambda}\]</span></p>
+<p>引入<span class="math inline">\(\lambda \geqslant 0\)</span>，当<span class="math inline">\(\lambda=0\)</span>时就是极大似然估计。<strong>一般<span class="math inline">\(\lambda=1\)</span>，即拉普拉斯平滑。其中<span class="math inline">\(S_{j}\)</span>表示特征的数量。</strong> 因此<span class="math inline">\(P_{\lambda}\)</span>永远不会为0。</p>
+<p><span class="math display">\[P_{\lambda}\left(X^{(j)}=a_{j l} | Y=c_{k}\right)&gt;0\]</span></p>
+<p><span class="math display">\[\sum_{l=1}^{S_{j}} P\left(X^{(j)}=a_{j l} | Y=c_{k}\right)=1\]</span></p>
+<p>同样，先验概率的贝叶斯估计变为</p>
+<p><span class="math display">\[P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}\]</span></p>
+<p><strong>其中<span class="math inline">\(K\)</span>表示<span class="math inline">\(Y\)</span>类别的数量。</strong></p>
+<h1 id="作业">作业</h1>
 ]]></content>
       <categories>
         <category>统计学习方法</category>
