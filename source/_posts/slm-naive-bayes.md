@@ -46,29 +46,45 @@ $$y=\arg \max _{c_{k}} P\left(Y=c_{k}\right) \underset{j}{\prod} P\left(X^{(j)}=
 
 ## 后验概率最大化的含义
 
-假设采用0-1损失函数
+假设在分类问题中采用0-1损失函数
 
 $$L(Y, f(X))=\left\{\begin{array}{ll}
 1, & Y \neq f(X) \\
 0, & Y=f(X)
 \end{array}\right.$$
 
-式中$f(X)$是分类决策函数，那么期望风险函数为
-
-$$R_{\exp }(f)=E[L(Y, f(X))]$$
-
-由于期望是根据联合分布$P(X, Y)$得到。因此，条件期望为
-
-$$R_{\mathrm{exp}}(f)=E_{X} \sum_{k=1}^{K}\left[L\left(c_{k}, f(X)\right)\right] P\left(c_{k} | X\right)$$
-
-为了使期望风险最小化，只需要对$X=x$逐个极小化，由此得到：
+式中$f(X)=\arg \underset{c_{k}}{max} P\left(Y=c_{k}|X\right)$是预测值，$Y$表示真实值，那么期望风险函数为
 
 $$\begin{aligned}
-f(x) &=\arg \min _{y \in \mathcal{Y}} \sum_{k=1}^{K} L\left(c_{k}, y\right) P\left(c_{k} | X=x\right) \\
-&=\arg \min _{y \in \mathcal{Y}} \sum_{k=1}^{K} P\left(y \neq c_{k} | X=x\right) \\
-&=\arg \min _{y \in \mathcal{Y}}\left(1-P\left(y=c_{k} | X=x\right)\right) \\
-&=\arg \max _{y \in \mathcal{Y}} P\left(y=c_{k} | X=x\right)
+R_{\exp }(f) &= \min E[L(Y, f(X))] \\
+ &=\arg \min [\underset{Y}{\sum}\underset{X}{\sum}\left [ L(Y, f(X))P(X,Y) \right ]]\\
+ &=\arg \min [\underset{Y}{\sum}\underset{X}{\sum}\left [ L(Y, f(X))P(X)P(Y|X) \right ]]\\
+  &=\arg \min [\underset{X}{\sum}\underset{Y}{\sum}\left [ L(Y, f(X))P(Y|X)P(X) \right ]]\\
 \end{aligned}$$
+
+所以最小化期望风险就变为
+
+$$\begin{aligned}
+R_{\exp }(f) &=\arg \min [L(Y, f(X))P(Y|X)] \\
+&=\arg \min [\underset{c_{k}}{\sum}L(Y=c_{k}, f(X))P(Y=c_{k}|X)]
+\end{aligned}$$
+
+因为$L(Y=c_{k}, f(X))$为损失函数，当$Y=c_{k}$时，$L(Y=c_{k}, f(X))=0$，当当$Y \neq c_{k}$时，$L(Y=c_{k}, f(X))=1$，所以上式可以写为释信函数
+
+$$\begin{aligned}
+R_{\exp }(f) &=\arg \min [\underset{c_{k}}{\sum}I(f(X) \neq c_{k})P(Y=c_{k}|X)] \\
+&=\arg \min [\underset{c_{k}}{\sum}\left [ 1-I(f(X)=c_{k}) \right ]P(Y=c_{k}|X)] \\
+&=\arg \min [\underset{c_{k}}{\sum}P(Y=c_{k}|X) - \underset{c_{k}}{\sum}I(f(X)=c_{k})P(Y=c_{k}|X)]
+\end{aligned}$$
+
+因为$\underset{c_{k}}{\sum}P(Y=c_{k}|X)$表示$X$对每个可能的$c_{k}$的概率求和，即为1。所以上式可以改为
+
+$$\begin{aligned}
+R_{\exp }(f) &=\arg \min [1 - \underset{c_{k}}{\sum}I(f(X)=c_{k})P(Y=c_{k}|X)] \\
+&= \max \underset{c_{k}}{\sum}I(f(X)=c_{k})P(Y=c_{k}|X) \\ 
+\end{aligned}$$
+
+由于释信函数$I(f(X)=c_{k})$只有$\left [ 0, 1 \right ]$的取值，因此要$R_{\exp }(f)$取最大值，只有$P(Y=c_{k}|X)$，即所有$X$对应的$c_{k}$中概率最高的分类。
 
 因此，根据风险最小化准则就得到了后验概率最大化准则：
 
