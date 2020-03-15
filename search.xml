@@ -86,6 +86,91 @@ R_{\exp }(f) &amp;=\arg \min [1 - \underset{c_{k}}{\sum}I(f(X)=c_{k})P(Y=c_{k}|X
 <p><span class="math display">\[P_{\lambda}\left(Y=c_{k}\right)=\frac{\sum_{i=1}^{N} I\left(y_{i}=c_{k}\right)+\lambda}{N+K \lambda}\]</span></p>
 <p><strong>其中<span class="math inline">\(K\)</span>表示<span class="math inline">\(Y\)</span>类别的数量。</strong></p>
 <h1 id="作业">作业</h1>
+<p>1、取<span class="math inline">\(\lambda=0.2\)</span>，试由下表的训练数据，利用先验概率的贝叶斯估计确定<span class="math inline">\(x=(2, S)^{\top}\)</span>的类标记<span class="math inline">\(y\)</span>。表中<span class="math inline">\(x^{(1)}\)</span>、<span class="math inline">\(x^{(2)}\)</span>为特征，取值的集合分别为<span class="math inline">\(A_{1}=\{1,2,3\}\)</span>、<span class="math inline">\(A_{2}=\{S,M,L\}\)</span>，<span class="math inline">\(Y\)</span>为类标记，<span class="math inline">\(Y \in C=\{1,-1\}\)</span>。</p>
+<p>训练数据表</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">编号</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">12</th>
+<th style="text-align: center;">13</th>
+<th style="text-align: center;">14</th>
+<th style="text-align: center;">15</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(x^{(1)}\)</span></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(x^{(2)}\)</span></td>
+<td style="text-align: center;">S</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">S</td>
+<td style="text-align: center;">S</td>
+<td style="text-align: center;">S</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">L</td>
+<td style="text-align: center;">L</td>
+<td style="text-align: center;">L</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">L</td>
+<td style="text-align: center;">L</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Y</td>
+<td style="text-align: center;">-1</td>
+<td style="text-align: center;">-1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">-1</td>
+<td style="text-align: center;">-1</td>
+<td style="text-align: center;">-1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">-1</td>
+</tr>
+</tbody>
+</table>
+<p>2、</p>
+<p>（1）自编程实现朴素贝叶斯算法，对上述表格中训练数据进行分类。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    data = np.array([</span><br><span class="line">        [<span class="number">1</span>, <span class="string">'S'</span>, <span class="number">-1</span>], [<span class="number">1</span>, <span class="string">'M'</span>, <span class="number">-1</span>], [<span class="number">1</span>, <span class="string">'M'</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="string">'S'</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="string">'S'</span>, <span class="number">-1</span>],</span><br><span class="line">        [<span class="number">2</span>, <span class="string">'S'</span>, <span class="number">-1</span>], [<span class="number">2</span>, <span class="string">'M'</span>, <span class="number">-1</span>], [<span class="number">2</span>, <span class="string">'M'</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="string">'L'</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="string">'L'</span>, <span class="number">1</span>],</span><br><span class="line">        [<span class="number">3</span>, <span class="string">'L'</span>, <span class="number">1</span>], [<span class="number">3</span>, <span class="string">'M'</span>, <span class="number">1</span>], [<span class="number">3</span>, <span class="string">'M'</span>, <span class="number">1</span>], [<span class="number">3</span>, <span class="string">'L'</span>, <span class="number">1</span>], [<span class="number">3</span>, <span class="string">'L'</span>, <span class="number">-1</span>],</span><br><span class="line">    ])</span><br><span class="line"></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    贝叶斯估计实现</span></span><br><span class="line"><span class="string">    Begin</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="comment"># 平滑系数</span></span><br><span class="line">    lamd = <span class="number">0.2</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 把Y值转化为DF格式</span></span><br><span class="line">    y_df = pd.DataFrame(data[:, <span class="number">2</span>])</span><br><span class="line">    <span class="comment"># Y值的统计信息</span></span><br><span class="line">    y_value_count = pd.value_counts(y_df.iloc[:, <span class="number">0</span>])</span><br><span class="line">    <span class="comment"># 计算Y的类别数量</span></span><br><span class="line">    category = y_value_count.index.size</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 把X值转化为DF格式</span></span><br><span class="line">    x_df = pd.DataFrame(data[:, <span class="number">0</span>:data.shape[<span class="number">1</span>] - <span class="number">1</span>])</span><br><span class="line">    <span class="comment"># 保存X值的统计信息</span></span><br><span class="line">    x_value_count = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(x_df.shape[<span class="number">1</span>]):</span><br><span class="line">        item_count = pd.DataFrame(pd.value_counts(x_df.iloc[:, i]))</span><br><span class="line">        x_value_count.append(item_count)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 保存每列的情况</span></span><br><span class="line">    y_column_probability = &#123;&#125;</span><br><span class="line">    <span class="comment"># 计算Y的种类</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(y_value_count.index.size):</span><br><span class="line">        <span class="comment"># 当前Y的标签</span></span><br><span class="line">        y_key = y_value_count.index[i]</span><br><span class="line">        <span class="comment"># 当前Y的数量</span></span><br><span class="line">        y_count = y_value_count.iloc[i]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 获取Y=y_key的数据</span></span><br><span class="line">        x_data = pd.DataFrame(data[data[:, data.shape[<span class="number">1</span>] - <span class="number">1</span>] == y_key][:, [<span class="number">0</span>, data.shape[<span class="number">1</span>] - <span class="number">2</span>]])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 检查每一列的数据</span></span><br><span class="line">        x_column_item = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(x_data.shape[<span class="number">1</span>]):</span><br><span class="line">            x_column = pd.DataFrame(x_data.iloc[:, j])</span><br><span class="line">            <span class="comment"># 每列数据的种类</span></span><br><span class="line">            x_column_category = x_value_count[j]</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 计算每列数据中，每种数据的数量</span></span><br><span class="line">            x_column_sub_item = &#123;&#125;</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(x_column_category.index.size):</span><br><span class="line">                <span class="comment"># 数据的种类</span></span><br><span class="line">                key = x_column_category.index[k]</span><br><span class="line">                <span class="comment"># 对应的数量</span></span><br><span class="line">                size = x_column[x_column.iloc[:, <span class="number">0</span>] == key].size</span><br><span class="line">                <span class="comment"># x_column_sub_item[key] = size</span></span><br><span class="line">                x_column_sub_item[key] = (size + lamd) / (y_count + x_column_category.size * lamd)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 保存每个x的值</span></span><br><span class="line">            x_column_item[j] = x_column_sub_item</span><br><span class="line">        <span class="comment"># 保存每种Y的值</span></span><br><span class="line">        y_column_probability[y_key] = x_column_item</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 保存概率字典</span></span><br><span class="line">    y_probability = &#123;&#125;</span><br><span class="line">    <span class="comment"># 计算先验概率的贝叶斯估计</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(y_value_count.index.size):</span><br><span class="line">        y_probability[y_value_count.index[i]] = (y_value_count.iloc[i] + lamd) / ( y_df.size + y_value_count.index.size * lamd)</span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    贝叶斯估计实现</span></span><br><span class="line"><span class="string">    End</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line"></span><br><span class="line">    x = np.array([<span class="number">2</span>, <span class="string">'S'</span>])</span><br><span class="line">    p_positive = y_probability[<span class="string">'1'</span>] * y_column_probability[<span class="string">'1'</span>][<span class="number">0</span>][str(x[<span class="number">0</span>])] * y_column_probability[<span class="string">'1'</span>][<span class="number">1</span>][x[<span class="number">1</span>]]</span><br><span class="line">    p_negative = y_probability[<span class="string">'-1'</span>] * y_column_probability[<span class="string">'-1'</span>][<span class="number">0</span>][str(x[<span class="number">0</span>])] * y_column_probability[<span class="string">'-1'</span>][<span class="number">1</span>][x[<span class="number">1</span>]]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> p_positive &gt; p_negative:</span><br><span class="line">        print(<span class="string">'x is positive'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'x is negative'</span>)</span><br></pre></td></tr></table></figure>
+<p>（2）试分别调用sklearn.naive_bayes的GaussianNB、BernoulliNB,、MultinomialNB模块，对上述表格中训练数据进行分类。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.naive_bayes <span class="keyword">import</span> GaussianNB, BernoulliNB, MultinomialNB</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    data = np.array([</span><br><span class="line">        [<span class="number">1</span>, <span class="string">'S'</span>, <span class="number">-1</span>], [<span class="number">1</span>, <span class="string">'M'</span>, <span class="number">-1</span>], [<span class="number">1</span>, <span class="string">'M'</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="string">'S'</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="string">'S'</span>, <span class="number">-1</span>],</span><br><span class="line">        [<span class="number">2</span>, <span class="string">'S'</span>, <span class="number">-1</span>], [<span class="number">2</span>, <span class="string">'M'</span>, <span class="number">-1</span>], [<span class="number">2</span>, <span class="string">'M'</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="string">'L'</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="string">'L'</span>, <span class="number">1</span>],</span><br><span class="line">        [<span class="number">3</span>, <span class="string">'L'</span>, <span class="number">1</span>], [<span class="number">3</span>, <span class="string">'M'</span>, <span class="number">1</span>], [<span class="number">3</span>, <span class="string">'M'</span>, <span class="number">1</span>], [<span class="number">3</span>, <span class="string">'L'</span>, <span class="number">1</span>], [<span class="number">3</span>, <span class="string">'L'</span>, <span class="number">-1</span>],</span><br><span class="line">    ])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 数据</span></span><br><span class="line">    train_x = data[:, [<span class="number">0</span>, <span class="number">1</span>]]</span><br><span class="line">    <span class="comment"># 标签</span></span><br><span class="line">    train_y = data[:, <span class="number">2</span>].astype(np.int)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 批量替换</span></span><br><span class="line">    train_x[train_x == <span class="string">'S'</span>] = <span class="number">4</span></span><br><span class="line">    train_x[train_x == <span class="string">'M'</span>] = <span class="number">5</span></span><br><span class="line">    train_x[train_x == <span class="string">'L'</span>] = <span class="number">6</span></span><br><span class="line">    <span class="comment"># 类型转换</span></span><br><span class="line">    train_x = train_x.astype(np.int)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 测试数据</span></span><br><span class="line">    x = np.array([[<span class="number">2</span>, <span class="string">'S'</span>]])</span><br><span class="line">    x[x == <span class="string">'S'</span>] = <span class="number">4</span></span><br><span class="line">    x = x.astype(np.int)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 高斯朴素贝叶斯对象</span></span><br><span class="line">    gaussianNB = GaussianNB()</span><br><span class="line">    gaussianNB.fit(train_x, train_y)</span><br><span class="line">    print(<span class="string">'Gaussian Test X = '</span>, gaussianNB.predict(x))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 伯努利朴素贝叶斯</span></span><br><span class="line">    bernoulliNB = BernoulliNB()</span><br><span class="line">    bernoulliNB.fit(train_x, train_y)</span><br><span class="line">    print(<span class="string">'Bernoulli Test X = '</span>, bernoulliNB.predict(x))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 多项式朴素贝叶斯</span></span><br><span class="line">    multinomialNB = MultinomialNB()</span><br><span class="line">    multinomialNB.fit(train_x, train_y)</span><br><span class="line">    print(<span class="string">'Multinomial Test X = '</span>, multinomialNB.predict(x))</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>统计学习方法</category>
