@@ -532,14 +532,42 @@ if __name__ == '__main__':
     y_test = y_encoder.inverse_transform(y_test)
 
     print(y_test)
-
-
 ```
 
-# 参考资料
+# 工程实践
 
-[1] [决策树](https://www.cnblogs.com/molieren/articles/10664954.html)
+```python
+sklearn.tree.DecisionTreeClassifier(
+    criterion='gini', splitter='best', max_depth='None', 
+    min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0,
+    max_features=None, random_state=None, max_leaf_nodes=None,
+    min_impurity_decrease=0.0, class_weight=None, ccp_alpha=0.0
+)
+```
 
-[2] [机器学习实战（三）——决策树](https://blog.csdn.net/jiaoyangwm/article/details/79525237#3__680)
-
-[3] [【机器学习】决策树](https://zhuanlan.zhihu.com/p/85731206)
+1. criterion（类型：str，默认值：gini）：分类结点的度量指标。scikit-learn中支持2种度量指标，分别是：
+   - gini：基尼值数
+   - entropy：信息增益
+2. splitter（类型：str，默认值：best）：分类点的选择方式。scikit-learn中支持2种度量指标，分别是：
+   - best：选择最好的结点
+   - random：随机选择最好的结点
+3. max_depth（类型：int，默认值：None）：树的最大深度。
+4. min_samples_split（类型：int或float，默认值：2）：最小样本树的阈值。
+   - 参数为int：min_samples_split作为最小数量。
+   - 参数为float：min_samples_split * n_samples作为每个分割点的样本最小数量。
+5. min_samples_leaf（类型：int或float，默认值：1）：叶结点的最小样本数。
+   - 参数为int：min_samples_leaf作为最小数量。
+   - 参数为float：min_samples_leaf * n_samples作为每个叶结点的最小样本数。
+6. min_weight_fraction_leaf（类型：float，默认值：0.0）：叶节点的权重总和的最小加权分数。
+7. max_features（类型：int、float或str，默认值：None）：寻找最佳分割点时考虑的特征数。
+   - 参数为int：每个分割点考虑max_features个特征。
+   - 参数为float：每个分割点考虑int(max_features * n_features)个特征。
+   - 参数为auto：每个分割点考虑max_features=sqrt(n_features)个特征。
+   - 参数为sqrt：每个分割点考虑max_features=sqrt(n_features)个特征。
+   - 参数为log2：每个分割点考虑max_features=log2(n_features)个特征。
+   - 参数为None：每个分割点考虑max_features=n_features个特征。
+8. random_state（类型：int，默认值：None）：随机数种子。
+9. max_leaf_nodes（类型：int，默认值：None）：最大叶结点数量。
+10. min_impurity_decrease（类型：float，默认值：0.0）：分割点损失值的阈值。
+11. class_weight（类型：dict、 列表dict或"balanced"，默认值：None）：类别权重。
+12. ccp_alpha（类型：非负float，默认值：0.0）：惩罚项系数。
