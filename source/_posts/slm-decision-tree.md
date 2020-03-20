@@ -434,6 +434,108 @@ $$\alpha=\min (\alpha, g(t))$$
 >* 基尼指数的计算不需要对数运算，更加高效。
 >* 基尼指数更偏向于连续属性，熵更偏向于离散属性。
 
+# 作业
+
+1、证明CART剪枝算法中，当$\alpha$确定时，存在唯一的最小子树$T_{\alpha}$使损失函数$C_{\alpha}(T)$最小。
+
+反证法：假设最小子树不唯一，有2个最优子树。
+
+情况1：假设有两个最优子树$C_{\alpha}(T_{0})$和$C_{\alpha}(T_{1})$，并且$C_{\alpha}(T_{1})$由$C_{\alpha}(T_{0})$剪枝得到，所以就可以得到$C_{\alpha}(T_{1}) \leq C_{\alpha}(T_{0})$，所以就与有两个最优子树相矛盾。
+
+情况2：假设有两个最优子树$C_{\alpha}(T_{1})$和$C_{\alpha}(T_{2})$，并且由$C_{\alpha}(T_{0})$剪枝得到，那么也就是说同时把$C_{\alpha}(T_{1})$和$C_{\alpha}(T_{2})$剪掉可以得到比$C_{\alpha}(T_{1})$和$C_{\alpha}(T_{2})$更优子树，因此这与假设中的有两个最优子树相矛盾。
+
+所以与假设相矛盾，因此最优子树是唯一的。
+
+2、尝试调用sklearn.tree.DecisionTreeClassifier模块，训练数据集采用课本例题5.1的数据，判断是否应该批准下列人员的贷款申请。
+
+| ID | 年龄 | 有工作 | 有自己的房子 | 信贷情况 |
+| :---: | :---: | :---: | :---: | :---: |
+| 1 | 青年 | 否 | 是 | 一般 |
+| 2 | 中年 | 是 | 否 | 好 |
+| 3 | 老年 | 否 | 是 | 一般 |
+
+```python
+import numpy as np
+import pandas as pd
+
+from sklearn.tree import DecisionTreeClassifier, export_graphviz
+from sklearn.preprocessing import LabelEncoder
+import pydotplus
+
+if __name__ == '__main__':
+    train_data = pd.DataFrame([
+        [1, '青年', '否', '否', '一般', '否'],
+        [2, '青年', '否', '否', '好', '否'],
+        [3, '青年', '是', '否', '好', '是'],
+        [4, '青年', '是', '是', '一般', '是'],
+        [5, '青年', '否', '否', '一般', '否'],
+        [6, '中年', '否', '否', '一般', '否'],
+        [7, '中年', '否', '否', '好', '否'],
+        [8, '中年', '是', '是', '好', '是'],
+        [9, '中年', '否', '是', '非常好', '是'],
+        [10, '中年', '否', '是', '非常好', '是'],
+        [11, '老年', '否', '是', '非常好', '是'],
+        [12, '老年', '否', '是', '好', '是'],
+        [13, '老年', '是', '否', '好', '是'],
+        [14, '老年', '是', '否', '非常好', '是'],
+        [15, '老年', '否', '否', '一般', '否'],
+    ])
+
+    test_data = pd.DataFrame([
+        [1, '青年', '否', '是', '一般'],
+        [2, '中年', '是', '否', '好'],
+        [3, '老年', '否', '是', '一般'],
+    ])
+
+    # 获取训练数据的X和Y
+    x_train = train_data.iloc[:, 1:-1]
+    y_train = train_data.iloc[:, -1]
+    x_test = test_data.iloc[:, 1:test_data.shape[1]]
+
+    # 获取数据中的数据类别
+    x_unique = np.unique(x_train)
+    y_unique = np.unique(y_train)
+
+    # 标签编码预处理
+    x_encoder = LabelEncoder()
+    y_encoder = LabelEncoder()
+
+    # 拟合X和Y的标签
+    x_encoder.fit(x_unique)
+    y_encoder.fit(y_unique)
+
+    # 把Y转化为标签编码
+    y_train = y_encoder.transform(y_train)
+    # 把X转化为标签编码
+    for i in range(x_train.shape[1]):
+        x = x_train.iloc[:, i].values
+        value = x_encoder.transform(x_train.iloc[:, i])
+        data = dict(map(lambda x, y: [x, y], x, value))
+        x_train.iloc[:, i].replace(data, inplace=True)
+    x_train = x_train.values
+
+    # 把X转化为标签编码
+    for i in range(x_test.shape[1]):
+        x = x_test.iloc[:, i].values
+        value = x_encoder.transform(x_test.iloc[:, i])
+        data = dict(map(lambda x, y: [x, y], x, value))
+        x_test.iloc[:, i].replace(data, inplace=True)
+    x_test = x_test.values
+
+    # 创建分类器
+    clf = DecisionTreeClassifier()
+    # 训练数据拟合
+    clf.fit(x_train, y_train)
+    # 对测试数据进行预测
+    y_test = clf.predict(x_test)
+    # 反向获取描述
+    y_test = y_encoder.inverse_transform(y_test)
+
+    print(y_test)
+
+
+```
+
 # 参考资料
 
 [1] [决策树](https://www.cnblogs.com/molieren/articles/10664954.html)
