@@ -65,6 +65,9 @@
 <p>在C4.5算法中，决策树的构建是自上而下的，并且选择纯度最低的属性作为分类训练集的属性。这个属性的选择是通过考虑信息增益、剩余训练样本集的熵与对该属性值进行划分所引起的子集熵的加权和之间的差异来决定的。</p>
 <p><span class="math display">\[\text{gain}(S, A)=\text{entropy}(S)-\sum_{v \in A} \frac{\left|S_{v}\right|}{|S|} * \text{entropy}\left(S_{v}\right)\]</span></p>
 <p>其中<span class="math inline">\(A\)</span>表示结点属性，<span class="math inline">\(S\)</span>表示训练集样本，<span class="math inline">\(S_{v}\)</span>表示<span class="math inline">\(S\)</span>中属性<span class="math inline">\(A\)</span>的值为<span class="math inline">\(v\)</span>的子集。C4.5算法有很好的文档，并且代码是开源的，所以这使得算法得以扩展。</p>
+<p>对于C4.5和几乎所有其他学习方法来说，多个标签都是一个问题，因为这些算法希望每个示例都被标记为只属于一个类。但是，对于酵母来说，情况并非如此，一个基因可能属于几个不同的类别。对于单标签的案例来说，数据集中的每个实例的熵如下：</p>
+<p><span class="math display">\[\text {entropy}(S)=-\sum_{i=1}^{N} p\left(c_{i}\right) \log p\left(c_{i}\right)\]</span></p>
+<p>其中<span class="math inline">\(p\left(c_{i}\right)\)</span>是数据集中<span class="math inline">\(c_{i}\)</span>类别的概率。</p>
 ]]></content>
       <categories>
         <category>论文</category>
