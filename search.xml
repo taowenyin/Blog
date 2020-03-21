@@ -25,6 +25,46 @@
 </ol>
 <h1 id="实验方法">实验方法</h1>
 <h2 id="数据">数据</h2>
+<p>作者使用了三种不同的表型数据来源，分别是：TRIPLES（三元数据集）、EUROFAN和MIPS。</p>
+<ol type="1">
+<li>TRIPLES（三元数据集，插入的跳跃基因的表型、定位和表达）：通过在酵母菌基因组中随机插入跳跃基因，从而产生的数据集。</li>
+<li>EUROFAN（欧洲功能分析网络）：欧洲的一个大型研究网络，通过PCR介导的基因替换（用标记基因（KanMX）替换特定基因）建立了一个删除了突变体库。作者使用了来自EUROFAN 1的数据。</li>
+<li>MIPS（慕尼黑蛋白质序列信息中心）：该数据集包含酵母表型数据的目录。</li>
+</ol>
+<p>这三个数据源被连接在一起形成一个统一的数据集。表型数据具有属性值向量的形式，其中属性表示是酵母菌所生长介质，而属性值是观察到的突变体与野生型相比的敏感性或抗性，以及该类是基因的功能类。需要注意的是，由于某些突变体无法存活或未经测试，因此并非所有基因都有数据，同时并非针对每个基因都在所有生长的培养基进行了测试和记录，因此数据集中有很多缺失值。</p>
+<p>因此，属性值采用如下值：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">值</th>
+<th style="text-align: center;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">n</td>
+<td style="text-align: center;">没有数据</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">w</td>
+<td style="text-align: center;">野生型（无表型作用）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">s</td>
+<td style="text-align: center;">敏感（生长速度低于野生型）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">r</td>
+<td style="text-align: center;">抵抗性（生长速度高于野生型）</td>
+</tr>
+</tbody>
+</table>
+<p>该数据集共有69个属性，其中68个属性在各种生长培养基中（例如，钙氟白、咖啡因、山梨醇、苯菌灵），还有一个是该突变体对于多个培养基表现出反应的离散计数(即，在突变体中有多少属性的值为“s”或“r”)。</p>
+<h2 id="算法">算法</h2>
+<p>作者选择机器学习中的C4.5决策树来对表型数据进行分析。C4.5被认为是健壮并且高效的算法。C4.5的输出是一个决策树或等价于一组符号规则。使用这组符号规则可以对输出进行解释，并与现有的生物学知识进行比较，而其他机器学习方法（例如神经网络或支持向量机）无法做到。</p>
+<p>在C4.5算法中，决策树的构建是自上而下的，并且选择纯度最低的属性作为分类训练集的属性。这个属性的选择是通过考虑信息增益、剩余训练样本集的熵与对该属性值进行划分所引起的子集熵的加权和之间的差异来决定的。</p>
+<p><span class="math display">\[\text{gain}(S, A)=\text{entropy}(S)-\sum_{v \in A} \frac{\left|S_{v}\right|}{|S|} * \text{entropy}\left(S_{v}\right)\]</span></p>
+<p>其中<span class="math inline">\(A\)</span>表示结点属性，<span class="math inline">\(S\)</span>表示训练集样本，<span class="math inline">\(S_{v}\)</span>表示<span class="math inline">\(S\)</span>中属性<span class="math inline">\(A\)</span>的值为<span class="math inline">\(v\)</span>的子集。C4.5算法有很好的文档，并且代码是开源的，所以这使得算法得以扩展。</p>
 ]]></content>
       <categories>
         <category>论文</category>
@@ -149,9 +189,7 @@
 <p>对于处理连续值时，C4.5选择具有最高信息增益属性的属性值作为阈值。</p>
 <h3 id="处理缺省数据">处理缺省数据</h3>
 <p>当某个属性由于数据缺失，使得只有<span class="math inline">\(B\)</span>条样本，而总样本数为<span class="math inline">\(A\)</span>，那么最后算出的信息增益率为：</p>
-<p><span class="math display">\[\begin{equation}
-    \text { 某属性的信息增益率 }=\frac{B}{A}*\text { 某属性的实际信息增益率 }
-\end{equation}\]</span></p>
+<p><span class="math display">\[\text { 某属性的信息增益率 }=\frac{B}{A}*\text { 某属性的实际信息增益率 }\]</span></p>
 <h3 id="缺陷-1">缺陷</h3>
 <p>1、C4.5只能用于分类。</p>
 <p>2、熵模型中的对数运算、连续值、排序运算都消耗大量运算。</p>
