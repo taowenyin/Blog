@@ -68,3 +68,9 @@ categories: [论文, 多标签学习]
 $$\text{gain}(S, A)=\text{entropy}(S)-\sum_{v \in A} \frac{\left|S_{v}\right|}{|S|} * \text{entropy}\left(S_{v}\right)$$
 
 其中$A$表示结点属性，$S$表示训练集样本，$S_{v}$表示$S$中属性$A$的值为$v$的子集。C4.5算法有很好的文档，并且代码是开源的，所以这使得算法得以扩展。
+
+对于C4.5和几乎所有其他学习方法来说，多个标签都是一个问题，因为这些算法希望每个示例都被标记为只属于一个类。但是，对于酵母来说，情况并非如此，一个基因可能属于几个不同的类别。对于单标签的案例来说，数据集中的每个实例的熵如下：
+
+$$\text {entropy}(S)=-\sum_{i=1}^{N} p\left(c_{i}\right) \log p\left(c_{i}\right)$$
+
+其中$p\left(c_{i}\right)$是数据集中$c_{i}$类别的概率。
