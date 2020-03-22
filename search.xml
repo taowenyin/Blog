@@ -68,6 +68,13 @@
 <p>对于C4.5和几乎所有其他学习方法来说，多个标签都是一个问题，因为这些算法希望每个示例都被标记为只属于一个类。但是，对于酵母来说，情况并非如此，一个基因可能属于几个不同的类别。对于单标签的案例来说，数据集中的每个实例的熵如下：</p>
 <p><span class="math display">\[\text {entropy}(S)=-\sum_{i=1}^{N} p\left(c_{i}\right) \log p\left(c_{i}\right)\]</span></p>
 <p>其中<span class="math inline">\(p\left(c_{i}\right)\)</span>是数据集中<span class="math inline">\(c_{i}\)</span>类别的概率。</p>
+<p>对于多类问题，作者需要修改这个形式。熵是数据集中不确定性的一种度量。可以这样认为：给定一个数据集中的某项数据，需要多少信息来描述该项数据？这相当于询问需要多少个bit来描述它所属的所有类。</p>
+<p>为了估计这个值，作者将描述每个类的成员身份或非成员身份所需的位数相加（见附录）。在通常情况下，假设有<span class="math inline">\(N\)</span>个分类，每个分类<span class="math inline">\(c_{i}\)</span>的概率为<span class="math inline">\(p\left(c_{i}\right)\)</span>，描述该实例所需的bit数可以通过下式给出：</p>
+<p><span class="math display">\[-\sum_{i=1}^{N}\left(\left(p\left(c_{i}\right) \log p\left(c_{i}\right)\right)+\left(q\left(c_{i}\right) \log q\left(c_{i}\right)\right)\right)\]</span></p>
+<p>其中，<span class="math inline">\(p\left(c_{i}\right)\)</span>是类<span class="math inline">\(c_{i}\)</span>的概率（相对频率），<span class="math inline">\(q\left(c_{i}\right)=1-p\left(c_{i}\right)\)</span>是不属于类<span class="math inline">\(c_{i}\)</span>的概率。</p>
+<p>现在，根据某个属性划分后的新信息，可以计算为每个子集的熵的加权和（如上所述计算），其中，加权和的意思是指如果子集中的某一项属于多个类，那么它将会计算两次。</p>
+<p>假设每个示例有多个标签，那么决策树的叶结点就可能是一组类标签，即示例的分类结果可以是一组类。当标记决策树时，需要考虑到这一点，并且在修剪决策树时也要考虑到这一点。从决策树生成的规则出发，可以通过通用的方法来完成，除非叶结点是一组类，否则在C4.5算法中，在剪枝之前每个类都有一个单独的规则。因此，可以生成只输出一组类的规则，生成单独的规则是任意的选择，选择这些规则是为了结果的可理解性。</p>
+<h2 id="重采样">重采样</h2>
 ]]></content>
       <categories>
         <category>论文</category>
