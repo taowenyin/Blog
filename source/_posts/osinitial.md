@@ -364,6 +364,14 @@ sudo apt-get update
 sudo apt-get install sqlitebrowser
 ```
 
+## qBittorrent
+
+```bash
+sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable
+sudo apt-get update
+sudo apt-get install qbittorrent
+```
+
 ## MasterPDF
 
 [官网](https://code-industry.net/downloads/)
