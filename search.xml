@@ -2049,12 +2049,13 @@ W_{0}^{t+1}=W_{0}^{t}-\gamma_{t} \xi\left(y, \mathbf{x}^{*}\right) \mathbf{w}_{y
   <entry>
     <title>Anaconda环境下的ROS配置</title>
     <url>/ros-anaconda/</url>
-    <content><![CDATA[<p>1、安装Anaconda</p><p>2、创建Python2.7的环境catkin_ws（可以自行修改成需要的名字）</p><p>3、执行环境切换命令<code>source activate catkin_ws</code></p><p>4、安装相关依赖<code>pip install -U rospkg</code></p><p>5、在PyCharm中添加ros-python</p><p>（1）File-&gt;Settings-&gt;Project Interpreter-&gt;右边小齿轮-&gt;Show All-&gt;选中正在使用的python</p><a id="more"></a>
+    <content><![CDATA[<p>1、安装Anaconda</p><p>2、创建Python2.7的环境catkin_ws（可以自行修改成需要的名字）</p><p>3、执行环境切换命令<code>source activate catkin_ws</code></p><p>4、安装相关依赖</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip install -U rospkg</span><br><span class="line">conda install numpy</span><br><span class="line">conda install pyqt</span><br><span class="line">conda install pydot</span><br></pre></td></tr></table></figure><a id="more"></a>
 
 
 
 
-
+<p>5、在PyCharm中添加ros-python</p>
+<p>（1）File-&gt;Settings-&gt;Project Interpreter-&gt;右边小齿轮-&gt;Show All-&gt;选中正在使用的python</p>
 <p>（2）点击右边最下面的图标，打开Interpreter Path</p>
 <p>（3）添加<code>/opt/ros/indigo/lib/python2.7/dist-packages</code></p>
 <p>6、编写代码，所有的Python顶部必须添加<code>#!/usr/bin/env python</code></p>
