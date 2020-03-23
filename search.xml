@@ -2049,7 +2049,7 @@ W_{0}^{t+1}=W_{0}^{t}-\gamma_{t} \xi\left(y, \mathbf{x}^{*}\right) \mathbf{w}_{y
   <entry>
     <title>Anaconda环境下的ROS配置</title>
     <url>/ros-anaconda/</url>
-    <content><![CDATA[<p>1、安装Anaconda</p><p>2、创建Python2.7的环境catkin_ws（可以自行修改成需要的名字）</p><p>3、执行环境切换命令<code>source activate catkin_ws</code></p><p>4、安装相关依赖</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip install -U rospkg</span><br><span class="line">conda install numpy</span><br><span class="line">conda install pyqt</span><br><span class="line">conda install pydot</span><br></pre></td></tr></table></figure><a id="more"></a>
+    <content><![CDATA[<p>1、安装Anaconda</p><p>2、创建Python2.7的环境catkin_ws（可以自行修改成需要的名字）</p><p>3、执行环境切换命令<code>source activate catkin_ws</code></p><p>4、安装相关依赖</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip install -U rospkg</span><br><span class="line">conda install numpy</span><br><span class="line">conda install pyqt</span><br><span class="line">conda install pydot</span><br><span class="line">conda install pyqtgraph</span><br></pre></td></tr></table></figure><a id="more"></a>
 
 
 
