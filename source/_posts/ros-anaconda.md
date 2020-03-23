@@ -13,7 +13,14 @@ categories: [ROS]
 
 3、执行环境切换命令`source activate catkin_ws`
 
-4、安装相关依赖`pip install -U rospkg`
+4、安装相关依赖
+
+```python
+pip install -U rospkg
+conda install numpy
+conda install pyqt
+conda install pydot
+```
 
 5、在PyCharm中添加ros-python
 
