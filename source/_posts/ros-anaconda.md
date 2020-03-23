@@ -20,6 +20,7 @@ pip install -U rospkg
 conda install numpy
 conda install pyqt
 conda install pydot
+conda install pyqtgraph
 ```
 
 5、在PyCharm中添加ros-python
