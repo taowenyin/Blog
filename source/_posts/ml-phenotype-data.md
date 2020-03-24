@@ -107,7 +107,13 @@ bootstrap是一种重复采样并替换数据从而产生百个训练集的方�
 
 # 结果
 
-待完成
+作者试图用1999年9月27日的目录来学习MIPS功能层次结构中所有类的规则。制作了500次bootstrap采样，运行了500次C4.5算法，生成并测试了500个规则集。为了发现哪些规则是稳定可靠的，作者计算了500个规则集中每个规则出现的次数。在层次结构的第1层和第2层，许多类都生成了精确的稳定规则。在级别3和级别4（具有最少填充类的最特定级别）中，找不到有用的规则。也就是说，在较低的层次上，产生的规则很少，而且这些规则不是特别普遍或准确。
+
+好的规则一般都很简单，只需要一两个条件来区分类别。这是意料之中的，尤其是因为大多数突变株对少数培养基敏感/耐药。一些类比其他类更容易识别，例如，较好的预测规则类“CELLULAR BIOGENESIS”及其子类“biogenesis of cell wall (cell envelope)”。
+
+完整的规则集可以在http://users.aber.ac.uk/ajc99/phenotype/以及使用的数据集上看到。
+
+在第1级（功能目录中最一般的级别）出现最频繁的4个规则都是“CELLULAR BIOGENESIS”类。这些规律表明，对酵母酶或丘疹白蛋白-b的敏感性，或对钙氟-白的任何反应（敏感性或抗性）是突变株的一般特性，其缺失基因属于“CELLULAR BIOGENESIS”类。所有符合这些规则的正确基因实际上也属于“biogenesis of cell wall (cell envelope)”的亚类。这些规则比该类的先验概率所建议的类别要准确得多。
 
 # 讨论和结论
 
@@ -122,4 +128,14 @@ bootstrap是一种重复采样并替换数据从而产生百个训练集的方�
 
 # 附录：多类熵公式背后的推理
 
-待完成
+对于一个实例需要多少个bit才能描述所有类？一个简单的方法是使用bit串来表示，每个bit表示一个类。比如有4个类别$\{\mathbf{a}, \mathbf{b}, \mathbf{c}, \mathbf{d}\}$，假设一个实例属于类$\mathbf{b}$和$\mathbf{d}$，那么就可以通过$0101$来表示。但通常会比实际需要的更多。假设每个实例都属于类$\mathbf{b}$，在这种情况下，根本不需要第二位。或者假设75%的实例都属于类$\mathbf{b}$。那么就事先就知道一个例子更可能属于$\mathbf{b}$类而不是不属于$\mathbf{b}$类。通过实际了解信息是否属于所获得的预期信息量为：
+
+$$p\left ( \text{belongs}\right ) \cdot gain\left ( \text{belongs}\right )+p\left ( \text{doesn't belongs}\right ) \cdot gain\left ( \text{doesn't belongs}\right )$$
+
+其中$gain(x)$为$x$的信息增益。
+
+也就是说，如果上式计算出来的值为0.81，那么实际上只需要0.81位就可以表示所需要知道的额外信息，从而知道是否属于$\mathbf{b}$类。概括地说，实际上需要的是描述每个类的成员身份或非成员身份所需的额外信息的总和，而不是每个类一个位。因此，总结就是
+
+$$-\sum_{i=1}^{N}\left(\left(p\left(c_{i}\right) \log p\left(c_{i}\right)\right)+\left(q\left(c_{i}\right) \log q\left(c_{i}\right)\right)\right)$$
+
+其中$p\left(c_{i}\right)$表示属于$c_{i}$类的概率，$q\left(c_{i}\right)$表示不属于$c_{i}$类的概率。
