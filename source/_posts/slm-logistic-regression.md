@@ -7,6 +7,14 @@ tags:
 categories: [统计学习方法]
 ---
 
+# 综述
+
+逻辑斯谛回归模型与最大熵模型都是对数线性模型。
+
+所谓对数线性模型就是对模型两边取对数，就得到一个关于$w$和$x$的线性模型，即$\ln P(Y=c_{i}|X=x) = w_{i} \cdot x$。在逻辑斯谛回归模型中，对数模型是关于$x$的线性函数，而在最大熵模型中，对数模型是关于$x$函数的线性函数。
+
+逻辑斯谛回归模型与最大熵模型的区别在于，逻辑斯谛回归模型是判别模型，而最大熵模型是生成模型。因此在最大熵模型中不仅$Y$具有随机性，$X$也是一个随机变量，并对应这一个经验分布$\tilde{P}\left ( X\right )$。
+
 # 逻辑斯谛回归模型
 
 ## 逻辑斯谛分布
@@ -53,9 +61,9 @@ $$\operatorname{logit}(p)=\log \frac{p}{1-p}$$
 
 $$\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x$$
 
-从上式可以直到，在逻辑斯谛回归模型中，输出$Y=1$的对数几率是输入$x$的线性函数或者说输出$Y=1$的对数几率是由输入$x$的线性函数表示的。
+从上式可以知道，在逻辑斯谛回归模型中，输出$Y=1$的对数几率是输入$x$的线性函数或者说输出$Y=1$的对数几率是由输入$x$的线性函数表示的。
 
-同时，由
+**同时，由于$P(Y=1 | x)$的取值范围是$\left [ 0， 1\right ]$，但是在线性函数$w \cdot x$中不会规定$w$只能取某个范围内的值，因此$w \cdot x$的取值为$\left ( -\infty , +\infty \right )$，所以把$P(Y=1 | x)$取值区间和$w \cdot x$的取值区间进行对应变换的函数方法就叫做$\operatorname{logit}$函数（逻辑斯谛函数），因此就得到上式函数，并反解出下面的模型表达。**
 
 $$P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}$$
 
@@ -65,18 +73,22 @@ $$P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}$$
 
 给定训练数据集$T=\left\{\left(x_{1}, y_{1}\right),\left(x_{2}, y_{2}\right), \cdots, \left(x_{N}, y_{N}\right)\right\}$，其中$x_{i} \in \mathbf{R}^{n}$，$y_{i} \in\{0,1\}$，通过极大似然法估计模型参数，从而得到逻辑斯谛回归模型
 
-设
+由逻辑斯谛函数可以知道
 
 $$P(Y=1 | x)=\pi(x), P(Y=0 | x)=1-\pi(x)$$
 
-则似然函数为
+接下来就要求出$w$，在概率模型中，参数的求解大多用极大似然估计，即求样本的联合概率密度
 
-$$\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$$
+$$P_{w}\left ( y \mid x\right ) = \left[\pi\left(x\right)\right]^{y}\left[1-\pi\left(x\right)\right]^{1-y}$$
 
-则两边取对数可以得到似然函数
+对于$N$个样本来说，就可以得到
+
+$$\max L(w) = \prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}$$
+
+则两边取对数可以得到最大似然函数
 
 $$\begin{aligned}
-L(w) &=\sum_{i=1}^{N}\left[y_{i} \log \pi\left(x_{i}\right)+\left(1-y_{i}\right) \log \left(1-\pi\left(x_{i}\right)\right)\right] \\
+\max \ln L(w) &=\sum_{i=1}^{N}\left[y_{i} \log \pi\left(x_{i}\right)+\left(1-y_{i}\right) \log \left(1-\pi\left(x_{i}\right)\right)\right] \\
 &=\sum_{i=1}^{N}\left[y_{i} \log \frac{\pi\left(x_{i}\right)}{1-\pi\left(x_{i}\right)}+\log \left(1-\pi\left(x_{i}\right)\right)\right] \\
 &=\sum_{i=1}^{N}\left[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]\right.
 \end{aligned}$$
@@ -217,6 +229,8 @@ $$Z_{w}(x)=\sum_{y} \exp \left(\sum_{i=1}^{n} w_{i} f_{i}(x, y)\right)$$
 $Z_{w}(x)$称为规范化因子，$f_{i}(x, y)$是特征函数，$w_{i}$特征权值。并且模型$P_{w}=P_{w}(y | x)$就是最大熵模型，$w$是最大熵模型中的参数向量。
 
 > 第三步：求外部的极大化问题，得到$w^{*}$。
+
+$$w=\arg \max L_{\tilde{P}}\left(P_{w}\right)=\log \prod_{x, y} P(y | x)^{\tilde{P}(x, y)}$$
 
 所以$P^{*}=P_{w^{*}}=P_{w^{*}}(y | x)$就是学习得到的最优模型。
 
