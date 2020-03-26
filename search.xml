@@ -3,11 +3,15 @@
   <entry>
     <title>S6-逻辑斯谛回归与最大熵模型</title>
     <url>/slm-logistic-regression/</url>
-    <content><![CDATA[<h1 id="逻辑斯谛回归模型">逻辑斯谛回归模型</h1><h2 id="逻辑斯谛分布">逻辑斯谛分布</h2><p>设<span class="math inline">\(X\)</span>是连续随机变量，<span class="math inline">\(X\)</span>服从逻辑斯谛分布是指<span class="math inline">\(X\)</span>具有如下的分布函数和密度函数：</p><p><span class="math display">\[F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}\]</span></p><p><span class="math display">\[f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}\]</span></p><a id="more"></a>
+    <content><![CDATA[<h1 id="综述">综述</h1><p>逻辑斯谛回归模型与最大熵模型都是对数线性模型。</p><p>所谓对数线性模型就是对模型两边取对数，就得到一个关于<span class="math inline">\(w\)</span>和<span class="math inline">\(x\)</span>的线性模型，即<span class="math inline">\(\ln P(Y=c_{i}|X=x) = w_{i} \cdot x\)</span>。在逻辑斯谛回归模型中，对数模型是关于<span class="math inline">\(x\)</span>的线性函数，而在最大熵模型中，对数模型是关于<span class="math inline">\(x\)</span>函数的线性函数。</p><a id="more"></a>
 
 
-
-
+<p>逻辑斯谛回归模型与最大熵模型的区别在于，逻辑斯谛回归模型是判别模型，而最大熵模型是生成模型。因此在最大熵模型中不仅<span class="math inline">\(Y\)</span>具有随机性，<span class="math inline">\(X\)</span>也是一个随机变量，并对应这一个经验分布<span class="math inline">\(\tilde{P}\left ( X\right )\)</span>。</p>
+<h1 id="逻辑斯谛回归模型">逻辑斯谛回归模型</h1>
+<h2 id="逻辑斯谛分布">逻辑斯谛分布</h2>
+<p>设<span class="math inline">\(X\)</span>是连续随机变量，<span class="math inline">\(X\)</span>服从逻辑斯谛分布是指<span class="math inline">\(X\)</span>具有如下的分布函数和密度函数：</p>
+<p><span class="math display">\[F(x)=P(X \leqslant x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}\]</span></p>
+<p><span class="math display">\[f(x)=F^{\prime}(x)=\frac{\mathrm{e}^{-(x-\mu) / \gamma}}{\gamma\left(1+\mathrm{e}^{-(x-\mu) / \gamma}\right)^{2}}\]</span></p>
 <p>其中<span class="math inline">\(\mu\)</span>为位置参数，<span class="math inline">\(\gamma&gt;0\)</span>为形状参数。</p>
 <img src="/slm-logistic-regression/logistic-func.png" class title="逻辑斯谛密度和分布函数">
 <p>图1：逻辑斯谛密度和分布函数</p>
@@ -26,19 +30,21 @@
 <p><span class="math display">\[\operatorname{logit}(p)=\log \frac{p}{1-p}\]</span></p>
 <p>而在逻辑斯谛回归模型中，由<span class="math inline">\(P(Y=1 | x)\)</span>和<span class="math inline">\(P(Y=0 | x)\)</span>两个模型可以得到</p>
 <p><span class="math display">\[\log \frac{P(Y=1 | x)}{1-P(Y=1 | x)}=w \cdot x\]</span></p>
-<p>从上式可以直到，在逻辑斯谛回归模型中，输出<span class="math inline">\(Y=1\)</span>的对数几率是输入<span class="math inline">\(x\)</span>的线性函数或者说输出<span class="math inline">\(Y=1\)</span>的对数几率是由输入<span class="math inline">\(x\)</span>的线性函数表示的。</p>
-<p>同时，由</p>
+<p>从上式可以知道，在逻辑斯谛回归模型中，输出<span class="math inline">\(Y=1\)</span>的对数几率是输入<span class="math inline">\(x\)</span>的线性函数或者说输出<span class="math inline">\(Y=1\)</span>的对数几率是由输入<span class="math inline">\(x\)</span>的线性函数表示的。</p>
+<p><strong>同时，由于<span class="math inline">\(P(Y=1 | x)\)</span>的取值范围是<span class="math inline">\(\left [ 0， 1\right ]\)</span>，但是在线性函数<span class="math inline">\(w \cdot x\)</span>中不会规定<span class="math inline">\(w\)</span>只能取某个范围内的值，因此<span class="math inline">\(w \cdot x\)</span>的取值为<span class="math inline">\(\left ( -\infty , +\infty \right )\)</span>，所以把<span class="math inline">\(P(Y=1 | x)\)</span>取值区间和<span class="math inline">\(w \cdot x\)</span>的取值区间进行对应变换的函数方法就叫做<span class="math inline">\(\operatorname{logit}\)</span>函数（逻辑斯谛函数），因此就得到上式函数，并反解出下面的模型表达。</strong></p>
 <p><span class="math display">\[P(Y=1 | x)=\frac{\exp (w \cdot x)}{1+\exp (w \cdot x)}\]</span></p>
 <p>可以知道，<strong>当线性函数<span class="math inline">\(w \cdot x\)</span>的值越接近正无穷，那么概率值就越接近1；而当线性函数<span class="math inline">\(w \cdot x\)</span>的值越接近负无穷，那么概率值就越接近0（与Sigmoid激活函数的性质相同）。</strong></p>
 <h2 id="模型参数估计">模型参数估计</h2>
 <p>给定训练数据集<span class="math inline">\(T=\left\{\left(x_{1}, y_{1}\right),\left(x_{2}, y_{2}\right), \cdots, \left(x_{N}, y_{N}\right)\right\}\)</span>，其中<span class="math inline">\(x_{i} \in \mathbf{R}^{n}\)</span>，<span class="math inline">\(y_{i} \in\{0,1\}\)</span>，通过极大似然法估计模型参数，从而得到逻辑斯谛回归模型</p>
-<p>设</p>
+<p>由逻辑斯谛函数可以知道</p>
 <p><span class="math display">\[P(Y=1 | x)=\pi(x), P(Y=0 | x)=1-\pi(x)\]</span></p>
-<p>则似然函数为</p>
-<p><span class="math display">\[\prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}\]</span></p>
-<p>则两边取对数可以得到似然函数</p>
+<p>接下来就要求出<span class="math inline">\(w\)</span>，在概率模型中，参数的求解大多用极大似然估计，即求样本的联合概率密度</p>
+<p><span class="math display">\[P_{w}\left ( y \mid x\right ) = \left[\pi\left(x\right)\right]^{y}\left[1-\pi\left(x\right)\right]^{1-y}\]</span></p>
+<p>对于<span class="math inline">\(N\)</span>个样本来说，就可以得到</p>
+<p><span class="math display">\[\max L(w) = \prod_{i=1}^{N}\left[\pi\left(x_{i}\right)\right]^{y_{i}}\left[1-\pi\left(x_{i}\right)\right]^{1-y_{i}}\]</span></p>
+<p>则两边取对数可以得到最大似然函数</p>
 <p><span class="math display">\[\begin{aligned}
-L(w) &amp;=\sum_{i=1}^{N}\left[y_{i} \log \pi\left(x_{i}\right)+\left(1-y_{i}\right) \log \left(1-\pi\left(x_{i}\right)\right)\right] \\
+\max \ln L(w) &amp;=\sum_{i=1}^{N}\left[y_{i} \log \pi\left(x_{i}\right)+\left(1-y_{i}\right) \log \left(1-\pi\left(x_{i}\right)\right)\right] \\
 &amp;=\sum_{i=1}^{N}\left[y_{i} \log \frac{\pi\left(x_{i}\right)}{1-\pi\left(x_{i}\right)}+\log \left(1-\pi\left(x_{i}\right)\right)\right] \\
 &amp;=\sum_{i=1}^{N}\left[y_{i}\left(w \cdot x_{i}\right)-\log \left(1+\exp \left(w \cdot x_{i}\right)\right]\right.
 \end{aligned}\]</span></p>
@@ -125,6 +131,7 @@ L(P, w) \equiv &amp;-H(P)+w_{0}\left(1-\sum_{y} P(y | x)\right)+\sum_{i=1}^{n} w
 <blockquote>
 <p>第三步：求外部的极大化问题，得到<span class="math inline">\(w^{*}\)</span>。</p>
 </blockquote>
+<p><span class="math display">\[w=\arg \max L_{\tilde{P}}\left(P_{w}\right)=\log \prod_{x, y} P(y | x)^{\tilde{P}(x, y)}\]</span></p>
 <p>所以<span class="math inline">\(P^{*}=P_{w^{*}}=P_{w^{*}}(y | x)\)</span>就是学习得到的最优模型。</p>
 <h2 id="极大似然估计">极大似然估计</h2>
 <p><strong>对偶函数的极大化等价于最大熵模型的极大似然估计，</strong> 证明如下：</p>
