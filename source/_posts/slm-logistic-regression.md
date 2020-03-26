@@ -219,3 +219,64 @@ $Z_{w}(x)$称为规范化因子，$f_{i}(x, y)$是特征函数，$w_{i}$特征�
 > 第三步：求外部的极大化问题，得到$w^{*}$。
 
 所以$P^{*}=P_{w^{*}}=P_{w^{*}}(y | x)$就是学习得到的最优模型。
+
+## 极大似然估计
+
+**对偶函数的极大化等价于最大熵模型的极大似然估计，** 证明如下：
+
+已知训练数据的经验概率分布$\tilde{P}(X, Y)$，条件概率分布$P(Y | X)$的对数似然函数可以表示为
+
+$$L_{\tilde{P}}\left(P_{w}\right)=\log \prod_{x, y} P(y | x)^{\tilde{P}(x, y)}=\sum_{x, y} \tilde{P}(x, y) \log P(y | x)$$
+
+> 对上式的推导
+
+最大似然函数的一般形式是样本集$X$中各个样本的联合概率
+
+$$L\left(x_{1}, x_{2}, \ldots, x_{n} ; \theta\right)=\prod_{i=1}^{n} p\left(x_{i} ; \theta\right)$$
+
+假设样本集的大小为$n$个，$X$的取值有$k$个，分别是$v_{1}, v_{2}, \dots, v_{k}$，$C\left(X=v_{i}\right)$表示在观测值中样本$v_{i}$出现的频率，所以$L\left(x_{1}, x_{2}, \ldots, x_{n} ; \theta\right)$可以表示为
+
+$$L\left(x_{1}, x_{2}, \ldots, x_{n} ; \theta\right)=\prod_{i=1}^{k} p\left(v_{i} ; \theta\right)^{C\left(X=v_{i}\right)}$$
+
+对等式两边同时开$n$次方，得到
+
+$$L\left(x_{1}, x_{2}, \ldots, x_{n} ; \theta\right)^{\frac{1}{n}}=\prod_{i=1}^{k} p\left(v_{i} ; \theta\right)^{\frac{\mathcal{C}\left(X=v_{i}\right)}{n}}$$
+
+因为经验概率$\tilde{p}(x)=\frac{C\left(X=v_{i}\right)}{n}$，所以上式可以改写为
+
+$$L\left(x_{1}, x_{2}, \ldots, x_{n} ; \theta\right)^{\frac{1}{n}}=\prod_{i=1}^{k} p\left(v_{i} ; \theta\right)^{\tilde{p}(x)}$$
+
+由于求$L\left(x_{1}, x_{2}, \ldots, x_{n} ; \theta\right)$最大值和求$L\left(x_{1}, x_{2}, \ldots, x_{n} ; \theta\right)^{\frac{1}{n}}$最大值相同，因此上式可以表示为
+
+$$L\left(x ; \theta\right)=\prod_{i=1}^{k} p\left(v_{i} ; \theta\right)^{\tilde{p}(x)}$$
+
+因此，对$L_{\tilde{P}}\left(P_{w}\right)$两边取对数，就可以得到
+
+$$L_{\tilde{P}}\left(P_{w}\right)=\log \prod_{x, y} P(y | x)^{\tilde{P}(x, y)}=\sum_{x, y} \tilde{P}(x, y) \log P(y | x)$$
+
+把最大熵模型
+
+$$P_{w}(y | x)=\frac{1}{Z_{w}(x)} \exp \left(\sum_{i=1}^{n} w_{i} f_{i}(x, y)\right)$$
+
+代入上式$L_{\tilde{P}}\left(P_{w}\right)$，可以得到
+
+$$\begin{aligned}
+L_{\tilde{P}}\left(P_{w}\right) &=\sum_{x, y} \tilde{P}(x, y) \log P(y | x) \\
+&=\sum_{x, y} \tilde{P}(x, y) \log \left( \frac{1}{Z_{w}(x)} \exp \left(\sum_{i=1}^{n} w_{i} f_{i}(x, y)\right) \right) \\
+&=\sum_{x, y} \tilde{P}(x, y) \sum_{i=1}^{n} w_{i} f_{i}(x, y)-\sum_{x, y} \tilde{P}(x, y) \log Z_{w}(x) \\
+&=\sum_{x, y} \tilde{P}(x, y) \sum_{i=1}^{n} w_{i} f_{i}(x, y)-\sum_{x} \tilde{P}(x) \log Z_{w}(x)
+\end{aligned}$$
+
+**由对偶函数可以得到（没懂）**
+
+因为$\sum_{y} P(y | x)=1$，所以
+
+$$\begin{aligned}
+\Psi(w)=& \sum_{x, y} \tilde{P}(x) P(y | x) \log P(y | x)+w_{0}\left(1-\sum_{y} P(y | x)\right)+ \sum_{i=1}^{n} w_{i}\left(\sum_{x, y} \tilde{P}(x, y) f_{i}(x, y)-\sum_{x, y} \tilde{P}(x) P(y | x) f_{i}(x, y)\right)\\
+=& \sum_{x, y} \tilde{P}(x) P_{w}(y | x) \log P_{w}(y | x)+ \sum_{i=1}^{n} w_{i}\left(\sum_{x, y} \tilde{P}(x, y) f_{i}(x, y)-\sum_{x, y} \tilde{P}(x) P_{w}(y | x) f_{i}(x, y)\right)\\
+=& \sum_{x, y} \tilde{P}(x, y) \sum_{i=1}^{n} w_{i} f_{i}(x, y)+\sum_{x, y} \tilde{P}(x) P_{w}(y | x)\left(\log P_{w}(y | x)-\sum_{i=1}^{n} w_{i} f_{i}(x, y)\right) \\
+=& \sum_{x, y} \tilde{P}(x, y) \sum_{i=1}^{n} w_{i} f_{i}(x, y)-\sum_{x, y} \tilde{P}(x) P_{w}(y | x) \log Z_{w}(x) \\
+=& \sum_{x, y} \tilde{P}(x, y) \sum_{i=1}^{n} w_{i} f_{i}(x, y)-\sum_{x} \tilde{P}(x) \log Z_{w}(x)
+\end{aligned}$$
+
+**证明得到对偶函数的极大化等价于最大熵模型的极大似然估计。**
