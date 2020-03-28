@@ -449,3 +449,41 @@ if __name__ == '__main__':
     end = time.time()
     print('用时：{:.3f}s'.format(end - star))
 ```
+
+# 工程实践
+
+```python
+sklearn.linear_model.LogisticRegression(
+    penalty='l2', dual=False, tol=0.0001, C=1.0, 
+    fit_intercept=True, intercept_scaling=1, class_weight=None, 
+    random_state=None, solver='lbfgs', max_iter=100, multi_class='auto', 
+    verbose=0, warm_start=False, n_jobs=None, l1_ratio=None)
+```
+
+1. penalty（类型：str，默认值：l2）：正则化项。scikit-learn中支持4种正则化项，分别是：
+   - l1：L1正则化项。
+   - l2：“newton-cg“、“sag“、“lbfgs“求解器只支持L2正则化项。
+   - elasticnet：该正则化项值支持”saga“求解器。
+   - none：不是用正则化项，但“liblinear”求解器不支持该属性值。
+2. dual（类型：bool，默认值：False）：使用对偶或者原始形式。对偶形式只在“liblinear”求解器的L2正则化项时才有效。当样本数>特征数时，属性值建议为False。
+3. tol（类型：float，默认值：1e-4）：迭代终止的阈值。
+4. C（类型：float，默认值：1.0）：正则化系数的倒数。
+5. fit_intercept（类型：bool，默认值：True）：是否有截距。
+6. intercept_scaling（类型：float，默认值：1）：当求解器是“liblinear”，并且fit_intercept为True时，该属性才有效。此时$x$就变成[x, self.intercept_scaling]，即合成特征。此时截距就变成intercept_scaling * synthetic_feature_weight。
+7. class_weight（类型：dict、 列表dict或"balanced"，默认值：None）：类别权重。
+8. random_state（类型：int，默认值：None）：随机数种子。
+9. solver（类型：str，默认值：lbfgs）：求解器。
+   - newton-cg：可以处理多类问题，并支持多项损失函数。支持L2正则化项或没有正则化项。
+   - lbfgs：支持L2正则化项或没有正则化项。
+   - liblinear：小数据集，该求解器更好。可以处理多类问题，但只支持OVR模式。支持L1正则化项，但不支持没有正则化项。
+   - sag（随机平均梯度下降求解器，Stochastic Average Gradient descent solver）：大数据集，该求解器更好。可以处理多类问题，并支持多项损失函数。支持L2正则化项或没有正则化项。
+   - saga：大数据集，该求解器更好。可以处理多类问题，并支持多项损失函数。支持L2、L1、elasticnet正则化项或没有正则化项。
+10. max_iter（类型：int，默认值：100）：最大迭代次数。
+11. multi_class（类型：str，默认值：auto）：多分类的方式。
+    - auto：当是二分类或求解器为liblinear时，采用OVR。其他情况采用multinomial。
+    - ovr：
+    - multinomial：
+12. verbose（类型：int，默认值：0）：对于liblinear和lbfgs解算器，该值可以是任何正数。
+13. warm_start（类型：bool，默认值：False）：当为False时，每次调用该函数会擦出前一次得到的参数，如果是True，那么会利用前一次的值进行初始化，但对于liblinear求解器无效。
+14. n_jobs（类型：int，默认值：None）：当multi_class为ovr时采用并行计算。当如果是liblinear求解器，那么该参数无效。
+15. l1_ratio（类型：float，默认值：None）：取值范围是$\left [ 0,1 \right ]$之间。只有到正则化项为“elasticnet”时，该参数才有效。该参数为0时，等价于L2正则化。该值为1时，等价于L1正则化。
