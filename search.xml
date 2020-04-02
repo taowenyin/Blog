@@ -1,6 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>S7-支持向量机</title>
+    <url>/slm-svm/</url>
+    <content><![CDATA[<p>支持向量机学习方法包含构建由简至繁的模型，分别是线性可分支持向量机、线性支持向量机，以及非线性支持向量机。简单模型是复杂模型的基础，也是复杂模型的特殊情况。</p><ol type="1">
+<li>当训练数据线性可分时，通过硬间隔最大化，学习一个线性的分类器，即线性可分支持向量机，又称为硬间隔支持向量机。</li>
+<li>当训练数据近似线性可分时，通过软间隔最大化，学习一个线性的分类器，即线性支持向量机，又称为软间隔支持向量机。</li>
+<li>当训练数据线性不可分时，通过使用核技巧和软间隔最大化，学习一个非线性支持向量机。</li>
+</ol><a id="more"></a>
+
+<p>核函数（kernel function）表示将输入从输入空间映射到特征空间得到的特征向量得到的特征向量之间的内积。<strong>通过使用核函数可以学习非线性支持向量机，等价于隐式第在高维的特征空间中学习线性支持向量机。核方法是比支持向量机更为一般的机器学习方法。</strong></p>
+<h1 id="线性可分支持向量机与硬间隔最大化">线性可分支持向量机与硬间隔最大化</h1>
+<h2 id="线性可分支持向量机">线性可分支持向量机</h2>
+<p>假设给定一个特征空间上的训练数据集</p>
+<p><span class="math display">\[T=\left\{\left(x_{1}, y_{1}\right),\left(x_{2}, y_{2}\right), \cdots,\left(x_{N}, y_{N}\right)\right\}\]</span></p>
+<p>其中，<span class="math inline">\(x_{i} \in \mathcal{X}=\mathbf{R}^{n}\)</span>，<span class="math inline">\(y_{i} \in \mathcal{Y}=\{+1,-1\}\)</span>，<span class="math inline">\(i=1,2, \cdots, N\)</span>。<span class="math inline">\(x_{i}\)</span>为第<span class="math inline">\(i\)</span>个特征向量，<span class="math inline">\(y_{i}\)</span>为<span class="math inline">\(x_{i}\)</span>的类标记。当<span class="math inline">\(y_{i}=+1\)</span>时，<span class="math inline">\(x_{i}\)</span>为正例，当<span class="math inline">\(y_{i}=-1\)</span>时，<span class="math inline">\(x_{i}\)</span>为负例。</p>
+<p><strong>学习的目标是在特征空间找到一个分离超平面，能将实例分到不同的类。</strong> 分离超平面对应于方程<span class="math inline">\(w \cdot x+b=0\)</span>，其中<span class="math inline">\(w\)</span>是法向量，<span class="math inline">\(b\)</span>是截距，可用<span class="math inline">\((w, b)\)</span>表示。分离超平面将特征空间分为两部分，法向量指向的一则为正类，另一侧为负类。</p>
+<h2 id="函数间隔和几何间隔">函数间隔和几何间隔</h2>
+<h3 id="函数间隔">函数间隔</h3>
+<p>一个点距离超平面的远近可以表示为分类预测的置信度。在超平面<span class="math inline">\(w \cdot x+b=0\)</span>确定的情况下，<span class="math inline">\(|w \cdot x+b|\)</span>表示点<span class="math inline">\(x\)</span>距离超平面的远近，而<span class="math inline">\(w \cdot x+b=0\)</span>的符号与<span class="math inline">\(y\)</span>的符号是否一致表示分类是否正确，<strong>可以用<span class="math inline">\(y(w \cdot x+b)\)</span>来表示分类的正确性和置信度，即该函数就是函数间隔。</strong></p>
+<p>对于给定训练数据集<span class="math inline">\(T\)</span>和超平面<span class="math inline">\((w, b)\)</span>，那么超平面关于样本点<span class="math inline">\(\left(x_{i}, y_{i}\right)\)</span>的函数间隔为</p>
+<p><span class="math display">\[\hat{\gamma}_{i}=y_{i}\left(w \cdot x_{i}+b\right)\]</span></p>
+<p>因此超平面关于训练数据<span class="math inline">\(T\)</span>的函数间隔为超平面关于<span class="math inline">\(T\)</span>中所有样本<span class="math inline">\(\left(x_{i}, y_{i}\right)\)</span>的函数间隔的最小值</p>
+<p><span class="math display">\[\hat{\gamma}=\min _{i=1, \cdots, N} \hat{\gamma}_{i}\]</span></p>
+<h3 id="几何间隔">几何间隔</h3>
+<p>由于函数间隔会因为<span class="math inline">\(w\)</span>和<span class="math inline">\(b\)</span>的等比例缩放发生改变，<strong>因此就需要对法向量<span class="math inline">\(w\)</span>进行约束，如<span class="math inline">\(\|w\|=1\)</span>，从而使得间隔固定，该间隔就是几何间隔。</strong></p>
+<p>对于给定训练数据集<span class="math inline">\(T\)</span>和超平面<span class="math inline">\((w, b)\)</span>，那么超平面关于样本点<span class="math inline">\(\left(x_{i}, y_{i}\right)\)</span>的几何间隔为</p>
+<p><span class="math display">\[\gamma_{i}=y_{i}\left(\frac{w}{\|w\|} \cdot x_{i}+\frac{b}{\|w\|}\right)\]</span></p>
+<p>因此超平面关于训练数据<span class="math inline">\(T\)</span>的几何间隔为超平面关于<span class="math inline">\(T\)</span>中所有样本<span class="math inline">\(\left(x_{i}, y_{i}\right)\)</span>的几何间隔的最小值</p>
+<p><span class="math display">\[\gamma=\min _{i=1, \cdots, N} \gamma_{i}\]</span></p>
+<p>因此，可以得到函数间隔<span class="math inline">\(\hat{\gamma}\)</span>和几何间隔<span class="math inline">\(\gamma\)</span>关系为：</p>
+<p><span class="math display">\[\gamma=\frac{\hat{\gamma}}{\|w\|}\]</span></p>
+<p>如果<span class="math inline">\(\|w\|=1\)</span>，那么函数间隔和几何间隔相同，如果<span class="math inline">\(w\)</span>和<span class="math inline">\(b\)</span>的等比例缩放，那么函数间隔也会按比例改变，但是几何间隔不变。</p>
+<h2 id="间隔最大化">间隔最大化</h2>
+<h3 id="最大间隔分离超平面">最大间隔分离超平面</h3>
+<p>最大间隔分离超平面可以表示为下面的约束问题：</p>
+<p><span class="math display">\[\begin{aligned} 
+\underset{w,b}{max} &amp; \quad \gamma \\
+\text { s.t. } &amp; \quad y_{i}\left(\frac{w}{\|w\|} \cdot x_{i}+\frac{b}{\|w\|}\right) \geqslant \gamma, i=1,2, \cdots, N
+\end{aligned}\]</span></p>
+<p>其中约束条件表示超平面<span class="math inline">\((w, b)\)</span>关于每个训练样本点的几何间隔至少为<span class="math inline">\(\gamma\)</span>。如果改写为函数间隔，即</p>
+<p><span class="math display">\[\begin{aligned} 
+\underset{w,b}{max} &amp; \quad \frac{\hat{\gamma}}{\|w\|} \\
+\text { s.t. } &amp; \quad y_{i}\left(w \cdot x_{i}+b\right) \geqslant \hat{\gamma}, i=1,2, \cdots, N
+\end{aligned}\]</span></p>
+<p>当<span class="math inline">\(\hat{\gamma}=1\)</span>，则优化问题就变为</p>
+<p><span class="math display">\[\begin{aligned} 
+\underset{w,b}{max} &amp; \quad \frac{1}{\|w\|} \\
+\text { s.t. } &amp; \quad y_{i}\left(w \cdot x_{i}+b\right) - 1 \geqslant 0, i=1,2, \cdots, N
+\end{aligned}\]</span></p>
+<p>由因为最大化<span class="math inline">\(\frac{1}{\|w\|}\)</span>就等价于最小化<span class="math inline">\(\frac{1}{2}\|w\|^{2}\)</span>，因此，最大化优化问题就变成了最小化优化问题。</p>
+<p><span class="math display">\[\begin{aligned} 
+\underset{w,b}{min} &amp; \quad \frac{1}{2}\|w\|^{2} \\
+\text { s.t. } &amp; \quad y_{i}\left(w \cdot x_{i}+b\right) - 1 \geqslant 0, i=1,2, \cdots, N
+\end{aligned}\]</span></p>
+<p>上面的优化问题就是一个凸二次规划问题。求出约束最优化问题的解<span class="math inline">\(w^{*}\)</span>和<span class="math inline">\(b^{*}\)</span>就可以得到最大间隔超平面<span class="math inline">\(w^{*} \cdot x+b^{*}=0\)</span>和分类决策函数<span class="math inline">\(f(x)=\operatorname{sign}\left(w^{*} \cdot x+b^{*}\right)\)</span>。</p>
+<p><strong>定理：若训练数据集<span class="math inline">\(T\)</span>线性可分，则可将训练数据集中的样本点完全正确分开的最大间隔分离超平面存在且唯一。</strong></p>
+<h3 id="支持向量和间隔边界">支持向量和间隔边界</h3>
+<p><strong>训练数据集的样本点中与分离超平面距离最近的样本点的实例称为支持向量。</strong> 支持向量的约束条件为</p>
+<p><span class="math display">\[y_{i}\left(w \cdot x_{i}+b\right)-1=0\]</span></p>
+<p>当<span class="math inline">\(y_{i}=+1\)</span>的正实例点，则支持向量的超平面为</p>
+<p><span class="math display">\[H_{1}: w \cdot x+b=1\]</span></p>
+<p>当<span class="math inline">\(y_{i}=-1\)</span>的正实例点，则支持向量的超平面为</p>
+<p><span class="math display">\[H_{2}: w \cdot x+b=-1\]</span></p>
+<p><span class="math inline">\(H_{1}\)</span>和<span class="math inline">\(H_{2}\)</span>平行，并没有实例点落在他们之间。<span class="math inline">\(H_{1}\)</span>和<span class="math inline">\(H_{2}\)</span>之间称为间隔。由于间隔至于法向量<span class="math inline">\(w\)</span>相关，因此当<span class="math inline">\(\hat{\gamma}=1\)</span>时，间隔为<span class="math inline">\(\frac{2}{\|w\|}\)</span>。</p>
+<h2 id="学习的对偶算法">学习的对偶算法</h2>
+<p><strong>采用对偶算法的优点：对偶问题往往更容易求解，同时对偶算法自然引入核函数，可以推广到非线性分类问题。</strong></p>
+<p>构建拉格朗日函数。对不等式约束引入拉格朗日乘子<span class="math inline">\(\alpha_{i} \geqslant 0\)</span>，<span class="math inline">\(i=1,2, \cdots, N\)</span>，则根据约束</p>
+<p><span class="math display">\[\begin{aligned} 
+\underset{w,b}{min} &amp; \quad \frac{1}{2}\|w\|^{2} \\
+\text { s.t. } &amp; \quad 1 - y_{i}\left(w \cdot x_{i}+b\right)  \leqslant 0, i=1,2, \cdots, N
+\end{aligned}\]</span></p>
+<p>可以得到</p>
+<p><span class="math display">\[\begin{aligned}
+L(w, b, \alpha) &amp;=\frac{1}{2}\|w\|^{2} + \sum_{i=1}^{N} \left [ \alpha_{i} - \alpha_{i} y_{i}\left(w \cdot x_{i}+b\right) \right ] \\
+ &amp;=\frac{1}{2}\|w\|^{2} - \sum_{i=1}^{N} \left [ \alpha_{i} y_{i}\left(w \cdot x_{i}+b\right) - \alpha_{i} \right ] \\
+ &amp;=\frac{1}{2}\|w\|^{2}-\sum_{i=1}^{N} \alpha_{i} y_{i}\left(w \cdot x_{i}+b\right)+\sum_{i=1}^{N} \alpha_{i}
+\end{aligned}\]</span></p>
+<p>其中，<span class="math inline">\(\alpha=\left(\alpha_{1}, \alpha_{2}, \cdots, \alpha_{N}\right)^{\mathrm{T}}\)</span>为拉格朗日乘子向量。根据拉格朗日对偶性，原始问题的对偶问题就是极大极小问题：</p>
+<p><span class="math display">\[\max _{\alpha} \min _{w, b} L(w, b, \alpha)\]</span></p>
+<p>因此是对<span class="math inline">\(L(w, b, \alpha)\)</span>求<span class="math inline">\(w\)</span>、<span class="math inline">\(b\)</span>的极小值，再对<span class="math inline">\(\alpha\)</span>求极大值。</p>
+<blockquote>
+<p>第一步：求<span class="math inline">\(\underset{w, b}{min}L(w, b, \alpha)\)</span></p>
+</blockquote>
+<p>拉格朗日函数<span class="math inline">\(L(w, b, \alpha)\)</span>分别对<span class="math inline">\(w\)</span>和<span class="math inline">\(b\)</span>求偏导，并令其等于0。</p>
+<p><span class="math display">\[\nabla_{w} L(w, b, \alpha)=w-\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}=0\]</span></p>
+<p><span class="math display">\[\nabla_{b} L(w, b, \alpha)=-\sum_{i=1}^{N} \alpha_{i} y_{i}=0\]</span></p>
+<p>得</p>
+<p><span class="math display">\[w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}\]</span></p>
+<p><span class="math display">\[\sum_{i=1}^{N} \alpha_{i} y_{i}=0\]</span></p>
+<p>因此代入拉格朗日函数得到</p>
+<p><span class="math display">\[\begin{aligned}
+L(w, b, \alpha) &amp;=\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i} y_{i}\left(\left(\sum_{j=1}^{N} \alpha_{j} y_{j} x_{j}\right) \cdot x_{i}+b\right)+\sum_{i=1}^{N} \alpha_{i} \\
+&amp;=-\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)+\sum_{i=1}^{N} \alpha_{i}
+\end{aligned}\]</span></p>
+<p>所以</p>
+<p><span class="math display">\[\min _{w, b} L(w, b, \alpha)=-\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)+\sum_{i=1}^{N} \alpha_{i}\]</span></p>
+<blockquote>
+<p>第二步：求<span class="math inline">\(\underset{w, b}{min}L(w, b, \alpha)\)</span>对<span class="math inline">\(\alpha\)</span>的极大值，即是对偶问题</p>
+</blockquote>
+<p><span class="math display">\[\begin{aligned} 
+\underset{\alpha}{max} &amp; \quad -\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)+\sum_{i=1}^{N} \alpha_{i} \\
+\text { s.t. } &amp; \quad \sum_{i=1}^{N} \alpha_{i} y_{i}=0 \\
+ &amp; \quad \alpha_{i} \geqslant 0, \quad i=1,2, \cdots, N
+\end{aligned}\]</span></p>
+<p>对上式由求极大值转化为求极小值，可以得到</p>
+<p><span class="math display">\[\begin{aligned} 
+\underset{\alpha}{min} &amp; \quad \frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i} \\
+\text { s.t. } &amp; \quad \sum_{i=1}^{N} \alpha_{i} y_{i}=0 \\
+ &amp; \quad \alpha_{i} \geqslant 0, \quad i=1,2, \cdots, N
+\end{aligned}\]</span></p>
+<p>此时就把原始问题转化为了求极小值的对偶问题，得到<span class="math inline">\(\alpha^{*}=\left(\alpha_{1}^{*}, \alpha_{2}^{*}, \cdots, \alpha_{l}^{*}\right)^{\mathrm{T}}\)</span>的最优解。从而解出<span class="math inline">\(w^{*}\)</span>和<span class="math inline">\(b^{*}\)</span>：</p>
+<p><span class="math display">\[w^{*}=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i}\]</span></p>
+<p><span class="math display">\[b^{*}=y_{j}-\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x_{i} \cdot x_{j}\right)\]</span></p>
+<p>因此分离超平面可以写为</p>
+<p><span class="math display">\[\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x \cdot x_{i}\right)+b^{*}=0\]</span></p>
+<p>因此分类决策函数就可以写成</p>
+<p><span class="math display">\[f(x)=\operatorname{sign}\left(\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x \cdot x_{i}\right)+b^{*}\right)\]</span></p>
+<p>该式称为线性可分支持向量机的对偶形式。</p>
+<h1 id="线性支持向量机与软间隔最大化">线性支持向量机与软间隔最大化</h1>
+<h1 id="工程实践">工程实践</h1>
+<h2 id="函数原型">函数原型</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC(</span><br><span class="line">            C=<span class="number">1.0</span>, kernel=<span class="string">'rbf'</span>, degree=<span class="number">3</span>, gamma=<span class="string">'scale'</span>,</span><br><span class="line">            coef0=<span class="number">0.0</span>, shrinking=<span class="literal">True</span>, probability=<span class="literal">False</span>,</span><br><span class="line">            tol=<span class="number">1e-3</span>, cache_size=<span class="number">200</span>, class_weight=<span class="literal">None</span>,</span><br><span class="line">            verbose=<span class="literal">False</span>, max_iter=<span class="number">-1</span>, decision_function_shape=<span class="string">'ovr'</span>,</span><br><span class="line">            break_ties=<span class="literal">False</span>, random_state=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+<ol type="1">
+<li>C（类型：flot，默认值：1.0，<code>超参：是</code>）：正则化参数，即惩罚项的系数。</li>
+<li>kernel（类型：str，默认值：rbf，<code>超参：是</code>）：核函数的选择。scikit-learn中支持4种核函数，分别是：
+<ul>
+<li>linear：线性核函数<span class="math inline">\(K\left(x, x^{\prime}\right)=\left\langle x, x^{\prime}\right\rangle\)</span></li>
+<li>poly：多项式核函数<span class="math inline">\(K\left(x, x^{\prime}\right)=\left(\gamma\left\langle x, x^{\prime}\right\rangle+ r\right)^{d}\)</span></li>
+<li>rbf：径向核函数/高斯核函数<span class="math inline">\(K\left(x, x^{\prime}\right)=\exp \left(-\gamma\left\|x-x^{\prime}\right\|^{2}\right)\)</span></li>
+<li>sigmoid：sigmoid核函数<span class="math inline">\(K\left(x, x^{\prime}\right)=\tanh \left(\gamma\left\langle x, x^{\prime}\right\rangle+ r\right)\)</span></li>
+<li>precomputed：核矩阵，使用自定义转换矩阵</li>
+</ul></li>
+<li>degree（类型：int，默认值：3，<code>超参：是</code>）：设置多项式的阶数。<strong>只有kernel函数为poly才有效，即公式中的<span class="math inline">\(d\)</span>。</strong></li>
+<li>gamma（类型：int或str，默认值：scale，<code>超参：是</code>）：核函数的系数。<strong>只有kernel函数为poly、rbf、sigmod才有效，即公式中的<span class="math inline">\(\gamma\)</span>。</strong>
+<ul>
+<li>当gamma为scale时，<span class="math inline">\(\text {gamma}=\frac{1}{\text {n_features} \times \text {X.var()}}\)</span></li>
+<li>当gamma为auto时，<span class="math inline">\(\text {gamma}=\frac{1}{\text {n_features}}\)</span></li>
+</ul></li>
+<li>coef0（类型：float，默认值：0.0，<code>超参：是</code>）：核函数的独立项。<strong>只有kernel函数为poly、sigmod才有效，即公式中的<span class="math inline">\(r\)</span>。</strong></li>
+<li>shrinking（类型：boolean，默认值：True）：是否使用启发式的最优算法。</li>
+<li>probability（类型：boolean，默认值：False）：是否使用概率估计。</li>
+<li>tol（类型：float，默认值：1e-3）：停止训练的误差值大小。</li>
+<li>cache_size（类型：float，默认值：200）：训练时所需要的内存大小，单位MB。</li>
+<li>class_weight（类型：dict或str，默认值：None）：给每个类分别设置不同的惩罚参数C，即<span class="math inline">\(\text {class_weight}\left [ i\right ] \times C\)</span>。如果参数是“balanced”，那么类别权重自动调整为与输入数据中的类频率成反比的权重<span class="math inline">\(\frac{\text{n_samples}}{\text{n_classes} \times \text{np.bincount}\left ( y\right )}\)</span>。</li>
+<li>verbose（类型：boolean，默认值：False）：是否启用详细输出。</li>
+<li>max_iter（类型：int，默认值：-1）：最大迭代次数，如果为-1，那么不受限制。</li>
+<li>decision_function_shape（类型：str，默认值：ovr）：决策函数类型。
+<ul>
+<li>ovo：返回形状为<span class="math inline">\(\left (\text{n_samples}, \frac{\text{n_classes} \times \left ( \text{n_classes} - 1\right )}{2} \right )\)</span>的决策函数，该决策函数一般用于多类别策略。</li>
+<li>ovr：返回形状为<span class="math inline">\(\left (\text{n_samples}, \text{n_classes} \right )\)</span>的决策函数。</li>
+</ul></li>
+<li>break_ties（类型：boolean，默认值：False）：当该值为True时，decision_function_shape为ovr，且类别数量大于2时，预测结果将根据decision_function_shape的置信度来来打破平局，否则就返回所有类别中的第一个。要注意的是打破平局相比简单的预测所需代价更高。</li>
+<li>random_state（类型：int，默认值：None）：随机数种子，如果不设置则默认为<code>np.random</code>。</li>
+</ol>
+<h2 id="程序流程">程序流程</h2>
+<ol type="1">
+<li>将原始数据转化为SVM算法软件或包所能识别的数据格式；</li>
+<li>将数据标准化；（防止样本中不同特征数值大小相差较大影响分类器性能）</li>
+<li>不知使用什么核函数，考虑使用RBF；</li>
+<li>利用交叉验证网格搜索寻找最优参数（C, γ）；（交叉验证防止过拟合，网格搜索在指定范围内寻找最优参数）</li>
+<li>使用最优参数来训练模型；</li>
+<li>测试。</li>
+</ol>
+<h2 id="核函数选择">核函数选择</h2>
+<ol type="1">
+<li>样本数量远小于特征数量：这种情况，利用情况利用linear核效果会高于RBF核。</li>
+<li>样本数量和特征数量一样大：linear核合适，且速度也更快。</li>
+<li>样本数量远大于特征数量：非线性核RBF等合适。</li>
+</ol>
+<h2 id="gridsearchcv小技巧">GridSearchCV小技巧</h2>
+<p>网格大小如果设置范围大且步长密集的话难免耗时，但是不这样的话又可能找到的参数不是很好，针对这解决方法是，先在大范围，大步长的粗糙网格内寻找参数。在找到的参数左右在设置精细步长找寻最优参数比如：</p>
+<ol type="1">
+<li>一开始寻找范围是<span class="math inline">\(C=2^{-5},2^{-3}, \cdots ,2^{15}\)</span>和<span class="math inline">\(\gamma = 2^{-15},2^{-13}, \cdots ,2^{3}\)</span>，由此找到的最优参数是<span class="math inline">\(\left ( 2^{3}, 2^{-5}\right )\)</span>；</li>
+<li>然后设置更小一点的步长，参数范围变为<span class="math inline">\(C=2^{1},2^{1.25}, \cdots ,2^{5}\)</span>和<span class="math inline">\(\gamma = 2^{−7},2^{−6.75}, \cdots ,2^{-3}\)</span></li>
+</ol>
+<p>这样既可以避免一开始就使用大范围，小步长而导致分类器进行过于多的计算而导致计算时间的增加。</p>
+<h2 id="常用函数">常用函数</h2>
+<ol type="1">
+<li>样本到分离超平面的距离</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC.decision_function(X)</span><br></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li>根据给定的训练数据拟合SVM模型</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC.fit(X, y[, sample_weight=<span class="literal">None</span>])</span><br></pre></td></tr></table></figure>
+<ol start="3" type="1">
+<li>获取此估算器的参数并以字典形式显示</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC.get_params([deep=<span class="literal">True</span>])</span><br></pre></td></tr></table></figure>
+<ol start="4" type="1">
+<li>根据测试数据集进行预测</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC.predict(X)</span><br></pre></td></tr></table></figure>
+<ol start="5" type="1">
+<li>返回给定测试数据和标签的平均精确度</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC.score(X, y)</span><br></pre></td></tr></table></figure>
+<ol start="6" type="1">
+<li>返回样本的对数概率以及普通概率，注意该函数只有在SVM构建时的probability参数为True时才有效。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC.predict_log_proba(X_test)</span><br><span class="line">sklearn.svm.SVC.predict_proba(X_test)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>统计学习方法</category>
+      </categories>
+  </entry>
+  <entry>
     <title>S6-逻辑斯谛回归与最大熵模型</title>
     <url>/slm-logistic-regression/</url>
     <content><![CDATA[<h1 id="综述">综述</h1><p>逻辑斯谛回归模型与最大熵模型都是对数线性模型。</p><p>所谓对数线性模型就是对模型两边取对数，就得到一个关于<span class="math inline">\(w\)</span>和<span class="math inline">\(x\)</span>的线性模型，即<span class="math inline">\(\ln P(Y=c_{i}|X=x) = w_{i} \cdot x\)</span>。在逻辑斯谛回归模型中，对数模型是关于<span class="math inline">\(x\)</span>的线性函数，而在最大熵模型中，对数模型是关于<span class="math inline">\(x\)</span>函数的线性函数。</p><a id="more"></a>
@@ -1388,100 +1594,6 @@ a_{n}^{T} a_{1} &amp; a_{n}^{T} a_{2} &amp; \cdots &amp; a_{n}^{T} a_{n}
       <categories>
         <category>统计学习方法</category>
       </categories>
-  </entry>
-  <entry>
-    <title>scikit-learn中的SVM（支持向量机）</title>
-    <url>/svm/</url>
-    <content><![CDATA[<h1 id="工程实践">工程实践</h1><h2 id="函数原型">函数原型</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC(</span><br><span class="line">            C=<span class="number">1.0</span>, kernel=<span class="string">'rbf'</span>, degree=<span class="number">3</span>, gamma=<span class="string">'scale'</span>,</span><br><span class="line">            coef0=<span class="number">0.0</span>, shrinking=<span class="literal">True</span>, probability=<span class="literal">False</span>,</span><br><span class="line">            tol=<span class="number">1e-3</span>, cache_size=<span class="number">200</span>, class_weight=<span class="literal">None</span>,</span><br><span class="line">            verbose=<span class="literal">False</span>, max_iter=<span class="number">-1</span>, decision_function_shape=<span class="string">'ovr'</span>,</span><br><span class="line">            break_ties=<span class="literal">False</span>, random_state=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure><a id="more"></a>
-
-
-<ol type="1">
-<li>C（类型：flot，默认值：1.0，<code>超参：是</code>）：正则化参数，即惩罚项的系数。</li>
-<li>kernel（类型：str，默认值：rbf，<code>超参：是</code>）：核函数的选择。scikit-learn中支持4种核函数，分别是：
-<ul>
-<li>linear：线性核函数<span class="math inline">\(K\left(x, x^{\prime}\right)=\left\langle x, x^{\prime}\right\rangle\)</span></li>
-<li>poly：多项式核函数<span class="math inline">\(K\left(x, x^{\prime}\right)=\left(\gamma\left\langle x, x^{\prime}\right\rangle+ r\right)^{d}\)</span></li>
-<li>rbf：径向核函数/高斯核函数<span class="math inline">\(K\left(x, x^{\prime}\right)=\exp \left(-\gamma\left\|x-x^{\prime}\right\|^{2}\right)\)</span></li>
-<li>sigmoid：sigmoid核函数<span class="math inline">\(K\left(x, x^{\prime}\right)=\tanh \left(\gamma\left\langle x, x^{\prime}\right\rangle+ r\right)\)</span></li>
-<li>precomputed：核矩阵，使用自定义转换矩阵</li>
-</ul></li>
-<li>degree（类型：int，默认值：3，<code>超参：是</code>）：设置多项式的阶数。<strong>只有kernel函数为poly才有效，即公式中的<span class="math inline">\(d\)</span>。</strong></li>
-<li>gamma（类型：int或str，默认值：scale，<code>超参：是</code>）：核函数的系数。<strong>只有kernel函数为poly、rbf、sigmod才有效，即公式中的<span class="math inline">\(\gamma\)</span>。</strong>
-<ul>
-<li>当gamma为scale时，<span class="math inline">\(\text {gamma}=\frac{1}{\text {n_features} \times \text {X.var()}}\)</span></li>
-<li>当gamma为auto时，<span class="math inline">\(\text {gamma}=\frac{1}{\text {n_features}}\)</span></li>
-</ul></li>
-<li>coef0（类型：float，默认值：0.0，<code>超参：是</code>）：核函数的独立项。<strong>只有kernel函数为poly、sigmod才有效，即公式中的<span class="math inline">\(r\)</span>。</strong></li>
-<li>shrinking（类型：boolean，默认值：True）：是否使用启发式的最优算法。</li>
-<li>probability（类型：boolean，默认值：False）：是否使用概率估计。</li>
-<li>tol（类型：float，默认值：1e-3）：停止训练的误差值大小。</li>
-<li>cache_size（类型：float，默认值：200）：训练时所需要的内存大小，单位MB。</li>
-<li>class_weight（类型：dict或str，默认值：None）：给每个类分别设置不同的惩罚参数C，即<span class="math inline">\(\text {class_weight}\left [ i\right ] \times C\)</span>。如果参数是“balanced”，那么类别权重自动调整为与输入数据中的类频率成反比的权重<span class="math inline">\(\frac{\text{n_samples}}{\text{n_classes} \times \text{np.bincount}\left ( y\right )}\)</span>。</li>
-<li>verbose（类型：boolean，默认值：False）：是否启用详细输出。</li>
-<li>max_iter（类型：int，默认值：-1）：最大迭代次数，如果为-1，那么不受限制。</li>
-<li>decision_function_shape（类型：str，默认值：ovr）：决策函数类型。
-<ul>
-<li>ovo：返回形状为<span class="math inline">\(\left (\text{n_samples}, \frac{\text{n_classes} \times \left ( \text{n_classes} - 1\right )}{2} \right )\)</span>的决策函数，该决策函数一般用于多类别策略。</li>
-<li>ovr：返回形状为<span class="math inline">\(\left (\text{n_samples}, \text{n_classes} \right )\)</span>的决策函数。</li>
-</ul></li>
-<li>break_ties（类型：boolean，默认值：False）：当该值为True时，decision_function_shape为ovr，且类别数量大于2时，预测结果将根据decision_function_shape的置信度来来打破平局，否则就返回所有类别中的第一个。要注意的是打破平局相比简单的预测所需代价更高。</li>
-<li>random_state（类型：int，默认值：None）：随机数种子，如果不设置则默认为<code>np.random</code>。</li>
-</ol>
-<h2 id="程序流程">程序流程</h2>
-<ol type="1">
-<li>将原始数据转化为SVM算法软件或包所能识别的数据格式；</li>
-<li>将数据标准化；（防止样本中不同特征数值大小相差较大影响分类器性能）</li>
-<li>不知使用什么核函数，考虑使用RBF；</li>
-<li>利用交叉验证网格搜索寻找最优参数（C, γ）；（交叉验证防止过拟合，网格搜索在指定范围内寻找最优参数）</li>
-<li>使用最优参数来训练模型；</li>
-<li>测试。</li>
-</ol>
-<h2 id="核函数选择">核函数选择</h2>
-<ol type="1">
-<li>样本数量远小于特征数量：这种情况，利用情况利用linear核效果会高于RBF核。</li>
-<li>样本数量和特征数量一样大：linear核合适，且速度也更快。</li>
-<li>样本数量远大于特征数量：非线性核RBF等合适。</li>
-</ol>
-<h2 id="gridsearchcv小技巧">GridSearchCV小技巧</h2>
-<p>网格大小如果设置范围大且步长密集的话难免耗时，但是不这样的话又可能找到的参数不是很好，针对这解决方法是，先在大范围，大步长的粗糙网格内寻找参数。在找到的参数左右在设置精细步长找寻最优参数比如：</p>
-<ol type="1">
-<li>一开始寻找范围是<span class="math inline">\(C=2^{-5},2^{-3}, \cdots ,2^{15}\)</span>和<span class="math inline">\(\gamma = 2^{-15},2^{-13}, \cdots ,2^{3}\)</span>，由此找到的最优参数是<span class="math inline">\(\left ( 2^{3}, 2^{-5}\right )\)</span>；</li>
-<li>然后设置更小一点的步长，参数范围变为<span class="math inline">\(C=2^{1},2^{1.25}, \cdots ,2^{5}\)</span>和<span class="math inline">\(\gamma = 2^{−7},2^{−6.75}, \cdots ,2^{-3}\)</span></li>
-</ol>
-<p>这样既可以避免一开始就使用大范围，小步长而导致分类器进行过于多的计算而导致计算时间的增加。</p>
-<h2 id="常用函数">常用函数</h2>
-<ol type="1">
-<li>样本到分离超平面的距离</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC.decision_function(X)</span><br></pre></td></tr></table></figure>
-<ol start="2" type="1">
-<li>根据给定的训练数据拟合SVM模型</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC.fit(X, y[, sample_weight=<span class="literal">None</span>])</span><br></pre></td></tr></table></figure>
-<ol start="3" type="1">
-<li>获取此估算器的参数并以字典形式显示</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC.get_params([deep=<span class="literal">True</span>])</span><br></pre></td></tr></table></figure>
-<ol start="4" type="1">
-<li>根据测试数据集进行预测</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC.predict(X)</span><br></pre></td></tr></table></figure>
-<ol start="5" type="1">
-<li>返回给定测试数据和标签的平均精确度</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC.score(X, y)</span><br></pre></td></tr></table></figure>
-<ol start="6" type="1">
-<li>返回样本的对数概率以及普通概率，注意该函数只有在SVM构建时的probability参数为True时才有效。</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC.predict_log_proba(X_test)</span><br><span class="line">sklearn.svm.SVC.predict_proba(X_test)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>基础</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>决策树</tag>
-      </tags>
   </entry>
   <entry>
     <title>各类数据集说明</title>
