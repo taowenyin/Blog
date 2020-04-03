@@ -241,6 +241,36 @@ f(x) &amp;=\operatorname{sign}\left(\sum_{i=1}^{N_{s}} a_{i}^{*} y_{i} \phi\left
 <p>在实际应用中，直接计算<span class="math inline">\(K(x, z)\)</span>比较容易，而通过<span class="math inline">\(\phi(x)\)</span>和<span class="math inline">\(\phi(z)\)</span>计算<span class="math inline">\(K(x, z)\)</span>比较难。</p>
 <p><span class="math display">\[K(x, z)=\phi(x) \cdot \phi(z)\]</span></p>
 <p>由于学习过程是隐式的在特征空间进行，并不需要显示的定义特征空间和映射函数，所以该方法称为核技巧。</p>
+<h2 id="正定核">正定核</h2>
+<p><span class="math inline">\(K(x, z)\)</span>为正定核函数的充要条件是<span class="math inline">\(x_{i} \in \mathcal{X}\)</span>，<span class="math inline">\(i=1,2, \cdots, m\)</span>，<span class="math inline">\(K(x, z)\)</span>对应的Gram矩阵</p>
+<p><span class="math display">\[K=\left[K\left(x_{i}, x_{j}\right)\right]_{m \times m}\]</span></p>
+<p>是半正定矩阵。</p>
+<p>等价于设<span class="math inline">\(\mathcal{X} \subset \mathbf{R}^{n}\)</span>，<span class="math inline">\(K(x, z)\)</span>是定义在<span class="math inline">\(\mathcal{X} \times \mathcal{X}\)</span>上的对称函数，如果对任意<span class="math inline">\(x_{i} \in \mathcal{X}\)</span>，<span class="math inline">\(i=1,2, \cdots, m\)</span>，<span class="math inline">\(K(x, z)\)</span>对应的Gram矩阵</p>
+<p><span class="math display">\[K=\left[K\left(x_{i}, x_{j}\right)\right]_{m \times m}\]</span></p>
+<p>是半正定矩阵，那么称<span class="math inline">\(K(x, z)\)</span>是正定核。</p>
+<h2 id="常用核函数">常用核函数</h2>
+<ol type="1">
+<li>多项式核函数（polynomial kernel function）</li>
+</ol>
+<p><span class="math display">\[K(x, z)=(x \cdot z+1)^{p}\]</span></p>
+<ol start="2" type="1">
+<li>高斯核函数（Gaussian kernel function）</li>
+</ol>
+<p><span class="math display">\[K(x, z)=\exp \left(-\frac{\|x-z\|^{2}}{2 \sigma^{2}}\right)\]</span></p>
+<ol start="3" type="1">
+<li>字符串核函数（string kernel function）<strong>没懂</strong></li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+k_{n}(s, t) &amp;=\sum_{u \in \Sigma^{n}}\left[\phi_{n}(s)\right]_{u}\left[\phi_{n}(t)\right]_{u} \\
+&amp;=\sum_{u \in \Sigma^{n}} \sum_{(i, j): s(i)=t(j)=u} \lambda^{l(i)} \lambda^{l(j)}
+\end{aligned}\]</span></p>
+<h1 id="smo序列最小最优化算法没懂">SMO序列最小最优化算法（<strong>没懂</strong>）</h1>
+<p>SMO（序列最小最优化）算法要解如下凸二次规划的对偶问题</p>
+<p><span class="math display">\[\begin{aligned} 
+\underset{\alpha}{max} &amp; \quad -\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}K(x, z)+\sum_{i=1}^{N} \alpha_{i} \\
+\text { s.t. } &amp; \quad \sum_{i=1}^{N} \alpha_{i} y_{i}=0 \\
+ &amp; \quad 0 \leqslant \alpha_{i} \leqslant C, \quad i=1,2, \cdots, N
+\end{aligned}\]</span></p>
 <h1 id="工程实践">工程实践</h1>
 <h2 id="函数原型">函数原型</h2>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC(</span><br><span class="line">            C=<span class="number">1.0</span>, kernel=<span class="string">'rbf'</span>, degree=<span class="number">3</span>, gamma=<span class="string">'scale'</span>,</span><br><span class="line">            coef0=<span class="number">0.0</span>, shrinking=<span class="literal">True</span>, probability=<span class="literal">False</span>,</span><br><span class="line">            tol=<span class="number">1e-3</span>, cache_size=<span class="number">200</span>, class_weight=<span class="literal">None</span>,</span><br><span class="line">            verbose=<span class="literal">False</span>, max_iter=<span class="number">-1</span>, decision_function_shape=<span class="string">'ovr'</span>,</span><br><span class="line">            break_ties=<span class="literal">False</span>, random_state=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
