@@ -347,6 +347,47 @@ $$K(x, z)=\phi(x) \cdot \phi(z)$$
 
 由于学习过程是隐式的在特征空间进行，并不需要显示的定义特征空间和映射函数，所以该方法称为核技巧。
 
+## 正定核
+
+$K(x, z)$为正定核函数的充要条件是$x_{i} \in \mathcal{X}$，$i=1,2, \cdots, m$，$K(x, z)$对应的Gram矩阵
+
+$$K=\left[K\left(x_{i}, x_{j}\right)\right]_{m \times m}$$
+
+是半正定矩阵。
+
+等价于设$\mathcal{X} \subset \mathbf{R}^{n}$，$K(x, z)$是定义在$\mathcal{X} \times \mathcal{X}$上的对称函数，如果对任意$x_{i} \in \mathcal{X}$，$i=1,2, \cdots, m$，$K(x, z)$对应的Gram矩阵
+
+$$K=\left[K\left(x_{i}, x_{j}\right)\right]_{m \times m}$$
+
+是半正定矩阵，那么称$K(x, z)$是正定核。
+
+## 常用核函数
+
+1. 多项式核函数（polynomial kernel function）
+
+$$K(x, z)=(x \cdot z+1)^{p}$$
+
+2. 高斯核函数（Gaussian kernel function）
+
+$$K(x, z)=\exp \left(-\frac{\|x-z\|^{2}}{2 \sigma^{2}}\right)$$
+
+3. 字符串核函数（string kernel function）**没懂**
+
+$$\begin{aligned}
+k_{n}(s, t) &=\sum_{u \in \Sigma^{n}}\left[\phi_{n}(s)\right]_{u}\left[\phi_{n}(t)\right]_{u} \\
+&=\sum_{u \in \Sigma^{n}} \sum_{(i, j): s(i)=t(j)=u} \lambda^{l(i)} \lambda^{l(j)}
+\end{aligned}$$
+
+# SMO序列最小最优化算法（**没懂**）
+
+SMO（序列最小最优化）算法要解如下凸二次规划的对偶问题
+
+$$\begin{aligned} 
+\underset{\alpha}{max} & \quad -\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}K(x, z)+\sum_{i=1}^{N} \alpha_{i} \\
+\text { s.t. } & \quad \sum_{i=1}^{N} \alpha_{i} y_{i}=0 \\
+ & \quad 0 \leqslant \alpha_{i} \leqslant C, \quad i=1,2, \cdots, N
+\end{aligned}$$
+
 # 工程实践
 
 ## 函数原型
