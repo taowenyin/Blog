@@ -119,7 +119,7 @@ $H_{1}$和$H_{2}$平行，并没有实例点落在他们之间。$H_{1}$和$H_{2
 
 $$\begin{aligned} 
 \underset{w,b}{min} & \quad \frac{1}{2}\|w\|^{2} \\
-\text { s.t. } & \quad 1 - y_{i}\left(w \cdot x_{i}+b\right)  \leqslant 0, i=1,2, \cdots, N
+\text { s.t. } & \quad 1 - y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0, i=1,2, \cdots, N
 \end{aligned}$$
 
 可以得到
@@ -194,6 +194,158 @@ $$f(x)=\operatorname{sign}\left(\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x \cdot
 该式称为线性可分支持向量机的对偶形式。
 
 # 线性支持向量机与软间隔最大化
+
+## 线性支持向量机
+
+线性支持向量机主要用来解决线性不可分问题，即在训练数据集中有一些特异点，将这些特异点去除后，剩下的样本点组成的数据集线性可分。为了解决这个问题，对每个样本点$\left(x_{i}, y_{i}\right)$引入一个松弛变量$\xi_{i} \geqslant 0$，使得函数间隔加上松弛变量大于等于1。此时，约束条件变为
+
+$$y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}$$
+
+由于引入了松弛变量，因此目标函数就需要支付一个代价$\xi_{i}$，因此原先的目标函数$\frac{1}{2}\|w\|^{2}$就变为
+
+$$\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}$$
+
+其中，$C>0$称为惩罚参数，$C$值大时对误分类的惩罚增大，$C$值小时对误分类的惩罚减小。该目标函数包含两层含义：使$\frac{1}{2}\|w\|^{2}$尽量小，即间隔尽可能大。同时误分类点的个数尽可能小，$C$是调和二者的系数。
+
+相对于硬间隔最大化，该目标函数为软间隔最大化。同时，线性支持向量机的学习问题就变成下面的凸二次规划问题（原始问题）：
+
+$$\begin{aligned} 
+\underset{w,b,\xi}{min} & \quad \frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i} \\
+\text { s.t. } & \quad y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}, i=1,2, \cdots, N \\
+& \quad \xi_{i} \geqslant 0, \quad i=1,2, \cdots, N
+\end{aligned}$$
+
+## 学习的对偶算法
+
+构建拉格朗日函数。对不等式约束引入拉格朗日乘子$\alpha_{i} \geqslant 0$，$\mu_{i} \geqslant 0$，$i=1,2, \cdots, N$，则根据约束
+
+$$\begin{aligned} 
+\underset{w,b,\xi}{min} & \quad \frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i} \\
+\text { s.t. } & \quad 1-\xi_{i} - y_{i}\left(w \cdot x_{i}+b\right) \leqslant 0, i=1,2, \cdots, N \\
+& \quad -\xi_{i} \leqslant 0, \quad i=1,2, \cdots, N
+\end{aligned}$$
+
+可以得到
+
+$$\begin{aligned}
+L(w, b, \xi, \alpha, \mu) &=\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i} + \sum_{i=1}^{N} \left [ \alpha_{i}-\alpha_{i}\xi_{i} - \alpha_{i}y_{i}\left(w \cdot x_{i}+b\right) \right ]-\sum_{i=1}^{N} \mu_{i} \xi_{i} \\
+ &=\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i} - \sum_{i=1}^{N} \alpha_{i} \left [ y_{i}\left(w \cdot x_{i}+b\right) - 1 +\xi_{i} \right ]-\sum_{i=1}^{N} \mu_{i} \xi_{i}
+\end{aligned}$$
+
+根据拉格朗日对偶性，原始问题的对偶问题就是极大极小问题：
+
+$$\max _{\alpha} \min _{w, b} L(w, b, \xi, \alpha, \mu)$$
+
+因此是对$L(w, b, \xi, \alpha, \mu)$求$w$、$b$、$\xi$的极小值。
+
+> 第一步：求$\underset{w, b}{min}L(w, b, \xi, \alpha, \mu)$
+
+拉格朗日函数$L(w, b, \xi, \alpha, \mu)$分别对$w$、$b$、$\xi$求偏导，并令其等于0。
+
+$$\nabla_{w} L(w, b, \xi, \alpha, \mu)=w-\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}=0$$
+
+$$\nabla_{b} L(w, b, \xi, \alpha, \mu)=-\sum_{i=1}^{N} \alpha_{i} y_{i}=0$$
+
+$$\nabla_{\xi_{i}} L(w, b, \xi, \alpha, \mu)=C-\alpha_{i}-\mu_{i}=0$$
+
+得
+
+$$w=\sum_{i=1}^{N} \alpha_{i} y_{i} x_{i}$$
+
+$$\sum_{i=1}^{N} \alpha_{i} y_{i}=0$$
+
+$$C-\alpha_{i}-\mu_{i}=0$$
+
+因此代入拉格朗日函数得到
+
+$$\min _{w, b, \xi} L(w, b, \xi, \alpha, \mu)=-\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)+\sum_{i=1}^{N} \alpha_{i}$$
+
+> 第二步：求$\underset{w, b, \xi}{min} L(w, b, \xi, \alpha, \mu)$对$\alpha$的极大值，即是对偶问题
+
+$$\begin{aligned} 
+\underset{\alpha}{max} & \quad -\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)+\sum_{i=1}^{N} \alpha_{i} \\
+\text { s.t. } & \quad \sum_{i=1}^{N} \alpha_{i} y_{i}=0 \\
+ & \quad C-\alpha_{i}-\mu_{i}=0 \\
+ & \quad \alpha_{i} \geqslant 0, \quad i=1,2, \cdots, N \\
+ & \quad \mu_{i} \geqslant 0, \quad i=1,2, \cdots, N
+\end{aligned}$$
+
+将约束进行变换，消去$\mu_{i}$，从而只留下$\alpha_{i}$，因此对偶问题就写为
+
+$$\begin{aligned} 
+\underset{\alpha}{max} & \quad -\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)+\sum_{i=1}^{N} \alpha_{i} \\
+\text { s.t. } & \quad \sum_{i=1}^{N} \alpha_{i} y_{i}=0 \\
+ & \quad 0 \leqslant \alpha_{i} \leqslant C
+\end{aligned}$$
+
+此时就把原始问题转化为了求极小值的对偶问题，得到$\alpha^{*}=\left(\alpha_{1}^{*}, \alpha_{2}^{*}, \cdots, \alpha_{l}^{*}\right)^{\mathrm{T}}$的最优解。从而解出$w^{*}$和$b^{*}$：
+
+$$w^{*}=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i}$$
+
+$$b^{*}=y_{j}-\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x_{i} \cdot x_{j}\right)$$
+
+因此分离超平面可以写为
+
+$$\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x \cdot x_{i}\right)+b^{*}=0$$
+
+因此分类决策函数就可以写成
+
+$$f(x)=\operatorname{sign}\left(\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x \cdot x_{i}\right)+b^{*}\right)$$
+
+该式称为线性可分支持向量机的对偶形式。
+
+## 支持向量（没懂）
+
+| $\alpha_{i}^{*}$ | $\xi_{i}$ | $x_{i}$ |
+| :---: | :---: | :---: |
+| $\alpha_{i}^{*}<C$ | $\xi_{i}=0$ | $x_{i}$落在间隔边界上 |
+| $\alpha_{i}^{*}=C$ | $0<\xi_{i}<1$ | 分类正确，$x_{i}$落在间隔边界与分离超平面之间 |
+| $\alpha_{i}^{*}=C$ | $\xi_{i}=1$ | $x_{i}$落在分离超平面上 |
+| $\alpha_{i}^{*}=C$ | $\xi_{i}>1$ | $x_{i}$落在分离超平面误分类一侧 |
+
+# 非线性支持向量机与核函数
+
+给定训练数据集$T=\left\{\left(x_{1}, y_{1}\right),\left(x_{2}, y_{2}\right), \cdots,\left(x_{N}, y_{N}\right)\right\}$，其中$x_{i}$属于输入空间，$x_{i} \in \mathcal{X}=\mathbf{R}^{n}$，对应的标记有两类$y_{i} \in \mathcal{Y}=\{-1,+1\}$，$i=1,2, \cdots, N$。如果能用$\mathbf{R}^{n}$中的一个超曲面将正负例正确分开，则称该问题为非线性可分问题。
+
+**要解决非线性可分问题，就是将非线性问题转化为线性问题，通过解变换后的线性问题方法来解决原来的非线性问题。**
+
+{% asset_img nonlinear.png 非线性分类问题与核技巧示例 %}
+
+图1：非线性分类问题与核技巧示例
+
+假设$\mathcal{X} \subset \mathbf{R}^{2}$，$x=\left(x^{(1)}, x^{(2)}\right)^{\mathrm{T}} \in \mathcal{X}$，新空间$\mathcal{Z} \subset \mathbf{R}^{2}$，$z=\left(z^{(1)}, z^{(2)}\right)^{\mathrm{T}} \in \mathcal{Z}$，定义从原空间到新空间的变换（映射）：
+
+$$z=\phi(x)=\left(\left(x^{(1)}\right)^{2},\left(x^{(2)}\right)^{2}\right)^{\mathrm{T}}$$
+
+经过变换$z=\phi(x)$，把原空间$\mathcal{X} \subset \mathbf{R}^{2}$变换为新空间$\mathcal{Z} \subset \mathbf{R}^{2}$，原空间中的点就变换为新空间中的点，原空间中的椭圆
+
+$$w_{1}\left(x^{(1)}\right)^{2}+w_{2}\left(x^{(2)}\right)^{2}+b=0$$
+
+变换为新空间中的直线
+
+$$w_{1} z^{(1)}+w_{2} z^{(2)}+b=0$$
+
+求解非线性分类问题分两步（核技巧）：
+
+1. 使用一个变换将原空间数据映射到新空间。
+2. 在新空间里用线性分类学习方法从训练数据中学习分类模型。
+
+由于线性支持向量机的对偶问题中，无论目标函数还是决策函数都只涉及输入实例与实例之间的内积$x_{i} \cdot x_{j}$，因此可以使用核函数$K\left(x_{i}, x_{j}\right)=\phi\left(x_{i}\right) \cdot \phi\left(x_{j}\right)$来代替，此时的对偶目标函数为
+
+$$W(\alpha)=\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j} K\left(x_{i}, x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}$$
+
+分类决策函数中的内积也可以使用核函数代替
+
+$$\begin{aligned}
+f(x) &=\operatorname{sign}\left(\sum_{i=1}^{N_{s}} a_{i}^{*} y_{i} \phi\left(x_{i}\right) \cdot \phi(x)+b^{*}\right) \\
+&=\operatorname{sign}\left(\sum_{i=1}^{N_{s}} a_{i}^{*} y_{i} K\left(x_{i}, x\right)+b^{*}\right)
+\end{aligned}$$
+
+在实际应用中，直接计算$K(x, z)$比较容易，而通过$\phi(x)$和$\phi(z)$计算$K(x, z)$比较难。
+
+$$K(x, z)=\phi(x) \cdot \phi(z)$$
+
+由于学习过程是隐式的在特征空间进行，并不需要显示的定义特征空间和映射函数，所以该方法称为核技巧。
 
 # 工程实践
 
