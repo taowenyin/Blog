@@ -488,3 +488,135 @@ sklearn.svm.SVC.score(X, y)
 sklearn.svm.SVC.predict_log_proba(X_test)
 sklearn.svm.SVC.predict_proba(X_test)
 ```
+
+# 作业
+
+1、完成习题7.2：已知正例点$x_{1}=(1,2)^{\top}$，$x_{2}=(2,3)^{\top}$，$x_{3}=(3,3)^{\top}$，负例点$x_{4}=(2,1)^{\top}$，$x_{5}=(3,2)^{\top}$，试求最大间隔分离超平面和分类决策函数，并在图上画出分离超平面、间隔边界及支持向量
+
+解：根据下式
+
+$$\begin{aligned} 
+\underset{\alpha}{min} & \quad \frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i} \\
+\text { s.t. } & \quad \sum_{i=1}^{N} \alpha_{i} y_{i}=0 \\
+ & \quad \alpha_{i} \geqslant 0, \quad i=1,2, \cdots, N
+\end{aligned}$$
+
+可以得到
+
+$$\begin{aligned} 
+\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i} & = \frac{1}{2}\left(5\alpha_{1}^{2}+13\alpha_{2}^{2}+18\alpha_{3}^{2}+5\alpha_{4}^{2}+13\alpha_{5}^{2}+16\alpha_{1}\alpha_{2}+18\alpha_{1}\alpha_{3}-8\alpha_{1}\alpha_{4}-14\alpha_{1}\alpha_{5}+30\alpha_{2}\alpha_{3}-14\alpha_{2}\alpha_{4}-24\alpha_{2}\alpha_{5}-18\alpha_{3}\alpha_{4}-30\alpha_{3}\alpha_{5}-16\alpha_{4}\alpha_{5}\right)-\alpha_{1}-\alpha_{2}-\alpha_{3}-\alpha_{4}-\alpha_{5} \\
+\sum_{i=1}^{N} \alpha_{i} y_{i} & = \alpha_{1}+\alpha_{2}+\alpha_{3}-\alpha_{4}-\alpha_{5}=0 \\
+ & \quad \alpha_{i} \geqslant 0, \quad i=1,2, \cdots, N
+\end{aligned}$$
+
+把$\alpha_{5} = \alpha_{1}+\alpha_{2}+\alpha_{3}-\alpha_{4}$代入上式消去$\alpha_{5}$，再分别对上式$\alpha_{1}$、$\alpha_{2}$、$\alpha_{3}$、$\alpha_{4}$求偏导，并令其为0
+
+$$\begin{aligned}   
+\nabla_{\alpha_{1}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) & = 4\alpha_{1}+2\alpha_{2}-2\alpha_{4}-2=0 \\
+\nabla_{\alpha_{2}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) & = 2\alpha_{1}+2\alpha_{2}+\alpha_{3}-2=0 \\
+\nabla_{\alpha_{3}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) & = \alpha_{2}+\alpha_{3}+\alpha_{4}-2=0 \\
+\nabla_{\alpha_{4}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) & = -2\alpha_{1}+\alpha_{3}+2\alpha_{4}=0 
+\end{aligned}$$
+
+由于上式无解，所以通过观测，由于$x_{2}$不在间隔边界，因此$\alpha_{2}=0$，因此上式的求导就变为
+
+$$\begin{aligned}   
+\nabla_{\alpha_{1}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) & = 4\alpha_{1}+2\alpha_{2}-2\alpha_{4}-2=0 \\
+\nabla_{\alpha_{3}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) & = \alpha_{2}+\alpha_{3}+\alpha_{4}-2=0 \\
+\nabla_{\alpha_{4}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) & = -2\alpha_{1}+\alpha_{3}+2\alpha_{4}=0 
+\end{aligned}$$
+
+代入$\alpha_{2}=0$得到
+
+$$\begin{aligned}   
+\nabla_{\alpha_{1}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) & = 2\alpha_{1}-\alpha_{4}-1=0 \\
+\nabla_{\alpha_{3}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) & = \alpha_{3}+\alpha_{4}-2=0 \\
+\nabla_{\alpha_{4}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) & = -2\alpha_{1}+\alpha_{3}+2\alpha_{4}=0 
+\end{aligned}$$
+
+由于上式依然无解，因此分三种情况进行讨论，分别是：
+
+> 情况1：$\alpha_{1}=0,\alpha_{2}=0$
+
+求得$\alpha_{1}=0$、$\alpha_{2}=0$、$\alpha_{3}=2$、$\alpha_{4}=0$、$\alpha_{5}=2$
+
+> 情况2：$\alpha_{3}=0,\alpha_{2}=0$
+
+求得$\alpha_{1}=1$、$\alpha_{2}=0$、$\alpha_{3}=0$、$\alpha_{4}=1$、$\alpha_{5}=0$
+
+> 情况3：$\alpha_{4}=0,\alpha_{2}=0$
+
+求得$\alpha_{1}=0.5$、$\alpha_{2}=0$、$\alpha_{3}=2$、$\alpha_{4}=0$、$\alpha_{5}=2.5$
+
+把所有解分别代入，求最小值
+
+$$L(\alpha)=\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}$$
+
+求得
+
+$L_{1}(\alpha)=-2$，$L_{2}(\alpha)=-1$，$L_{3}(\alpha)=-2.5$
+
+所以$L_{3}(\alpha)$最小，所以$\alpha$的最优解为$\alpha_{1}=0.5$、$\alpha_{2}=0$、$\alpha_{3}=2$、$\alpha_{4}=0$、$\alpha_{5}=2.5$。
+
+再把所有$\alpha$代入下式，可以求得$w^{*}$和$b^{*}$
+
+$$w^{*}=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i}=\left(-1,2\right)$$
+
+$$b^{*}=y_{j}-\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x_{i} \cdot x_{j}\right)=-2$$
+
+所以分离超平面为
+
+$$-x^{(1)}+2 x^{(2)}-2=0$$
+
+决策函数为
+
+$$f(x)=\operatorname{sign}\left(-x^{(1)}+2 x^{(2)}-2\right)$$
+
+所以，$x_{1}=(1,2)^{\top}$，$x_{3}=(3,3)^{\top}$，$x_{5}=(3,2)^{\top}$是支持向量。
+
+2、完成习题7.3：线性支持向量机还可以定义成以下形式：
+
+$$\begin{aligned} 
+\underset{w,b,\xi}{min} & \quad \frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}^{2} \\
+\text { s.t. } & \quad y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}, i=1,2, \cdots, N \\
+& \quad \xi_{i} \geqslant 0, \quad i=1,2, \cdots, N
+\end{aligned}$$
+
+试求其对偶形式。
+
+3、试调用sklearn.svm中的SVC模块求解习题7.2，长时改变参数，如C、kernel，比较结果
+
+```python
+import numpy as np
+import time
+
+from sklearn.svm import SVC
+
+if __name__ == '__main__':
+    # 计算开始时间
+    star = time.time()
+
+    data = np.array([
+        [1, 2, 1], [2, 3, 1], [3, 3, 1],
+        [2, 1, -1], [3, 2, -1]
+    ])
+
+    train_x = data[:, 0:2]
+    train_y = data[:, 2]
+
+    clf = SVC(C=100, kernel='linear')
+    clf.fit(train_x, train_y)
+
+    # 获取w
+    w = clf.coef_[0]
+    # 获取截距
+    b = clf.intercept_
+
+    # 打印超平面
+    print(clf.support_vectors_)
+    print(w, b)
+
+    # 计算结束事时间
+    end = time.time()
+    print('用时：{:.3f}s'.format(end - star))
+```
