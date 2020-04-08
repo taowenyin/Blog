@@ -353,6 +353,74 @@ k_{n}(s, t) &amp;=\sum_{u \in \Sigma^{n}}\left[\phi_{n}(s)\right]_{u}\left[\phi_
 <li>返回样本的对数概率以及普通概率，注意该函数只有在SVM构建时的probability参数为True时才有效。</li>
 </ol>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sklearn.svm.SVC.predict_log_proba(X_test)</span><br><span class="line">sklearn.svm.SVC.predict_proba(X_test)</span><br></pre></td></tr></table></figure>
+<h1 id="作业">作业</h1>
+<p>1、完成习题7.2：已知正例点<span class="math inline">\(x_{1}=(1,2)^{\top}\)</span>，<span class="math inline">\(x_{2}=(2,3)^{\top}\)</span>，<span class="math inline">\(x_{3}=(3,3)^{\top}\)</span>，负例点<span class="math inline">\(x_{4}=(2,1)^{\top}\)</span>，<span class="math inline">\(x_{5}=(3,2)^{\top}\)</span>，试求最大间隔分离超平面和分类决策函数，并在图上画出分离超平面、间隔边界及支持向量</p>
+<p>解：根据下式</p>
+<p><span class="math display">\[\begin{aligned} 
+\underset{\alpha}{min} &amp; \quad \frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i} \\
+\text { s.t. } &amp; \quad \sum_{i=1}^{N} \alpha_{i} y_{i}=0 \\
+ &amp; \quad \alpha_{i} \geqslant 0, \quad i=1,2, \cdots, N
+\end{aligned}\]</span></p>
+<p>可以得到</p>
+<p><span class="math display">\[\begin{aligned} 
+\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i} &amp; = \frac{1}{2}\left(5\alpha_{1}^{2}+13\alpha_{2}^{2}+18\alpha_{3}^{2}+5\alpha_{4}^{2}+13\alpha_{5}^{2}+16\alpha_{1}\alpha_{2}+18\alpha_{1}\alpha_{3}-8\alpha_{1}\alpha_{4}-14\alpha_{1}\alpha_{5}+30\alpha_{2}\alpha_{3}-14\alpha_{2}\alpha_{4}-24\alpha_{2}\alpha_{5}-18\alpha_{3}\alpha_{4}-30\alpha_{3}\alpha_{5}-16\alpha_{4}\alpha_{5}\right)-\alpha_{1}-\alpha_{2}-\alpha_{3}-\alpha_{4}-\alpha_{5} \\
+\sum_{i=1}^{N} \alpha_{i} y_{i} &amp; = \alpha_{1}+\alpha_{2}+\alpha_{3}-\alpha_{4}-\alpha_{5}=0 \\
+ &amp; \quad \alpha_{i} \geqslant 0, \quad i=1,2, \cdots, N
+\end{aligned}\]</span></p>
+<p>把<span class="math inline">\(\alpha_{5} = \alpha_{1}+\alpha_{2}+\alpha_{3}-\alpha_{4}\)</span>代入上式消去<span class="math inline">\(\alpha_{5}\)</span>，再分别对上式<span class="math inline">\(\alpha_{1}\)</span>、<span class="math inline">\(\alpha_{2}\)</span>、<span class="math inline">\(\alpha_{3}\)</span>、<span class="math inline">\(\alpha_{4}\)</span>求偏导，并令其为0</p>
+<p><span class="math display">\[\begin{aligned}   
+\nabla_{\alpha_{1}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) &amp; = 4\alpha_{1}+2\alpha_{2}-2\alpha_{4}-2=0 \\
+\nabla_{\alpha_{2}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) &amp; = 2\alpha_{1}+2\alpha_{2}+\alpha_{3}-2=0 \\
+\nabla_{\alpha_{3}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) &amp; = \alpha_{2}+\alpha_{3}+\alpha_{4}-2=0 \\
+\nabla_{\alpha_{4}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) &amp; = -2\alpha_{1}+\alpha_{3}+2\alpha_{4}=0 
+\end{aligned}\]</span></p>
+<p>由于上式无解，所以通过观测，由于<span class="math inline">\(x_{2}\)</span>不在间隔边界，因此<span class="math inline">\(\alpha_{2}=0\)</span>，因此上式的求导就变为</p>
+<p><span class="math display">\[\begin{aligned}   
+\nabla_{\alpha_{1}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) &amp; = 4\alpha_{1}+2\alpha_{2}-2\alpha_{4}-2=0 \\
+\nabla_{\alpha_{3}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) &amp; = \alpha_{2}+\alpha_{3}+\alpha_{4}-2=0 \\
+\nabla_{\alpha_{4}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) &amp; = -2\alpha_{1}+\alpha_{3}+2\alpha_{4}=0 
+\end{aligned}\]</span></p>
+<p>代入<span class="math inline">\(\alpha_{2}=0\)</span>得到</p>
+<p><span class="math display">\[\begin{aligned}   
+\nabla_{\alpha_{1}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) &amp; = 2\alpha_{1}-\alpha_{4}-1=0 \\
+\nabla_{\alpha_{3}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) &amp; = \alpha_{3}+\alpha_{4}-2=0 \\
+\nabla_{\alpha_{4}} L(\alpha_{1}, \alpha_{2},\alpha_{3},\alpha_{4}) &amp; = -2\alpha_{1}+\alpha_{3}+2\alpha_{4}=0 
+\end{aligned}\]</span></p>
+<p>由于上式依然无解，因此分三种情况进行讨论，分别是：</p>
+<blockquote>
+<p>情况1：<span class="math inline">\(\alpha_{1}=0,\alpha_{2}=0\)</span></p>
+</blockquote>
+<p>求得<span class="math inline">\(\alpha_{1}=0\)</span>、<span class="math inline">\(\alpha_{2}=0\)</span>、<span class="math inline">\(\alpha_{3}=2\)</span>、<span class="math inline">\(\alpha_{4}=0\)</span>、<span class="math inline">\(\alpha_{5}=2\)</span></p>
+<blockquote>
+<p>情况2：<span class="math inline">\(\alpha_{3}=0,\alpha_{2}=0\)</span></p>
+</blockquote>
+<p>求得<span class="math inline">\(\alpha_{1}=1\)</span>、<span class="math inline">\(\alpha_{2}=0\)</span>、<span class="math inline">\(\alpha_{3}=0\)</span>、<span class="math inline">\(\alpha_{4}=1\)</span>、<span class="math inline">\(\alpha_{5}=0\)</span></p>
+<blockquote>
+<p>情况3：<span class="math inline">\(\alpha_{4}=0,\alpha_{2}=0\)</span></p>
+</blockquote>
+<p>求得<span class="math inline">\(\alpha_{1}=0.5\)</span>、<span class="math inline">\(\alpha_{2}=0\)</span>、<span class="math inline">\(\alpha_{3}=2\)</span>、<span class="math inline">\(\alpha_{4}=0\)</span>、<span class="math inline">\(\alpha_{5}=2.5\)</span></p>
+<p>把所有解分别代入，求最小值</p>
+<p><span class="math display">\[L(\alpha)=\frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}\]</span></p>
+<p>求得</p>
+<p><span class="math inline">\(L_{1}(\alpha)=-2\)</span>，<span class="math inline">\(L_{2}(\alpha)=-1\)</span>，<span class="math inline">\(L_{3}(\alpha)=-2.5\)</span></p>
+<p>所以<span class="math inline">\(L_{3}(\alpha)\)</span>最小，所以<span class="math inline">\(\alpha\)</span>的最优解为<span class="math inline">\(\alpha_{1}=0.5\)</span>、<span class="math inline">\(\alpha_{2}=0\)</span>、<span class="math inline">\(\alpha_{3}=2\)</span>、<span class="math inline">\(\alpha_{4}=0\)</span>、<span class="math inline">\(\alpha_{5}=2.5\)</span>。</p>
+<p>再把所有<span class="math inline">\(\alpha\)</span>代入下式，可以求得<span class="math inline">\(w^{*}\)</span>和<span class="math inline">\(b^{*}\)</span></p>
+<p><span class="math display">\[w^{*}=\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} x_{i}=\left(-1,2\right)\]</span></p>
+<p><span class="math display">\[b^{*}=y_{j}-\sum_{i=1}^{N} \alpha_{i}^{*} y_{i}\left(x_{i} \cdot x_{j}\right)=-2\]</span></p>
+<p>所以分离超平面为</p>
+<p><span class="math display">\[-x^{(1)}+2 x^{(2)}-2=0\]</span></p>
+<p>决策函数为</p>
+<p><span class="math display">\[f(x)=\operatorname{sign}\left(-x^{(1)}+2 x^{(2)}-2\right)\]</span></p>
+<p>所以，<span class="math inline">\(x_{1}=(1,2)^{\top}\)</span>，<span class="math inline">\(x_{3}=(3,3)^{\top}\)</span>，<span class="math inline">\(x_{5}=(3,2)^{\top}\)</span>是支持向量。</p>
+<p>2、完成习题7.3：线性支持向量机还可以定义成以下形式：</p>
+<p><span class="math display">\[\begin{aligned} 
+\underset{w,b,\xi}{min} &amp; \quad \frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{N} \xi_{i}^{2} \\
+\text { s.t. } &amp; \quad y_{i}\left(w \cdot x_{i}+b\right) \geqslant 1-\xi_{i}, i=1,2, \cdots, N \\
+&amp; \quad \xi_{i} \geqslant 0, \quad i=1,2, \cdots, N
+\end{aligned}\]</span></p>
+<p>试求其对偶形式。</p>
+<p>3、试调用sklearn.svm中的SVC模块求解习题7.2，长时改变参数，如C、kernel，比较结果</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="comment"># 计算开始时间</span></span><br><span class="line">    star = time.time()</span><br><span class="line"></span><br><span class="line">    data = np.array([</span><br><span class="line">        [<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>], [<span class="number">3</span>, <span class="number">3</span>, <span class="number">1</span>],</span><br><span class="line">        [<span class="number">2</span>, <span class="number">1</span>, <span class="number">-1</span>], [<span class="number">3</span>, <span class="number">2</span>, <span class="number">-1</span>]</span><br><span class="line">    ])</span><br><span class="line"></span><br><span class="line">    train_x = data[:, <span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">    train_y = data[:, <span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">    clf = SVC(C=<span class="number">100</span>, kernel=<span class="string">'linear'</span>)</span><br><span class="line">    clf.fit(train_x, train_y)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取w</span></span><br><span class="line">    w = clf.coef_[<span class="number">0</span>]</span><br><span class="line">    <span class="comment"># 获取截距</span></span><br><span class="line">    b = clf.intercept_</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打印超平面</span></span><br><span class="line">    print(clf.support_vectors_)</span><br><span class="line">    print(w, b)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算结束事时间</span></span><br><span class="line">    end = time.time()</span><br><span class="line">    print(<span class="string">'用时：&#123;:.3f&#125;s'</span>.format(end - star))</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>统计学习方法</category>
