@@ -24,7 +24,7 @@
 <p>2、对<span class="math inline">\(m=1,2, \cdots, M\)</span></p>
 <p>（1）使用具有权值分布<span class="math inline">\(D_{m}\)</span>的训练数据学习，得到基本分类器（弱分类器）</p>
 <p><span class="math display">\[G_{m}(x): \mathcal{X} \rightarrow \{-1,+1\}\]</span></p>
-<p>（2）计算<span class="math inline">\(G_{m}(x)\)</span>在训练数据集三的分类误差率</p>
+<p>（2）计算<span class="math inline">\(G_{m}(x)\)</span>在训练数据集上的分类误差率</p>
 <p><span class="math display">\[e_{m}=\sum_{i=1}^{N} P\left(G_{m}\left(x_{i}\right) \neq y_{i}\right)=\sum_{i=1}^{N} w_{m i} I\left(G_{m}\left(x_{i}\right) \neq y_{i}\right)\]</span></p>
 <p>（3）计算<span class="math inline">\(G_{m}(x)\)</span>的系数</p>
 <p><span class="math display">\[\alpha_{m}=\frac{1}{2} \log \frac{1-e_{m}}{e_{m}}\]</span></p>
@@ -32,6 +32,34 @@
 <p>（4）更新训练数据集的权值分布</p>
 <p><span class="math display">\[D_{m+1}=\left(w_{m+1,1}, \cdots, w_{m+1, i}, \cdots, w_{m+1, N}\right)\]</span></p>
 <p><span class="math display">\[w_{m+1, i}=\frac{w_{m i}}{Z_{m}} \exp \left(-\alpha_{m} y_{i} G_{m}\left(x_{i}\right)\right), \quad i=1,2, \cdots, N\]</span></p>
+<p>其中<span class="math inline">\(Z_{m}\)</span>表示规范化因子</p>
+<p><span class="math display">\[Z_{m}=\sum_{i=1}^{N} w_{m i} \exp \left(-\alpha_{m} y_{i} G_{m}\left(x_{i}\right)\right)\]</span></p>
+<p>它使<span class="math inline">\(D_{m+1}\)</span>成为一个概率分布</p>
+<p>3、构建基本分类器的线性组合</p>
+<p><span class="math display">\[f(x)=\sum_{m=1}^{M} \alpha_{m} G_{m}(x)\]</span></p>
+<p>得到最终分类器</p>
+<p><span class="math display">\[\begin{aligned}
+G(x) &amp;=\operatorname{sign}(f(x)) \\
+&amp;=\operatorname{sign}\left(\sum_{m=1}^{M} \alpha_{m} G_{m}(x)\right)
+\end{aligned}\]</span></p>
+<h1 id="adaboost算法的训练误差">AdaBoost算法的训练误差</h1>
+<blockquote>
+<p>1、AdaBoost算法最终分类器的训练误差界为</p>
+</blockquote>
+<p><span class="math display">\[\frac{1}{N} \sum_{i=1}^{N} I\left(G\left(x_{i}\right) \neq y_{i}\right) \leqslant \frac{1}{N} \sum_{i} \exp \left(-y_{i} f\left(x_{i}\right)\right)=\prod_{m} Z_{m}\]</span></p>
+<blockquote>
+<p>2、二分类问题AdaBoost的训练误差界</p>
+</blockquote>
+<p><span class="math display">\[\begin{aligned}
+\prod_{m=1}^{M} Z_{m} &amp;=\prod_{m=1}^{M}[2 \sqrt{e_{m}\left(1-e_{m}\right)}] \\
+&amp;=\prod_{m=1}^{M} \sqrt{\left(1-4 \gamma_{m}^{2}\right)} \\
+&amp; \leqslant \exp \left(-2 \sum_{m=1}^{M} \gamma_{m}^{2}\right)
+\end{aligned}\]</span></p>
+<p>其中<span class="math inline">\(\gamma_{m}=\frac{1}{2}-e_{m}\)</span></p>
+<blockquote>
+<p>3、如果存在<span class="math inline">\(\gamma&gt;0\)</span>，对所有<span class="math inline">\(m\)</span>有<span class="math inline">\(\gamma_{m} \geqslant \gamma\)</span>，则</p>
+</blockquote>
+<p><span class="math display">\[\frac{1}{N} \sum_{i=1}^{N} I\left(G\left(x_{i}\right) \neq y_{i}\right) \leqslant \exp \left(-2 M \gamma^{2}\right)\]</span></p>
 ]]></content>
       <categories>
         <category>统计学习方法</category>
