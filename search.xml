@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>S8-提升方法</title>
+    <url>/slm-adaboost/</url>
+    <content><![CDATA[<p>提升（boosting）方法通过改变训练样本的权重，学习多个分类器，并将这些分类器进行线性组合，从而提高分类的性能，其中典型的方法就是AdaBoost方法。</p><h1 id="提升方法adaboost算法">提升方法AdaBoost算法</h1><h2 id="提升方法的基本思路">提升方法的基本思路</h2><p>基本思想：对于复杂任务来说，将多个专家的判断进行适当的综合所得出的判断，要比其中任何一个专家独立的判断好。在概率近似正确（probably approximately correct, PAC）学习框架下，一个强可学习的充分必要条件是弱可学习。因此，<strong>“提升方法”的目标是把弱可学习提升为强可学习，即从弱学习器出发，反复学习，得到一系列弱分类器（基本分类器），然后组合这些弱分类器，从而构成一个强分类器。</strong></p><a id="more"></a>
+
+
+
+<blockquote>
+<p>1、每一轮如何改变训练数据的权值或概率分布？</p>
+</blockquote>
+<p>AdaBoost的做法是提高被前一轮弱分类器错分类样本的权值，并降低被正确分类样本的权值，从而使得错分类的数据能在接下来弱分类器中获得更大关注。</p>
+<blockquote>
+<p>2、如何将弱分类器组合成一个强分类器？</p>
+</blockquote>
+<p>AdaBoost的做法是加权多数表决，即加大误分类小的弱分类器的权值，减少误分类大的弱分类器的权值。</p>
+<h2 id="adaboost算法">AdaBoost算法</h2>
+<p>假设给定一个二分类的训练数据集</p>
+<p><span class="math display">\[T=\left\{\left(x_{1}, y_{1}\right),\left(x_{2}, y_{2}\right), \cdots,\left(x_{N}, y_{N}\right)\right\}\]</span></p>
+<p>实例<span class="math inline">\(x_{i} \in \mathcal{X} \subseteq \mathbf{R}^{n}\)</span>，标记<span class="math inline">\(y_{i} \in \mathcal{Y}=\{-1,+1\}\)</span></p>
+<p>1、初始化训练数据的权值分布</p>
+<p><span class="math display">\[D_{1}=\left(w_{11}, \cdots, w_{1 i}, \cdots, w_{1 N}\right), \quad w_{1 i}=\frac{1}{N}, \quad i=1,2, \cdots, N\]</span></p>
+<p>2、对<span class="math inline">\(m=1,2, \cdots, M\)</span></p>
+<p>（1）使用具有权值分布<span class="math inline">\(D_{m}\)</span>的训练数据学习，得到基本分类器（弱分类器）</p>
+<p><span class="math display">\[G_{m}(x): \mathcal{X} \rightarrow \{-1,+1\}\]</span></p>
+<p>（2）计算<span class="math inline">\(G_{m}(x)\)</span>在训练数据集三的分类误差率</p>
+<p><span class="math display">\[e_{m}=\sum_{i=1}^{N} P\left(G_{m}\left(x_{i}\right) \neq y_{i}\right)=\sum_{i=1}^{N} w_{m i} I\left(G_{m}\left(x_{i}\right) \neq y_{i}\right)\]</span></p>
+<p>（3）计算<span class="math inline">\(G_{m}(x)\)</span>的系数</p>
+<p><span class="math display">\[\alpha_{m}=\frac{1}{2} \log \frac{1-e_{m}}{e_{m}}\]</span></p>
+<p>此处的对数为自然对数。</p>
+<p>（4）更新训练数据集的权值分布</p>
+<p><span class="math display">\[D_{m+1}=\left(w_{m+1,1}, \cdots, w_{m+1, i}, \cdots, w_{m+1, N}\right)\]</span></p>
+<p><span class="math display">\[w_{m+1, i}=\frac{w_{m i}}{Z_{m}} \exp \left(-\alpha_{m} y_{i} G_{m}\left(x_{i}\right)\right), \quad i=1,2, \cdots, N\]</span></p>
+]]></content>
+      <categories>
+        <category>统计学习方法</category>
+      </categories>
+  </entry>
+  <entry>
     <title>S7-支持向量机</title>
     <url>/slm-svm/</url>
     <content><![CDATA[<p>支持向量机学习方法包含构建由简至繁的模型，分别是线性可分支持向量机、线性支持向量机，以及非线性支持向量机。简单模型是复杂模型的基础，也是复杂模型的特殊情况。</p><ol type="1">
