@@ -41,7 +41,7 @@ $$D_{1}=\left(w_{11}, \cdots, w_{1 i}, \cdots, w_{1 N}\right), \quad w_{1 i}=\fr
 
 $$G_{m}(x): \mathcal{X} \rightarrow \{-1,+1\}$$
 
-（2）计算$G_{m}(x)$在训练数据集三的分类误差率
+（2）计算$G_{m}(x)$在训练数据集上的分类误差率
 
 $$e_{m}=\sum_{i=1}^{N} P\left(G_{m}\left(x_{i}\right) \neq y_{i}\right)=\sum_{i=1}^{N} w_{m i} I\left(G_{m}\left(x_{i}\right) \neq y_{i}\right)$$
 
@@ -56,3 +56,40 @@ $$\alpha_{m}=\frac{1}{2} \log \frac{1-e_{m}}{e_{m}}$$
 $$D_{m+1}=\left(w_{m+1,1}, \cdots, w_{m+1, i}, \cdots, w_{m+1, N}\right)$$
 
 $$w_{m+1, i}=\frac{w_{m i}}{Z_{m}} \exp \left(-\alpha_{m} y_{i} G_{m}\left(x_{i}\right)\right), \quad i=1,2, \cdots, N$$
+
+其中$Z_{m}$表示规范化因子
+
+$$Z_{m}=\sum_{i=1}^{N} w_{m i} \exp \left(-\alpha_{m} y_{i} G_{m}\left(x_{i}\right)\right)$$
+
+它使$D_{m+1}$成为一个概率分布
+
+3、构建基本分类器的线性组合
+
+$$f(x)=\sum_{m=1}^{M} \alpha_{m} G_{m}(x)$$
+
+得到最终分类器
+
+$$\begin{aligned}
+G(x) &=\operatorname{sign}(f(x)) \\
+&=\operatorname{sign}\left(\sum_{m=1}^{M} \alpha_{m} G_{m}(x)\right)
+\end{aligned}$$
+
+# AdaBoost算法的训练误差
+
+> 1、AdaBoost算法最终分类器的训练误差界为
+
+$$\frac{1}{N} \sum_{i=1}^{N} I\left(G\left(x_{i}\right) \neq y_{i}\right) \leqslant \frac{1}{N} \sum_{i} \exp \left(-y_{i} f\left(x_{i}\right)\right)=\prod_{m} Z_{m}$$
+
+> 2、二分类问题AdaBoost的训练误差界
+
+$$\begin{aligned}
+\prod_{m=1}^{M} Z_{m} &=\prod_{m=1}^{M}[2 \sqrt{e_{m}\left(1-e_{m}\right)}] \\
+&=\prod_{m=1}^{M} \sqrt{\left(1-4 \gamma_{m}^{2}\right)} \\
+& \leqslant \exp \left(-2 \sum_{m=1}^{M} \gamma_{m}^{2}\right)
+\end{aligned}$$
+
+其中$\gamma_{m}=\frac{1}{2}-e_{m}$
+
+> 3、如果存在$\gamma>0$，对所有$m$有$\gamma_{m} \geqslant \gamma$，则
+
+$$\frac{1}{N} \sum_{i=1}^{N} I\left(G\left(x_{i}\right) \neq y_{i}\right) \leqslant \exp \left(-2 M \gamma^{2}\right)$$
