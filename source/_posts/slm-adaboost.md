@@ -203,7 +203,7 @@ $$-\left[\frac{\partial L\left(y, f\left(x_{i}\right)\right)}{\partial f\left(x_
 
 作为回归问题提升树中的残差近似值。
 
-> 前向分步算法过程
+> 梯度提升算法过程
 
 输入训练数据集$T=\left\{\left(x_{1}, y_{1}\right),\left(x_{2}, y_{2}\right), \cdots,\left(x_{N}, y_{N}\right)\right\}$，$x_{i} \in \mathcal{X} \subseteq \mathbf{R}^{n}$，$y_{i} \in \mathcal{Y} \subseteq \mathbf{R}$；损失函数$L(y, f(x))$
 
