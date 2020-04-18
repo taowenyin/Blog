@@ -281,6 +281,4 @@ if __name__ == '__main__':
     multinomialNB = MultinomialNB()
     multinomialNB.fit(train_x, train_y)
     print('Multinomial Test X = ', multinomialNB.predict(x))
-
-
 ```
