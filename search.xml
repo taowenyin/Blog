@@ -5064,6 +5064,8 @@ W_{0}^{t+1}=W_{0}^{t}-\gamma_{t} \xi\left(y, \mathbf{x}^{*}\right) \mathbf{w}_{y
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D6BC243565B2087BC3F897C9277A7293F59E4889</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"deb http://miktex.org/download/ubuntu xenial universe"</span> | sudo tee /etc/apt/sources.list.d/miktex.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install miktex</span><br></pre></td></tr></table></figure>
 <h2 id="pinta">Pinta</h2>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-fast install pinta</span><br></pre></td></tr></table></figure>
+<h2 id="axel">Axel</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-fast install axel</span><br><span class="line"></span><br><span class="line">axel -n 20 xxx</span><br></pre></td></tr></table></figure>
 <h1 id="资源下载">资源下载</h1>
 <h2 id="android生成key">Android生成Key</h2>
 <p><a href="https://pan.baidu.com/s/11KC0kjlk0rHle7SSY7l5RA" target="_blank" rel="noopener">下载地址</a></p>
