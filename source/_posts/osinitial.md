@@ -492,6 +492,14 @@ sudo apt-get install miktex
 sudo apt-fast install pinta
 ```
 
+## Axel
+
+```bash
+sudo apt-fast install axel
+
+axel -n 20 xxx
+```
+
 # 资源下载 
 
 ## Android生成Key
