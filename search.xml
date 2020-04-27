@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>模式识别原理作业</title>
+    <url>/pc-homework/</url>
+    <content><![CDATA[<h1 id="节">2.3节</h1><p>3、考虑0-1损失函数的及消化极大化准则，即<span class="math inline">\(\lambda_{11}=\lambda_{22}=0\)</span>且<span class="math inline">\(\lambda_{12}=\lambda_{21}=1\)</span>。</p><p>（1）证明在这种情况下判决区域将满足</p><p><span class="math display">\[\int_{\mathcal{R}_{2}} p\left(\mathbf{x} | \omega_{1}\right) d \mathbf{x}=\int_{\mathcal{R}_{1}} p\left(\mathbf{x} | \omega_{2}\right) d \mathbf{x}\]</span></p><a id="more"></a>
+
+
+
+<p>证：</p>
+<p>已知先验概率<span class="math inline">\(P\left(\omega_{1}\right)\)</span>和<span class="math inline">\(P\left(\omega_{2}\right)=1-P\left(\omega_{1}\right)\)</span>，并根据式子22，并代入<span class="math inline">\(\lambda_{11}=\lambda_{22}=0\)</span>和<span class="math inline">\(\lambda_{12}=\lambda_{21}=1\)</span>可以得到</p>
+<p><span class="math inline">\(\begin{aligned} R=&amp; \int_{R_{1}}\left[\lambda_{11} P\left(\omega_{1}\right) p\left(\mathbf{x} | \omega_{1}\right)+\lambda_{12} P\left(\omega_{2}\right) p\left(\mathbf{x} | \omega_{2}\right)\right] d \mathbf{x}+\int_{\mathcal{R}_{2}}\left[\lambda_{21} P\left(\omega_{1}\right) p\left(\mathbf{x} | \omega_{1}\right)+\lambda_{22} P\left(\omega_{2}\right) p\left(\mathbf{x} | \omega_{2}\right)\right] d \mathbf{x} \end{aligned}\)</span></p>
+<p>（2）此解是否总是唯一的？如果不是，请构造一个简单的反例。</p>
+]]></content>
+      <categories>
+        <category>课程</category>
+      </categories>
+  </entry>
+  <entry>
     <title>S8-提升方法</title>
     <url>/slm-adaboost/</url>
     <content><![CDATA[<p>提升（boosting）方法通过改变训练样本的权重，学习多个分类器，并将这些分类器进行线性组合，从而提高分类的性能，其中典型的方法就是AdaBoost方法。</p><h1 id="提升方法adaboost算法">提升方法AdaBoost算法</h1><h2 id="提升方法的基本思路">提升方法的基本思路</h2><p>基本思想：对于复杂任务来说，将多个专家的判断进行适当的综合所得出的判断，要比其中任何一个专家独立的判断好。在概率近似正确（probably approximately correct, PAC）学习框架下，一个强可学习的充分必要条件是弱可学习。因此，<strong>“提升方法”的目标是把弱可学习提升为强可学习，即从弱学习器出发，反复学习，得到一系列弱分类器（基本分类器），然后组合这些弱分类器，从而构成一个强分类器。</strong></p><a id="more"></a>
