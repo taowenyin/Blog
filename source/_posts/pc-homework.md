@@ -113,3 +113,69 @@ E_{B} &=2 \int_{0}^{\infty} \frac{1}{2} N\left(\mu_{1}, \sigma_{1}^{2}\right) d 
  &=2 \int_{0}^{\infty} \frac{1}{2} N\left(1, 1\right) d \mathbf{x} \\
  &=\int_{0}^{\infty} N\left(1, 1\right) d \mathbf{x}
 \end{aligned}$
+
+12、设$\omega_{\max}(\mathbf{x})$为类别状态，此时对所有的$i(i=1, \cdots, c)$，有$P\left(\omega_{max} | \mathbf{x}\right) \geqslant P\left(\omega_{i} | \mathbf{x}\right)$。
+
+（1）证明$P\left(\omega_{max} | \mathbf{x}\right) \geq \frac{1}{c}$
+
+证明：
+
+由于$\sum_{i=1}^{c} P\left(\omega_{i} | \mathbf{x}\right)=1$
+
+如果对于任意的$i \neq j$，都有$P\left(\omega_{i} | \mathbf{x}\right)=P\left(\omega_{j} | \mathbf{x}\right)$，那么就可以得到
+
+$$P\left(\omega_{i} | \mathbf{x}\right)=\frac{1}{c}$$
+
+所以如果存在$P\left(\omega_{max} | \mathbf{x}\right) \geqslant P\left(\omega_{i} | \mathbf{x}\right)$，那么
+
+$$P\left(\omega_{max} | \mathbf{x}\right) \geqslant \frac{1}{c}$$
+
+（2）证明对于最小化误差判定规则，平均误差概率为$P(\text {error})=1-\int P\left(\omega_{\max } | \mathbf{x}\right) p(\mathbf{x}) d \mathbf{x}$
+
+证明：
+
+因为最小误差概率为1-最大正确概率，因此按照最小化误差判定规则，平均误差概率为
+
+$$P(\text {error})=1-\int P\left(\omega_{\max } | \mathbf{x}\right) p(\mathbf{x}) d \mathbf{x}$$
+
+（3）利用这两个结论证明$P(\text {error}) \leqslant \frac{c-1}{c}$
+
+证明：
+
+因为
+
+$$P\left(\omega_{max} | \mathbf{x}\right) \geqslant \frac{1}{c}$$
+
+所以
+
+$$-P\left(\omega_{max} | \mathbf{x}\right) \leqslant -\frac{1}{c}$$
+
+又因为
+
+$$P(\text {error})=1-\int P\left(\omega_{\max } | \mathbf{x}\right) p(\mathbf{x}) d \mathbf{x}$$
+
+所以
+
+$$P(\text {error})=1-P\left(\omega_{\max } | \mathbf{x}\right) \int p(\mathbf{x}) d \mathbf{x} \leqslant 1 -\frac{1}{c} \int p(\mathbf{x}) d \mathbf{x}$$
+
+又因为
+
+$$\int p(\mathbf{x}) d \mathbf{x}=1$$
+
+所以
+
+$$P(\text {error})=1-P\left(\omega_{\max } | \mathbf{x}\right) \int p(\mathbf{x}) d \mathbf{x} \leqslant 1 -\frac{1}{c} \int p(\mathbf{x}) d \mathbf{x}=1-\frac{1}{c}=\frac{c-1}{c}$$
+
+所以
+
+$$P(\text {error}) \leqslant \frac{c-1}{c}$$
+
+（4）描述一种情况，在此情况下$P(\text {error}) = \frac{c-1}{c}$
+
+因为当$P\left(\omega_{i} | \mathbf{x}\right)=P\left(\omega_{j} | \mathbf{x}\right)$时
+
+$$P\left(\omega_{i} | \mathbf{x}\right)=\frac{1}{c}$$
+
+所以，只有在所有类别等概率的情况下
+
+$$P(\text {error}) = \frac{c-1}{c}$$
