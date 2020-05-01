@@ -49,6 +49,39 @@
 <p><span class="math display">\[\int_{\mathcal{R}_{2}} p\left(\mathbf{x} | \omega_{1}\right) d \mathbf{x}=\int_{\mathcal{R}_{1}} p\left(\mathbf{x} | \omega_{2}\right) d \mathbf{x}\]</span></p>
 <p>同时，由于在本题中的贝叶斯误差<span class="math inline">\(x^{*}=0\)</span>，所以</p>
 <p><span class="math inline">\(\begin{aligned} E_{B} &amp;=2 \int_{0}^{\infty} \frac{1}{2} N\left(\mu_{1}, \sigma_{1}^{2}\right) d \mathbf{x} \\  &amp;=2 \int_{0}^{\infty} \frac{1}{2} N\left(1, 1\right) d \mathbf{x} \\  &amp;=\int_{0}^{\infty} N\left(1, 1\right) d \mathbf{x} \end{aligned}\)</span></p>
+<p>12、设<span class="math inline">\(\omega_{\max}(\mathbf{x})\)</span>为类别状态，此时对所有的<span class="math inline">\(i(i=1, \cdots, c)\)</span>，有<span class="math inline">\(P\left(\omega_{max} | \mathbf{x}\right) \geqslant P\left(\omega_{i} | \mathbf{x}\right)\)</span>。</p>
+<p>（1）证明<span class="math inline">\(P\left(\omega_{max} | \mathbf{x}\right) \geq \frac{1}{c}\)</span></p>
+<p>证明：</p>
+<p>由于<span class="math inline">\(\sum_{i=1}^{c} P\left(\omega_{i} | \mathbf{x}\right)=1\)</span></p>
+<p>如果对于任意的<span class="math inline">\(i \neq j\)</span>，都有<span class="math inline">\(P\left(\omega_{i} | \mathbf{x}\right)=P\left(\omega_{j} | \mathbf{x}\right)\)</span>，那么就可以得到</p>
+<p><span class="math display">\[P\left(\omega_{i} | \mathbf{x}\right)=\frac{1}{c}\]</span></p>
+<p>所以如果存在<span class="math inline">\(P\left(\omega_{max} | \mathbf{x}\right) \geqslant P\left(\omega_{i} | \mathbf{x}\right)\)</span>，那么</p>
+<p><span class="math display">\[P\left(\omega_{max} | \mathbf{x}\right) \geqslant \frac{1}{c}\]</span></p>
+<p>（2）证明对于最小化误差判定规则，平均误差概率为<span class="math inline">\(P(\text {error})=1-\int P\left(\omega_{\max } | \mathbf{x}\right) p(\mathbf{x}) d \mathbf{x}\)</span></p>
+<p>证明：</p>
+<p>因为最小误差概率为1-最大正确概率，因此按照最小化误差判定规则，平均误差概率为</p>
+<p><span class="math display">\[P(\text {error})=1-\int P\left(\omega_{\max } | \mathbf{x}\right) p(\mathbf{x}) d \mathbf{x}\]</span></p>
+<p>（3）利用这两个结论证明<span class="math inline">\(P(\text {error}) \leqslant \frac{c-1}{c}\)</span></p>
+<p>证明：</p>
+<p>因为</p>
+<p><span class="math display">\[P\left(\omega_{max} | \mathbf{x}\right) \geqslant \frac{1}{c}\]</span></p>
+<p>所以</p>
+<p><span class="math display">\[-P\left(\omega_{max} | \mathbf{x}\right) \leqslant -\frac{1}{c}\]</span></p>
+<p>又因为</p>
+<p><span class="math display">\[P(\text {error})=1-\int P\left(\omega_{\max } | \mathbf{x}\right) p(\mathbf{x}) d \mathbf{x}\]</span></p>
+<p>所以</p>
+<p><span class="math display">\[P(\text {error})=1-P\left(\omega_{\max } | \mathbf{x}\right) \int p(\mathbf{x}) d \mathbf{x} \leqslant 1 -\frac{1}{c} \int p(\mathbf{x}) d \mathbf{x}\]</span></p>
+<p>又因为</p>
+<p><span class="math display">\[\int p(\mathbf{x}) d \mathbf{x}=1\]</span></p>
+<p>所以</p>
+<p><span class="math display">\[P(\text {error})=1-P\left(\omega_{\max } | \mathbf{x}\right) \int p(\mathbf{x}) d \mathbf{x} \leqslant 1 -\frac{1}{c} \int p(\mathbf{x}) d \mathbf{x}=1-\frac{1}{c}=\frac{c-1}{c}\]</span></p>
+<p>所以</p>
+<p><span class="math display">\[P(\text {error}) \leqslant \frac{c-1}{c}\]</span></p>
+<p>（4）描述一种情况，在此情况下<span class="math inline">\(P(\text {error}) = \frac{c-1}{c}\)</span></p>
+<p>因为当<span class="math inline">\(P\left(\omega_{i} | \mathbf{x}\right)=P\left(\omega_{j} | \mathbf{x}\right)\)</span>时</p>
+<p><span class="math display">\[P\left(\omega_{i} | \mathbf{x}\right)=\frac{1}{c}\]</span></p>
+<p>所以，只有在所有类别等概率的情况下</p>
+<p><span class="math display">\[P(\text {error}) = \frac{c-1}{c}\]</span></p>
 ]]></content>
       <categories>
         <category>课程</category>
