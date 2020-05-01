@@ -179,3 +179,128 @@ $$P\left(\omega_{i} | \mathbf{x}\right)=\frac{1}{c}$$
 所以，只有在所有类别等概率的情况下
 
 $$P(\text {error}) = \frac{c-1}{c}$$
+
+14、考虑有拒绝决策行为的分类问题
+
+（1）利用第13题的结论证明下面的判别函数对于此问题是最优的
+
+$$g_{i}(\mathbf{x})=\left\{\begin{array}{ll}
+p\left(\mathbf{x} | \omega_{i}\right) P\left(\omega_{i}\right) & i=1, \cdots, c \\
+\frac{\lambda_{s}-\lambda_{f}}{\lambda_{s}} \sum_{j=1}^{c} p\left(\mathbf{x} | \omega_{j}\right) P\left(\omega_{j}\right) & i=c+1
+\end{array}\right.$$
+
+证明：
+
+根据第13题的结论可以知道，对于任意的$j$都有$P\left(\omega_{i} | \mathbf{x}\right) \geq P\left(\omega_{j} | \mathbf{x}\right)$，并且$P\left(\omega_{i} | \mathbf{x}\right) \geq 1-\frac{\lambda_{r}}{\lambda_{s}}$
+
+根据贝叶斯公式$p\left(\omega_{i} | \mathbf{x}\right)=\frac{p\left(\mathbf{x} | \omega_{i}\right) P\left(\omega_{i}\right)}{p(\mathbf{x})}$，可以得到对于任意的$j$都有
+
+$$p\left(\mathbf{x} | \omega_{i}\right) P\left(\omega_{i}\right) \geq p\left(\mathbf{x} | \omega_{j}\right) P\left(\omega_{j}\right)$$
+
+$$p\left(\mathbf{x} | \omega_{i}\right) P\left(\omega_{i}\right) \geq \left(1-\frac{\lambda_{r}}{\lambda_{s}}\right) p(\mathbf{x})$$
+
+其中由于$p(\mathbf{x})$是常量，因此不用体现。
+
+由于对于任意的$j$都有$P\left(\omega_{i} | \mathbf{x}\right) \geq P\left(\omega_{j} | \mathbf{x}\right)$，因此就可以到$g_{i}(\mathbf{x}) \geq g_{j}(\mathbf{x})$
+
+所以在$i=1, \cdots, c$的决策函数为
+
+$$g_{i}(\mathbf{x}) = p\left(\mathbf{x} | \omega_{i}\right) P\left(\omega_{i}\right)$$
+
+当$i=c+1$的决策函数为
+
+$$g_{i}(\mathbf{x}) = \left(1-\frac{\lambda_{r}}{\lambda_{s}}\right) p(\mathbf{x})$$
+
+因为$p(\mathbf{x}) = \sum_{j=1}^{c} p\left(\mathbf{x} | \omega_{j}\right) P\left(\omega_{j}\right)$，所以
+
+$$g_{i}(\mathbf{x}) = \left(1-\frac{\lambda_{r}}{\lambda_{s}}\right) \sum_{j=1}^{c} p\left(\mathbf{x} | \omega_{j}\right) P\left(\omega_{j}\right)$$
+
+所以
+
+$$g_{i}(\mathbf{x})=\left\{\begin{array}{ll}
+p\left(\mathbf{x} | \omega_{i}\right) P\left(\omega_{i}\right) & i=1, \cdots, c \\
+\frac{\lambda_{s}-\lambda_{f}}{\lambda_{s}} \sum_{j=1}^{c} p\left(\mathbf{x} | \omega_{j}\right) P\left(\omega_{j}\right) & i=c+1
+\end{array}\right.$$
+
+（2）绘出此判别函数及其判决区域在具有如下特性的两类一维情况下的图形。**（未画图）**
+
+>* $p\left(x | \omega_{1}\right) \sim N(1,1)$
+>* $p\left(x | \omega_{2}\right) \sim N(-1,1)$
+>* $P\left(\omega_{1}\right)=P\left(\omega_{2}\right)=\frac{1}{2}$
+>* $\frac{\lambda_{r}}{\lambda_{s}}=\frac{1}{4}$
+
+根据上述条件可以得到
+
+$g_{1}(x)=p\left(x | \omega_{1}\right) P\left(\omega_{1}\right)=\frac{1}{2} \frac{e^{-(x-1)^{2} / 2}}{\sqrt{2 \pi}}$
+
+$g_{2}(x)=p\left(x | \omega_{2}\right) P\left(\omega_{2}\right)=\frac{1}{2} \frac{e^{-(x+1)^{2} / 2}}{\sqrt{2 \pi}}$
+
+$g_{3}(x) = \frac{3}{8 \sqrt{2 \pi}}\left[e^{\frac{-(x-1)^{2}}{2}}+e^{-(x+1)^{2} / 2}\right]=\frac{3}{4}\left[g_{1}(x)+g_{2}(x)\right]$
+
+（3）定性地描述随$\frac{\lambda_{r}}{\lambda_{s}}$从0增加到1，将会怎样？**（未做）**
+
+（4）在具有如下特定的情况下重复（3）**（未画图）**
+
+>* $p\left(x | \omega_{1}\right) \sim N(1,1)$
+>* $p\left(x | \omega_{2}\right) \sim N(0,\frac{1}{4})$
+>* $P\left(\omega_{1}\right)=\frac{1}{3}$，$P\left(\omega_{2}\right)=\frac{2}{3}$
+>* $\frac{\lambda_{r}}{\lambda_{s}}=\frac{1}{2}$
+
+根据上述条件可以得到
+
+$g_{1}(x)=p\left(x | \omega_{1}\right) P\left(\omega_{1}\right)=\frac{2}{3} \frac{e^{-(x-1)^{2} / 2}}{\sqrt{2 \pi}}$
+
+$g_{2}(x)=p\left(x | \omega_{2}\right) P\left(\omega_{2}\right)=\frac{1}{3} \frac{2 e^{-2 x^{2}}}{\sqrt{2 \pi}}$
+
+$g_{3}(x) = \frac{1}{3 \sqrt{2 \pi}}\left[e^{\frac{-(x-1)^{2}}{2}}+e^{-2x^{2}}\right]=\frac{1}{2}\left[g_{1}(x)+g_{2}(x)\right]$
+
+19、从熵的定义（式（37））开始，推导最大熵分布的一般方程，假定其约束条件的一般形式如下：
+
+$$\int b_{k}(x) p(x) d x=a_{k} . \quad k=1,2, \cdots, q$$
+
+（1）利用拉格朗日待定因子$\lambda_{1} \cdot \lambda_{2}, \cdots , \lambda_{q}$，推导合成的函数式：
+
+$$H_{s}=-\int p(x)\left[\ln p(x)-\sum_{k=0}^{q} \lambda_{k} b_{k}(x)\right] d x-\sum_{k=0}^{q} \lambda_{k} a_{k}$$
+
+解释对所有$x$为什么有$a_{0}=1$及$b_{0}(x)=1$成立。
+
+推导：
+
+按照式（37）得到熵函数
+
+$$H(p(x))=-\int p(x) \ln p(x) d x$$
+
+同时对约束条件进行变化，可以得到
+
+$$\int b_{k}(x) p(x) d x - a_{k} = 0$$
+
+因此，引入拉格朗日因子，得到
+
+$$\begin{aligned}
+H_{s} &=-\int p(x) \ln p(x) d x+\sum_{k=1}^{q}\lambda_{k}\left[\int b_{k}(x) p(x) d x-a_{k}\right] \\
+ &=-\int p(x) \ln p(x) d x + \sum_{k=1}^{q}\lambda_{k} \int b_{k}(x) p(x) d x - \sum_{k=1}^{q}\lambda_{k}a_{k} \\
+ &=-\left[\int p(x) \ln p(x) d x - \sum_{k=1}^{q}\lambda_{k} \int b_{k}(x) p(x) d x\right]- \sum_{k=1}^{q}\lambda_{k}a_{k} \\
+ &=-\int p(x)\left[\ln p(x)-\sum_{k=0}^{q} \lambda_{k} b_{k}(x)\right] d x-\sum_{k=0}^{q} \lambda_{k} a_{k}
+\end{aligned}$$
+
+**未解释**
+
+（2）根据$H_{s}$对$p(x)$求导，令被积函数为0，由此证明最大熵分布遵循
+
+$$p(x)=\exp \left[\sum_{k=0}^{q} \lambda_{k} b_{k}(x)-1\right]$$
+
+其中$q+1$个参数由上面的约束式确定。
+
+证明：
+
+首先令$H_{s}$对$p(x)$求导，令被积函数为0，就可以得到
+
+$$\frac{\partial H_{s}}{\partial p(x)}=-\int\left[\ln p(x)-\sum_{k=0}^{q} \lambda_{k} b_{k}(x)+1\right] d x=0$$
+
+变换后可以得到
+
+$$\ln p(x)=\sum_{k=0}^{q} \lambda_{k} b_{k}(x)-1$$
+
+最后得到
+
+$$p(x)=\exp \left[\sum_{k=0}^{q} \lambda_{k} b_{k}(x)-1\right]$$
