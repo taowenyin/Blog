@@ -29,9 +29,26 @@
 <p>假设<span class="math inline">\(x^{*}\)</span>是决策边界，以及最大可接受的误差率为<span class="math inline">\(E_{1}\)</span>，就可以得到</p>
 <p><span class="math inline">\(R\left(P\left(\omega_{1}\right)\right)=P\left(\omega_{1}\right) \int_{\mathcal{R}_{2}} p\left(x | \omega_{1}\right) d \mathbf{x}=\frac{1}{2} \int_{\mathcal{R}_{2}} N\left(\mu_{1}, \sigma_{1}^{2}\right)=\frac{1}{2} \int_{x^{*}}^{\infty} N\left(\mu_{1}, \sigma_{1}^{2}\right) d \mathbf{x} \leq E_{1}\)</span></p>
 <p>（2）对于此边界，将<span class="math inline">\(\omega_{2}\)</span>错分为<span class="math inline">\(\omega_{1}\)</span>的误差率是多少？</p>
+<p><span class="math inline">\(R\left(P\left(\omega_{2}\right)\right)=P\left(\omega_{2}\right) \int_{\mathcal{R}_{1}} p\left(x | \omega_{2}\right) d \mathbf{x}=\frac{1}{2} \int_{\mathcal{R}_{1}} N\left(\mu_{2}, \sigma_{2}^{2}\right)=\frac{1}{2} \int_{-\infty}^{x^{*}} N\left(\mu_{2}, \sigma_{2}^{2}\right) d \mathbf{x} \leq E_{2}\)</span></p>
 <p>（3）在0-1损失率下的总误差率是多少？</p>
+<p>因为总误差<span class="math inline">\(E=E_{1}+E_{2}\)</span></p>
+<p>所以</p>
+<p><span class="math inline">\(\begin{aligned} E &amp;=E_{1}+E_{2} \\  &amp;=\frac{1}{2} \int_{x^{*}}^{\infty} N\left(\mu_{1}, \sigma_{1}^{2}\right) d \mathbf{x}+\frac{1}{2} \int_{-\infty}^{x^{*}} N\left(\mu_{2}, \sigma_{2}^{2}\right) d \mathbf{x} \end{aligned}\)</span></p>
 <p>（4）将你的结论用于特殊情况：<span class="math inline">\(p\left(x | \omega_{1}\right) \sim N(-1,1)\)</span>及<span class="math inline">\(p\left(x | \omega_{2}\right) \sim N(1,1)\)</span>，且<span class="math inline">\(E_{1}=0.05\)</span>。</p>
+<p>因为<span class="math inline">\(E_{1}=0.05\)</span></p>
+<p>所以<span class="math inline">\(\frac{1}{2} \int_{x^{*}}^{\infty} N\left(\mu_{1}, \sigma_{1}^{2}\right) d \mathbf{x}=0.05\)</span></p>
+<p>把正态分布转化为标准正态分布，可以得到</p>
+<p><span class="math inline">\(\begin{aligned} \frac{1}{2} \int_{x^{*}}^{\infty} N\left(\mu_{1}, \sigma_{1}^{2}\right) d \mathbf{x} &amp;=\frac{1}{2} P(x &gt; x^{*}) \\  &amp;=\frac{1}{2} [1 - P(x \leq x^{*})] \\  &amp;=\frac{1}{2} [1 - \Phi \left ( \frac{x^{*}-\mu_{1}}{\sigma_{1}}\right )] \\  &amp;=0.05 \end{aligned}\)</span></p>
+<p>代入<span class="math inline">\(\mu_{1}=-1\)</span>和<span class="math inline">\(\sigma_{1}=1\)</span>，就可以得到</p>
+<p><span class="math inline">\(\frac{1}{2} [1 - \Phi \left ( \frac{x^{*}-\mu_{1}}{\sigma_{1}}\right )]=\frac{1}{2} [1 - \Phi \left ( x^{*}+1\right )]=0.05\)</span></p>
+<p>所以<span class="math inline">\(\Phi \left ( x^{*}+1\right )=0.9\)</span>，就可以通过查表求得<span class="math inline">\(x^{*}+1=1.28\)</span>，所以<span class="math inline">\(x^{*}=0.28\)</span>，代入<span class="math inline">\(\frac{1}{2} \int_{-\infty}^{x^{*}} N\left(\mu_{2}, \sigma_{2}^{2}\right) d \mathbf{x}\)</span>，就可以求得<span class="math inline">\(E_{2}\)</span>，再根据<span class="math inline">\(E=E_{1}+E_{2}\)</span>，就可以求得<span class="math inline">\(E\)</span>。</p>
+<p><span class="math display">\[\int_{\mathcal{R}_{2}} p\left(\mathbf{x} | \omega_{1}\right) d \mathbf{x}=\int_{\mathcal{R}_{1}} p\left(\mathbf{x} | \omega_{2}\right) d \mathbf{x}\]</span></p>
+<p>所以<span class="math inline">\(E=0.4321\)</span></p>
 <p>（5）将你的结论与贝叶斯误差率（即没有Neyman-Pearson条件）作比较。</p>
+<p>因为在0-1损失下</p>
+<p><span class="math display">\[\int_{\mathcal{R}_{2}} p\left(\mathbf{x} | \omega_{1}\right) d \mathbf{x}=\int_{\mathcal{R}_{1}} p\left(\mathbf{x} | \omega_{2}\right) d \mathbf{x}\]</span></p>
+<p>同时，由于在本题中的贝叶斯误差<span class="math inline">\(x^{*}=0\)</span>，所以</p>
+<p><span class="math inline">\(\begin{aligned} E_{B} &amp;=2 \int_{0}^{\infty} \frac{1}{2} N\left(\mu_{1}, \sigma_{1}^{2}\right) d \mathbf{x} \\  &amp;=2 \int_{0}^{\infty} \frac{1}{2} N\left(1, 1\right) d \mathbf{x} \\  &amp;=\int_{0}^{\infty} N\left(1, 1\right) d \mathbf{x} \end{aligned}\)</span></p>
 ]]></content>
       <categories>
         <category>课程</category>
