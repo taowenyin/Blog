@@ -304,3 +304,56 @@ $$\ln p(x)=\sum_{k=0}^{q} \lambda_{k} b_{k}(x)-1$$
 最后得到
 
 $$p(x)=\exp \left[\sum_{k=0}^{q} \lambda_{k} b_{k}(x)-1\right]$$
+
+23、考虑三维正态分布$p(\mathbf{x} | \omega) \sim N(\boldsymbol{\mu}, \mathbf{\Sigma})$，其中
+
+$$\boldsymbol{\mu} = \begin{pmatrix} 1\\ 2\\ 2 \end{pmatrix} \text{及} \mathbf{\Sigma} = \begin{pmatrix} 1 & 0 & 0\\ 0 & 5 & 2\\ 0 & 2 & 5 \end{pmatrix}$$
+
+（1）求点$\mathbf{x}_{0}=(0.5,0,1)^{t}$处的概率密度
+
+由3维多元正态密度函数得到
+
+$$p\left(\mathbf{x}_{o} | \omega\right)=\frac{1}{(2 \pi)^{\frac{3}{2}}|\mathbf{\Sigma}|^{\frac{1}{2}}} \exp \left[-\frac{1}{2}\left(\mathbf{x}_{o}-\boldsymbol{\mu}\right)^{t} \mathbf{\Sigma}^{-1}\left(\mathbf{x}_{o}-\boldsymbol{\mu}\right)\right]$$
+
+根据$\mathbf{\Sigma}$值可以得到
+
+$|\mathbf{\Sigma}|=\left|\begin{array}{ccc}1 & 0 & 0 \\ 0 & 5 & 2 \\ 0 & 2 & 5\end{array}\right|=1\left|\begin{array}{cc}5 & 2 \\ 2 & 5\end{array}\right|=21$
+
+$\mathbf{\Sigma}^{-1}=\left(\begin{array}{ccc}1 & 0 & 0 \\ 0 & 5 & 2 \\ 0 & 2 & 5\end{array}\right)^{-1}=\left(\begin{array}{ccc}1 & 0 & 0 \\ 0 & \left(\begin{array}{cc}5 & 2 \\ 2 & 5\end{array}\right)^{-1}\end{array}\right)=\left(\begin{array}{ccc}1 & 0 & 0 \\ 0 & \frac{5}{21} & \frac{-2}{21} \\ 0 & \frac{-2}{21} & \frac{5}{21}\end{array}\right)$
+
+代入$\mathbf{x}_{0}=(0.5,0,1)^{t}$就可以得到
+
+$\begin{aligned}
+\left(\mathbf{x}_{o}-\boldsymbol{\mu}\right)^{t} \mathbf{\Sigma}^{-1}\left(\mathbf{x}_{o}-\boldsymbol{\mu}\right) &=\left[\left(\begin{array}{c}5 \\0 \\1 \end{array}\right)-\left(\begin{array}{c} 1 \\ 2 \\ 2 \end{array}\right)\right]^{t}\left(\begin{array}{ccc} 1 & 0 & 0 \\ 0 & 5 / 21 & -2 / 21 \\ 0 & -2 / 21 & 5 / 21 \end{array}\right)^{-1}\left[\left(\begin{array}{c} 0.5 \\ 0 \\ 1 \end{array}\right)-\left(\begin{array}{c} 1 \\ 2 \\ 2 \end{array}\right)\right] \\
+ &=\left[\begin{array}{c} -0.5 \\ -8 / 21 \\ -1 / 21 \end{array}\right]^{t}\left[\begin{array}{c} -0.5 \\ -2 \\ -1 \end{array}\right] \\
+ &=0.25+\frac{16}{21}+\frac{1}{21} \\
+ &=1.06
+\end{aligned}$
+
+因此就可以得到
+
+$p\left(\mathbf{x}_{o} | \omega\right)=\frac{1}{(2 \pi)^{\frac{3}{2}}(21)^{\frac{1}{2}}} \exp \left[-\frac{1}{2}(1.06)\right]=8.16 \times 10^{-3}$
+
+（2）构造白化变换$\mathbf{A}_{w}$（式（44）），计算分别表示本征向量和本征值的矩阵$\Phi$和$\mathbf{A}$；接下来，将此分布转化为以原点为中心协方差矩阵为单位阵的分布，即$p(\mathbf{x} | \omega) \sim N(\mathbf{0}, \mathbf{I})$。**（未做）**
+
+（3）将整个同样的转化过程应用与点$\mathbf{x}_{0}$以产生一变化点$\mathbf{x}_{w}$。**（未做）**
+
+（4）通过详细计算，证明原分布中从$\mathbf{x}_{0}$到均值$\boldsymbol{\mu}$的Mahalanobis距离与变换后的分布中从$\mathbf{x}_{w}$到0的Mahalanobis距离相等。**（未做）**
+
+（5）概率密度在一个一般的线性变换下是否保持不变？换句话说，对于某线性变化$\mathbf{T}$，是否有$p\left(\mathbf{x}_{0} | N(\boldsymbol{\mu}, \mathbf{\Sigma})\right)=p\left(\mathbf{T}^{t} \mathbf{x}_{0} | N\left(\mathbf{T}^{t} \boldsymbol{\mu}, \mathbf{T}^{t} \mathbf{\Sigma} \mathbf{T}\right)\right)$？解释原因。**（未做）**
+
+（6）证明当把一个一般的白化电话$\mathbf{A}_{\omega}=\mathbf{\Phi} \mathbf{\Lambda}^{\frac{1}{2}}$应用于一个高斯分布时可保证最终分布的协方差与单位阵$\mathbf{I}$成比例，检查变换后的分布是否仍然具有归一化特征。**（未做）**
+
+31、对于两类一维问题，设$p\left(x | \omega_{i}\right) \sim N\left(\mu_{i}, \sigma^{2}\right)$，且$P\left(\omega_{1}\right)=P\left(\omega_{2}\right)=\frac{1}{2}$。
+
+（1）证明最小误差概率为
+
+$$P_{e}=\frac{1}{\sqrt{2 \pi}} \int_{a}^{\infty} e^{\frac{-u^{2}}{2}} d u$$
+
+其中$a=\frac{\left|\mu_{2}-\mu_{1}\right|}{(2 \sigma)}$
+
+（2）利用不等式
+
+$$P_{e}=\frac{1}{\sqrt{2 \pi}} \int_{a}^{\infty} e^{\frac{-t^{2}}{2}} d t \leqslant \frac{1}{\sqrt{2 \pi} a} e^{\frac{-a^{2}}{2}}$$
+
+证明当$\frac{\left|\mu_{2}-\mu_{1}\right|}{\sigma}$趋于无穷时，$P_{e}$趋向于零。
