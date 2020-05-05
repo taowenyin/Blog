@@ -161,6 +161,30 @@ H_{s} &amp;=-\int p(x) \ln p(x) d x+\sum_{k=1}^{q}\lambda_{k}\left[\int b_{k}(x)
 <p><span class="math display">\[\ln p(x)=\sum_{k=0}^{q} \lambda_{k} b_{k}(x)-1\]</span></p>
 <p>最后得到</p>
 <p><span class="math display">\[p(x)=\exp \left[\sum_{k=0}^{q} \lambda_{k} b_{k}(x)-1\right]\]</span></p>
+<p>23、考虑三维正态分布<span class="math inline">\(p(\mathbf{x} | \omega) \sim N(\boldsymbol{\mu}, \mathbf{\Sigma})\)</span>，其中</p>
+<p><span class="math display">\[\boldsymbol{\mu} = \begin{pmatrix} 1\\ 2\\ 2 \end{pmatrix} \text{及} \mathbf{\Sigma} = \begin{pmatrix} 1 &amp; 0 &amp; 0\\ 0 &amp; 5 &amp; 2\\ 0 &amp; 2 &amp; 5 \end{pmatrix}\]</span></p>
+<p>（1）求点<span class="math inline">\(\mathbf{x}_{0}=(0.5,0,1)^{t}\)</span>处的概率密度</p>
+<p>由3维多元正态密度函数得到</p>
+<p><span class="math display">\[p\left(\mathbf{x}_{o} | \omega\right)=\frac{1}{(2 \pi)^{\frac{3}{2}}|\mathbf{\Sigma}|^{\frac{1}{2}}} \exp \left[-\frac{1}{2}\left(\mathbf{x}_{o}-\boldsymbol{\mu}\right)^{t} \mathbf{\Sigma}^{-1}\left(\mathbf{x}_{o}-\boldsymbol{\mu}\right)\right]\]</span></p>
+<p>根据<span class="math inline">\(\mathbf{\Sigma}\)</span>值可以得到</p>
+<p><span class="math inline">\(|\mathbf{\Sigma}|=\left|\begin{array}{ccc}1 &amp; 0 &amp; 0 \\ 0 &amp; 5 &amp; 2 \\ 0 &amp; 2 &amp; 5\end{array}\right|=1\left|\begin{array}{cc}5 &amp; 2 \\ 2 &amp; 5\end{array}\right|=21\)</span></p>
+<p><span class="math inline">\(\mathbf{\Sigma}^{-1}=\left(\begin{array}{ccc}1 &amp; 0 &amp; 0 \\ 0 &amp; 5 &amp; 2 \\ 0 &amp; 2 &amp; 5\end{array}\right)^{-1}=\left(\begin{array}{ccc}1 &amp; 0 &amp; 0 \\ 0 &amp; \left(\begin{array}{cc}5 &amp; 2 \\ 2 &amp; 5\end{array}\right)^{-1}\end{array}\right)=\left(\begin{array}{ccc}1 &amp; 0 &amp; 0 \\ 0 &amp; \frac{5}{21} &amp; \frac{-2}{21} \\ 0 &amp; \frac{-2}{21} &amp; \frac{5}{21}\end{array}\right)\)</span></p>
+<p>代入<span class="math inline">\(\mathbf{x}_{0}=(0.5,0,1)^{t}\)</span>就可以得到</p>
+<p><span class="math inline">\(\begin{aligned} \left(\mathbf{x}_{o}-\boldsymbol{\mu}\right)^{t} \mathbf{\Sigma}^{-1}\left(\mathbf{x}_{o}-\boldsymbol{\mu}\right) &amp;=\left[\left(\begin{array}{c}5 \\0 \\1 \end{array}\right)-\left(\begin{array}{c} 1 \\ 2 \\ 2 \end{array}\right)\right]^{t}\left(\begin{array}{ccc} 1 &amp; 0 &amp; 0 \\ 0 &amp; 5 / 21 &amp; -2 / 21 \\ 0 &amp; -2 / 21 &amp; 5 / 21 \end{array}\right)^{-1}\left[\left(\begin{array}{c} 0.5 \\ 0 \\ 1 \end{array}\right)-\left(\begin{array}{c} 1 \\ 2 \\ 2 \end{array}\right)\right] \\  &amp;=\left[\begin{array}{c} -0.5 \\ -8 / 21 \\ -1 / 21 \end{array}\right]^{t}\left[\begin{array}{c} -0.5 \\ -2 \\ -1 \end{array}\right] \\  &amp;=0.25+\frac{16}{21}+\frac{1}{21} \\  &amp;=1.06 \end{aligned}\)</span></p>
+<p>因此就可以得到</p>
+<p><span class="math inline">\(p\left(\mathbf{x}_{o} | \omega\right)=\frac{1}{(2 \pi)^{\frac{3}{2}}(21)^{\frac{1}{2}}} \exp \left[-\frac{1}{2}(1.06)\right]=8.16 \times 10^{-3}\)</span></p>
+<p>（2）构造白化变换<span class="math inline">\(\mathbf{A}_{w}\)</span>（式（44）），计算分别表示本征向量和本征值的矩阵<span class="math inline">\(\Phi\)</span>和<span class="math inline">\(\mathbf{A}\)</span>；接下来，将此分布转化为以原点为中心协方差矩阵为单位阵的分布，即<span class="math inline">\(p(\mathbf{x} | \omega) \sim N(\mathbf{0}, \mathbf{I})\)</span>。<strong>（未做）</strong></p>
+<p>（3）将整个同样的转化过程应用与点<span class="math inline">\(\mathbf{x}_{0}\)</span>以产生一变化点<span class="math inline">\(\mathbf{x}_{w}\)</span>。<strong>（未做）</strong></p>
+<p>（4）通过详细计算，证明原分布中从<span class="math inline">\(\mathbf{x}_{0}\)</span>到均值<span class="math inline">\(\boldsymbol{\mu}\)</span>的Mahalanobis距离与变换后的分布中从<span class="math inline">\(\mathbf{x}_{w}\)</span>到0的Mahalanobis距离相等。<strong>（未做）</strong></p>
+<p>（5）概率密度在一个一般的线性变换下是否保持不变？换句话说，对于某线性变化<span class="math inline">\(\mathbf{T}\)</span>，是否有<span class="math inline">\(p\left(\mathbf{x}_{0} | N(\boldsymbol{\mu}, \mathbf{\Sigma})\right)=p\left(\mathbf{T}^{t} \mathbf{x}_{0} | N\left(\mathbf{T}^{t} \boldsymbol{\mu}, \mathbf{T}^{t} \mathbf{\Sigma} \mathbf{T}\right)\right)\)</span>？解释原因。<strong>（未做）</strong></p>
+<p>（6）证明当把一个一般的白化电话<span class="math inline">\(\mathbf{A}_{\omega}=\mathbf{\Phi} \mathbf{\Lambda}^{\frac{1}{2}}\)</span>应用于一个高斯分布时可保证最终分布的协方差与单位阵<span class="math inline">\(\mathbf{I}\)</span>成比例，检查变换后的分布是否仍然具有归一化特征。<strong>（未做）</strong></p>
+<p>31、对于两类一维问题，设<span class="math inline">\(p\left(x | \omega_{i}\right) \sim N\left(\mu_{i}, \sigma^{2}\right)\)</span>，且<span class="math inline">\(P\left(\omega_{1}\right)=P\left(\omega_{2}\right)=\frac{1}{2}\)</span>。</p>
+<p>（1）证明最小误差概率为</p>
+<p><span class="math display">\[P_{e}=\frac{1}{\sqrt{2 \pi}} \int_{a}^{\infty} e^{\frac{-u^{2}}{2}} d u\]</span></p>
+<p>其中<span class="math inline">\(a=\frac{\left|\mu_{2}-\mu_{1}\right|}{(2 \sigma)}\)</span></p>
+<p>（2）利用不等式</p>
+<p><span class="math display">\[P_{e}=\frac{1}{\sqrt{2 \pi}} \int_{a}^{\infty} e^{\frac{-t^{2}}{2}} d t \leqslant \frac{1}{\sqrt{2 \pi} a} e^{\frac{-a^{2}}{2}}\]</span></p>
+<p>证明当<span class="math inline">\(\frac{\left|\mu_{2}-\mu_{1}\right|}{\sigma}\)</span>趋于无穷时，<span class="math inline">\(P_{e}\)</span>趋向于零。</p>
 ]]></content>
       <categories>
         <category>课程</category>
