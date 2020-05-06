@@ -346,14 +346,79 @@ $p\left(\mathbf{x}_{o} | \omega\right)=\frac{1}{(2 \pi)^{\frac{3}{2}}(21)^{\frac
 
 31、对于两类一维问题，设$p\left(x | \omega_{i}\right) \sim N\left(\mu_{i}, \sigma^{2}\right)$，且$P\left(\omega_{1}\right)=P\left(\omega_{2}\right)=\frac{1}{2}$。
 
-（1）证明最小误差概率为
+（1）证明最小误差概率为 **（未做完）**
 
 $$P_{e}=\frac{1}{\sqrt{2 \pi}} \int_{a}^{\infty} e^{\frac{-u^{2}}{2}} d u$$
 
 其中$a=\frac{\left|\mu_{2}-\mu_{1}\right|}{(2 \sigma)}$
 
-（2）利用不等式
+证明：
+
+根据式71可以知道最小误差为
+
+$\begin{aligned} 
+P(correct) &=\sum_{i=1}^{c} \int_{\mathcal{R}_{i}} p\left(\mathbf{x} | \omega_{i}\right) P\left(\omega_{i}\right) d \mathbf{x} \\
+ &= \frac{1}{2}\int_{\mathcal{R}_{1}} p\left(\mathbf{x} | \omega_{1}\right) d \mathbf{x} + \frac{1}{2}\int_{\mathcal{R}_{2}} p\left(\mathbf{x} | \omega_{2}\right) d \mathbf{x} \\
+ &= \frac{1}{2}\int_{\mathcal{R}_{1}} \frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{(x-\mu_{1})^{2}}{2 \sigma^{2}}\right) d \mathbf{x} + \frac{1}{2}\int_{\mathcal{R}_{2}} \frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{(x-\mu_{2})^{2}}{2 \sigma^{2}}\right) d \mathbf{x}
+\end{aligned}$
+
+（2）利用不等式 **（未做）**
 
 $$P_{e}=\frac{1}{\sqrt{2 \pi}} \int_{a}^{\infty} e^{\frac{-t^{2}}{2}} d t \leqslant \frac{1}{\sqrt{2 \pi} a} e^{\frac{-a^{2}}{2}}$$
 
 证明当$\frac{\left|\mu_{2}-\mu_{1}\right|}{\sigma}$趋于无穷时，$P_{e}$趋向于零。
+
+43、设向量$\mathbf{x}=\left(x_{1}, \cdots, x_{d}\right)^{t}$的分量为二值的（0或1），且设$P\left(\omega_{j}\right)$的类别状态$\omega_{j}$的先验概率，其中$j=1, \cdots, c$。现定义
+
+$$p_{i j}=\operatorname{Pr}\left[x_{i}=1 | \omega_{j}\right] \quad \begin{aligned} i &=1, \cdots, d \\ j &=1, \cdots, c \end{aligned}$$
+
+且对于$\omega_{j}$中所有$\mathbf{x}$，其分量$x_{i}$是统计独立的。
+
+（1）解释$p_{i j}$的含义
+
+$p_{i j}$表示类别为$\omega_{j}$，且$x_{i}$为1情况下的概率。
+
+（2）证明最小误差概率通过下面的判定规则获得：对于所有的$j$和$k$，如果$g_{k}(\mathbf{x}) \geqslant g_{j}(\mathbf{x})$，则判为$\omega_{k}$，其中
+
+$$g_{j}(\mathbf{x})=\sum_{i=1}^{d} x_{i} \ln \frac{p_{i j}}{1-p_{i j}}+\sum_{i=1}^{d} \ln \left(1-p_{i j}\right)+\ln P\left(\omega_{j}\right)$$
+
+证明：
+
+根据贝叶斯公式
+
+$$P\left(\omega_{j} | \mathbf{x}\right)=\frac{p\left(\mathbf{x} | \omega_{j}\right) P\left(\omega_{j}\right)}{p(\mathbf{x})}$$
+
+变形可以得到判别函数
+
+$$g_{j}(\mathbf{x})=\ln p\left(\mathbf{x} | \omega_{j}\right)+\ln P\left(\omega_{j}\right)$$
+
+根据书中式（86）可以得到
+
+$$p\left(\mathbf{x} | \omega_{j}\right)=\prod_{i=1}^{d} p_{i j}^{x_{i}}\left(1-p_{i j}\right)^{1-x_{i}}$$
+
+把上式代入判别函数就可以得到
+
+$$\begin{aligned}
+g_{j}(\mathbf{x}) &=\sum_{i=1}^{d}\left[x_{i} \ln p_{i j}+\left(1-x_{i}\right) \ln \left(1-p_{i j}\right)\right]+\ln P\left(\omega_{j}\right) \\
+&=\sum_{i=1}^{d} x_{i} \ln \frac{p_{i j}}{1-p_{i j}}+\sum_{i=1}^{d} \ln \left(1-p_{i j}\right)+\ln P\left(\omega_{j}\right)
+\end{aligned}$$
+
+48、现有二维的三类别模式，具有下列分布：
+
+>* $p\left(\mathbf{x} | \omega_{1}\right) \sim N(\mathbf{0}, \mathbf{I})$
+>* $p\left(\mathbf{x} | \omega_{2}\right) \sim N\left(\left(\begin{array}{l}1 \\ 1\end{array}\right), \mathbf{I}\right)$
+>* $p\left(\mathbf{x} | \omega_{3}\right) \sim \frac{1}{2} N\left(\left(\begin{array}{c}0.5 \\ 0.5\end{array}\right), \mathbf{I}\right)+\frac{1}{2} N\left(\left(\begin{array}{c}-0.5 \\ 0.5\end{array}\right), \mathbf{I}\right)$
+
+且$P\left(\omega_{i}\right)=\frac{1}{3}$，$i=1,2,3$。
+
+（1）通过显式的计算后验概率，以最小误差概率对点$\mathbf{x}=\begin{pmatrix} 0.3\\ 0.3 \end{pmatrix}$进行分类。
+
+根据书上式（38）的多维多元正态秘书函数可以得到，当$\mathbf{x}=\begin{pmatrix} 0.3\\ 0.3 \end{pmatrix}$时，$p\left(\mathbf{x} | \omega_{1}\right) P\left(\omega_{1}\right)=0.04849$，$p\left(\mathbf{x} | \omega_{2}\right) P\left(\omega_{2}\right)=0.03250$，$p\left(\mathbf{x} | \omega_{3}\right) P\left(\omega_{3}\right)=0.04437$，所以$\mathbf{x}=\begin{pmatrix} 0.3\\ 0.3 \end{pmatrix}$属于第1类。
+
+（2）假设对于某特定的测试点，第一个特征值丢失了，即对$\mathbf{x}=\begin{pmatrix} *\\ 0.3 \end{pmatrix}$进行分类。 **（未做）**
+
+（3）假设对于某特定的测试点，第一个特征值丢失了，即对$\mathbf{x}=\begin{pmatrix} 0.3\\ * \end{pmatrix}$进行分类。 **（未做）**
+
+（4）对点$\mathbf{x}=\begin{pmatrix} 0.2\\ 0.6 \end{pmatrix}$重复以上各步。**（未做完）**
+
+当$\mathbf{x}=\begin{pmatrix} 0.2\\ 0.6 \end{pmatrix}$时，$P\left(\omega_{1}\right) p\left(\mathbf{x} | \omega_{1}\right)=0.04344$，$P\left(\omega_{2}\right) p\left(\mathbf{x} | \omega_{2}\right)=0.03556$，$P\left(\omega_{3}\right) p\left(\mathbf{x} | \omega_{3}\right)=0.04589$，所以$\mathbf{x}=\begin{pmatrix} 0.2\\ 0.6 \end{pmatrix}$属于第3类
