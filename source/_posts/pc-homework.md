@@ -6,7 +6,9 @@ updated: {{ date }}
 categories: [课程]
 ---
 
-# 2.3节
+# 第二章 贝叶斯决策论
+
+## 课后习题
 
 3、考虑0-1损失函数的极小化极大化准则，即$\lambda_{11}=\lambda_{22}=0$且$\lambda_{12}=\lambda_{21}=1$。
 
@@ -422,3 +424,19 @@ g_{j}(\mathbf{x}) &=\sum_{i=1}^{d}\left[x_{i} \ln p_{i j}+\left(1-x_{i}\right) \
 （4）对点$\mathbf{x}=\begin{pmatrix} 0.2\\ 0.6 \end{pmatrix}$重复以上各步。**（未做完）**
 
 当$\mathbf{x}=\begin{pmatrix} 0.2\\ 0.6 \end{pmatrix}$时，$P\left(\omega_{1}\right) p\left(\mathbf{x} | \omega_{1}\right)=0.04344$，$P\left(\omega_{2}\right) p\left(\mathbf{x} | \omega_{2}\right)=0.03556$，$P\left(\omega_{3}\right) p\left(\mathbf{x} | \omega_{3}\right)=0.04589$，所以$\mathbf{x}=\begin{pmatrix} 0.2\\ 0.6 \end{pmatrix}$属于第3类
+
+## 思考题
+
+对于有噪声的模型中，其判别函数为
+
+$\begin{aligned} 
+P\left(\omega_{i} | \mathbf{x}_{g}, \mathbf{x}_{b}\right) &= \frac{\int p\left(\omega_{i}, \mathbf{x}_{g}, \mathbf{x}_{b}, \mathbf{x}_{t}\right) d \mathbf{x}_{l}}{p\left(\mathbf{x}_{g}, \mathbf{x}_{b}\right)}\\
+ &=\frac{\int P\left(\omega_{i} | \mathbf{x}_{g}, \mathbf{x}_{t}\right) p\left(\mathbf{x}_{g}, \mathbf{x}_{t}\right) p\left(\mathbf{x}_{b} | \mathbf{x}_{t}\right) d \mathbf{x}_{t}}{\int p\left(\mathbf{x}_{g}, \mathbf{x}_{\mathbf{t}}\right) p\left(\mathbf{x}_{b} | \mathbf{x}_{t}\right) d \mathbf{x}_{t}} \\ 
+ &=\frac{\int g_{i}(\mathbf{x}) p(\mathbf{x}) p\left(\mathbf{x}_{b} | \mathbf{x}_{t}\right) d \mathbf{x}_{t}}{\int p(\mathbf{x}) p\left(\mathbf{x}_{b} | \mathbf{x}_{t}\right) d \mathbf{x}_{t}} 
+\end{aligned}$
+
+1、当整个图像都存在在噪声时，$\mathbf{x}_{g}$不存在，只有$\mathbf{x}_{b}$和$\mathbf{x}_{t}$，那么模型是什么样？
+
+2、已知类别$\omega_{i}$，求$\mathbf{x}_{t}$
+
+3、即有确实的数据，又有带噪的数据，什么场景有这么情况？怎么建立起一个概率分布？
