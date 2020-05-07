@@ -3,7 +3,8 @@
   <entry>
     <title>模式识别原理作业</title>
     <url>/pc-homework/</url>
-    <content><![CDATA[<h1 id="节">2.3节</h1><p>3、考虑0-1损失函数的极小化极大化准则，即<span class="math inline">\(\lambda_{11}=\lambda_{22}=0\)</span>且<span class="math inline">\(\lambda_{12}=\lambda_{21}=1\)</span>。</p><p>（1）证明在这种情况下判决区域将满足</p><p><span class="math display">\[\int_{\mathcal{R}_{2}} p\left(\mathbf{x} | \omega_{1}\right) d \mathbf{x}=\int_{\mathcal{R}_{1}} p\left(\mathbf{x} | \omega_{2}\right) d \mathbf{x}\]</span></p><a id="more"></a>
+    <content><![CDATA[<h1 id="第二章-贝叶斯决策论">第二章 贝叶斯决策论</h1><h2 id="课后习题">课后习题</h2><p>3、考虑0-1损失函数的极小化极大化准则，即<span class="math inline">\(\lambda_{11}=\lambda_{22}=0\)</span>且<span class="math inline">\(\lambda_{12}=\lambda_{21}=1\)</span>。</p><p>（1）证明在这种情况下判决区域将满足</p><p><span class="math display">\[\int_{\mathcal{R}_{2}} p\left(\mathbf{x} | \omega_{1}\right) d \mathbf{x}=\int_{\mathcal{R}_{1}} p\left(\mathbf{x} | \omega_{2}\right) d \mathbf{x}\]</span></p><a id="more"></a>
+
 
 
 
@@ -222,6 +223,12 @@ g_{j}(\mathbf{x}) &amp;=\sum_{i=1}^{d}\left[x_{i} \ln p_{i j}+\left(1-x_{i}\righ
 <p>（3）假设对于某特定的测试点，第一个特征值丢失了，即对<span class="math inline">\(\mathbf{x}=\begin{pmatrix} 0.3\\ * \end{pmatrix}\)</span>进行分类。 <strong>（未做）</strong></p>
 <p>（4）对点<span class="math inline">\(\mathbf{x}=\begin{pmatrix} 0.2\\ 0.6 \end{pmatrix}\)</span>重复以上各步。<strong>（未做完）</strong></p>
 <p>当<span class="math inline">\(\mathbf{x}=\begin{pmatrix} 0.2\\ 0.6 \end{pmatrix}\)</span>时，<span class="math inline">\(P\left(\omega_{1}\right) p\left(\mathbf{x} | \omega_{1}\right)=0.04344\)</span>，<span class="math inline">\(P\left(\omega_{2}\right) p\left(\mathbf{x} | \omega_{2}\right)=0.03556\)</span>，<span class="math inline">\(P\left(\omega_{3}\right) p\left(\mathbf{x} | \omega_{3}\right)=0.04589\)</span>，所以<span class="math inline">\(\mathbf{x}=\begin{pmatrix} 0.2\\ 0.6 \end{pmatrix}\)</span>属于第3类</p>
+<h2 id="思考题">思考题</h2>
+<p>对于有噪声的模型中，其判别函数为</p>
+<p><span class="math inline">\(\begin{aligned} P\left(\omega_{i} | \mathbf{x}_{g}, \mathbf{x}_{b}\right) &amp;= \frac{\int p\left(\omega_{i}, \mathbf{x}_{g}, \mathbf{x}_{b}, \mathbf{x}_{t}\right) d \mathbf{x}_{l}}{p\left(\mathbf{x}_{g}, \mathbf{x}_{b}\right)}\\  &amp;=\frac{\int P\left(\omega_{i} | \mathbf{x}_{g}, \mathbf{x}_{t}\right) p\left(\mathbf{x}_{g}, \mathbf{x}_{t}\right) p\left(\mathbf{x}_{b} | \mathbf{x}_{t}\right) d \mathbf{x}_{t}}{\int p\left(\mathbf{x}_{g}, \mathbf{x}_{\mathbf{t}}\right) p\left(\mathbf{x}_{b} | \mathbf{x}_{t}\right) d \mathbf{x}_{t}} \\  &amp;=\frac{\int g_{i}(\mathbf{x}) p(\mathbf{x}) p\left(\mathbf{x}_{b} | \mathbf{x}_{t}\right) d \mathbf{x}_{t}}{\int p(\mathbf{x}) p\left(\mathbf{x}_{b} | \mathbf{x}_{t}\right) d \mathbf{x}_{t}} \end{aligned}\)</span></p>
+<p>1、当整个图像都存在在噪声时，<span class="math inline">\(\mathbf{x}_{g}\)</span>不存在，只有<span class="math inline">\(\mathbf{x}_{b}\)</span>和<span class="math inline">\(\mathbf{x}_{t}\)</span>，那么模型是什么样？</p>
+<p>2、已知类别<span class="math inline">\(\omega_{i}\)</span>，求<span class="math inline">\(\mathbf{x}_{t}\)</span></p>
+<p>3、即有确实的数据，又有带噪的数据，什么场景有这么情况？怎么建立起一个概率分布？</p>
 ]]></content>
       <categories>
         <category>课程</category>
