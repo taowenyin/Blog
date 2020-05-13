@@ -440,3 +440,142 @@ P\left(\omega_{i} | \mathbf{x}_{g}, \mathbf{x}_{b}\right) &= \frac{\int p\left(\
 2、已知类别$\omega_{i}$，求$\mathbf{x}_{t}$
 
 3、即有确实的数据，又有带噪的数据，什么场景有这么情况？怎么建立起一个概率分布？
+
+# 第三章 贝叶斯决策论
+
+## 课后习题
+
+1、令$x$为服从指数概率密度函数的分布：
+
+$$p(x | \theta)=\left\{
+    \begin{array}{ll}
+    \theta e^{-\theta x} & x \geqslant 0 \\
+    0 & \text { 其他 }
+    \end{array}\right.$$
+
+假设$n$个样本点$x_{1}, \cdots, x_{n}$都独立地服从分布$p(x | \theta)$，证明关于$\theta$的最大似然估计结果为
+
+$$\hat{\theta}=\frac{1}{\frac{1}{n} \sum_{k=1}^{n} x_{k}}$$
+
+证明：
+
+要求$p(x | \theta)$的关于$\theta$的最大似然估计，即求下式最大时的$\theta$
+
+$$p(\mathcal{D} | \boldsymbol{\theta})=\prod_{k=1}^{n} p\left(\mathbf{x}_{k} | \theta\right)$$
+
+因此对上式两边求对数，就可以得到
+
+$$\begin{aligned} 
+l(\theta) &= \sum_{k=1}^{n} \ln p\left(\mathbf{x}_{k} | \theta\right)\\
+ &=\sum_{k=1}^{n}\left[\ln \theta-\theta \mathbf{x}_{k}\right] \\ 
+ &=n \ln \theta-\theta \sum_{k=1}^{n} x_{k}
+\end{aligned}$$
+
+根据书上式子（6），可以知道要求$\theta$，那么就需要对$l(\theta)$求导，即$\nabla_{\theta} l(\theta)=0$，同时令其等于0。
+
+$$\begin{aligned} 
+\nabla_{\theta} l(\theta) &= \frac{\partial}{\partial \theta}\left[n \ln \theta-\theta \sum_{k=1}^{n} x_{k}\right]\\
+ &=\frac{n}{\theta}-\sum_{k=1}^{n} x_{k} \\ 
+ &=0
+\end{aligned}$$
+
+就可以得到
+
+$$\hat{\theta}=\frac{1}{\frac{1}{n} \sum_{k=1}^{n} x_{k}}$$
+
+3、最大似然估计也可以用于估计先验概率。假设样本是连续独立地从自然状态$\omega_{i}$中抽取的每一个自然状态的概率为$P\left(\omega_{i}\right)$。如果第$k$个样本的自然状态为$\omega_{i}$，那么就记$z_{i k}=1$，否则$z_{i k}=0$。
+
+（1）证明
+
+$$P\left(z_{i 1}, \ldots, z_{i n} | P\left(\omega_{i}\right)\right)=\prod_{k=1}^{n} P\left(\omega_{i}\right)^{z_{i k}}\left(1-P\left(\omega_{i}\right)\right)^{1-z_{i k}}$$
+
+证明：
+
+由于第$k$个样本的自然状态为$\omega_{i}$时，$z_{i k}=1$。因此就可以得到
+
+$$P\left[z_{i k}=1 | P\left(\omega_{i}\right)\right]=P\left(\omega_{i}\right)$$
+
+同理就可以得到
+
+$$P\left[z_{i k}=0 | P\left(\omega_{i}\right)\right]=1-P\left(\omega_{i}\right)$$
+
+因此，把上面两个式子进行合并得到
+
+$$P\left[z_{i k} | P\left(\omega_{i}\right)\right]=\left[P\left(\omega_{i}\right)\right]^{z_{i k}}\left[1-P\left(\omega_{i}\right)\right]^{1-z_{i k}}$$
+
+因此就可以得到
+
+$$\begin{aligned} 
+P\left(z_{i 1}, \ldots, z_{i n} | P\left(\omega_{i}\right)\right) &= \prod_{k=1}^{n} P\left(z_{i k} | P\left(\omega_{i}\right)\right)\\
+ &=\prod_{k=1}^{n}\left[P\left(\omega_{i}\right)\right]^{z_{i k}}\left[1-P\left(\omega_{i}\right)\right]^{1-z_{i k}}
+\end{aligned}$$
+
+（2）证明对$P\left(\omega_{i}\right)$的最大似然估计为
+
+$$\hat{P}\left(\omega_{i}\right)=\frac{1}{n} \sum_{k=1}^{n} z_{i k}$$
+
+并且简单解释这个结果。
+
+要求$P\left(\omega_{i}\right)$的最大似然估计，那么就需要对$P\left(z_{i 1}, \ldots, z_{i n} | P\left(\omega_{i}\right)\right)$两边求对数得到
+
+$$\begin{aligned} 
+l\left(P\left(\omega_{i}\right)\right) &= \ln P\left(z_{i 1}, \cdots, z_{i n} | P\left(\omega_{i}\right)\right)\\
+ &=\ln \left[\prod_{k=1}^{n}\left[P\left(\omega_{i}\right)\right]^{z_{i k}}\left[1-P\left(\omega_{i}\right)\right]^{1-z_{i k}}\right] \\
+ &=\sum_{k=1}^{n}\left[z_{i k} \ln P\left(\omega_{i}\right)+\left(1-z_{i k}\right) \ln \left(1-P\left(\omega_{i}\right)\right)\right]
+\end{aligned}$$
+
+然后令$l\left(P\left(\omega_{i}\right)\right)$对$P\left(\omega_{i}\right)$求导得到
+
+$$\begin{aligned} 
+\nabla_{P\left(\omega_{i}\right)} l\left(P\left(\omega_{i}\right)\right) &= \frac{1}{P\left(\omega_{i}\right)} \sum_{k=1}^{n} z_{i k}-\frac{1}{1-P\left(\omega_{i}\right)} \sum_{k=1}^{n}\left(1-z_{i k}\right)\\
+ &=0
+\end{aligned}$$
+
+然后进行计算
+
+$$\frac{1}{P\left(\omega_{i}\right)} \sum_{k=1}^{n} z_{i k}-\frac{1}{1-P\left(\omega_{i}\right)} \sum_{k=1}^{n}\left(1-z_{i k}\right)=0$$
+
+通过变换就可以得到
+
+$$\hat{P}\left(\omega_{i}\right)=\frac{1}{n} \sum_{k=1}^{n} z_{i k}$$
+
+6、对多元高斯分布，推导用最大似然估计方法估计均值和方差时的公式（18）（19）。并且明确地给出可能需要的假设条件。
+
+证明：
+
+假设$d$维数据服从高斯分布，因此就可以得到密度函数为
+
+$$p(\mathbf{x} | \boldsymbol{\mu}, \mathbf{\Sigma})=\frac{1}{(2 \pi)^{\frac{d}{2}}|\mathbf{\Sigma}|^{\frac{1}{2}}} \exp \left[-\frac{1}{2}(\mathbf{x}-\boldsymbol{\mu})^{t} \mathbf{\Sigma}^{-1}(\mathbf{x}-\boldsymbol{\mu})\right]$$
+
+所以就可以得到$n$个$x$的密度函数为
+
+$$p\left(\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{n} | \boldsymbol{\mu}, \mathbf{\Sigma}\right)=\frac{1}{(2 \pi)^{\frac{n}{2}}|\mathbf{\Sigma}|^{\frac{n}{2}}} \exp \left[-\frac{1}{2} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\boldsymbol{\mu}\right)^{t} \mathbf{\Sigma}^{-1}\left(\mathbf{x}_{k}-\boldsymbol{\mu}\right)\right]$$
+
+根据最大似然的求解方法，即对上式两边求对数，就可以得到
+
+$$l(\boldsymbol{\mu}, \mathbf{\Sigma})=-\frac{n}{2} \ln (2 \pi)-\frac{n}{2} \ln |\mathbf{\Sigma}|-\frac{1}{2} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\boldsymbol{\mu}\right)^{t} \mathbf{\Sigma}^{-1}\left(\mathbf{x}_{k}-\boldsymbol{\mu}\right)=0$$
+
+**（上式化简不会）**
+
+然后分别对上式中的$\boldsymbol{\mu}$和$\mathbf{\Sigma}$进行求导，并令其等于0，就可以解出
+
+$$\hat{\boldsymbol{\mu}}=\frac{1}{n} \sum_{k=1}^{n} \mathbf{x}_{k}$$
+
+$$\hat{\mathbf{\Sigma}}=\frac{1}{n} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\hat{\boldsymbol{\mu}}\right)\left(\mathbf{x}_{k}-\hat{\boldsymbol{\mu}}\right)^{t}$$
+
+13、令$p(\mathbf{x} | \mathbf{\Sigma}) \sim \mathrm{N}(\boldsymbol{\mu}, \mathbf{\Sigma})$，其中$\boldsymbol{\mu}$已知，而$\mathbf{\Sigma}$未知。证明对$\mathbf{\Sigma}$的最大似然估计为 **（未做）**
+
+$$\hat{\mathbf{\Sigma}}=\frac{1}{n} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\hat{\boldsymbol{\mu}}\right)\left(\mathbf{x}_{k}-\hat{\boldsymbol{\mu}}\right)^{t}$$
+
+（1）证明$\mathbf{a}^{t} \mathbf{A} \mathbf{a}=\operatorname{tr}\left[\mathbf{A} \mathbf{a} \mathbf{a}^{t}\right]$，其中矩阵的迹$\operatorname{tr}(\mathbf{A})$是矩阵$\mathbf{A}$对角元素之和。
+
+（2）证明似然函数可以写作
+
+$$p\left(\mathbf{x}_{1}, \cdots, \mathbf{x}_{n} | \mathbf{\Sigma}\right)=\frac{1}{(2 \pi)^{\frac{n d}{2}}}\left|\mathbf{\Sigma}^{-1}\right|^{\frac{n}{2}} \exp \left[-\frac{1}{2} \operatorname{tr}\left[\mathbf{\Sigma}^{-1} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\boldsymbol{\mu}\right)\left(\mathbf{x}_{k}-\boldsymbol{\mu}\right)^{t}\right]\right]$$
+
+（3）如果$\mathbf{A}=\mathbf{\Sigma}^{-1} \hat{\mathbf{\Sigma}}$，并且$\mathbf{A}$的本征值为$\lambda_{1}, \lambda_{2}, \cdots, \lambda_{n}$。证明我们在上面的结果能够导出
+
+$$p\left(\mathbf{x}_{1}, \cdots, \mathbf{x}_{n} | \mathbf{\Sigma}\right)=\frac{1}{(2 \pi)^{\frac{n d}{2}}|\hat{\mathbf{\Sigma}}|^{\frac{n}{2}}}\left(\lambda_{1} \cdots \lambda_{d}\right)^{\frac{n}{2}} \exp \left[-\frac{n}{2}\left(\lambda_{1}+\cdots+\lambda_{d}\right)\right]$$
+
+（4）证明，当$\lambda_{1}=\lambda_{2}=\dots=\lambda_{d}=1$时，似然函数达到最大。并且解释这个结果。
+
