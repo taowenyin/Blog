@@ -229,6 +229,86 @@ g_{j}(\mathbf{x}) &amp;=\sum_{i=1}^{d}\left[x_{i} \ln p_{i j}+\left(1-x_{i}\righ
 <p>1、当整个图像都存在在噪声时，<span class="math inline">\(\mathbf{x}_{g}\)</span>不存在，只有<span class="math inline">\(\mathbf{x}_{b}\)</span>和<span class="math inline">\(\mathbf{x}_{t}\)</span>，那么模型是什么样？</p>
 <p>2、已知类别<span class="math inline">\(\omega_{i}\)</span>，求<span class="math inline">\(\mathbf{x}_{t}\)</span></p>
 <p>3、即有确实的数据，又有带噪的数据，什么场景有这么情况？怎么建立起一个概率分布？</p>
+<h1 id="第三章-贝叶斯决策论">第三章 贝叶斯决策论</h1>
+<h2 id="课后习题-1">课后习题</h2>
+<p>1、令<span class="math inline">\(x\)</span>为服从指数概率密度函数的分布：</p>
+<p><span class="math display">\[p(x | \theta)=\left\{
+    \begin{array}{ll}
+    \theta e^{-\theta x} &amp; x \geqslant 0 \\
+    0 &amp; \text { 其他 }
+    \end{array}\right.\]</span></p>
+<p>假设<span class="math inline">\(n\)</span>个样本点<span class="math inline">\(x_{1}, \cdots, x_{n}\)</span>都独立地服从分布<span class="math inline">\(p(x | \theta)\)</span>，证明关于<span class="math inline">\(\theta\)</span>的最大似然估计结果为</p>
+<p><span class="math display">\[\hat{\theta}=\frac{1}{\frac{1}{n} \sum_{k=1}^{n} x_{k}}\]</span></p>
+<p>证明：</p>
+<p>要求<span class="math inline">\(p(x | \theta)\)</span>的关于<span class="math inline">\(\theta\)</span>的最大似然估计，即求下式最大时的<span class="math inline">\(\theta\)</span></p>
+<p><span class="math display">\[p(\mathcal{D} | \boldsymbol{\theta})=\prod_{k=1}^{n} p\left(\mathbf{x}_{k} | \theta\right)\]</span></p>
+<p>因此对上式两边求对数，就可以得到</p>
+<p><span class="math display">\[\begin{aligned} 
+l(\theta) &amp;= \sum_{k=1}^{n} \ln p\left(\mathbf{x}_{k} | \theta\right)\\
+ &amp;=\sum_{k=1}^{n}\left[\ln \theta-\theta \mathbf{x}_{k}\right] \\ 
+ &amp;=n \ln \theta-\theta \sum_{k=1}^{n} x_{k}
+\end{aligned}\]</span></p>
+<p>根据书上式子（6），可以知道要求<span class="math inline">\(\theta\)</span>，那么就需要对<span class="math inline">\(l(\theta)\)</span>求导，即<span class="math inline">\(\nabla_{\theta} l(\theta)=0\)</span>，同时令其等于0。</p>
+<p><span class="math display">\[\begin{aligned} 
+\nabla_{\theta} l(\theta) &amp;= \frac{\partial}{\partial \theta}\left[n \ln \theta-\theta \sum_{k=1}^{n} x_{k}\right]\\
+ &amp;=\frac{n}{\theta}-\sum_{k=1}^{n} x_{k} \\ 
+ &amp;=0
+\end{aligned}\]</span></p>
+<p>就可以得到</p>
+<p><span class="math display">\[\hat{\theta}=\frac{1}{\frac{1}{n} \sum_{k=1}^{n} x_{k}}\]</span></p>
+<p>3、最大似然估计也可以用于估计先验概率。假设样本是连续独立地从自然状态<span class="math inline">\(\omega_{i}\)</span>中抽取的每一个自然状态的概率为<span class="math inline">\(P\left(\omega_{i}\right)\)</span>。如果第<span class="math inline">\(k\)</span>个样本的自然状态为<span class="math inline">\(\omega_{i}\)</span>，那么就记<span class="math inline">\(z_{i k}=1\)</span>，否则<span class="math inline">\(z_{i k}=0\)</span>。</p>
+<p>（1）证明</p>
+<p><span class="math display">\[P\left(z_{i 1}, \ldots, z_{i n} | P\left(\omega_{i}\right)\right)=\prod_{k=1}^{n} P\left(\omega_{i}\right)^{z_{i k}}\left(1-P\left(\omega_{i}\right)\right)^{1-z_{i k}}\]</span></p>
+<p>证明：</p>
+<p>由于第<span class="math inline">\(k\)</span>个样本的自然状态为<span class="math inline">\(\omega_{i}\)</span>时，<span class="math inline">\(z_{i k}=1\)</span>。因此就可以得到</p>
+<p><span class="math display">\[P\left[z_{i k}=1 | P\left(\omega_{i}\right)\right]=P\left(\omega_{i}\right)\]</span></p>
+<p>同理就可以得到</p>
+<p><span class="math display">\[P\left[z_{i k}=0 | P\left(\omega_{i}\right)\right]=1-P\left(\omega_{i}\right)\]</span></p>
+<p>因此，把上面两个式子进行合并得到</p>
+<p><span class="math display">\[P\left[z_{i k} | P\left(\omega_{i}\right)\right]=\left[P\left(\omega_{i}\right)\right]^{z_{i k}}\left[1-P\left(\omega_{i}\right)\right]^{1-z_{i k}}\]</span></p>
+<p>因此就可以得到</p>
+<p><span class="math display">\[\begin{aligned} 
+P\left(z_{i 1}, \ldots, z_{i n} | P\left(\omega_{i}\right)\right) &amp;= \prod_{k=1}^{n} P\left(z_{i k} | P\left(\omega_{i}\right)\right)\\
+ &amp;=\prod_{k=1}^{n}\left[P\left(\omega_{i}\right)\right]^{z_{i k}}\left[1-P\left(\omega_{i}\right)\right]^{1-z_{i k}}
+\end{aligned}\]</span></p>
+<p>（2）证明对<span class="math inline">\(P\left(\omega_{i}\right)\)</span>的最大似然估计为</p>
+<p><span class="math display">\[\hat{P}\left(\omega_{i}\right)=\frac{1}{n} \sum_{k=1}^{n} z_{i k}\]</span></p>
+<p>并且简单解释这个结果。</p>
+<p>要求<span class="math inline">\(P\left(\omega_{i}\right)\)</span>的最大似然估计，那么就需要对<span class="math inline">\(P\left(z_{i 1}, \ldots, z_{i n} | P\left(\omega_{i}\right)\right)\)</span>两边求对数得到</p>
+<p><span class="math display">\[\begin{aligned} 
+l\left(P\left(\omega_{i}\right)\right) &amp;= \ln P\left(z_{i 1}, \cdots, z_{i n} | P\left(\omega_{i}\right)\right)\\
+ &amp;=\ln \left[\prod_{k=1}^{n}\left[P\left(\omega_{i}\right)\right]^{z_{i k}}\left[1-P\left(\omega_{i}\right)\right]^{1-z_{i k}}\right] \\
+ &amp;=\sum_{k=1}^{n}\left[z_{i k} \ln P\left(\omega_{i}\right)+\left(1-z_{i k}\right) \ln \left(1-P\left(\omega_{i}\right)\right)\right]
+\end{aligned}\]</span></p>
+<p>然后令<span class="math inline">\(l\left(P\left(\omega_{i}\right)\right)\)</span>对<span class="math inline">\(P\left(\omega_{i}\right)\)</span>求导得到</p>
+<p><span class="math display">\[\begin{aligned} 
+\nabla_{P\left(\omega_{i}\right)} l\left(P\left(\omega_{i}\right)\right) &amp;= \frac{1}{P\left(\omega_{i}\right)} \sum_{k=1}^{n} z_{i k}-\frac{1}{1-P\left(\omega_{i}\right)} \sum_{k=1}^{n}\left(1-z_{i k}\right)\\
+ &amp;=0
+\end{aligned}\]</span></p>
+<p>然后进行计算</p>
+<p><span class="math display">\[\frac{1}{P\left(\omega_{i}\right)} \sum_{k=1}^{n} z_{i k}-\frac{1}{1-P\left(\omega_{i}\right)} \sum_{k=1}^{n}\left(1-z_{i k}\right)=0\]</span></p>
+<p>通过变换就可以得到</p>
+<p><span class="math display">\[\hat{P}\left(\omega_{i}\right)=\frac{1}{n} \sum_{k=1}^{n} z_{i k}\]</span></p>
+<p>6、对多元高斯分布，推导用最大似然估计方法估计均值和方差时的公式（18）（19）。并且明确地给出可能需要的假设条件。</p>
+<p>证明：</p>
+<p>假设<span class="math inline">\(d\)</span>维数据服从高斯分布，因此就可以得到密度函数为</p>
+<p><span class="math display">\[p(\mathbf{x} | \boldsymbol{\mu}, \mathbf{\Sigma})=\frac{1}{(2 \pi)^{\frac{d}{2}}|\mathbf{\Sigma}|^{\frac{1}{2}}} \exp \left[-\frac{1}{2}(\mathbf{x}-\boldsymbol{\mu})^{t} \mathbf{\Sigma}^{-1}(\mathbf{x}-\boldsymbol{\mu})\right]\]</span></p>
+<p>所以就可以得到<span class="math inline">\(n\)</span>个<span class="math inline">\(x\)</span>的密度函数为</p>
+<p><span class="math display">\[p\left(\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{n} | \boldsymbol{\mu}, \mathbf{\Sigma}\right)=\frac{1}{(2 \pi)^{\frac{n}{2}}|\mathbf{\Sigma}|^{\frac{n}{2}}} \exp \left[-\frac{1}{2} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\boldsymbol{\mu}\right)^{t} \mathbf{\Sigma}^{-1}\left(\mathbf{x}_{k}-\boldsymbol{\mu}\right)\right]\]</span></p>
+<p>根据最大似然的求解方法，即对上式两边求对数，就可以得到</p>
+<p><span class="math display">\[l(\boldsymbol{\mu}, \mathbf{\Sigma})=-\frac{n}{2} \ln (2 \pi)-\frac{n}{2} \ln |\mathbf{\Sigma}|-\frac{1}{2} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\boldsymbol{\mu}\right)^{t} \mathbf{\Sigma}^{-1}\left(\mathbf{x}_{k}-\boldsymbol{\mu}\right)=0\]</span></p>
+<p><strong>（上式化简不会）</strong></p>
+<p>然后分别对上式中的<span class="math inline">\(\boldsymbol{\mu}\)</span>和<span class="math inline">\(\mathbf{\Sigma}\)</span>进行求导，并令其等于0，就可以解出</p>
+<p><span class="math display">\[\hat{\boldsymbol{\mu}}=\frac{1}{n} \sum_{k=1}^{n} \mathbf{x}_{k}\]</span></p>
+<p><span class="math display">\[\hat{\mathbf{\Sigma}}=\frac{1}{n} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\hat{\boldsymbol{\mu}}\right)\left(\mathbf{x}_{k}-\hat{\boldsymbol{\mu}}\right)^{t}\]</span></p>
+<p>13、令<span class="math inline">\(p(\mathbf{x} | \mathbf{\Sigma}) \sim \mathrm{N}(\boldsymbol{\mu}, \mathbf{\Sigma})\)</span>，其中<span class="math inline">\(\boldsymbol{\mu}\)</span>已知，而<span class="math inline">\(\mathbf{\Sigma}\)</span>未知。证明对<span class="math inline">\(\mathbf{\Sigma}\)</span>的最大似然估计为 <strong>（未做）</strong></p>
+<p><span class="math display">\[\hat{\mathbf{\Sigma}}=\frac{1}{n} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\hat{\boldsymbol{\mu}}\right)\left(\mathbf{x}_{k}-\hat{\boldsymbol{\mu}}\right)^{t}\]</span></p>
+<p>（1）证明<span class="math inline">\(\mathbf{a}^{t} \mathbf{A} \mathbf{a}=\operatorname{tr}\left[\mathbf{A} \mathbf{a} \mathbf{a}^{t}\right]\)</span>，其中矩阵的迹<span class="math inline">\(\operatorname{tr}(\mathbf{A})\)</span>是矩阵<span class="math inline">\(\mathbf{A}\)</span>对角元素之和。</p>
+<p>（2）证明似然函数可以写作</p>
+<p><span class="math display">\[p\left(\mathbf{x}_{1}, \cdots, \mathbf{x}_{n} | \mathbf{\Sigma}\right)=\frac{1}{(2 \pi)^{\frac{n d}{2}}}\left|\mathbf{\Sigma}^{-1}\right|^{\frac{n}{2}} \exp \left[-\frac{1}{2} \operatorname{tr}\left[\mathbf{\Sigma}^{-1} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\boldsymbol{\mu}\right)\left(\mathbf{x}_{k}-\boldsymbol{\mu}\right)^{t}\right]\right]\]</span></p>
+<p>（3）如果<span class="math inline">\(\mathbf{A}=\mathbf{\Sigma}^{-1} \hat{\mathbf{\Sigma}}\)</span>，并且<span class="math inline">\(\mathbf{A}\)</span>的本征值为<span class="math inline">\(\lambda_{1}, \lambda_{2}, \cdots, \lambda_{n}\)</span>。证明我们在上面的结果能够导出</p>
+<p><span class="math display">\[p\left(\mathbf{x}_{1}, \cdots, \mathbf{x}_{n} | \mathbf{\Sigma}\right)=\frac{1}{(2 \pi)^{\frac{n d}{2}}|\hat{\mathbf{\Sigma}}|^{\frac{n}{2}}}\left(\lambda_{1} \cdots \lambda_{d}\right)^{\frac{n}{2}} \exp \left[-\frac{n}{2}\left(\lambda_{1}+\cdots+\lambda_{d}\right)\right]\]</span></p>
+<p>（4）证明，当<span class="math inline">\(\lambda_{1}=\lambda_{2}=\dots=\lambda_{d}=1\)</span>时，似然函数达到最大。并且解释这个结果。</p>
 ]]></content>
       <categories>
         <category>课程</category>
