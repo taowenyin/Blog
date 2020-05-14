@@ -309,6 +309,51 @@ l\left(P\left(\omega_{i}\right)\right) &amp;= \ln P\left(z_{i 1}, \cdots, z_{i n
 <p>（3）如果<span class="math inline">\(\mathbf{A}=\mathbf{\Sigma}^{-1} \hat{\mathbf{\Sigma}}\)</span>，并且<span class="math inline">\(\mathbf{A}\)</span>的本征值为<span class="math inline">\(\lambda_{1}, \lambda_{2}, \cdots, \lambda_{n}\)</span>。证明我们在上面的结果能够导出</p>
 <p><span class="math display">\[p\left(\mathbf{x}_{1}, \cdots, \mathbf{x}_{n} | \mathbf{\Sigma}\right)=\frac{1}{(2 \pi)^{\frac{n d}{2}}|\hat{\mathbf{\Sigma}}|^{\frac{n}{2}}}\left(\lambda_{1} \cdots \lambda_{d}\right)^{\frac{n}{2}} \exp \left[-\frac{n}{2}\left(\lambda_{1}+\cdots+\lambda_{d}\right)\right]\]</span></p>
 <p>（4）证明，当<span class="math inline">\(\lambda_{1}=\lambda_{2}=\dots=\lambda_{d}=1\)</span>时，似然函数达到最大。并且解释这个结果。</p>
+<p>35、对于样本<span class="math inline">\(\mathbf{x}_{1}, \cdots, \mathbf{x}_{n}\)</span>（每个样本是<span class="math inline">\(d\)</span>维的），定义样本均值和样本协方差如下：</p>
+<p><span class="math display">\[\hat{\mu}_{n}=\frac{1}{n} \sum_{k=1}^{n} x_{k}\]</span></p>
+<p><span class="math display">\[\mathbf{C}_{n}=\frac{1}{n-1} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\hat{\boldsymbol{\mu}}_{n}\right)\left(\mathbf{x}_{k}-\hat{\boldsymbol{\mu}}_{n}\right)^{t}\]</span></p>
+<p>这些被称为非递归公式。</p>
+<p>（1）用这些公式计算样本均值和样本协方差的计算复杂度分别是多少？</p>
+<p>均值的计算复杂度为<span class="math inline">\(O(d n)\)</span>，方差的计算复杂度为<span class="math inline">\(O\left(d n^{2}\right)\)</span></p>
+<p>（2）证明，用递归方法求解样本均值和样本协方差的公式为</p>
+<p><span class="math display">\[\hat{\boldsymbol{\mu}}_{n+1}=\hat{\boldsymbol{\mu}}_{n}+\frac{1}{n+1}\left(\mathbf{x}_{n+1}-\hat{\boldsymbol{\mu}}_{n}\right)\]</span></p>
+<p><strong>未证明</strong></p>
+<p><span class="math display">\[\mathbf{C}_{n+1}=\frac{n-1}{n} \mathbf{C}_{n}+\frac{1}{n+1}\left(\mathbf{x}_{n+1}-\hat{\boldsymbol{\mu}}_{n}\right)\left(\mathbf{x}_{n+1}-\hat{\boldsymbol{\mu}}_{n}\right)^{t}\]</span></p>
+<p>证明：</p>
+<p>因为<span class="math inline">\(\hat{\mu}_{n}=\frac{1}{n} \sum_{k=1}^{n} x_{k}\)</span>，所以</p>
+<p><span class="math display">\[\begin{aligned} 
+\hat{\mu}_{n+1} &amp;= \frac{1}{n+1} \sum_{k=1}^{n+1} x_{k}\\
+ &amp;=\frac{1}{n+1}\left[\sum_{k=1}^{n} \mathbf{x}_{k}+\mathbf{x}_{n+1}\right]
+\end{aligned}\]</span></p>
+<p>因为</p>
+<p><span class="math display">\[\hat{\mu}_{n}=\frac{1}{n} \sum_{k=1}^{n} x_{k}\]</span></p>
+<p>所以</p>
+<p><span class="math display">\[\sum_{k=1}^{n} x_{k}=n \hat{\mu}_{n}\]</span></p>
+<p>所以</p>
+<p><span class="math display">\[\begin{aligned} 
+\hat{\mu}_{n+1} &amp;= \frac{1}{n+1} \sum_{k=1}^{n+1} x_{k} \\
+ &amp;=\frac{1}{n+1}\left[\sum_{k=1}^{n} \mathbf{x}_{k}+\mathbf{x}_{n+1}\right] \\
+ &amp;=\frac{1}{n+1}\left[n \hat{\mu}_{n}+\mathbf{x}_{n+1}\right] \\
+ &amp;=\frac{n}{n+1} \hat{\mu}_{n} + \frac{1}{n+1} \mathbf{x}_{n+1} \\
+ &amp;=\frac{n+1-1}{n+1} \hat{\mu}_{n} + \frac{1}{n+1} \mathbf{x}_{n+1} \\
+ &amp;=\hat{\mu}_{n} - \frac{1}{n+1}\hat{\mu}_{n} + \frac{1}{n+1} \mathbf{x}_{n+1} \\
+ &amp;=\hat{\mu}_{n}+\frac{1}{n+1}\left(\mathbf{x}_{n+1}-\hat{\mu}_{n}\right)
+\end{aligned}\]</span></p>
+<p>（3）用这些递归公式计算样本均值和样本方差的计算复杂度分别是多少？<strong>未完全</strong></p>
+<p>均值的复杂度为<span class="math inline">\(O(d)\)</span>。</p>
+<p>（4）在什么情况下，你会偏向于采用非递归公式；而在什么情况下，你会偏向于采用递归公式。<strong>未完成</strong></p>
+<p>38、令<span class="math inline">\(p_{x}\left(\mathbf{x} | \omega_{i}\right)\)</span>，<span class="math inline">\(i=1,2\)</span>为任意的概率密度函数，均值为<span class="math inline">\(\mu_{i}\)</span>，协方差矩阵为<span class="math inline">\(\mathbf{\Sigma}_{i}\)</span>，其中并不要求<span class="math inline">\(p_{x}\left(\mathbf{x} | \omega_{i}\right)\)</span>必须为正态概率密度。令<span class="math inline">\(y=\mathbf{w}^{t} \mathbf{x}\)</span>表示投影，并且设投影后的结果的概率密度函数为<span class="math inline">\(p\left(y | \omega_{i}\right)\)</span>，其均值为<span class="math inline">\(\mu_{i}\)</span>,方差为<span class="math inline">\(\sigma_{1}^{2}\)</span>。</p>
+<p>（1）证明准则函数</p>
+<p><span class="math display">\[J_{1}(\mathbf{w})=\frac{\left(\mu_{1}-\mu_{2}\right)^{2}}{\sigma_{1}^{2}+\sigma_{2}^{2}}\]</span></p>
+<p>当</p>
+<p><span class="math display">\[\mathbf{w}=\left(\Sigma_{1}+\Sigma_{2}\right)^{-1}\left(\mu_{1}-\mu_{2}\right)\]</span></p>
+<p>时取得最大值。</p>
+<p>（2）如果<span class="math inline">\(P\left(\omega_{i}\right)\)</span>为<span class="math inline">\(\omega_{i}\)</span>的先验概率，证明</p>
+<p><span class="math display">\[J_{2}(\mathbf{w})=\frac{\left(\boldsymbol{\mu}_{1}-\boldsymbol{\mu}_{2}\right)^{2}}{P\left(\omega_{1}\right) \sigma_{1}^{2}+P\left(\omega_{2}\right) \sigma_{2}^{2}}\]</span></p>
+<p>当</p>
+<p><span class="math display">\[\mathbf{w}=\left[P\left(\omega_{1}\right) \mathbf{\Sigma}_{1}+P\left(\omega_{2}\right) \mathbf{\Sigma}_{2}\right]^{-1}\left(\mu_{1}-\mu_{2}\right)\]</span></p>
+<p>时取得最大值。</p>
+<p>（3）在（1）和（2）之间，哪个于公式（96）的关系更密切，请解释为什么。</p>
 ]]></content>
       <categories>
         <category>课程</category>
