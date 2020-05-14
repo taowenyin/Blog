@@ -579,3 +579,82 @@ $$p\left(\mathbf{x}_{1}, \cdots, \mathbf{x}_{n} | \mathbf{\Sigma}\right)=\frac{1
 
 （4）证明，当$\lambda_{1}=\lambda_{2}=\dots=\lambda_{d}=1$时，似然函数达到最大。并且解释这个结果。
 
+35、对于样本$\mathbf{x}_{1}, \cdots, \mathbf{x}_{n}$（每个样本是$d$维的），定义样本均值和样本协方差如下：
+
+$$\hat{\mu}_{n}=\frac{1}{n} \sum_{k=1}^{n} x_{k}$$
+
+$$\mathbf{C}_{n}=\frac{1}{n-1} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\hat{\boldsymbol{\mu}}_{n}\right)\left(\mathbf{x}_{k}-\hat{\boldsymbol{\mu}}_{n}\right)^{t}$$
+
+这些被称为非递归公式。
+
+（1）用这些公式计算样本均值和样本协方差的计算复杂度分别是多少？
+
+均值的计算复杂度为$O(d n)$，方差的计算复杂度为$O\left(d n^{2}\right)$
+
+（2）证明，用递归方法求解样本均值和样本协方差的公式为
+
+$$\hat{\boldsymbol{\mu}}_{n+1}=\hat{\boldsymbol{\mu}}_{n}+\frac{1}{n+1}\left(\mathbf{x}_{n+1}-\hat{\boldsymbol{\mu}}_{n}\right)$$
+
+**未证明**
+
+$$\mathbf{C}_{n+1}=\frac{n-1}{n} \mathbf{C}_{n}+\frac{1}{n+1}\left(\mathbf{x}_{n+1}-\hat{\boldsymbol{\mu}}_{n}\right)\left(\mathbf{x}_{n+1}-\hat{\boldsymbol{\mu}}_{n}\right)^{t}$$ 
+
+证明：
+
+因为$\hat{\mu}_{n}=\frac{1}{n} \sum_{k=1}^{n} x_{k}$，所以
+
+$$\begin{aligned} 
+\hat{\mu}_{n+1} &= \frac{1}{n+1} \sum_{k=1}^{n+1} x_{k}\\
+ &=\frac{1}{n+1}\left[\sum_{k=1}^{n} \mathbf{x}_{k}+\mathbf{x}_{n+1}\right]
+\end{aligned}$$
+
+因为
+
+$$\hat{\mu}_{n}=\frac{1}{n} \sum_{k=1}^{n} x_{k}$$
+
+所以
+
+$$\sum_{k=1}^{n} x_{k}=n \hat{\mu}_{n}$$
+
+所以
+
+$$\begin{aligned} 
+\hat{\mu}_{n+1} &= \frac{1}{n+1} \sum_{k=1}^{n+1} x_{k} \\
+ &=\frac{1}{n+1}\left[\sum_{k=1}^{n} \mathbf{x}_{k}+\mathbf{x}_{n+1}\right] \\
+ &=\frac{1}{n+1}\left[n \hat{\mu}_{n}+\mathbf{x}_{n+1}\right] \\
+ &=\frac{n}{n+1} \hat{\mu}_{n} + \frac{1}{n+1} \mathbf{x}_{n+1} \\
+ &=\frac{n+1-1}{n+1} \hat{\mu}_{n} + \frac{1}{n+1} \mathbf{x}_{n+1} \\
+ &=\hat{\mu}_{n} - \frac{1}{n+1}\hat{\mu}_{n} + \frac{1}{n+1} \mathbf{x}_{n+1} \\
+ &=\hat{\mu}_{n}+\frac{1}{n+1}\left(\mathbf{x}_{n+1}-\hat{\mu}_{n}\right)
+\end{aligned}$$
+
+
+（3）用这些递归公式计算样本均值和样本方差的计算复杂度分别是多少？**未完全**
+
+均值的复杂度为$O(d)$。
+
+（4）在什么情况下，你会偏向于采用非递归公式；而在什么情况下，你会偏向于采用递归公式。**未完成**
+
+38、令$p_{x}\left(\mathbf{x} | \omega_{i}\right)$，$i=1,2$为任意的概率密度函数，均值为$\mu_{i}$，协方差矩阵为$\mathbf{\Sigma}_{i}$，其中并不要求$p_{x}\left(\mathbf{x} | \omega_{i}\right)$必须为正态概率密度。令$y=\mathbf{w}^{t} \mathbf{x}$表示投影，并且设投影后的结果的概率密度函数为$p\left(y | \omega_{i}\right)$，其均值为$\mu_{i}$,方差为$\sigma_{1}^{2}$。
+
+（1）证明准则函数
+
+$$J_{1}(\mathbf{w})=\frac{\left(\mu_{1}-\mu_{2}\right)^{2}}{\sigma_{1}^{2}+\sigma_{2}^{2}}$$
+
+当
+
+$$\mathbf{w}=\left(\Sigma_{1}+\Sigma_{2}\right)^{-1}\left(\mu_{1}-\mu_{2}\right)$$
+
+时取得最大值。
+
+（2）如果$P\left(\omega_{i}\right)$为$\omega_{i}$的先验概率，证明
+
+$$J_{2}(\mathbf{w})=\frac{\left(\boldsymbol{\mu}_{1}-\boldsymbol{\mu}_{2}\right)^{2}}{P\left(\omega_{1}\right) \sigma_{1}^{2}+P\left(\omega_{2}\right) \sigma_{2}^{2}}$$
+
+当
+
+$$\mathbf{w}=\left[P\left(\omega_{1}\right) \mathbf{\Sigma}_{1}+P\left(\omega_{2}\right) \mathbf{\Sigma}_{2}\right]^{-1}\left(\mu_{1}-\mu_{2}\right)$$
+
+时取得最大值。
+
+（3）在（1）和（2）之间，哪个于公式（96）的关系更密切，请解释为什么。
