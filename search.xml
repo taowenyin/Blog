@@ -376,7 +376,45 @@ l\left(P\left(\omega_{i}\right)\right) &amp;= \ln P\left(z_{i 1}, \cdots, z_{i n
 <p><span class="math display">\[\mathbf{S}_{W}=P\left(\omega_{1}\right) \mathbf{\Sigma}_{1}+P\left(\omega_{2}\right) \mathbf{\Sigma}_{2}\]</span></p>
 <p>因此，根据式子（106）就可以得到</p>
 <p><span class="math display">\[\mathbf{w}=\left[P\left(\omega_{1}\right) \mathbf{\Sigma}_{1}+P\left(\omega_{2}\right) \mathbf{\Sigma}_{2}\right]^{-1}\left(\mu_{1}-\mu_{2}\right)\]</span></p>
-<p>（3）在（1）和（2）之间，哪个于公式（96）的关系更密切，请解释为什么。</p>
+<p>（3）在（1）和（2）之间，哪个于公式（96）的关系更密切，请解释为什么。<strong>（未完成）</strong></p>
+<p>39、表达式</p>
+<p><span class="math display">\[J_{1}=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{i}-y_{j}\right)^{2}\]</span></p>
+<p>是总体组内离散度的度量。</p>
+<p>（1）证明这个离散度公式等价于</p>
+<p><span class="math display">\[J_{1}=\left(m_{1}-m_{2}\right)^{2}+\frac{1}{n_{1}} s_{1}^{2}+\frac{1}{n_{2}} s_{2}^{2}\]</span></p>
+<p>证明</p>
+<p><span class="math display">\[\begin{aligned} 
+J_{1} &amp;= \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left[\left(y_{i}-m_{1}\right)-\left(y_{j}-m_{2}\right)+\left(m_{1}-m_{2}\right)\right]^{2} \\
+ &amp;=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left[\left(y_{i}-m_{1}\right)^{2}+\left(y_{j}-m_{2}\right)^{2}+\left(m_{1}-m_{2}\right)^{2} +2\left(y_{i}-m_{1}\right)\left(y_{j}-m_{2}\right)+2\left(y_{i}-m_{1}\right)\left(m_{1}-m_{2}\right)+2\left(y_{j}-m_{2}\right)\left(m_{1}-m_{2}\right)\right] \\
+ &amp;=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{i}-m_{1}\right)^{2}+\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{j}-m_{2}\right)^{2}+\left(m_{1}-m_{2}\right)^{2} + \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{i}-m_{1}\right)\left(y_{j}-m_{2}\right)+\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{i}-m_{1}\right)\left(m_{1}-m_{2}\right) + \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{j}-m_{2}\right)\left(m_{1}-m_{2}\right)
+\end{aligned}\]</span></p>
+<p>因为</p>
+<p><span class="math display">\[s_{1}^{2}=\sum_{y_{i} \in \mathcal{Y}_{1}}\left(y_{i}-m_{1}\right)^{2}\]</span></p>
+<p><span class="math display">\[s_{2}^{2}=\sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{j}-m_{2}\right)^{2}\]</span></p>
+<p>所以</p>
+<p><span class="math display">\[\begin{aligned} 
+J_{1} &amp;= \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left[\left(y_{i}-m_{1}\right)-\left(y_{j}-m_{2}\right)+\left(m_{1}-m_{2}\right)\right]^{2} \\
+ &amp;=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left[\left(y_{i}-m_{1}\right)^{2}+\left(y_{j}-m_{2}\right)^{2}+\left(m_{1}-m_{2}\right)^{2} +2\left(y_{i}-m_{1}\right)\left(y_{j}-m_{2}\right)+2\left(y_{i}-m_{1}\right)\left(m_{1}-m_{2}\right)+2\left(y_{j}-m_{2}\right)\left(m_{1}-m_{2}\right)\right] \\
+ &amp;=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{i}-m_{1}\right)^{2}+\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{j}-m_{2}\right)^{2}+\left(m_{1}-m_{2}\right)^{2} + \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{i}-m_{1}\right)\left(y_{j}-m_{2}\right)+\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{i}-m_{1}\right)\left(m_{1}-m_{2}\right) + \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{j}-m_{2}\right)\left(m_{1}-m_{2}\right) \\ 
+ &amp;=\frac{1}{n_{1}} s_{1}^{2}+\frac{1}{n_{2}} s_{2}^{2}+\left(m_{1}-m_{2}\right)^{2}
+\end{aligned}\]</span></p>
+<p>（2）证明，整体离散度为</p>
+<p><span class="math display">\[J_{2}=\frac{1}{n_{1}} s_{1}^{2}+\frac{1}{n_{2}} s_{2}^{2}\]</span></p>
+<p>证明：</p>
+<p>因为<span class="math inline">\(P\left(\omega_{1}\right)=\frac{1}{n_{1}}\)</span>，<span class="math inline">\(P\left(\omega_{2}\right)=\frac{1}{n_{2}}\)</span>，所以可以得到整体的离散度为</p>
+<p><span class="math display">\[J_{2}=\frac{1}{n_{1}} s_{1}^{2}+\frac{1}{n_{2}} s_{2}^{2}\]</span></p>
+<p>（3）如果<span class="math inline">\(y=\mathbf{w}^{t} \mathbf{x}\)</span>，证明在约束条件<span class="math inline">\(J_{2}=1\)</span>下，使得<span class="math inline">\(J_{1}\)</span>最大化的<span class="math inline">\(\mathbf{w}\)</span>为 <strong>（未完成）</strong></p>
+<p><span class="math display">\[\mathbf{w}=\lambda\left(\frac{1}{n_{1}} \mathbf{S}_{1}+\frac{1}{n_{2}} \mathbf{S}_{2}\right)^{-1}\left(\mathbf{m}_{1}-\mathbf{m}_{2}\right)\]</span></p>
+<p>其中</p>
+<p><span class="math display">\[\lambda=\left[\left(\mathbf{m}_{1}-\mathbf{m}_{2}\right)^{t}\left(\frac{1}{n_{1}} \mathbf{S}_{1}+\frac{1}{n_{2}} \mathbf{S}_{2}\right)\left(\mathbf{m}_{1}-\mathbf{m}_{2}\right)\right]^{\frac{1}{2}}\]</span></p>
+<p><span class="math display">\[\mathbf{m}_{i}=\frac{1}{n_{i}} \sum_{\mathbf{x} \in \mathcal{D}_{i}} \mathbf{x}\]</span></p>
+<p>和</p>
+<p><span class="math display">\[\mathbf{S}_{i}=\sum_{\mathbf{x} \in \mathcal{D}_{i}} n_{i}\left(\mathbf{m}_{i}-\mathbf{m}\right)\left(\mathbf{m}_{i}-\mathbf{m}\right)^{t}\]</span></p>
+<p>40、如果<span class="math inline">\(\mathbf{S}_{B}\)</span>和<span class="math inline">\(\mathbf{S}_{W}\)</span>为两个对称<span class="math inline">\(d \times d\)</span>的实数矩阵，那么我们知道存在着<span class="math inline">\(n\)</span>个本征值<span class="math inline">\(\lambda_{1}, \cdots, \lambda_{n}\)</span>，满足<span class="math inline">\(\left|\mathbf{S}_{B}-\lambda \mathbf{S}_{W}\right|=0\)</span>，和对应的<span class="math inline">\(n\)</span>个本征向量<span class="math inline">\(\mathbf{e}_{1}, \cdots, \mathbf{e}_{n}\)</span>，满足<span class="math inline">\(\mathbf{S}_{\mathbf{B}} \mathbf{e}_{i}=\lambda_{i} \mathbf{S}_{W} \mathbf{e}_{i}\)</span>。而且，当<span class="math inline">\(\mathbf{S}_{W}\)</span>正定时，这些本征向量就能够被归一化，因此<span class="math inline">\(\mathbf{e}_{i}^{t} \mathbf{S}_{W} \mathbf{e}_{j}=\delta_{i j}\)</span>和<span class="math inline">\(\mathbf{e}_{i}^{t} \mathbf{S}_{B} \mathbf{e}_{j}=\lambda_{i} \delta_{i j}\)</span>。令<span class="math inline">\(\tilde{\mathbf{S}}_{W}=\mathbf{W}^{t} \mathbf{S}_{W} \mathbf{W}\)</span>和<span class="math inline">\(\tilde{\mathbf{S}}_{B}=\mathbf{W}^{t} \mathbf{S}_{B} \mathbf{W}\)</span>，其中<span class="math inline">\(\mathbf{W}\)</span>为一个<span class="math inline">\(d \times n\)</span>的矩阵，其各列向量对应于前面所述的<span class="math inline">\(n\)</span>个本征向量。<strong>（未完成）</strong></p>
+<p>（1）证明<span class="math inline">\(\tilde{\mathbf{S}}_{W}\)</span>是一个<span class="math inline">\(n \times n\)</span>的单位矩阵<span class="math inline">\(I\)</span>，而<span class="math inline">\(\tilde{\mathbf{S}}_{B}\)</span>是一个对角矩阵，其中各个对角线上的元素正好是前面所述的<span class="math inline">\(n\)</span>个本征值。（这表明多重判别函数分析中的判别函数都是互不相关的）</p>
+<p>（2）求<span class="math inline">\(J=\frac{|\tilde{\mathbf{S}}_{B}|}{|\tilde{\mathbf{S}}_{W}|}\)</span>的值。</p>
+<p>（3）令<span class="math inline">\(\mathbf{y}=\mathbf{W}^{t} \mathbf{x}\)</span>。然后令<span class="math inline">\(\mathbf{y}^{\prime}=\mathbf{Q D y}\)</span>，其中<span class="math inline">\(\mathbf{D}\)</span>为<span class="math inline">\(n \times n\)</span>的非奇异对角矩阵，表示对坐标轴的尺度变换，<span class="math inline">\(\mathbf{Q}\)</span>为正交矩阵，表示对坐标轴的旋转。证明<span class="math inline">\(J\)</span>对这种变换具有不变性。</p>
+<p>41、考虑两个正态分布，它们的协方差矩阵相同，但都是任意的。证明，对于一个合适的阈值，Fisher线性分类函数可以用负的对数似然比来得到。<strong>（未完成）</strong></p>
 ]]></content>
       <categories>
         <category>课程</category>
