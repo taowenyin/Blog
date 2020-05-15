@@ -1229,3 +1229,21 @@ makerom -ciatocci XX.cia
 ```bash
 python 3ds_decrypt_v2.py XX.cci
 ```
+
+## Ubuntu录音消除杂英
+
+>* 1、打开Pulse配置文件
+
+```bash
+sudo gedit /etc/pulse/default.pa
+```
+
+>* 2、在尾部添加降噪配置
+
+```bash
+#Active Noise Removal
+.ifexists module-echo-cancel.so
+load-module module-echo-cancel aec_method=webrtc source_name=mic source_properties=device.description=MicHD
+set-default-source "mic"
+.endif
+```
