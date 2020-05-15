@@ -5908,6 +5908,19 @@ W_{0}^{t+1}=W_{0}^{t}-\gamma_{t} \xi\left(y, \mathbf{x}^{*}\right) \mathbf{w}_{y
 </ul>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python 3ds_decrypt_v2.py XX.cci</span><br></pre></td></tr></table></figure>
+<h2 id="ubuntu录音消除杂英">Ubuntu录音消除杂英</h2>
+<blockquote>
+<ul>
+<li>1、打开Pulse配置文件</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo gedit /etc/pulse/default.pa</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>2、在尾部添加降噪配置</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#Active Noise Removal</span></span><br><span class="line">.ifexists module-echo-cancel.so</span><br><span class="line">load-module module-echo-cancel aec_method=webrtc source_name=mic source_properties=device.description=MicHD</span><br><span class="line"><span class="built_in">set</span>-default-source <span class="string">"mic"</span></span><br><span class="line">.endif</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>资源</category>
