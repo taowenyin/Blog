@@ -703,4 +703,71 @@ $$\mathbf{S}_{W}=P\left(\omega_{1}\right) \mathbf{\Sigma}_{1}+P\left(\omega_{2}\
 
 $$\mathbf{w}=\left[P\left(\omega_{1}\right) \mathbf{\Sigma}_{1}+P\left(\omega_{2}\right) \mathbf{\Sigma}_{2}\right]^{-1}\left(\mu_{1}-\mu_{2}\right)$$
 
-（3）在（1）和（2）之间，哪个于公式（96）的关系更密切，请解释为什么。
+（3）在（1）和（2）之间，哪个于公式（96）的关系更密切，请解释为什么。**（未完成）**
+
+39、表达式
+
+$$J_{1}=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{i}-y_{j}\right)^{2}$$
+
+是总体组内离散度的度量。
+
+（1）证明这个离散度公式等价于
+
+$$J_{1}=\left(m_{1}-m_{2}\right)^{2}+\frac{1}{n_{1}} s_{1}^{2}+\frac{1}{n_{2}} s_{2}^{2}$$
+
+证明
+
+$$\begin{aligned} 
+J_{1} &= \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left[\left(y_{i}-m_{1}\right)-\left(y_{j}-m_{2}\right)+\left(m_{1}-m_{2}\right)\right]^{2} \\
+ &=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left[\left(y_{i}-m_{1}\right)^{2}+\left(y_{j}-m_{2}\right)^{2}+\left(m_{1}-m_{2}\right)^{2} +2\left(y_{i}-m_{1}\right)\left(y_{j}-m_{2}\right)+2\left(y_{i}-m_{1}\right)\left(m_{1}-m_{2}\right)+2\left(y_{j}-m_{2}\right)\left(m_{1}-m_{2}\right)\right] \\
+ &=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{i}-m_{1}\right)^{2}+\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{j}-m_{2}\right)^{2}+\left(m_{1}-m_{2}\right)^{2} + \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{i}-m_{1}\right)\left(y_{j}-m_{2}\right)+\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{i}-m_{1}\right)\left(m_{1}-m_{2}\right) + \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{j}-m_{2}\right)\left(m_{1}-m_{2}\right)
+\end{aligned}$$
+
+因为
+
+$$s_{1}^{2}=\sum_{y_{i} \in \mathcal{Y}_{1}}\left(y_{i}-m_{1}\right)^{2}$$
+
+$$s_{2}^{2}=\sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{j}-m_{2}\right)^{2}$$
+
+所以
+
+$$\begin{aligned} 
+J_{1} &= \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left[\left(y_{i}-m_{1}\right)-\left(y_{j}-m_{2}\right)+\left(m_{1}-m_{2}\right)\right]^{2} \\
+ &=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left[\left(y_{i}-m_{1}\right)^{2}+\left(y_{j}-m_{2}\right)^{2}+\left(m_{1}-m_{2}\right)^{2} +2\left(y_{i}-m_{1}\right)\left(y_{j}-m_{2}\right)+2\left(y_{i}-m_{1}\right)\left(m_{1}-m_{2}\right)+2\left(y_{j}-m_{2}\right)\left(m_{1}-m_{2}\right)\right] \\
+ &=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{i}-m_{1}\right)^{2}+\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{j}-m_{2}\right)^{2}+\left(m_{1}-m_{2}\right)^{2} + \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{i}-m_{1}\right)\left(y_{j}-m_{2}\right)+\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{i}-m_{1}\right)\left(m_{1}-m_{2}\right) + \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{j}-m_{2}\right)\left(m_{1}-m_{2}\right) \\ 
+ &=\frac{1}{n_{1}} s_{1}^{2}+\frac{1}{n_{2}} s_{2}^{2}+\left(m_{1}-m_{2}\right)^{2}
+\end{aligned}$$
+
+（2）证明，整体离散度为
+
+$$J_{2}=\frac{1}{n_{1}} s_{1}^{2}+\frac{1}{n_{2}} s_{2}^{2}$$
+
+证明：
+
+因为$P\left(\omega_{1}\right)=\frac{1}{n_{1}}$，$P\left(\omega_{2}\right)=\frac{1}{n_{2}}$，所以可以得到整体的离散度为
+
+$$J_{2}=\frac{1}{n_{1}} s_{1}^{2}+\frac{1}{n_{2}} s_{2}^{2}$$
+
+（3）如果$y=\mathbf{w}^{t} \mathbf{x}$，证明在约束条件$J_{2}=1$下，使得$J_{1}$最大化的$\mathbf{w}$为 **（未完成）**
+
+$$\mathbf{w}=\lambda\left(\frac{1}{n_{1}} \mathbf{S}_{1}+\frac{1}{n_{2}} \mathbf{S}_{2}\right)^{-1}\left(\mathbf{m}_{1}-\mathbf{m}_{2}\right)$$
+
+其中
+
+$$\lambda=\left[\left(\mathbf{m}_{1}-\mathbf{m}_{2}\right)^{t}\left(\frac{1}{n_{1}} \mathbf{S}_{1}+\frac{1}{n_{2}} \mathbf{S}_{2}\right)\left(\mathbf{m}_{1}-\mathbf{m}_{2}\right)\right]^{\frac{1}{2}}$$
+
+$$\mathbf{m}_{i}=\frac{1}{n_{i}} \sum_{\mathbf{x} \in \mathcal{D}_{i}} \mathbf{x}$$
+
+和
+
+$$\mathbf{S}_{i}=\sum_{\mathbf{x} \in \mathcal{D}_{i}} n_{i}\left(\mathbf{m}_{i}-\mathbf{m}\right)\left(\mathbf{m}_{i}-\mathbf{m}\right)^{t}$$
+
+40、如果$\mathbf{S}_{B}$和$\mathbf{S}_{W}$为两个对称$d \times d$的实数矩阵，那么我们知道存在着$n$个本征值$\lambda_{1}, \cdots, \lambda_{n}$，满足$\left|\mathbf{S}_{B}-\lambda \mathbf{S}_{W}\right|=0$，和对应的$n$个本征向量$\mathbf{e}_{1}, \cdots, \mathbf{e}_{n}$，满足$\mathbf{S}_{\mathbf{B}} \mathbf{e}_{i}=\lambda_{i} \mathbf{S}_{W} \mathbf{e}_{i}$。而且，当$\mathbf{S}_{W}$正定时，这些本征向量就能够被归一化，因此$\mathbf{e}_{i}^{t} \mathbf{S}_{W} \mathbf{e}_{j}=\delta_{i j}$和$\mathbf{e}_{i}^{t} \mathbf{S}_{B} \mathbf{e}_{j}=\lambda_{i} \delta_{i j}$。令$\tilde{\mathbf{S}}_{W}=\mathbf{W}^{t} \mathbf{S}_{W} \mathbf{W}$和$\tilde{\mathbf{S}}_{B}=\mathbf{W}^{t} \mathbf{S}_{B} \mathbf{W}$，其中$\mathbf{W}$为一个$d \times n$的矩阵，其各列向量对应于前面所述的$n$个本征向量。**（未完成）**
+
+（1）证明$\tilde{\mathbf{S}}_{W}$是一个$n \times n$的单位矩阵$I$，而$\tilde{\mathbf{S}}_{B}$是一个对角矩阵，其中各个对角线上的元素正好是前面所述的$n$个本征值。（这表明多重判别函数分析中的判别函数都是互不相关的）
+
+（2）求$J=\frac{|\tilde{\mathbf{S}}_{B}|}{|\tilde{\mathbf{S}}_{W}|}$的值。
+
+（3）令$\mathbf{y}=\mathbf{W}^{t} \mathbf{x}$。然后令$\mathbf{y}^{\prime}=\mathbf{Q D y}$，其中$\mathbf{D}$为$n \times n$的非奇异对角矩阵，表示对坐标轴的尺度变换，$\mathbf{Q}$为正交矩阵，表示对坐标轴的旋转。证明$J$对这种变换具有不变性。
+
+41、考虑两个正态分布，它们的协方差矩阵相同，但都是任意的。证明，对于一个合适的阈值，Fisher线性分类函数可以用负的对数似然比来得到。**（未完成）**
