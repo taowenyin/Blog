@@ -647,6 +647,42 @@ $$\mathbf{w}=\left(\Sigma_{1}+\Sigma_{2}\right)^{-1}\left(\mu_{1}-\mu_{2}\right)
 
 时取得最大值。
 
+证明：
+
+已知$y=\mathbf{w}^{t} \mathbf{x}$，并且均值为$\mu_{i}$，就可以得到
+
+$$\mu_{i}=\frac{1}{n_{i}} \sum y=\frac{1}{n_{i}} \sum \mathbf{w}^{t} \mathbf{x}=\mathbf{w}^{t} \boldsymbol{\mu}_{i}$$
+
+同时根据式子（99）还可以得到方差$\sigma_{1}^{2}$为
+
+$$\sigma_{i}^{2}=\sum\left(y-\mu_{i}\right)^{2}=\mathbf{w}^{t}\left[\sum\left(\mathbf{x}-\boldsymbol{\mu}_{i}\right)\left(\mathbf{x}-\boldsymbol{\mu}_{i}\right)^{t}\right] \mathbf{w}$$
+
+根据式子（97）可以得到类内部散布矩阵$\mathbf{S}_{i}$
+
+$$\mathbf{S}_{i}=\sum\left(\mathbf{x}-\boldsymbol{\mu}_{i}\right)\left(\mathbf{x}-\boldsymbol{\mu}_{i}\right)^{t}$$
+
+因为$i=1,2$，所以总类内散步矩阵$\mathbf{S}_{w}$
+
+$$\mathbf{S}_{W}=\mathbf{S}_{1}+\mathbf{S}_{2}$$
+
+总类间散布矩阵$\mathbf{S}_{B}$为
+
+$$\mathbf{S}_{B}=\left(\boldsymbol{\mu}_{1}-\boldsymbol{\mu}_{2}\right)\left(\boldsymbol{\mu}_{1}-\boldsymbol{\mu}_{2}\right)^{t}$$
+
+根据式子（103）和准则函数可以得到
+
+$$J_{1}(\mathbf{w})=\frac{\mathbf{w}^{t} \mathbf{S}_{B} \mathbf{w}}{\mathbf{w}^{\prime} \mathbf{S}_{W} \mathbf{w}}=\frac{\left(\mu_{1}-\mu_{2}\right)^{2}}{\sigma_{1}^{2}+\sigma_{2}^{2}}$$
+
+可以知道
+
+$$\mathbf{w}^{t} \mathbf{S}_{B} \mathbf{w}=\left(\mu_{1}-\mu_{2}\right)^{2}$$
+
+$$\mathbf{w}^{\prime} \mathbf{S}_{W} \mathbf{w}=\sigma_{1}^{2}+\sigma_{2}^{2}$$
+
+从而求得了
+
+$$\mathbf{w}=\left(\mathbf{S}_{1}+\mathbf{S}_{2}\right)^{-1}\left(\mu_{1}-\mu_{2}\right)$$
+
 （2）如果$P\left(\omega_{i}\right)$为$\omega_{i}$的先验概率，证明
 
 $$J_{2}(\mathbf{w})=\frac{\left(\boldsymbol{\mu}_{1}-\boldsymbol{\mu}_{2}\right)^{2}}{P\left(\omega_{1}\right) \sigma_{1}^{2}+P\left(\omega_{2}\right) \sigma_{2}^{2}}$$
@@ -656,5 +692,15 @@ $$J_{2}(\mathbf{w})=\frac{\left(\boldsymbol{\mu}_{1}-\boldsymbol{\mu}_{2}\right)
 $$\mathbf{w}=\left[P\left(\omega_{1}\right) \mathbf{\Sigma}_{1}+P\left(\omega_{2}\right) \mathbf{\Sigma}_{2}\right]^{-1}\left(\mu_{1}-\mu_{2}\right)$$
 
 时取得最大值。
+
+证明：
+
+根据式子（103）和第1题，可以知道
+
+$$\mathbf{S}_{W}=P\left(\omega_{1}\right) \mathbf{\Sigma}_{1}+P\left(\omega_{2}\right) \mathbf{\Sigma}_{2}$$
+
+因此，根据式子（106）就可以得到
+
+$$\mathbf{w}=\left[P\left(\omega_{1}\right) \mathbf{\Sigma}_{1}+P\left(\omega_{2}\right) \mathbf{\Sigma}_{2}\right]^{-1}\left(\mu_{1}-\mu_{2}\right)$$
 
 （3）在（1）和（2）之间，哪个于公式（96）的关系更密切，请解释为什么。
