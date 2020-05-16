@@ -415,6 +415,10 @@ J_{1} &amp;= \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} 
 <p>（2）求<span class="math inline">\(J=\frac{|\tilde{\mathbf{S}}_{B}|}{|\tilde{\mathbf{S}}_{W}|}\)</span>的值。</p>
 <p>（3）令<span class="math inline">\(\mathbf{y}=\mathbf{W}^{t} \mathbf{x}\)</span>。然后令<span class="math inline">\(\mathbf{y}^{\prime}=\mathbf{Q D y}\)</span>，其中<span class="math inline">\(\mathbf{D}\)</span>为<span class="math inline">\(n \times n\)</span>的非奇异对角矩阵，表示对坐标轴的尺度变换，<span class="math inline">\(\mathbf{Q}\)</span>为正交矩阵，表示对坐标轴的旋转。证明<span class="math inline">\(J\)</span>对这种变换具有不变性。</p>
 <p>41、考虑两个正态分布，它们的协方差矩阵相同，但都是任意的。证明，对于一个合适的阈值，Fisher线性分类函数可以用负的对数似然比来得到。<strong>（未完成）</strong></p>
+<h1 id="第四章-非参数技术">第四章 非参数技术</h1>
+<h2 id="思考题-1">思考题</h2>
+<p>1、KNN会不会过拟合？</p>
+<p>2、无穷多个样本能修正前面的错误估计吗？</p>
 ]]></content>
       <categories>
         <category>课程</category>
