@@ -441,6 +441,14 @@ J_{1} &amp;= \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} 
 <p>（3）令<span class="math inline">\(\mathbf{y}=\mathbf{W}^{t} \mathbf{x}\)</span>。然后令<span class="math inline">\(\mathbf{y}^{\prime}=\mathbf{Q D y}\)</span>，其中<span class="math inline">\(\mathbf{D}\)</span>为<span class="math inline">\(n \times n\)</span>的非奇异对角矩阵，表示对坐标轴的尺度变换，<span class="math inline">\(\mathbf{Q}\)</span>为正交矩阵，表示对坐标轴的旋转。证明<span class="math inline">\(J\)</span>对这种变换具有不变性。</p>
 <p>41、考虑两个正态分布，它们的协方差矩阵相同，但都是任意的。证明，对于一个合适的阈值，Fisher线性分类函数可以用负的对数似然比来得到。<strong>（未完成）</strong></p>
 <h1 id="第四章-非参数技术">第四章 非参数技术</h1>
+<h2 id="课后习题-2">课后习题</h2>
+<p>2、考虑一个正态分布<span class="math inline">\(p(x) \sim N\left(\mu, \sigma^{2}\right)\)</span>和Parzen窗函数<span class="math inline">\(\varphi(x) \sim N(0,1)\)</span>，证明Parzen窗估计</p>
+<p><span class="math display">\[p_{n}(x)=\frac{1}{n h_{n}} \sum_{i=1}^{n} \varphi\left(\frac{x-x_{i}}{h_{n}}\right)\]</span></p>
+<p>有如下的性质：</p>
+<p>（1）<span class="math inline">\(\bar{p}_{n}(x) \sim N\left(\mu, \sigma^{2}+h_{n}^{2}\right)\)</span></p>
+<p>（2）<span class="math inline">\(\operatorname{Var}\left[p_{n}(x)\right] \approx \frac{1}{2 n h_{n} \sqrt{\pi}} p(x)\)</span></p>
+<p>（3）对于<span class="math inline">\(h_{n}\)</span>较小时，<span class="math inline">\(p(x)-\bar{p}_{n}(x) \approx \frac{1}{2}\left(\frac{h_{n}}{\sigma}\right)^{2}\left[1-\left(\frac{x-\mu}{\sigma}\right)^{2}\right] p(x)\)</span></p>
+<p>注意，如果<span class="math inline">\(h_{n}=\frac{h_{1}}{\sqrt{n}}\)</span>，那么这个结果表示由于偏差导致的无差率为<span class="math inline">\(\frac{1}{n}\)</span>的速度趋向于零，而噪声的标准差以速度<span class="math inline">\(\sqrt[4]{n}\)</span>趋于零。</p>
 <h2 id="思考题-1">思考题</h2>
 <p>1、KNN会不会过拟合？</p>
 <p>2、无穷多个样本能修正前面的错误估计吗？</p>
