@@ -774,6 +774,22 @@ $$\mathbf{S}_{i}=\sum_{\mathbf{x} \in \mathcal{D}_{i}} n_{i}\left(\mathbf{m}_{i}
 
 # 第四章 非参数技术
 
+## 课后习题
+
+2、考虑一个正态分布$p(x) \sim N\left(\mu, \sigma^{2}\right)$和Parzen窗函数$\varphi(x) \sim N(0,1)$，证明Parzen窗估计
+
+$$p_{n}(x)=\frac{1}{n h_{n}} \sum_{i=1}^{n} \varphi\left(\frac{x-x_{i}}{h_{n}}\right)$$
+
+有如下的性质：
+
+（1）$\bar{p}_{n}(x) \sim N\left(\mu, \sigma^{2}+h_{n}^{2}\right)$
+
+（2）$\operatorname{Var}\left[p_{n}(x)\right] \approx \frac{1}{2 n h_{n} \sqrt{\pi}} p(x)$
+
+（3）对于$h_{n}$较小时，$p(x)-\bar{p}_{n}(x) \approx \frac{1}{2}\left(\frac{h_{n}}{\sigma}\right)^{2}\left[1-\left(\frac{x-\mu}{\sigma}\right)^{2}\right] p(x)$
+
+注意，如果$h_{n}=\frac{h_{1}}{\sqrt{n}}$，那么这个结果表示由于偏差导致的无差率为$\frac{1}{n}$的速度趋向于零，而噪声的标准差以速度$\sqrt[4]{n}$趋于零。
+
 ## 思考题
 
 1、KNN会不会过拟合？
