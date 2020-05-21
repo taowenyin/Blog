@@ -500,6 +500,14 @@ sudo apt-fast install axel
 axel -n 20 xxx
 ```
 
+## Flameshot
+
+```bash
+sudo add-apt-repository ppa:rikmills/bionic
+sudo apt-get update
+sudo apt-get install flameshot
+```
+
 # 资源下载 
 
 ## Android生成Key
