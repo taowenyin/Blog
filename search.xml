@@ -466,6 +466,30 @@ J_{1} &amp;= \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} 
 <p>（2）<span class="math inline">\(\operatorname{Var}\left[p_{n}(x)\right] \approx \frac{1}{2 n h_{n} \sqrt{\pi}} p(x)\)</span></p>
 <p>（3）对于<span class="math inline">\(h_{n}\)</span>较小时，<span class="math inline">\(p(x)-\bar{p}_{n}(x) \approx \frac{1}{2}\left(\frac{h_{n}}{\sigma}\right)^{2}\left[1-\left(\frac{x-\mu}{\sigma}\right)^{2}\right] p(x)\)</span></p>
 <p>注意，如果<span class="math inline">\(h_{n}=\frac{h_{1}}{\sqrt{n}}\)</span>，那么这个结果表示由于偏差导致的无差率为<span class="math inline">\(\frac{1}{n}\)</span>的速度趋向于零，而噪声的标准差以速度<span class="math inline">\(\sqrt[4]{n}\)</span>趋于零。</p>
+<p>证明：</p>
+<p>因为Parzen窗函数<span class="math inline">\(\varphi(x) \sim N(0,1)\)</span>，并且<span class="math inline">\(p(x) \sim N\left(\mu, \sigma^{2}\right)\)</span></p>
+<p>所以</p>
+<p><span class="math display">\[\varphi(x)=\frac{1}{\sqrt{2 \pi}} e^{-\frac{x^{2}}{2}}\]</span></p>
+<p><span class="math display">\[p(x)=\frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{(x-\mu)^{2}}{2 \sigma^{2}}\right)\]</span></p>
+<p>（1）</p>
+<p>根据式子（23）得到</p>
+<p><span class="math display">\[\begin{aligned} 
+\bar{p}_{n}(x) &amp;= \mathcal{E}\left[p_{n}(x)\right] \\
+ &amp;=\frac{1}{n h_{n}} \sum_{i=1}^{n} \mathcal{E}\left[\varphi\left(\frac{x-x_{i}}{h_{n}}\right)\right] \\
+ &amp;=\frac{1}{h_{n}} \int_{-\infty}^{\infty} \varphi\left(\frac{x-v}{h_{n}}\right) p(v) d v \\ 
+ &amp;=\frac{1}{h_{n}} \int_{-\infty}^{\infty} \frac{1}{\sqrt{2 \pi}} \exp \left[-\frac{1}{2}\left(\frac{x-v}{h_{n}}\right)^{2}\right] \frac{1}{\sqrt{2 \pi} \sigma} \exp \left[-\frac{1}{2}\left(\frac{v-\mu}{\sigma}\right)^{2}\right] d v \\
+ &amp;=\frac{1}{\sqrt{2 \pi} \sqrt{h_{n}^{2}+\sigma^{2}}} \exp \left[-\frac{1}{2} \frac{(x-\mu)^{2}}{h_{n}^{2}+\sigma^{2}}\right]
+\end{aligned}\]</span></p>
+<p>所以<span class="math inline">\(\bar{p}_{n}(x) \sim N\left(\mu, \sigma^{2}+h_{n}^{2}\right)\)</span></p>
+<p>（2）</p>
+<p>根据式子（24）得到</p>
+<p><span class="math display">\[\begin{aligned} 
+\operatorname{Var}\left[p_{n}(x)\right] &amp;= \operatorname{Var}\left[\frac{1}{n h_{n}} \sum_{i=1}^{n} \varphi\left(\frac{x-x_{i}}{h_{n}}\right)\right] \\
+ &amp;=\frac{1}{n^{2} h_{n}^{2}} \sum_{i=1}^{n} \operatorname{Var}\left[\varphi\left(\frac{x-x_{i}}{h_{n}}\right)\right] \\
+ &amp;=\frac{1}{h_{n}} \int_{-\infty}^{\infty} \varphi\left(\frac{x-v}{h_{n}}\right) p(v) d v \\ 
+ &amp;=\frac{1}{h_{n}} \int_{-\infty}^{\infty} \frac{1}{\sqrt{2 \pi}} \exp \left[-\frac{1}{2}\left(\frac{x-v}{h_{n}}\right)^{2}\right] \frac{1}{\sqrt{2 \pi} \sigma} \exp \left[-\frac{1}{2}\left(\frac{v-\mu}{\sigma}\right)^{2}\right] d v \\
+ &amp;=\frac{1}{\sqrt{2 \pi} \sqrt{h_{n}^{2}+\sigma^{2}}} \exp \left[-\frac{1}{2} \frac{(x-\mu)^{2}}{h_{n}^{2}+\sigma^{2}}\right]
+\end{aligned}\]</span></p>
 <h2 id="思考题-1">思考题</h2>
 <p>1、KNN会不会过拟合？</p>
 <p>2、无穷多个样本能修正前面的错误估计吗？</p>
