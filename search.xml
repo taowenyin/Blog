@@ -27,7 +27,16 @@
 <p>在作者工作的同时，“高速网络”提供了门控功能的快捷连接。这些门控依赖于数据，并且需要一些参数，而作者的恒等快捷连接则不需要参数。当一个快捷门控关闭时（接近于0），高速网络中的层表现为非残差函数。恰恰相反，作者的形式总是一个残差函数，恒等快捷也不会关闭，并且在学习额外的残差函数时，所有的信息都能够通过。此外，“高速网络”没有显示出当网络深度增加时（例如，超过100层）带来的精度提高。</p>
 <h1 id="深度残差学习">深度残差学习</h1>
 <h2 id="残差学习">残差学习</h2>
+<p>作者将<span class="math inline">\(\mathcal{H}(\mathbf{x})\)</span>认为是一个由部分堆叠层（不必是整个网络）来拟合的底层映射，而<span class="math inline">\(\mathbf{x}\)</span>表示这个层的输入。如果加入多个非线性层能够逐渐逼近一个复杂函数，那么也相当于假设它们可以逐渐逼近一个残差函数，例如<span class="math inline">\(\mathcal{H}(\mathbf{x})-\mathbf{x}\)</span>（假设输入和输出具有相同的纬度）。因此，作者希望这些堆叠层能显式的近似残差函数<span class="math inline">\(\mathcal{F}(\mathbf{x}):=\mathcal{H}(\mathbf{x})-\mathbf{x}\)</span>，而不是近似底层映射<span class="math inline">\(\mathcal{H}(\mathbf{x})\)</span>。因此原始函数就变为<span class="math inline">\(\mathcal{F}(\mathbf{x})+\mathbf{x}\)</span>。虽然这种形式都应该可以逐渐逼近期望函数（假设成立），但学习的难易程度却不同。</p>
+<p>这种重表达的动机是因为退化问题的反直觉现象（如图1，左）。正如作者在介绍里讨论的，如果增加的层能以恒等映射来构建，那么一个更深模型的训练错误率不应该比它对应的浅层模型更大。退化问题表明了一个求解器通过多个非线性层来近似恒等映射是困难的。而伴随着残差学习的重表达，如果恒等映射是最优的，那么求解器驱使多个非线性层的权重趋向于零来逼近恒等映射。</p>
+<p>在真实的案例中，恒等映射不太可能是最优解，但是作者的重表达能够帮助解决这个问题。如果最优函数更趋近于恒等映射而不是0映射，那么对于求解器来说寻找关于恒等映射的扰动比学习一个新的函数要容易的多。通过实验（如图7所示），学习到的残差函数通常只有很小的响应，说明了恒等映射提供了合理的预处理。</p>
 <h2 id="通过快捷方式实现恒等映射">通过快捷方式实现恒等映射</h2>
+<p>作者在每个堆叠层上采用残差学习。一个残差学习的模块如图2所示。从形式上说，在本论文中作者认为一个残差学习模块可以被定义为（式子1）：</p>
+<p><span class="math display">\[\mathbf{y}=\mathcal{F}\left(\mathbf{x},\left\{W_{i}\right\}\right)+\mathbf{x}\]</span></p>
+<p>这里的<span class="math inline">\(\mathbf{x}\)</span>和<span class="math inline">\(\mathbf{y}\)</span>分别表示每层的输入和输出向量。<span class="math inline">\(\mathcal{F}\left(\mathbf{x},\left\{W_{i}\right\}\right)\)</span>表示已经学习的残差映射。在如图2的例子中有两个层，<span class="math inline">\(\mathcal{F}=W_{2} \sigma\left(W_{1} \mathbf{x}\right)\)</span>，其中<span class="math inline">\(\sigma\)</span>表示ReLU的激活函数，为了简化符号省略了偏置项。<span class="math inline">\(\mathcal{F}+\mathbf{x}\)</span>通过快捷连接和元素加法来执行。在加法之后我们再执行另一个非线性操作（如图2所示的<span class="math inline">\(\sigma(\mathbf{y})\)</span>）。</p>
+<p>在式子1中的快捷连接既没有引入额外的参数也没有增加计算的复杂度。这不仅在实践中具有吸引力，而且在作者比较平原网络和残差网络时也非常重要。作者可以公平的同时比较在相同参数数量、深度、宽度和计算成本（除了可以忽略的元素加成）下的平原网络和残差网络。</p>
+<p>在式子1中<span class="math inline">\(\mathbf{x}\)</span>和<span class="math inline">\(\mathcal{F}\)</span>的维度必须相同。如果不相同（如改变了输入、输出的通道数），那么就需要在快捷连接上执行一个线性映射<span class="math inline">\(W_{s}\)</span>来匹配输入、输出的纬度（式子2）：</p>
+<p><span class="math display">\[\mathbf{y}=\mathcal{F}\left(\mathbf{x},\left\{W_{i}\right\}\right)+W_{s} \mathbf{x}\]</span></p>
 <h2 id="网络结构">网络结构</h2>
 <h2 id="实现">实现</h2>
 <h1 id="实验">实验</h1>
