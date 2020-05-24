@@ -501,18 +501,87 @@ J_{1} &amp;= \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} 
  &amp;=\frac{1}{\sqrt{2 \pi} \sqrt{h_{n}^{2}+\sigma^{2}}} \exp \left[-\frac{1}{2} \frac{(x-\mu)^{2}}{h_{n}^{2}+\sigma^{2}}\right]
 \end{aligned}\]</span></p>
 <p>所以<span class="math inline">\(\bar{p}_{n}(x) \sim N\left(\mu, \sigma^{2}+h_{n}^{2}\right)\)</span></p>
-<p>（2）</p>
+<p>（2）<strong>（未完成）</strong></p>
 <p>根据式子（24）得到</p>
 <p><span class="math display">\[\begin{aligned} 
 \operatorname{Var}\left[p_{n}(x)\right] &amp;= \operatorname{Var}\left[\frac{1}{n h_{n}} \sum_{i=1}^{n} \varphi\left(\frac{x-x_{i}}{h_{n}}\right)\right] \\
  &amp;=\frac{1}{n^{2} h_{n}^{2}} \sum_{i=1}^{n} \operatorname{Var}\left[\varphi\left(\frac{x-x_{i}}{h_{n}}\right)\right] \\
- &amp;=\frac{1}{h_{n}} \int_{-\infty}^{\infty} \varphi\left(\frac{x-v}{h_{n}}\right) p(v) d v \\ 
- &amp;=\frac{1}{h_{n}} \int_{-\infty}^{\infty} \frac{1}{\sqrt{2 \pi}} \exp \left[-\frac{1}{2}\left(\frac{x-v}{h_{n}}\right)^{2}\right] \frac{1}{\sqrt{2 \pi} \sigma} \exp \left[-\frac{1}{2}\left(\frac{v-\mu}{\sigma}\right)^{2}\right] d v \\
- &amp;=\frac{1}{\sqrt{2 \pi} \sqrt{h_{n}^{2}+\sigma^{2}}} \exp \left[-\frac{1}{2} \frac{(x-\mu)^{2}}{h_{n}^{2}+\sigma^{2}}\right]
+ &amp;=\frac{1}{n h_{n}^{2}} \operatorname{Var}\left[\varphi\left(\frac{x-v}{h_{n}}\right)\right] \\ 
+ &amp;=\frac{1}{n h_{n}^{2}}\left\{\mathcal{E}\left[\varphi^{2}\left(\frac{x-v}{h_{n}}\right)\right]-\left(\mathcal{E}\left[\varphi\left(\frac{x-v}{h_{n}}\right)\right]\right)^{2}\right\}
 \end{aligned}\]</span></p>
+<p>所以<span class="math inline">\(\operatorname{Var}\left[p_{n}(x)\right] \approx \frac{1}{2 n h_{n} \sqrt{\pi}} p(x)\)</span></p>
+<p>（3）<strong>（未完成）</strong></p>
+<p>7、证明最近邻规则中的Voronoi网格必须是凸的。也就是说，对于同一个体积中的两个点<span class="math inline">\(\mathbf{x}_{1}\)</span>，<span class="math inline">\(\mathbf{x}_{2}\)</span>，位于连接着两个点的线段上的所有点也必定位于这个体积内部。</p>
+<p>证明：</p>
+<p>要证明Voronoi细胞是凸的，就是证明在Voronoi网格中的任意两点，连接它们的直线也都在网格中。假设<span class="math inline">\(\mathbf{x}^{*}\)</span>是Voronoi网格中的一个样本点，<span class="math inline">\(\mathbf{y}\)</span>为其他样本点。如果构建一个超平面，该超平面靠近<span class="math inline">\(\mathbf{x}^{*}\)</span>而非<span class="math inline">\(\mathbf{y}\)</span>，那么可以认为<span class="math inline">\(\mathbf{x}_{1}\)</span>，<span class="math inline">\(\mathbf{x}_{2}\)</span>之间的连线上的点更加接近<span class="math inline">\(\mathbf{x}^{*}\)</span>。因此就可以得到连线上的点为</p>
+<p><span class="math display">\[\mathbf{x}(\lambda)=(1-\lambda) \mathbf{x}_{1}+\lambda \mathbf{x}_{2}\]</span></p>
+<p>其中<span class="math inline">\(0 \leq \lambda \leq 1\)</span></p>
+<p>因为超平面定义的半空间是凸的，因此所有的<span class="math inline">\(\mathbf{x}(\lambda)\)</span>都比<span class="math inline">\(\mathbf{y}\)</span>更加接近<span class="math inline">\(\mathbf{x}^{*}\)</span>。对于Voronoi网格中每个<span class="math inline">\(\mathbf{x}_{1}\)</span>，<span class="math inline">\(\mathbf{x}_{2}\)</span>有满足这样的条件。此外，对于其他的采样点<span class="math inline">\(\mathbf{y}_{i}\)</span>，结果也都成立。因此，<span class="math inline">\(\mathbf{x}(\lambda)\)</span>比任何其他标记点更接近<span class="math inline">\(\mathbf{x}^{*}\)</span>。</p>
+<p>根据凸的定义，就可以得到了Voronoi网格是凸的。</p>
+<p>9、考虑下面的二维空间的3-类别问题 <strong>（未完成）</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(\omega_{1}\)</span></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><span class="math inline">\(\omega_{2}\)</span></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><span class="math inline">\(\omega_{3}\)</span></th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(x_{1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x_{2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x_{1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x_{2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x_{1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x_{2}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">-10</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">-5</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">-2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">-4</td>
+</tr>
+</tbody>
+</table>
+<p>（1）画出用最近邻规则区分分类<span class="math inline">\(\omega_{1}\)</span>和<span class="math inline">\(\omega_{2}\)</span>的决策边界。计算样本均值<span class="math inline">\(\mathbf{m}_{1}\)</span>和<span class="math inline">\(\mathbf{m}_{2}\)</span>。在同一张图上，画出如果把样本归类为与之最近的样本均值的阿哥类时的判定边界。</p>
+<p>（2）对类别<span class="math inline">\(\omega_{1}\)</span>和<span class="math inline">\(\omega_{3}\)</span>，重复（1）。</p>
+<p>（3）对类别<span class="math inline">\(\omega_{2}\)</span>和<span class="math inline">\(\omega_{3}\)</span>，重复（1）。</p>
+<p>（4）对类别<span class="math inline">\(\omega_{1}\)</span>、<span class="math inline">\(\omega_{2}\)</span>和<span class="math inline">\(\omega_{3}\)</span>，重复（1）。</p>
 <h2 id="思考题-1">思考题</h2>
 <p>1、KNN会不会过拟合？</p>
 <p>2、无穷多个样本能修正前面的错误估计吗？</p>
+<h1 id="第五章-线性判别函数">第五章 线性判别函数</h1>
+<p>1、讨论线性判别函数对以下二维的单模和多模问题的应用</p>
+<p>（1）绘制两个多模分布，要求有一个线性判别函数能给出一个很好的，或者（有可能的话）是最优的分类器。</p>
+<p>证明：当两个分布在分类面的两边，并且对称，那么这两个分布的概率密度也沿这条垂直线具有相同的值，此时的分类面为贝叶斯决策边界，可以给出最小的分类误差。</p>
+<p>（2）绘制两个单模分布，要求对最好的线性判别函数都只能给出很差的分类效果。</p>
+<p>证明：当两个单模分布明显重叠时，虽然有最好的线性判别函数，但是分类效果还是很差。</p>
+<p>（3）考虑两个圆周对称高斯分布<span class="math inline">\(p\left(\mathbf{x} | \omega_{i}\right) \sim N\left(\boldsymbol{\mu}_{i}, a_{i} \mathbf{I}\right)\)</span>且<span class="math inline">\(P\left(\omega_{i}\right)\)</span>，<span class="math inline">\(i=1,2\)</span>。其中<span class="math inline">\(\mathbf{I}\)</span>是单位矩阵且其他参数可取任意值。不作任何计算，请说明这个两类问题的最优判决边界是否是直线。如果不是的话，请给出一个最优判别函数不是一条直线的例子。</p>
+<p>证明：假设有两个不同方差的高斯分布<span class="math inline">\(\sigma_{1}^{2} \neq \sigma_{2}^{2}\)</span>，并且<span class="math inline">\(\sigma_{2}&gt;\sigma_{1}\)</span>。但是由于<span class="math inline">\(p\left(\mathbf{x} | \omega_{i}\right)\)</span>符合正态分布，因此均值的未知固定，所以不能使用直线作为判别面，而是使用圆形作为判别面。</p>
+<p>4、</p>
+<h2 id="课后习题-3">课后习题</h2>
 ]]></content>
       <categories>
         <category>课程</category>
