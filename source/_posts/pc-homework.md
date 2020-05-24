@@ -814,20 +814,74 @@ $$\begin{aligned}
 
 所以$\bar{p}_{n}(x) \sim N\left(\mu, \sigma^{2}+h_{n}^{2}\right)$
 
-（2）
+（2）**（未完成）**
 
 根据式子（24）得到
 
 $$\begin{aligned} 
 \operatorname{Var}\left[p_{n}(x)\right] &= \operatorname{Var}\left[\frac{1}{n h_{n}} \sum_{i=1}^{n} \varphi\left(\frac{x-x_{i}}{h_{n}}\right)\right] \\
  &=\frac{1}{n^{2} h_{n}^{2}} \sum_{i=1}^{n} \operatorname{Var}\left[\varphi\left(\frac{x-x_{i}}{h_{n}}\right)\right] \\
- &=\frac{1}{h_{n}} \int_{-\infty}^{\infty} \varphi\left(\frac{x-v}{h_{n}}\right) p(v) d v \\ 
- &=\frac{1}{h_{n}} \int_{-\infty}^{\infty} \frac{1}{\sqrt{2 \pi}} \exp \left[-\frac{1}{2}\left(\frac{x-v}{h_{n}}\right)^{2}\right] \frac{1}{\sqrt{2 \pi} \sigma} \exp \left[-\frac{1}{2}\left(\frac{v-\mu}{\sigma}\right)^{2}\right] d v \\
- &=\frac{1}{\sqrt{2 \pi} \sqrt{h_{n}^{2}+\sigma^{2}}} \exp \left[-\frac{1}{2} \frac{(x-\mu)^{2}}{h_{n}^{2}+\sigma^{2}}\right]
+ &=\frac{1}{n h_{n}^{2}} \operatorname{Var}\left[\varphi\left(\frac{x-v}{h_{n}}\right)\right] \\ 
+ &=\frac{1}{n h_{n}^{2}}\left\{\mathcal{E}\left[\varphi^{2}\left(\frac{x-v}{h_{n}}\right)\right]-\left(\mathcal{E}\left[\varphi\left(\frac{x-v}{h_{n}}\right)\right]\right)^{2}\right\}
 \end{aligned}$$
+
+所以$\operatorname{Var}\left[p_{n}(x)\right] \approx \frac{1}{2 n h_{n} \sqrt{\pi}} p(x)$
+
+（3）**（未完成）**
+
+7、证明最近邻规则中的Voronoi网格必须是凸的。也就是说，对于同一个体积中的两个点$\mathbf{x}_{1}$，$\mathbf{x}_{2}$，位于连接着两个点的线段上的所有点也必定位于这个体积内部。
+
+证明：
+
+要证明Voronoi细胞是凸的，就是证明在Voronoi网格中的任意两点，连接它们的直线也都在网格中。假设$\mathbf{x}^{*}$是Voronoi网格中的一个样本点，$\mathbf{y}$为其他样本点。如果构建一个超平面，该超平面靠近$\mathbf{x}^{*}$而非$\mathbf{y}$，那么可以认为$\mathbf{x}_{1}$，$\mathbf{x}_{2}$之间的连线上的点更加接近$\mathbf{x}^{*}$。因此就可以得到连线上的点为
+
+$$\mathbf{x}(\lambda)=(1-\lambda) \mathbf{x}_{1}+\lambda \mathbf{x}_{2}$$
+
+其中$0 \leq \lambda \leq 1$
+
+因为超平面定义的半空间是凸的，因此所有的$\mathbf{x}(\lambda)$都比$\mathbf{y}$更加接近$\mathbf{x}^{*}$。对于Voronoi网格中每个$\mathbf{x}_{1}$，$\mathbf{x}_{2}$有满足这样的条件。此外，对于其他的采样点$\mathbf{y}_{i}$，结果也都成立。因此，$\mathbf{x}(\lambda)$比任何其他标记点更接近$\mathbf{x}^{*}$。
+
+根据凸的定义，就可以得到了Voronoi网格是凸的。
+
+9、考虑下面的二维空间的3-类别问题 **（未完成）**
+
+| $\omega_{1}$ | | $\omega_{2}$ | | $\omega_{3}$ | |
+| :------: | :------: | :------: | :------: | :------: | :------: |
+| $x_{1}$ | $x_{2}$ | $x_{1}$ | $x_{2}$ | $x_{1}$ | $x_{2}$ |
+| 10 | 0 | 5 | 10 | 2 | 8 |
+| 0 | -10 | 0 | 5 | -5 | 2 |
+| 5 | -2 | 5 | 5 | 10 | -4 |
+
+（1）画出用最近邻规则区分分类$\omega_{1}$和$\omega_{2}$的决策边界。计算样本均值$\mathbf{m}_{1}$和$\mathbf{m}_{2}$。在同一张图上，画出如果把样本归类为与之最近的样本均值的阿哥类时的判定边界。
+
+（2）对类别$\omega_{1}$和$\omega_{3}$，重复（1）。
+
+（3）对类别$\omega_{2}$和$\omega_{3}$，重复（1）。
+
+（4）对类别$\omega_{1}$、$\omega_{2}$和$\omega_{3}$，重复（1）。
 
 ## 思考题
 
 1、KNN会不会过拟合？
 
 2、无穷多个样本能修正前面的错误估计吗？
+
+# 第五章 线性判别函数
+
+1、讨论线性判别函数对以下二维的单模和多模问题的应用
+
+（1）绘制两个多模分布，要求有一个线性判别函数能给出一个很好的，或者（有可能的话）是最优的分类器。
+
+证明：当两个分布在分类面的两边，并且对称，那么这两个分布的概率密度也沿这条垂直线具有相同的值，此时的分类面为贝叶斯决策边界，可以给出最小的分类误差。
+
+（2）绘制两个单模分布，要求对最好的线性判别函数都只能给出很差的分类效果。
+
+证明：当两个单模分布明显重叠时，虽然有最好的线性判别函数，但是分类效果还是很差。
+
+（3）考虑两个圆周对称高斯分布$p\left(\mathbf{x} | \omega_{i}\right) \sim N\left(\boldsymbol{\mu}_{i}, a_{i} \mathbf{I}\right)$且$P\left(\omega_{i}\right)$，$i=1,2$。其中$\mathbf{I}$是单位矩阵且其他参数可取任意值。不作任何计算，请说明这个两类问题的最优判决边界是否是直线。如果不是的话，请给出一个最优判别函数不是一条直线的例子。
+
+证明：假设有两个不同方差的高斯分布$\sigma_{1}^{2} \neq \sigma_{2}^{2}$，并且$\sigma_{2}>\sigma_{1}$。但是由于$p\left(\mathbf{x} | \omega_{i}\right)$符合正态分布，因此均值的未知固定，所以不能使用直线作为判别面，而是使用圆形作为判别面。
+
+4、
+
+## 课后习题
