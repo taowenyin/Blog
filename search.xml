@@ -573,6 +573,7 @@ J_{1} &amp;= \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} 
 <p>1、KNN会不会过拟合？</p>
 <p>2、无穷多个样本能修正前面的错误估计吗？</p>
 <h1 id="第五章-线性判别函数">第五章 线性判别函数</h1>
+<h2 id="课后习题-3">课后习题</h2>
 <p>1、讨论线性判别函数对以下二维的单模和多模问题的应用</p>
 <p>（1）绘制两个多模分布，要求有一个线性判别函数能给出一个很好的，或者（有可能的话）是最优的分类器。</p>
 <p>证明：当两个分布在分类面的两边，并且对称，那么这两个分布的概率密度也沿这条垂直线具有相同的值，此时的分类面为贝叶斯决策边界，可以给出最小的分类误差。</p>
@@ -580,8 +581,60 @@ J_{1} &amp;= \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} 
 <p>证明：当两个单模分布明显重叠时，虽然有最好的线性判别函数，但是分类效果还是很差。</p>
 <p>（3）考虑两个圆周对称高斯分布<span class="math inline">\(p\left(\mathbf{x} | \omega_{i}\right) \sim N\left(\boldsymbol{\mu}_{i}, a_{i} \mathbf{I}\right)\)</span>且<span class="math inline">\(P\left(\omega_{i}\right)\)</span>，<span class="math inline">\(i=1,2\)</span>。其中<span class="math inline">\(\mathbf{I}\)</span>是单位矩阵且其他参数可取任意值。不作任何计算，请说明这个两类问题的最优判决边界是否是直线。如果不是的话，请给出一个最优判别函数不是一条直线的例子。</p>
 <p>证明：假设有两个不同方差的高斯分布<span class="math inline">\(\sigma_{1}^{2} \neq \sigma_{2}^{2}\)</span>，并且<span class="math inline">\(\sigma_{2}&gt;\sigma_{1}\)</span>。但是由于<span class="math inline">\(p\left(\mathbf{x} | \omega_{i}\right)\)</span>符合正态分布，因此均值的未知固定，所以不能使用直线作为判别面，而是使用圆形作为判别面。</p>
-<p>4、</p>
-<h2 id="课后习题-3">课后习题</h2>
+<p>4、考虑判别中用的超平面。</p>
+<p>（1）证明在从超平面<span class="math inline">\(g(\mathbf{x})=\mathbf{w}^{t} \mathbf{x}+w_{0}=0\)</span>到点<span class="math inline">\(\mathbf{x}_{a}\)</span>的距离为<span class="math inline">\(\frac{g\left(\mathbf{x}_{a}\right)}{\| \mathbf{w} \|}\)</span>，且对应的点是约束条件<span class="math inline">\(g(\mathbf{x})=0\)</span>下的满足使<span class="math inline">\(\left\|\mathbf{x}-\mathbf{x}_{a}\right\|^{2}\)</span>最小的<span class="math inline">\(\mathbf{x}_{a}\)</span>。</p>
+<p>证明：</p>
+<p>为了最小化<span class="math inline">\(\left\|\mathbf{x}-\mathbf{x}_{a}\right\|^{2}\)</span>，并且约束条件为<span class="math inline">\(g(\mathbf{x})=0\)</span>，因此根据拉格朗日变换可以得到</p>
+<p><span class="math display">\[f(\mathbf{x}, \lambda)=\left\|\mathbf{x}-\mathbf{x}_{a}\right\|^{2}+2 \lambda[g(\mathbf{x})]\]</span></p>
+<p>对上式进行展开就可以得到</p>
+<p><span class="math display">\[\begin{aligned}
+f(\mathbf{x}, \lambda) &amp;=\left\|\mathbf{x}-\mathbf{x}_{a}\right\|^{2}+2 \lambda\left[\mathbf{w}^{t} \mathbf{x}+w_{0}\right] \\
+&amp;=\left(\mathbf{x}-\mathbf{x}_{a}\right)^{t}\left(\mathbf{x}-\mathbf{x}_{a}\right)+2 \lambda\left(\mathbf{w}^{t} \mathbf{x}+w_{0}\right) \\
+&amp;=\mathbf{x}^{t} \mathbf{x}-2 \mathbf{x}^{t} \mathbf{x}_{a}+\mathbf{x}_{a}^{t} \mathbf{x}_{a}+2 \lambda\left(\mathbf{x}^{t} \mathbf{w}+w_{0}\right)
+\end{aligned}\]</span></p>
+<p>分别对<span class="math inline">\(\mathbf{x}\)</span>和<span class="math inline">\(\lambda\)</span>求导就可以得到</p>
+<p><span class="math display">\[\frac{\partial f(\mathbf{x}, \lambda)}{\partial \mathbf{x}}=\mathbf{x}-\mathbf{x}_{a}+\lambda \mathbf{w}=0\]</span></p>
+<p><span class="math display">\[\frac{\partial f(\mathbf{x}, \lambda)}{\partial \lambda}=\mathbf{w}^{t} \mathbf{x}+w_{0}=0\]</span></p>
+<p>就可以得到</p>
+<p><span class="math display">\[\mathbf{x}=\mathbf{x}_{a}-\lambda \mathbf{w}\]</span></p>
+<p>代入<span class="math inline">\(\frac{\partial f(\mathbf{x}, \lambda)}{\partial \lambda}\)</span>就可以得到</p>
+<p><span class="math display">\[\begin{aligned}
+\mathbf{w}^{t} \mathbf{x}+w_{0} &amp;=\mathbf{w}^{t}\left(\mathbf{x}_{a}-\lambda \mathbf{w}\right)+w_{0} \\
+&amp;=\mathbf{w}^{t} \mathbf{x}_{a}+w_{0}-\lambda \mathbf{w}^{t} \mathbf{w} \\
+&amp;=0
+\end{aligned}\]</span></p>
+<p>根据上式就可以得到</p>
+<p><span class="math display">\[\lambda=\frac{\mathbf{w}^{t} \mathbf{x}_{a}+w_{0}}{\mathbf{w}^{t} \mathbf{w}}\]</span></p>
+<p>因此就可以得到</p>
+<p><span class="math display">\[\mathbf{x}=\mathbf{x}_{a}-\lambda \mathbf{w}=\mathbf{x}_{a}-\left[\frac{\mathbf{w}^{t} \mathbf{x}_{a}+w_{0}}{\mathbf{w}^{t} \mathbf{w}}\right] \mathbf{w}\]</span></p>
+<p>把上式代入<span class="math inline">\(\left\|\mathbf{x}-\mathbf{x}_{a}\right\|\)</span>就可以得到</p>
+<p><span class="math display">\[\begin{aligned}
+\left\|\mathbf{x}-\mathbf{x}_{a}\right\| &amp;=\left\|\mathbf{x}_{a}-\left[\frac{\mathbf{w}^{t} \mathbf{x}_{a}+w_{0}}{\mathbf{w}^{t} \mathbf{w}}\right] \mathbf{w}-\mathbf{x}_{a}\right\| \\
+&amp;=\left\|\left(\frac{\mathbf{w}^{t} \mathbf{x}_{a}+w_{0}}{\mathbf{w}^{t} \mathbf{w}}\right) \mathbf{w}\right\| \\
+&amp;=\frac{\left|g\left(\mathbf{x}_{a}\right)\right|\|\mathbf{w}\|}{\|\mathbf{w}\|^{2}} \\
+&amp;=\frac{\left|g\left(\mathbf{x}_{a}\right)\right|}{\|\mathbf{w}\|}
+\end{aligned}\]</span></p>
+<p>得证</p>
+<p>（2）证明<span class="math inline">\(\mathbf{x}_{a}\)</span>到超平面的投影为</p>
+<p><span class="math display">\[\mathbf{x}_{p}=\mathbf{x}_{a}-\frac{g\left(\mathbf{x}_{a}\right)}{\|\mathbf{w}\|^{2}} \mathbf{w}\]</span></p>
+<p>证明：</p>
+<p>根据上题可以知道</p>
+<p><span class="math display">\[\mathbf{x}=\mathbf{x}_{a}-\lambda \mathbf{w}\]</span></p>
+<p><span class="math display">\[\lambda=\frac{\mathbf{w}^{t} \mathbf{x}_{a}+w_{0}}{\mathbf{w}^{t} \mathbf{w}}=\frac{g\left(\mathbf{x}_{a}\right)}{\|\mathbf{w}\|^{2}}\]</span></p>
+<p>所以</p>
+<p><span class="math display">\[\mathbf{x}=\mathbf{x}_{a}-\frac{g\left(\mathbf{x}_{a}\right)}{\|\mathbf{w}\|^{2}} \mathbf{w}\]</span></p>
+<p>得证</p>
+<p>12、考虑二次判别函数（式（4））</p>
+<p><span class="math display">\[g(\mathbf{x})=w_{0}+\sum_{i=1}^{d} w_{i} x_{i}+\sum_{i=1}^{d} \sum_{j=1}^{d} w_{i j} x_{i} x_{j}\]</span></p>
+<p>并定义对称的非奇异矩阵<span class="math inline">\(\mathbf{W}=\left[w_{ij}\right]\)</span>。说明判决边界的基本特性可用尺度矩阵<span class="math inline">\(\overline{\mathbf{W}}=\frac{\mathbf{W}}{\mathbf{w}^{\prime} \mathbf{W}^{-1} \mathbf{w}-4 w_{0}}\)</span>描述如下：</p>
+<p>（1）如果<span class="math inline">\(\overline{\mathbf{W}}\)</span>正比于单位矩阵<span class="math inline">\(\mathbf{I}\)</span>，那么判决边界为超平面。</p>
+<p>（2）如果<span class="math inline">\(\overline{\mathbf{W}}\)</span>是正定的，判决边界是超椭圆体。</p>
+<p>（3）如果<span class="math inline">\(\overline{\mathbf{W}}\)</span>的本正值有正有负，判决边界是超双曲面。</p>
+<p>（4）设<span class="math inline">\(\mathbf{w}=\begin{bmatrix} 5\\ 2\\ -2 \end{bmatrix}\)</span>和<span class="math inline">\(\mathbf{W}=\begin{bmatrix} 1 &amp; 2 &amp; 0\\ 2 &amp; 5 &amp; 1\\ 0 &amp; 1 &amp; -3 \end{bmatrix}\)</span>，它的解有什么特性？</p>
+<p>（5）设<span class="math inline">\(\mathbf{w}=\begin{bmatrix} 2\\ -1\\ 3 \end{bmatrix}\)</span>和<span class="math inline">\(\mathbf{W}=\begin{bmatrix} 1 &amp; 2 &amp; 3\\ 2 &amp; 0 &amp; 4\\ 3 &amp; 4 &amp; -5 \end{bmatrix}\)</span>，它的解有什么特性？</p>
+<p>14、</p>
+<p>22、</p>
+<p>32、</p>
 ]]></content>
       <categories>
         <category>课程</category>
