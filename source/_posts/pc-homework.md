@@ -868,6 +868,8 @@ $$\mathbf{x}(\lambda)=(1-\lambda) \mathbf{x}_{1}+\lambda \mathbf{x}_{2}$$
 
 # 第五章 线性判别函数
 
+## 课后习题
+
 1、讨论线性判别函数对以下二维的单模和多模问题的应用
 
 （1）绘制两个多模分布，要求有一个线性判别函数能给出一个很好的，或者（有可能的话）是最优的分类器。
@@ -882,6 +884,97 @@ $$\mathbf{x}(\lambda)=(1-\lambda) \mathbf{x}_{1}+\lambda \mathbf{x}_{2}$$
 
 证明：假设有两个不同方差的高斯分布$\sigma_{1}^{2} \neq \sigma_{2}^{2}$，并且$\sigma_{2}>\sigma_{1}$。但是由于$p\left(\mathbf{x} | \omega_{i}\right)$符合正态分布，因此均值的未知固定，所以不能使用直线作为判别面，而是使用圆形作为判别面。
 
-4、
+4、考虑判别中用的超平面。
 
-## 课后习题
+（1）证明在从超平面$g(\mathbf{x})=\mathbf{w}^{t} \mathbf{x}+w_{0}=0$到点$\mathbf{x}_{a}$的距离为$\frac{g\left(\mathbf{x}_{a}\right)}{\| \mathbf{w} \|}$，且对应的点是约束条件$g(\mathbf{x})=0$下的满足使$\left\|\mathbf{x}-\mathbf{x}_{a}\right\|^{2}$最小的$\mathbf{x}_{a}$。
+
+证明：
+
+为了最小化$\left\|\mathbf{x}-\mathbf{x}_{a}\right\|^{2}$，并且约束条件为$g(\mathbf{x})=0$，因此根据拉格朗日变换可以得到
+
+$$f(\mathbf{x}, \lambda)=\left\|\mathbf{x}-\mathbf{x}_{a}\right\|^{2}+2 \lambda[g(\mathbf{x})]$$
+
+对上式进行展开就可以得到
+
+$$\begin{aligned}
+f(\mathbf{x}, \lambda) &=\left\|\mathbf{x}-\mathbf{x}_{a}\right\|^{2}+2 \lambda\left[\mathbf{w}^{t} \mathbf{x}+w_{0}\right] \\
+&=\left(\mathbf{x}-\mathbf{x}_{a}\right)^{t}\left(\mathbf{x}-\mathbf{x}_{a}\right)+2 \lambda\left(\mathbf{w}^{t} \mathbf{x}+w_{0}\right) \\
+&=\mathbf{x}^{t} \mathbf{x}-2 \mathbf{x}^{t} \mathbf{x}_{a}+\mathbf{x}_{a}^{t} \mathbf{x}_{a}+2 \lambda\left(\mathbf{x}^{t} \mathbf{w}+w_{0}\right)
+\end{aligned}$$
+
+分别对$\mathbf{x}$和$\lambda$求导就可以得到
+
+$$\frac{\partial f(\mathbf{x}, \lambda)}{\partial \mathbf{x}}=\mathbf{x}-\mathbf{x}_{a}+\lambda \mathbf{w}=0$$
+
+$$\frac{\partial f(\mathbf{x}, \lambda)}{\partial \lambda}=\mathbf{w}^{t} \mathbf{x}+w_{0}=0$$
+
+就可以得到
+
+$$\mathbf{x}=\mathbf{x}_{a}-\lambda \mathbf{w}$$
+
+代入$\frac{\partial f(\mathbf{x}, \lambda)}{\partial \lambda}$就可以得到
+
+$$\begin{aligned}
+\mathbf{w}^{t} \mathbf{x}+w_{0} &=\mathbf{w}^{t}\left(\mathbf{x}_{a}-\lambda \mathbf{w}\right)+w_{0} \\
+&=\mathbf{w}^{t} \mathbf{x}_{a}+w_{0}-\lambda \mathbf{w}^{t} \mathbf{w} \\
+&=0
+\end{aligned}$$
+
+根据上式就可以得到
+
+$$\lambda=\frac{\mathbf{w}^{t} \mathbf{x}_{a}+w_{0}}{\mathbf{w}^{t} \mathbf{w}}$$
+
+因此就可以得到
+
+$$\mathbf{x}=\mathbf{x}_{a}-\lambda \mathbf{w}=\mathbf{x}_{a}-\left[\frac{\mathbf{w}^{t} \mathbf{x}_{a}+w_{0}}{\mathbf{w}^{t} \mathbf{w}}\right] \mathbf{w}$$
+
+把上式代入$\left\|\mathbf{x}-\mathbf{x}_{a}\right\|$就可以得到
+
+$$\begin{aligned}
+\left\|\mathbf{x}-\mathbf{x}_{a}\right\| &=\left\|\mathbf{x}_{a}-\left[\frac{\mathbf{w}^{t} \mathbf{x}_{a}+w_{0}}{\mathbf{w}^{t} \mathbf{w}}\right] \mathbf{w}-\mathbf{x}_{a}\right\| \\
+&=\left\|\left(\frac{\mathbf{w}^{t} \mathbf{x}_{a}+w_{0}}{\mathbf{w}^{t} \mathbf{w}}\right) \mathbf{w}\right\| \\
+&=\frac{\left|g\left(\mathbf{x}_{a}\right)\right|\|\mathbf{w}\|}{\|\mathbf{w}\|^{2}} \\
+&=\frac{\left|g\left(\mathbf{x}_{a}\right)\right|}{\|\mathbf{w}\|}
+\end{aligned}$$
+
+得证
+
+（2）证明$\mathbf{x}_{a}$到超平面的投影为
+
+$$\mathbf{x}_{p}=\mathbf{x}_{a}-\frac{g\left(\mathbf{x}_{a}\right)}{\|\mathbf{w}\|^{2}} \mathbf{w}$$
+
+证明：
+
+根据上题可以知道
+
+$$\mathbf{x}=\mathbf{x}_{a}-\lambda \mathbf{w}$$
+
+$$\lambda=\frac{\mathbf{w}^{t} \mathbf{x}_{a}+w_{0}}{\mathbf{w}^{t} \mathbf{w}}=\frac{g\left(\mathbf{x}_{a}\right)}{\|\mathbf{w}\|^{2}}$$
+
+所以
+
+$$\mathbf{x}=\mathbf{x}_{a}-\frac{g\left(\mathbf{x}_{a}\right)}{\|\mathbf{w}\|^{2}} \mathbf{w}$$
+
+得证
+
+12、考虑二次判别函数（式（4））
+
+$$g(\mathbf{x})=w_{0}+\sum_{i=1}^{d} w_{i} x_{i}+\sum_{i=1}^{d} \sum_{j=1}^{d} w_{i j} x_{i} x_{j}$$
+
+并定义对称的非奇异矩阵$\mathbf{W}=\left[w_{ij}\right]$。说明判决边界的基本特性可用尺度矩阵$\overline{\mathbf{W}}=\frac{\mathbf{W}}{\mathbf{w}^{\prime} \mathbf{W}^{-1} \mathbf{w}-4 w_{0}}$描述如下：
+
+（1）如果$\overline{\mathbf{W}}$正比于单位矩阵$\mathbf{I}$，那么判决边界为超平面。
+
+（2）如果$\overline{\mathbf{W}}$是正定的，判决边界是超椭圆体。
+
+（3）如果$\overline{\mathbf{W}}$的本正值有正有负，判决边界是超双曲面。
+
+（4）设$\mathbf{w}=\begin{bmatrix} 5\\ 2\\ -2 \end{bmatrix}$和$\mathbf{W}=\begin{bmatrix} 1 & 2 & 0\\ 2 & 5 & 1\\ 0 & 1 & -3 \end{bmatrix}$，它的解有什么特性？
+
+（5）设$\mathbf{w}=\begin{bmatrix} 2\\ -1\\ 3 \end{bmatrix}$和$\mathbf{W}=\begin{bmatrix} 1 & 2 & 3\\ 2 & 0 & 4\\ 3 & 4 & -5 \end{bmatrix}$，它的解有什么特性？
+
+14、
+
+22、
+
+32、
