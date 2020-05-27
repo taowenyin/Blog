@@ -624,7 +624,7 @@ f(\mathbf{x}, \lambda) &amp;=\left\|\mathbf{x}-\mathbf{x}_{a}\right\|^{2}+2 \lam
 <p>所以</p>
 <p><span class="math display">\[\mathbf{x}=\mathbf{x}_{a}-\frac{g\left(\mathbf{x}_{a}\right)}{\|\mathbf{w}\|^{2}} \mathbf{w}\]</span></p>
 <p>得证</p>
-<p>12、考虑二次判别函数（式（4））</p>
+<p>12、考虑二次判别函数（式（4））<strong>（未完成）</strong></p>
 <p><span class="math display">\[g(\mathbf{x})=w_{0}+\sum_{i=1}^{d} w_{i} x_{i}+\sum_{i=1}^{d} \sum_{j=1}^{d} w_{i j} x_{i} x_{j}\]</span></p>
 <p>并定义对称的非奇异矩阵<span class="math inline">\(\mathbf{W}=\left[w_{ij}\right]\)</span>。说明判决边界的基本特性可用尺度矩阵<span class="math inline">\(\overline{\mathbf{W}}=\frac{\mathbf{W}}{\mathbf{w}^{\prime} \mathbf{W}^{-1} \mathbf{w}-4 w_{0}}\)</span>描述如下：</p>
 <p>（1）如果<span class="math inline">\(\overline{\mathbf{W}}\)</span>正比于单位矩阵<span class="math inline">\(\mathbf{I}\)</span>，那么判决边界为超平面。</p>
@@ -632,9 +632,96 @@ f(\mathbf{x}, \lambda) &amp;=\left\|\mathbf{x}-\mathbf{x}_{a}\right\|^{2}+2 \lam
 <p>（3）如果<span class="math inline">\(\overline{\mathbf{W}}\)</span>的本正值有正有负，判决边界是超双曲面。</p>
 <p>（4）设<span class="math inline">\(\mathbf{w}=\begin{bmatrix} 5\\ 2\\ -2 \end{bmatrix}\)</span>和<span class="math inline">\(\mathbf{W}=\begin{bmatrix} 1 &amp; 2 &amp; 0\\ 2 &amp; 5 &amp; 1\\ 0 &amp; 1 &amp; -3 \end{bmatrix}\)</span>，它的解有什么特性？</p>
 <p>（5）设<span class="math inline">\(\mathbf{w}=\begin{bmatrix} 2\\ -1\\ 3 \end{bmatrix}\)</span>和<span class="math inline">\(\mathbf{W}=\begin{bmatrix} 1 &amp; 2 &amp; 3\\ 2 &amp; 0 &amp; 4\\ 3 &amp; 4 &amp; -5 \end{bmatrix}\)</span>，它的解有什么特性？</p>
-<p>14、</p>
-<p>22、</p>
-<p>32、</p>
+<p>14、考虑平方误差和准则函数（式（43））</p>
+<p><span class="math display">\[J_{s}(\mathbf{a})=\sum_{i=1}^{n}\left(\mathbf{a}^{t} \mathbf{y}_{i}-b_{i}\right)^{2}\]</span></p>
+<p>令<span class="math inline">\(b_{i}=b\)</span>，取如下6个训练点</p>
+<p><span class="math display">\[\begin{array}{ccc}
+\omega_{1}:(1,5)^{t} &amp; (2,9)^{t} &amp; (-5,-3)^{t} \\
+\omega_{2}:(2,-3)^{t} &amp; (-1,-4)^{t} &amp; (0,2)^{t}
+\end{array}\]</span></p>
+<p>解：</p>
+<p>根据式子（10）可以知道，把样本进行扩展得到</p>
+<p><span class="math display">\[\mathbf{Y}=\left(\begin{array}{rrr}
+1 &amp; 1 &amp; 5 \\
+1 &amp; 2 &amp; 9 \\
+1 &amp; -5 &amp; -3 \\
+-1 &amp; -2 &amp; 3 \\
+-1 &amp; 1 &amp; 4 \\
+-1 &amp; 0 &amp; -2
+\end{array}\right) \mathbf{a}=\left(\begin{array}{l}
+a_{1} \\
+a_{2} \\
+a_{3}
+\end{array}\right) \mathbf{b}=\left(\begin{array}{l}
+b \\
+b \\
+b \\
+b \\
+b \\
+b
+\end{array}\right)\]</span></p>
+<p>根据平方和误差准则得到</p>
+<p><span class="math display">\[\mathbf{J}_{s}(\mathbf{a})=\frac{1}{2} \sum_{i=1}^{n}\left(\mathbf{a}^{t} \mathbf{y}_{i}-b\right)^{2}=\frac{(\mathbf{Y} \mathbf{a}-\mathbf{b})^{t}(\mathbf{Y} \mathbf{a}-\mathbf{b})}{2}\]</span></p>
+<p>（1）计算它的赫森矩阵。</p>
+<p>对<span class="math inline">\(\mathbf{J}_{s}(\mathbf{a})\)</span>进行求导可以得到</p>
+<p><span class="math display">\[\boldsymbol{\nabla} J_{s}(\mathbf{a})=\boldsymbol{Y}^{t}(\mathbf{Y} \mathbf{a}-\mathbf{b})=\left(\begin{array}{ccccccc}
+6 a_{1} &amp; - &amp; a_{2} &amp; + &amp; 6 a_{3} &amp; + &amp; 0 \\
+-a_{1} &amp; + &amp; 35 a_{2} &amp; + &amp; 36 a_{3} &amp; + &amp; 3 b \\
+6 a_{1} &amp; + &amp; 36 a_{2} &amp; + &amp; 144 a_{3} &amp; - &amp; 16 b
+\end{array}\right)\]</span></p>
+<p>因此<span class="math inline">\(\mathbf{H}\)</span>矩阵为</p>
+<p><span class="math display">\[\mathbf{H}=\mathbf{Y}^{t} \mathbf{Y}=\left(\begin{array}{ccc}
+6 &amp; -1 &amp; 6 \\
+-1 &amp; 35 &amp; 36 \\
+6 &amp; 36 &amp; 144
+\end{array}\right)\]</span></p>
+<p>（2）假定二次准则函数，计算最优学习率。</p>
+<p>根据式子（14）可以知道学习率<span class="math inline">\(\eta\)</span>为</p>
+<p><span class="math display">\[\eta=\frac{\left[\boldsymbol{\nabla} J_{s}(\mathbf{a})\right]^{t} \boldsymbol{\nabla} J_{s}(\mathbf{a})}{\left[\boldsymbol{\nabla} J_{s}(\mathbf{a})\right]^{t} \mathbf{H} \nabla J_{s}(\mathbf{a})}\]</span></p>
+<p>22、推广5.8.3节的结论，证明使得准则函数</p>
+<p><span class="math display">\[J_{s}^{\prime}(\mathbf{a})=\sum_{\mathbf{y} \in \mathcal{Y}_{1}}\left(\mathbf{a}^{\prime} \mathbf{y}-\left(\lambda_{21}-\lambda_{11}\right)\right)^{2}+\sum_{\mathbf{y} \in \mathcal{Y}_{2}}\left(\mathbf{a}^{\prime} \mathbf{y}-\left(\lambda_{12}-\lambda_{22}\right)\right)^{2}\]</span></p>
+<p>极小化的向量<span class="math inline">\(\mathbf{a}\)</span>同时使得<span class="math inline">\(J_{s}^{\prime}(\mathbf{a})\)</span>渐近地以最小均方差逼近贝叶斯判断函数</p>
+<p><span class="math display">\[\left(\lambda_{21}-\lambda_{11}\right) P\left(\omega_{1} | \mathbf{x}\right)-\left(\lambda_{12}-\lambda_{22}\right) P\left(\omega_{2} | \mathbf{x}\right)\]</span></p>
+<p>证明：</p>
+<p>由于判别函数为</p>
+<p><span class="math display">\[g_{0}(\mathbf{x})=\left(\lambda_{21}-\lambda_{11}\right) P\left(\omega_{1} | \mathbf{x}\right)-\left(\lambda_{12}-\lambda_{22}\right) P\left(\omega_{2} | \mathbf{x}\right)\]</span></p>
+<p>以及准则函数为</p>
+<p><span class="math display">\[J_{s}^{\prime}(\mathbf{a})=\sum_{\mathbf{y} \in \mathcal{Y}_{1}}\left(\mathbf{a}^{\prime} \mathbf{y}-\left(\lambda_{21}-\lambda_{11}\right)\right)^{2}+\sum_{\mathbf{y} \in \mathcal{Y}_{2}}\left(\mathbf{a}^{\prime} \mathbf{y}-\left(\lambda_{12}-\lambda_{22}\right)\right)^{2}\]</span></p>
+<p>根据式子（57）得到逼近误差为</p>
+<p><span class="math display">\[\varepsilon^{2}=\int\left[\mathbf{a}^{t} \mathbf{y}-g_{o}(\mathbf{x})\right]^{2} p(\mathbf{x}) d \mathbf{x}\]</span></p>
+<p>再根据式子（58）可以得到</p>
+<p><span class="math display">\[\begin{aligned}
+J_{s}^{\prime}(\mathbf{a}) &amp;=\sum_{\mathbf{y} \in \mathcal{Y}_{1}}\left(\mathbf{a}^{t} \mathbf{y}-\left(\lambda_{21}-\lambda_{11}\right)\right)^{2}+\sum_{\mathbf{y} \in \mathcal{Y}_{2}}\left(\mathbf{a}^{t} \mathbf{y}-\left(\lambda_{12}-\lambda_{22}\right)\right)^{2} \\
+&amp;=n\left[\frac{n_{1}}{n} \frac{1}{n} \sum_{\mathbf{y} \in \mathcal{Y}_{1}}\left(\mathbf{a}^{t} \mathbf{y}-\left(\lambda_{21}-\lambda_{11}\right)\right)^{2}+\frac{n_{2}}{n} \frac{1}{n} \sum_{\mathbf{y} \in \mathcal{Y}_{2}}\left(\mathbf{a}^{t} \mathbf{y}+\left(\lambda_{12}-\lambda_{22}\right)\right)^{2}\right]
+\end{aligned}\]</span></p>
+<p>根据大数定理和式子（59），当<span class="math inline">\(n \rightarrow \infty\)</span>时，概率为1</p>
+<p><span class="math display">\[\begin{aligned}
+\lim _{n \rightarrow \infty} \frac{1}{n} J_{s}^{\prime}(\mathbf{a}) &amp;=J^{\prime}(\mathbf{a}) \\
+&amp;=P\left(\omega_{1}\right) \mathcal{E}_{1}\left[\left(\mathbf{a}^{t} \mathbf{y}-\left(\lambda_{21}-\lambda_{11}\right)\right)^{2}\right]+P\left(\omega_{2}\right) \mathcal{E}_{2}\left[\left(\mathbf{a}^{t} \mathbf{y}+\left(\lambda_{12}-\lambda_{22}\right)\right)^{2}\right]
+\end{aligned}\]</span></p>
+<p>其中</p>
+<p><span class="math display">\[\mathcal{E}_{1}\left[\left(\mathbf{a}^{t} \mathbf{y}-\left(\lambda_{21}-\lambda_{11}\right)\right)^{2}\right]=\int\left(\mathbf{a}^{t} \mathbf{y}-\left(\lambda_{21}-\lambda_{11}\right)\right)^{2} p\left(\mathbf{x} | \omega_{1}\right) d \mathbf{x}\]</span></p>
+<p><span class="math display">\[\mathcal{E}_{2}\left[\left(\mathbf{a}^{t} \mathbf{y}+\left(\lambda_{21}-\lambda_{11}\right)\right)^{2}\right]=\int\left(\mathbf{a}^{t} \mathbf{y}+\left(\lambda_{12}-\lambda_{22}\right)\right)^{2} p\left(\mathbf{x} | \omega_{2}\right) d \mathbf{x}\]</span></p>
+<p>代入准则方程，就可以得到</p>
+<p><span class="math display">\[J^{\prime}(\mathbf{a})=\int\left(\mathbf{a}^{t} \mathbf{y}\right)^{2} p(\mathbf{x}) d \mathbf{x}+2 \int \mathbf{a}^{t} \mathbf{y} g_{0}(\mathbf{x}) p(\mathbf{x}) d \mathbf{x}+\left(\lambda_{21}-\lambda_{11}\right)^{2} P\left(\omega_{1}\right)+\left(\lambda_{12}-\lambda_{22}\right)^{2} P\left(\omega_{2}\right)\]</span></p>
+<p>改写判别函数为</p>
+<p><span class="math display">\[\left(\lambda_{21}-\lambda_{11}\right) p\left(\mathbf{x}, \omega_{1}\right)+\left(\lambda_{12}-\lambda_{22}\right) p\left(\mathbf{x}, \omega_{2}\right)=\left(\lambda_{21}-\lambda_{11}\right) p\left(\mathbf{x} | \omega_{1}\right)+\left(\lambda_{12}-\lambda_{22}\right) p\left(\mathbf{x} | \omega_{2}\right)=g_{0}(\mathbf{x}) p(\mathbf{x})\]</span></p>
+<p>就有</p>
+<p><span class="math display">\[J^{\prime}(\mathbf{a})=\int\left[\mathbf{a}^{t} \mathbf{y}-g_{o}(\mathbf{x})\right]^{2} p(\mathbf{x}) d \mathbf{x}+\int\left[\left(\lambda_{21}-\lambda_{11}\right)^{2} P\left(\omega_{1}\right)+\left(\lambda_{12}-\lambda_{22}\right)^{2} P\left(\omega_{2}\right)-g_{o}^{2}(\mathbf{x})\right] p(\mathbf{x}) d \mathbf{x}\]</span></p>
+<p>因为上式中的第二项与<span class="math inline">\(\mathbf{a}\)</span>无关，所以只要<span class="math inline">\(\mathbf{a}\)</span>最小化，那么整个式子就最小化。</p>
+<p>32、考虑支持向量机和分属两类的训练样本：</p>
+<p><span class="math display">\[\begin{array}{ccc}
+\omega_{1}:(1,1)^{t} &amp; (2,2)^{t} &amp; (2,0)^{t} \\
+\omega_{2}:(0,0)^{t} &amp; (1,0)^{t} &amp; (0,1)^{t}
+\end{array}\]</span></p>
+<p>（1）在图中作出这6个训练点，构造具有最优超平面和最优间隔的权向量。</p>
+<p>（2）哪些是支持向量？</p>
+<p>支持向量为<span class="math inline">\((1,1)^{t}\)</span>、<span class="math inline">\((2,0)^{t}\)</span>、<span class="math inline">\((1,0)^{t}\)</span>、<span class="math inline">\((0,1)^{t}\)</span></p>
+<p>（3）通过寻找拉格朗日待定乘数<span class="math inline">\(\alpha_{i}\)</span>来构造在对偶空间的解，并将它与（1）中的结果比较。</p>
+<p>根据式子（109）</p>
+<p><span class="math display">\[L(\boldsymbol{\alpha})=\sum_{k=1}^{n} \alpha_{k}-\frac{1}{2} \sum_{k, j}^{n} \alpha_{k} \alpha_{j} z_{k} z_{j} \mathbf{y}_{j}^{t} \mathbf{y}_{k}\]</span></p>
+<p>约束条件为</p>
+<p><span class="math display">\[\sum_{k=1}^{n} z_{k} \alpha_{k}=0\]</span></p>
 ]]></content>
       <categories>
         <category>课程</category>
