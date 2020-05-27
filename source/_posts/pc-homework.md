@@ -957,7 +957,7 @@ $$\mathbf{x}=\mathbf{x}_{a}-\frac{g\left(\mathbf{x}_{a}\right)}{\|\mathbf{w}\|^{
 
 得证
 
-12、考虑二次判别函数（式（4））
+12、考虑二次判别函数（式（4））**（未完成）**
 
 $$g(\mathbf{x})=w_{0}+\sum_{i=1}^{d} w_{i} x_{i}+\sum_{i=1}^{d} \sum_{j=1}^{d} w_{i j} x_{i} x_{j}$$
 
@@ -973,8 +973,144 @@ $$g(\mathbf{x})=w_{0}+\sum_{i=1}^{d} w_{i} x_{i}+\sum_{i=1}^{d} \sum_{j=1}^{d} w
 
 （5）设$\mathbf{w}=\begin{bmatrix} 2\\ -1\\ 3 \end{bmatrix}$和$\mathbf{W}=\begin{bmatrix} 1 & 2 & 3\\ 2 & 0 & 4\\ 3 & 4 & -5 \end{bmatrix}$，它的解有什么特性？
 
-14、
+14、考虑平方误差和准则函数（式（43））
 
-22、
+$$J_{s}(\mathbf{a})=\sum_{i=1}^{n}\left(\mathbf{a}^{t} \mathbf{y}_{i}-b_{i}\right)^{2}$$
 
-32、
+令$b_{i}=b$，取如下6个训练点
+
+$$\begin{array}{ccc}
+\omega_{1}:(1,5)^{t} & (2,9)^{t} & (-5,-3)^{t} \\
+\omega_{2}:(2,-3)^{t} & (-1,-4)^{t} & (0,2)^{t}
+\end{array}$$
+
+解：
+
+根据式子（10）可以知道，把样本进行扩展得到
+
+$$\mathbf{Y}=\left(\begin{array}{rrr}
+1 & 1 & 5 \\
+1 & 2 & 9 \\
+1 & -5 & -3 \\
+-1 & -2 & 3 \\
+-1 & 1 & 4 \\
+-1 & 0 & -2
+\end{array}\right) \mathbf{a}=\left(\begin{array}{l}
+a_{1} \\
+a_{2} \\
+a_{3}
+\end{array}\right) \mathbf{b}=\left(\begin{array}{l}
+b \\
+b \\
+b \\
+b \\
+b \\
+b
+\end{array}\right)$$
+
+根据平方和误差准则得到
+
+$$\mathbf{J}_{s}(\mathbf{a})=\frac{1}{2} \sum_{i=1}^{n}\left(\mathbf{a}^{t} \mathbf{y}_{i}-b\right)^{2}=\frac{(\mathbf{Y} \mathbf{a}-\mathbf{b})^{t}(\mathbf{Y} \mathbf{a}-\mathbf{b})}{2}$$
+
+（1）计算它的赫森矩阵。
+
+对$\mathbf{J}_{s}(\mathbf{a})$进行求导可以得到
+
+$$\boldsymbol{\nabla} J_{s}(\mathbf{a})=\boldsymbol{Y}^{t}(\mathbf{Y} \mathbf{a}-\mathbf{b})=\left(\begin{array}{ccccccc}
+6 a_{1} & - & a_{2} & + & 6 a_{3} & + & 0 \\
+-a_{1} & + & 35 a_{2} & + & 36 a_{3} & + & 3 b \\
+6 a_{1} & + & 36 a_{2} & + & 144 a_{3} & - & 16 b
+\end{array}\right)$$
+
+因此$\mathbf{H}$矩阵为
+
+$$\mathbf{H}=\mathbf{Y}^{t} \mathbf{Y}=\left(\begin{array}{ccc}
+6 & -1 & 6 \\
+-1 & 35 & 36 \\
+6 & 36 & 144
+\end{array}\right)$$
+
+（2）假定二次准则函数，计算最优学习率。
+
+根据式子（14）可以知道学习率$\eta$为
+
+$$\eta=\frac{\left[\boldsymbol{\nabla} J_{s}(\mathbf{a})\right]^{t} \boldsymbol{\nabla} J_{s}(\mathbf{a})}{\left[\boldsymbol{\nabla} J_{s}(\mathbf{a})\right]^{t} \mathbf{H} \nabla J_{s}(\mathbf{a})}$$
+
+22、推广5.8.3节的结论，证明使得准则函数
+
+$$J_{s}^{\prime}(\mathbf{a})=\sum_{\mathbf{y} \in \mathcal{Y}_{1}}\left(\mathbf{a}^{\prime} \mathbf{y}-\left(\lambda_{21}-\lambda_{11}\right)\right)^{2}+\sum_{\mathbf{y} \in \mathcal{Y}_{2}}\left(\mathbf{a}^{\prime} \mathbf{y}-\left(\lambda_{12}-\lambda_{22}\right)\right)^{2}$$
+
+极小化的向量$\mathbf{a}$同时使得$J_{s}^{\prime}(\mathbf{a})$渐近地以最小均方差逼近贝叶斯判断函数
+
+$$\left(\lambda_{21}-\lambda_{11}\right) P\left(\omega_{1} | \mathbf{x}\right)-\left(\lambda_{12}-\lambda_{22}\right) P\left(\omega_{2} | \mathbf{x}\right)$$
+
+证明：
+
+由于判别函数为
+
+$$g_{0}(\mathbf{x})=\left(\lambda_{21}-\lambda_{11}\right) P\left(\omega_{1} | \mathbf{x}\right)-\left(\lambda_{12}-\lambda_{22}\right) P\left(\omega_{2} | \mathbf{x}\right)$$
+
+以及准则函数为
+
+$$J_{s}^{\prime}(\mathbf{a})=\sum_{\mathbf{y} \in \mathcal{Y}_{1}}\left(\mathbf{a}^{\prime} \mathbf{y}-\left(\lambda_{21}-\lambda_{11}\right)\right)^{2}+\sum_{\mathbf{y} \in \mathcal{Y}_{2}}\left(\mathbf{a}^{\prime} \mathbf{y}-\left(\lambda_{12}-\lambda_{22}\right)\right)^{2}$$
+
+根据式子（57）得到逼近误差为
+
+$$\varepsilon^{2}=\int\left[\mathbf{a}^{t} \mathbf{y}-g_{o}(\mathbf{x})\right]^{2} p(\mathbf{x}) d \mathbf{x}$$
+
+再根据式子（58）可以得到
+
+$$\begin{aligned}
+J_{s}^{\prime}(\mathbf{a}) &=\sum_{\mathbf{y} \in \mathcal{Y}_{1}}\left(\mathbf{a}^{t} \mathbf{y}-\left(\lambda_{21}-\lambda_{11}\right)\right)^{2}+\sum_{\mathbf{y} \in \mathcal{Y}_{2}}\left(\mathbf{a}^{t} \mathbf{y}-\left(\lambda_{12}-\lambda_{22}\right)\right)^{2} \\
+&=n\left[\frac{n_{1}}{n} \frac{1}{n} \sum_{\mathbf{y} \in \mathcal{Y}_{1}}\left(\mathbf{a}^{t} \mathbf{y}-\left(\lambda_{21}-\lambda_{11}\right)\right)^{2}+\frac{n_{2}}{n} \frac{1}{n} \sum_{\mathbf{y} \in \mathcal{Y}_{2}}\left(\mathbf{a}^{t} \mathbf{y}+\left(\lambda_{12}-\lambda_{22}\right)\right)^{2}\right]
+\end{aligned}$$
+
+根据大数定理和式子（59），当$n \rightarrow \infty$时，概率为1
+
+$$\begin{aligned}
+\lim _{n \rightarrow \infty} \frac{1}{n} J_{s}^{\prime}(\mathbf{a}) &=J^{\prime}(\mathbf{a}) \\
+&=P\left(\omega_{1}\right) \mathcal{E}_{1}\left[\left(\mathbf{a}^{t} \mathbf{y}-\left(\lambda_{21}-\lambda_{11}\right)\right)^{2}\right]+P\left(\omega_{2}\right) \mathcal{E}_{2}\left[\left(\mathbf{a}^{t} \mathbf{y}+\left(\lambda_{12}-\lambda_{22}\right)\right)^{2}\right]
+\end{aligned}$$
+
+其中
+
+$$\mathcal{E}_{1}\left[\left(\mathbf{a}^{t} \mathbf{y}-\left(\lambda_{21}-\lambda_{11}\right)\right)^{2}\right]=\int\left(\mathbf{a}^{t} \mathbf{y}-\left(\lambda_{21}-\lambda_{11}\right)\right)^{2} p\left(\mathbf{x} | \omega_{1}\right) d \mathbf{x}$$
+
+$$\mathcal{E}_{2}\left[\left(\mathbf{a}^{t} \mathbf{y}+\left(\lambda_{21}-\lambda_{11}\right)\right)^{2}\right]=\int\left(\mathbf{a}^{t} \mathbf{y}+\left(\lambda_{12}-\lambda_{22}\right)\right)^{2} p\left(\mathbf{x} | \omega_{2}\right) d \mathbf{x}$$
+
+代入准则方程，就可以得到
+
+$$J^{\prime}(\mathbf{a})=\int\left(\mathbf{a}^{t} \mathbf{y}\right)^{2} p(\mathbf{x}) d \mathbf{x}+2 \int \mathbf{a}^{t} \mathbf{y} g_{0}(\mathbf{x}) p(\mathbf{x}) d \mathbf{x}+\left(\lambda_{21}-\lambda_{11}\right)^{2} P\left(\omega_{1}\right)+\left(\lambda_{12}-\lambda_{22}\right)^{2} P\left(\omega_{2}\right)$$
+
+改写判别函数为
+
+$$\left(\lambda_{21}-\lambda_{11}\right) p\left(\mathbf{x}, \omega_{1}\right)+\left(\lambda_{12}-\lambda_{22}\right) p\left(\mathbf{x}, \omega_{2}\right)=\left(\lambda_{21}-\lambda_{11}\right) p\left(\mathbf{x} | \omega_{1}\right)+\left(\lambda_{12}-\lambda_{22}\right) p\left(\mathbf{x} | \omega_{2}\right)=g_{0}(\mathbf{x}) p(\mathbf{x})$$
+
+就有
+
+$$J^{\prime}(\mathbf{a})=\int\left[\mathbf{a}^{t} \mathbf{y}-g_{o}(\mathbf{x})\right]^{2} p(\mathbf{x}) d \mathbf{x}+\int\left[\left(\lambda_{21}-\lambda_{11}\right)^{2} P\left(\omega_{1}\right)+\left(\lambda_{12}-\lambda_{22}\right)^{2} P\left(\omega_{2}\right)-g_{o}^{2}(\mathbf{x})\right] p(\mathbf{x}) d \mathbf{x}$$
+
+因为上式中的第二项与$\mathbf{a}$无关，所以只要$\mathbf{a}$最小化，那么整个式子就最小化。
+
+32、考虑支持向量机和分属两类的训练样本：
+
+$$\begin{array}{ccc}
+\omega_{1}:(1,1)^{t} & (2,2)^{t} & (2,0)^{t} \\
+\omega_{2}:(0,0)^{t} & (1,0)^{t} & (0,1)^{t}
+\end{array}$$
+
+（1）在图中作出这6个训练点，构造具有最优超平面和最优间隔的权向量。
+
+（2）哪些是支持向量？
+
+支持向量为$(1,1)^{t}$、$(2,0)^{t}$、$(1,0)^{t}$、$(0,1)^{t}$
+
+（3）通过寻找拉格朗日待定乘数$\alpha_{i}$来构造在对偶空间的解，并将它与（1）中的结果比较。
+
+根据式子（109）
+
+$$L(\boldsymbol{\alpha})=\sum_{k=1}^{n} \alpha_{k}-\frac{1}{2} \sum_{k, j}^{n} \alpha_{k} \alpha_{j} z_{k} z_{j} \mathbf{y}_{j}^{t} \mathbf{y}_{k}$$
+
+约束条件为
+
+$$\sum_{k=1}^{n} z_{k} \alpha_{k}=0$$
