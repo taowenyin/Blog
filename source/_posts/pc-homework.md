@@ -1175,18 +1175,151 @@ $\omega_{2}$=NOT $a_{3}$ OR ($a_{3}$ AND $a_{1}$) AND ((NOT $a_{2}$ AND $a_{4}$)
 
 ## 课后习题
 
-23、
+23、请证明式（24）中的“留一法”均值估计$\mu(\cdot)$等价于式（22）的样本均值$\hat{\mu}$。
 
-40
+证明：
+
+根据式子（25）
+
+$$\begin{aligned}
+\mu_{(\cdot)} &=\frac{1}{n} \sum_{i=1}^{n} \mu_{(i)} \\
+&=\frac{1}{n} \sum_{i=1}^{n}\left[\frac{1}{n-1} \sum_{j \neq i} x_{j}\right] \\
+&=\frac{1}{n(n-1)} \sum_{i=1}^{n}\left[\sum_{j=1}^{n} x_{j}-x_{i}\right] \\
+&=\frac{1}{n(n-1)} \sum_{i=1}^{n}\left[n \hat{\mu}-x_{i}\right] \\
+&=\frac{n}{n-1} \hat{\mu}-\frac{1}{n(n-1)} \sum_{i=1}^{n} x_{i} \\
+&=\frac{n}{n-1} \hat{\mu}-\frac{1}{n-1} \hat{\mu} \\
+&=\hat{\mu}
+\end{aligned}$$
+
+40、如果$n^{\prime}$个独立随机选取的测试集中有$k$个错分类的模型，那么如式（38）所示，$k$具有二项式分布 **（未完成）**
+
+$$P(k)=\left(\begin{array}{l} n^{\prime} \\ k \end{array}\right) p^{k}(1-p)^{n^{\prime}-k}$$
+
+请证明$p$的最大似然估计$\hat{p}=\frac{k}{n^{\prime}}$，如式（39）所示。
 
 # 第十章 无监督学习和聚类
 
 ## 课后习题
 
-3、
+3、假设一个一维的混合正态模型由两个正态分量组成，每个分量都以原点为中心：
 
-4、
+$$p(x | \boldsymbol{\theta})=P\left(\omega_{1}\right) \frac{1}{\sqrt{2 \pi} \sigma_{1}} e^{\frac{-x^{2}}{\left(2 \sigma_{1}^{2}\right)}}+\left(1-P\left(\omega_{1}\right)\right) \frac{1}{\sqrt{2 \pi} \sigma_{2}} e^{\frac{-x^{2}}{\left(2 \sigma_{2}^{2}\right)}}$$
 
-6、
+而参数向量为$\boldsymbol{\theta}=\left(P\left(\omega_{1}\right), \sigma_{1}, \sigma_{2}\right)^{t}$。
 
-32、
+（1）证明在这些条件下，这个混合密度是完全不可辨识的。
+
+（2）假设$P\left(\omega_{1}\right)$的值是确定而未知的，混合模型是可辨识的吗？
+
+（3）假设$\sigma_{1}$和$\sigma_{2}$是已知的，但$P\left(\omega_{1}\right)$是未知的。模型是可辨识的吗？也就是说，$P\left(\omega_{1}\right)$可由样本数据求出吗？
+
+证明：
+
+（1）当$\sigma_{1}=\sigma_{2}$，$P\left(\omega_{1}\right)$的取值范围为[0,1]，保持相同的混合密度。因此，混合密度无法确定。
+
+（2）如果$P\left(\omega_{1}\right)$是固定的且已知的，并且不等于0、0.5或1，那么模型是可辨识的。对于$P\left(\omega_{1}\right)$的这三个值，不能恢复第一个分布的参数。如果$P\left(\omega_{1}\right)=1$，不能恢复第二个分布的参数。如果$P\left(\omega_{1}\right)=0.5$，那么两个分布的参数可以互换。
+
+（3）如果$\sigma_{1}=\sigma_{2}$，因为$P\left(\omega_{1}\right)$和$P\left(\omega_{2}\right)$可以互换，所以$P\left(\omega_{1}\right)$不能够被识别。如果$\sigma_{1} \neq \sigma_{2}$，那么$P\left(\omega_{1}\right)$可以确定。
+
+4、令$\mathbf{x}$表示含有$d$个分量的向量，每个分量在0或1间取值，让$P(\mathbf{x} | \theta)$表示$c$个多变量伯努利分布组成的混合分布，
+
+$$P(\mathbf{x} | \boldsymbol{\theta})=\sum_{i=1}^{c} P\left(\mathbf{x} | \omega_{i}, \boldsymbol{\theta}_{i}\right) P\left(\omega_{i}\right)$$
+
+其中
+
+$$P\left(\mathbf{x} | \omega_{i}, \boldsymbol{\theta}_{i}\right)=\prod_{j=1}^{d} \theta_{i j}^{x_{j}}\left(1-\theta_{i j}\right)^{1-x_{j}}$$
+
+（1）请推出下面的偏导数公式
+
+$$\frac{\partial \ln P\left(\mathbf{x} | \omega_{i}, \boldsymbol{\theta}_{i}\right)}{\partial \theta_{i j}}=\frac{\mathbf{x}_{i}-\theta_{i j}}{\theta_{i j}\left(1-\theta_{i j}\right)}$$
+
+（2）用最大似然估计的一般公式证明参数向量$\boldsymbol{\theta}_{i}$的最大似然估计$\hat{\boldsymbol{\theta}_{i}}$，必须满足
+
+$$\hat{\boldsymbol{\theta}}_{i}=\frac{\sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}_{i}\right) \mathbf{x}_{k}}{\sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}_{i}\right)}$$
+
+（3）解释你在（2）中得到的答案。
+
+解：
+
+（1）首先对$P\left(\mathbf{x} | \omega_{i}, \boldsymbol{\theta}_{i}\right)$取对数
+
+$$\ln P\left(\mathbf{x} | \omega_{i}, \boldsymbol{\theta}_{i}\right)=\sum_{i=1}^{d}\left[x_{i j} \ln \theta_{i j}+\left(1-x_{i j}\right) \ln \left(1-\theta_{i j}\right)\right]$$
+
+然后对$\theta_{i j}$求导得到
+
+$$\begin{aligned}
+\frac{\partial \ln P\left(\mathbf{x} | \omega_{i}, \boldsymbol{\theta}_{i}\right)}{\partial \theta_{i j}} &=\frac{x_{i j}}{\theta_{i j}}-\frac{1-x_{i j}}{1-\theta_{i j}} \\
+&=\frac{x_{i j}\left(1-\theta_{i j}\right)-\theta_{i j}\left(1-x_{i j}\right)}{\theta_{i j}\left(1-\theta_{i j}\right)} \\
+&=\frac{x_{i j}-x_{i j} \theta_{i j}-\theta_{i j}+\theta_{i j} x_{i j}}{\theta_{i j}\left(1-\theta_{i j}\right)} \\
+&=\frac{x_{i j}-\theta_{i j}}{\theta_{i j}\left(1-\theta_{i j}\right)}
+\end{aligned}$$
+
+（2）根据式子（7）可以知道
+
+$$\sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}_{i}\right) \nabla_{\boldsymbol{\theta}_{i}} \ln P\left(x_{k} | \omega_{i}, \hat{\boldsymbol{\theta}}_{i}\right)=0$$
+
+更具（1）中的结论可以得到
+
+$$\nabla_{\boldsymbol{\theta}_{i}} \ln P\left(x_{k} | \omega_{i}, \hat{\boldsymbol{\theta}}_{i}\right)=\frac{x_{k} \hat{\boldsymbol{\theta}}_{i}}{\hat{\boldsymbol{\theta}}_{i}\left(1-\hat{\boldsymbol{\theta}}_{i}\right)}$$
+
+因此就可以得到
+
+$$\sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}_{i}\right) \frac{\mathbf{x}_{k}-\hat{\boldsymbol{\theta}}_{i}}{\hat{\boldsymbol{\theta}}_{i}\left(1-\hat{\boldsymbol{\theta}}_{i}\right)}=0$$
+
+假设$\hat{\boldsymbol{\theta}}_{i} \in(0,1)$，因此就有
+
+$$\sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}_{i}\right)\left(\mathbf{x}_{k}-\hat{\boldsymbol{\theta}}_{i}\right)=\mathbf{0}$$
+
+所以就得到
+
+$$\hat{\boldsymbol{\theta}}_{i}=\frac{\sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}_{i}\right) \mathbf{x}_{k}}{\sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}_{i}\right)}$$
+
+（3）$\boldsymbol{\theta}_{i}$的最大似然估计$\hat{\boldsymbol{\theta}}_{i}$是$\mathbf{x}_{k}$的加权平均，其中权重是混合权重$\hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}_{i}\right)$的后验概率。
+
+6、考虑一个含有$c$个成分的混合概率，参数向量$\theta$和先验概率$P\left(\omega_{i}\right)$都是未知的。令$\hat{P}\left(\omega_{i}\right)$表示$P\left(\omega_{i}\right)$的最大似然估计，$\hat{\boldsymbol{\theta}}_{i}$表示$\boldsymbol{\theta}_{i}$的最大似然估计。证明如果似然函数是可微的而且对于任何$i$，$\hat{P}\left(\omega_{i}\right) \neq 0$，则$\hat{P}\left(\omega_{i}\right)$和$\hat{\boldsymbol{\theta}}_{i}$必须满足式（11）和（12），即有 **（未完成）**
+
+$$\hat{P}\left(\omega_{i}\right)=\frac{1}{n} \sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}\right)$$
+
+和
+
+$$\sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}\right) \nabla_{\boldsymbol{\theta}_{i}} \ln p\left(\mathbf{x}_{k} | \omega_{i}, \hat{\boldsymbol{\theta}}_{i}\right)=0$$
+
+其中
+
+$$\hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}\right)=\frac{p\left(\mathbf{x}_{k} | \omega_{i}, \hat{\boldsymbol{\theta}}_{i}\right) \hat{P}\left(\omega_{i}\right)}{\sum_{i=1}^{c} p\left(\mathbf{x}_{k} | \omega_{j}, \hat{\boldsymbol{\theta}}_{j}\right) \hat{P}\left(\omega_{j}\right)}$$
+
+32、定义相似性度量为$s\left(\mathbf{x}, \mathbf{x}^{\prime}\right)=\frac{\mathbf{x}^{t} \mathbf{x}^{\prime}}{\left(\|\mathbf{x}\|\left\|\mathbf{x}^{\prime}\right\|\right)}$
+
+（1）如果$\mathbf{x}$的每个分量都是二值的（取-1或1），$x_{i}=1$表示$\mathbf{x}$拥有第$i$项属性，$x_{i}=-1$则表示$\mathbf{x}$不具有这个属性，请解释相似性度量的意义。
+
+（2）证明在这种情况下，欧几里得距离的平方满足
+
+$$\left\|\mathbf{x}-\mathbf{x}^{\prime}\right\|^{2}=2 d\left(1-s\left(\mathbf{x}, \mathbf{x}^{\prime}\right)\right)$$
+
+证明：
+
+根据式子（50）得到相似性度量为
+
+（1）因为$\mathbf{x}$和$\mathbf{x}^{\prime}$是$d$维的向量，并且当$x_{i}=1$表示$\mathbf{x}$拥有第$i$项属性，$x_{i}=-1$则表示$\mathbf{x}$不具有这个属性。因此向量的欧式长度维
+
+$$\|\mathbf{x}\|=\left\|\mathbf{x}^{\prime}\right\|=\sqrt{\sum_{i=1}^{d} x_{i}^{2}}=\sqrt{\sum_{i=1}^{d} 1}=\sqrt{d}$$
+
+所以相似性度量可以写为
+
+$$\begin{aligned}
+s\left(\mathbf{x}, \mathbf{x}^{\prime}\right) &=\frac{\mathbf{x}^{t} \mathbf{x}^{\prime}}{\sqrt{d} \sqrt{d}} \\
+&=\frac{1}{d} \sum_{i=1}^{d} x_{i} x_{i}^{\prime} \\
+&=\frac{1}{d} [\text{一般特征数}-\text{非一般特征数}] \\
+&=\frac{1}{d} [\text{一般特征数}-(d-\text{非一般特征数)}] \\
+&=\frac{2}{d} (\text{一般特征数}) - 1
+\end{aligned}$$
+
+（2）根据（1）结果，使$\|\mathbf{x}\|=\left\|\mathbf{x}^{\prime}\right\|=\sqrt{d}$
+
+$$\begin{aligned}
+\left\|\mathbf{x}-\mathbf{x}^{\prime}\right\|^{2} &=\left(\mathbf{x}-\mathbf{x}^{\prime}\right)^{t}\left(\mathbf{x}-\mathbf{x}^{\prime}\right) \\
+&=\mathbf{x}^{t} \mathbf{x}+\mathbf{x}^{\prime t} \mathbf{x}^{\prime}-2 \mathbf{x}^{t} \mathbf{x}^{\prime} \\
+&=\|\mathbf{x}\|^{2}+\left\|\mathbf{x}^{\prime}\right\|^{2}-2 s\left(\mathbf{x}, \mathbf{x}^{\prime}\right)\|\mathbf{x}\|\left\|\mathbf{x}^{\prime}\right\| \\
+&=d+d-2 s\left(\mathbf{x}, \mathbf{x}^{\prime}\right) \sqrt{d} \sqrt{d} \\
+&=2 d\left[1-s\left(\mathbf{x}, \mathbf{x}^{\prime}\right)\right]
+\end{aligned}$$
