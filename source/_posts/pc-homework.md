@@ -1111,9 +1111,65 @@ $$\begin{array}{ccc}
 
 ## 课后习题
 
-5、
+5、考虑利用熵步纯度训练一颗二叉树，可以参考（1）和（5）。
 
-8、
+（1）经过单次是/否的查询判断，所引起的步纯度下降总是比1比特小。
+
+（2）对例1中的两棵树，验证以下每次分支都引起不纯度下降，但是下降差总是小于1比特。虽然这样，解释一下为什么某个结点的不纯度却可能比后续节点还小。
+
+（3）将（1）的结果推广到任意分支率的情况。
+
+解
+
+根据式子（1）知道不纯度表示为
+
+$$i(N)=-\sum P\left(\omega_{i}\right) \log _{2}\left(P\left(\omega_{i}\right)\right)=H\left(\omega_{i}\right)$$
+
+（1）假设由一个二元特征$F \in\{R, L\}$，这两个节点的不纯度为
+
+$$\begin{aligned}
+P(L) i(L)+P(R) i(R) &=-P(L) \sum_{i} P\left(\omega_{i} | L\right) \log _{2}\left(P\left(\omega_{i} | L\right)\right)-P(R) \sum_{i} P\left(\omega_{i} | R\right) \log _{2}\left(P\left(\omega_{i} | R\right)\right) \\
+&=-\sum_{i} P\left(\omega_{i}, L\right) \log _{2}\left(\frac{P\left(\omega_{i}, L\right)}{P(L)}\right)-\sum_{i} P\left(\omega_{i}, R\right) \log _{2}\left(\frac{P\left(\omega_{i}, R\right)}{P(R)}\right) \\
+&=-\sum_{i, F} P\left(\omega_{i}, F\right) \log _{2}\left(P\left(\omega_{i}, F\right)\right)+P(L) \log _{2}(P(L))+P(R) \log _{2}(P(R)) \\
+&=H(\omega, F)-H(F)
+\end{aligned}$$
+
+因此分裂后的纯度为
+
+$$\Delta i(N)=H(\omega)-H(\omega, F)+H(F)$$
+
+因为$H(\omega) \leq H(\omega, F) \leq H(\omega)+H(F)$，所以
+
+$$0 \leq \Delta i(N) \leq H(F) \leq 1 \text { bit }$$
+
+（2）在每个节点上，子节点处的加权不纯度将小于父节点处的加权不纯度，即使单个子节点的不纯度可能大于其父节点。例如，在例1的上树中的（$x_{2}<0.61$）节点处，不纯度为0.65，而在左子节点处杂质为0.0，在右子节点处杂质为1.0。左枝取$\frac{2}{3}$次，则子代的加权不纯度为$\frac{2}{3} \times 0+\frac{1}{3} \times 1=0.33$。同样，在子树的（$x_{1}<0.61$）节点，右子节点的不纯度（0.92）高于父节点（0.76），但子节点的加权平均值为$\frac{2}{3} \times 0+\frac{1}{3} \times 0.92=0.304$。在每种情况下，杂质的减少量在0到1位之间，视需要而定。
+
+（3）对于B分支，有$0 \leq \Delta i(N) \leq \log _{2}(B)\text { bit }$。
+
+8、考虑一个2-类分类问题，采用如下的训练模式：
+
+| $\omega_{1}$ | $\omega_{2}$ |
+| :--: | :--: |
+| 0110 | 1011 |
+| 1010 | 0000 |
+| 0011 | 0100 |
+| 1111 | 1110 |
+
+（1）用熵不纯度（式（1））手工生成一颗未剪枝的分类树。
+
+（2）利用简单的逻辑表达式简化规则对上面得到的类别进行简化，以得到最简单的逻辑表达式（使用最少的AND和OR）
+
+解：
+
+此2-类分类问题一共有4个属性，分别是$\left\{a_{1}, a_{2}, a_{3}, a_{4}\right\}$
+
+（1）根据不纯度计算可以得生成树
+
+{% asset_img 2-tree.png 生成的树 %}
+
+（2）$\omega_{1}=a_{3}$ AND (NOT $a_{1}$ OR $a_{1}$ AND (NOT $a_{2}$ AND NOT $a_{4}$) OR ($a_{2}$ AND $a_{4}$))
+
+$\omega_{2}$=NOT $a_{3}$ OR ($a_{3}$ AND $a_{1}$) AND ((NOT $a_{2}$ AND $a_{4}$) OR ($a_{2}$ AND NOT $a_{4}$))
 
 # 第九章 独立算法的机器学习
 
