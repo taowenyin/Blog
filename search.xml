@@ -88,6 +88,9 @@
 <img src="/deep-residual-learning/ensembles-error.png" class title="组合模型的错误率">
 <h2 id="cifa-10以及分析">CIFA-10以及分析</h2>
 <p>作者对CIFAR-10数据集进行了更多的研究，该数据集包含了10个类别，以及5万张的训练图片和1万张的测试图片。作者提供了在训练集上训练和在测试集上评估的实验。作者关注的是验证极深模型的效果，而不是追求最好的结果，因此我们只使用简单的框架如下。</p>
+<p>普通网络和残差网络按照图3的形式。网络的输入为<span class="math inline">\(32 \times 32\)</span>减去图像均值的图像。第一层为<span class="math inline">\(3 \times 3\)</span>的卷积层。然后作者使用<span class="math inline">\(6n\)</span>个<span class="math inline">\(3 \times 3\)</span>的卷积层进行堆叠，卷积层对应的特征图有三种<span class="math inline">\(\{32,16,8\}\)</span>，每一种的卷积层数量为<span class="math inline">\(2n\)</span>。对应的卷积核数量为<span class="math inline">\(\{16,32,64\}\)</span>。使用步长为2的卷积进行下采样。网络的最后再进行全局平均池化，以及一个10路的全链接层和softmax。总共有<span class="math inline">\(6 n+2\)</span>个堆叠权重层。具体结构如下表所示：</p>
+<img src="/deep-residual-learning/net-architecture.png" class title="网络结构">
+<p>当使用快捷连接时，作者把网络中<span class="math inline">\(3 \times 3\)</span>的网络层进行两两连接（合计<span class="math inline">\(3n\)</span>个快捷连接）。在这个数据集上，作者为所有模型都使用恒等快捷连接，因此我们的残差网络与普通网络具有相同的深度、宽度和参数数量。</p>
 <h2 id="pascal和ms-coco的目标检测">PASCAL和MS COCO的目标检测</h2>
 ]]></content>
       <categories>
