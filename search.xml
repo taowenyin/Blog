@@ -735,8 +735,61 @@ J_{s}^{\prime}(\mathbf{a}) &amp;=\sum_{\mathbf{y} \in \mathcal{Y}_{1}}\left(\mat
 <p>（3）通过寻找拉格朗日待定乘数<span class="math inline">\(\alpha_{i}\)</span>来构造在对偶空间的解，并将它与（1）中的结果比较。</p>
 <h1 id="第八章-非度量方法">第八章 非度量方法</h1>
 <h2 id="课后习题-4">课后习题</h2>
-<p>5、</p>
-<p>8、</p>
+<p>5、考虑利用熵步纯度训练一颗二叉树，可以参考（1）和（5）。</p>
+<p>（1）经过单次是/否的查询判断，所引起的步纯度下降总是比1比特小。</p>
+<p>（2）对例1中的两棵树，验证以下每次分支都引起不纯度下降，但是下降差总是小于1比特。虽然这样，解释一下为什么某个结点的不纯度却可能比后续节点还小。</p>
+<p>（3）将（1）的结果推广到任意分支率的情况。</p>
+<p>解</p>
+<p>根据式子（1）知道不纯度表示为</p>
+<p><span class="math display">\[i(N)=-\sum P\left(\omega_{i}\right) \log _{2}\left(P\left(\omega_{i}\right)\right)=H\left(\omega_{i}\right)\]</span></p>
+<p>（1）假设由一个二元特征<span class="math inline">\(F \in\{R, L\}\)</span>，这两个节点的不纯度为</p>
+<p><span class="math display">\[\begin{aligned}
+P(L) i(L)+P(R) i(R) &amp;=-P(L) \sum_{i} P\left(\omega_{i} | L\right) \log _{2}\left(P\left(\omega_{i} | L\right)\right)-P(R) \sum_{i} P\left(\omega_{i} | R\right) \log _{2}\left(P\left(\omega_{i} | R\right)\right) \\
+&amp;=-\sum_{i} P\left(\omega_{i}, L\right) \log _{2}\left(\frac{P\left(\omega_{i}, L\right)}{P(L)}\right)-\sum_{i} P\left(\omega_{i}, R\right) \log _{2}\left(\frac{P\left(\omega_{i}, R\right)}{P(R)}\right) \\
+&amp;=-\sum_{i, F} P\left(\omega_{i}, F\right) \log _{2}\left(P\left(\omega_{i}, F\right)\right)+P(L) \log _{2}(P(L))+P(R) \log _{2}(P(R)) \\
+&amp;=H(\omega, F)-H(F)
+\end{aligned}\]</span></p>
+<p>因此分裂后的纯度为</p>
+<p><span class="math display">\[\Delta i(N)=H(\omega)-H(\omega, F)+H(F)\]</span></p>
+<p>因为<span class="math inline">\(H(\omega) \leq H(\omega, F) \leq H(\omega)+H(F)\)</span>，所以</p>
+<p><span class="math display">\[0 \leq \Delta i(N) \leq H(F) \leq 1 \text { bit }\]</span></p>
+<p>（2）在每个节点上，子节点处的加权不纯度将小于父节点处的加权不纯度，即使单个子节点的不纯度可能大于其父节点。例如，在例1的上树中的（<span class="math inline">\(x_{2}&lt;0.61\)</span>）节点处，不纯度为0.65，而在左子节点处杂质为0.0，在右子节点处杂质为1.0。左枝取<span class="math inline">\(\frac{2}{3}\)</span>次，则子代的加权不纯度为<span class="math inline">\(\frac{2}{3} \times 0+\frac{1}{3} \times 1=0.33\)</span>。同样，在子树的（<span class="math inline">\(x_{1}&lt;0.61\)</span>）节点，右子节点的不纯度（0.92）高于父节点（0.76），但子节点的加权平均值为<span class="math inline">\(\frac{2}{3} \times 0+\frac{1}{3} \times 0.92=0.304\)</span>。在每种情况下，杂质的减少量在0到1位之间，视需要而定。</p>
+<p>（3）对于B分支，有<span class="math inline">\(0 \leq \Delta i(N) \leq \log _{2}(B)\text { bit }\)</span>。</p>
+<p>8、考虑一个2-类分类问题，采用如下的训练模式：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(\omega_{1}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\omega_{2}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0110</td>
+<td style="text-align: center;">1011</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1010</td>
+<td style="text-align: center;">0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0011</td>
+<td style="text-align: center;">0100</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1111</td>
+<td style="text-align: center;">1110</td>
+</tr>
+</tbody>
+</table>
+<p>（1）用熵不纯度（式（1））手工生成一颗未剪枝的分类树。</p>
+<p>（2）利用简单的逻辑表达式简化规则对上面得到的类别进行简化，以得到最简单的逻辑表达式（使用最少的AND和OR）</p>
+<p>解：</p>
+<p>此2-类分类问题一共有4个属性，分别是<span class="math inline">\(\left\{a_{1}, a_{2}, a_{3}, a_{4}\right\}\)</span></p>
+<p>（1）根据不纯度计算可以得生成树</p>
+<img src="/pc-homework/2-tree.png" class title="生成的树">
+<p>（2）<span class="math inline">\(\omega_{1}=a_{3}\)</span> AND (NOT <span class="math inline">\(a_{1}\)</span> OR <span class="math inline">\(a_{1}\)</span> AND (NOT <span class="math inline">\(a_{2}\)</span> AND NOT <span class="math inline">\(a_{4}\)</span>) OR (<span class="math inline">\(a_{2}\)</span> AND <span class="math inline">\(a_{4}\)</span>))</p>
+<p><span class="math inline">\(\omega_{2}\)</span>=NOT <span class="math inline">\(a_{3}\)</span> OR (<span class="math inline">\(a_{3}\)</span> AND <span class="math inline">\(a_{1}\)</span>) AND ((NOT <span class="math inline">\(a_{2}\)</span> AND <span class="math inline">\(a_{4}\)</span>) OR (<span class="math inline">\(a_{2}\)</span> AND NOT <span class="math inline">\(a_{4}\)</span>))</p>
 <h1 id="第九章-独立算法的机器学习">第九章 独立算法的机器学习</h1>
 <h2 id="课后习题-5">课后习题</h2>
 <p>23、</p>
