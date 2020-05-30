@@ -40,7 +40,23 @@ $\frac{d R\left(P\left(\omega_{1}\right)\right)}{d P\left(\omega_{1}\right)}=\in
 
 $\int_{\mathcal{R}_{2}} p\left(x | \omega_{1}\right) d x=\int_{\mathcal{R}_{1}} p\left(x | \omega_{2}\right) d x$
 
-（2）此解是否总是唯一的？如果不是，请构造一个简单的反例。**（未做）**
+（2）此解是否总是唯一的？如果不是，请构造一个简单的反例。
+
+解：
+
+解不是总是唯一的。当$P\left(\omega_{1}\right)=P\left(\omega_{2}\right)=0.5$，并且
+
+$$p\left(x | \omega_{1}\right)=\left\{\begin{array}{ll}
+1 & -0.5 \leq x \leq 0.5 \\
+0 & \text { otherwise }
+\end{array}\right.$$
+
+$$p\left(x | \omega_{2}\right)=\left\{\begin{array}{ll}
+1 & 0 \leq x \leq 1 \\
+0 & \text { otherwise }
+\end{array}\right.$$
+
+可以得到$\mathcal{R}_{1}$的决策区为$\mathcal{R}_{1}=[-0.5,0.25]$，可以得到$\mathcal{R}_{2}$的决策区为$\mathcal{R}_{2}=[0,0.5]$，因此解不是唯一的。
 
 6、考虑两个单变量正态分布$p\left(x | \omega_{i}\right) \sim N\left(\mu_{i}, \sigma_{i}^{2}\right)$，且$P\left(\omega_{t}\right)=\frac{1}{2}(i=1,2)$的Neyman-Pearson准则，在0-1损失下，且为了方便设$\mu_{2}>\mu_{1}$。
 
@@ -224,7 +240,7 @@ p\left(\mathbf{x} | \omega_{i}\right) P\left(\omega_{i}\right) & i=1, \cdots, c 
 \frac{\lambda_{s}-\lambda_{f}}{\lambda_{s}} \sum_{j=1}^{c} p\left(\mathbf{x} | \omega_{j}\right) P\left(\omega_{j}\right) & i=c+1
 \end{array}\right.$$
 
-（2）绘出此判别函数及其判决区域在具有如下特性的两类一维情况下的图形。**（未画图）**
+（2）绘出此判别函数及其判决区域在具有如下特性的两类一维情况下的图形。
 
 >* $p\left(x | \omega_{1}\right) \sim N(1,1)$
 >* $p\left(x | \omega_{2}\right) \sim N(-1,1)$
@@ -239,9 +255,9 @@ $g_{2}(x)=p\left(x | \omega_{2}\right) P\left(\omega_{2}\right)=\frac{1}{2} \fra
 
 $g_{3}(x) = \frac{3}{8 \sqrt{2 \pi}}\left[e^{\frac{-(x-1)^{2}}{2}}+e^{-(x+1)^{2} / 2}\right]=\frac{3}{4}\left[g_{1}(x)+g_{2}(x)\right]$
 
-（3）定性地描述随$\frac{\lambda_{r}}{\lambda_{s}}$从0增加到1，将会怎样？**（未做）**
+（3）定性地描述随$\frac{\lambda_{r}}{\lambda_{s}}$从0增加到1，将会怎样？
 
-（4）在具有如下特定的情况下重复（3）**（未画图）**
+（4）在具有如下特定的情况下重复（3）
 
 >* $p\left(x | \omega_{1}\right) \sim N(1,1)$
 >* $p\left(x | \omega_{2}\right) \sim N(0,\frac{1}{4})$
@@ -285,7 +301,7 @@ H_{s} &=-\int p(x) \ln p(x) d x+\sum_{k=1}^{q}\lambda_{k}\left[\int b_{k}(x) p(x
  &=-\int p(x)\left[\ln p(x)-\sum_{k=0}^{q} \lambda_{k} b_{k}(x)\right] d x-\sum_{k=0}^{q} \lambda_{k} a_{k}
 \end{aligned}$$
 
-**未解释**
+因为$\int p(x) d x=1$，所以$a_{0}=b_{0}=1$对所有$x$成立。
 
 （2）根据$H_{s}$对$p(x)$求导，令被积函数为0，由此证明最大熵分布遵循
 
@@ -336,19 +352,19 @@ $\begin{aligned}
 
 $p\left(\mathbf{x}_{o} | \omega\right)=\frac{1}{(2 \pi)^{\frac{3}{2}}(21)^{\frac{1}{2}}} \exp \left[-\frac{1}{2}(1.06)\right]=8.16 \times 10^{-3}$
 
-（2）构造白化变换$\mathbf{A}_{w}$（式（44）），计算分别表示本征向量和本征值的矩阵$\Phi$和$\mathbf{A}$；接下来，将此分布转化为以原点为中心协方差矩阵为单位阵的分布，即$p(\mathbf{x} | \omega) \sim N(\mathbf{0}, \mathbf{I})$。**（未做）**
+（2）构造白化变换$\mathbf{A}_{w}$（式（44）），计算分别表示本征向量和本征值的矩阵$\Phi$和$\mathbf{A}$；接下来，将此分布转化为以原点为中心协方差矩阵为单位阵的分布，即$p(\mathbf{x} | \omega) \sim N(\mathbf{0}, \mathbf{I})$。**（不会）**
 
-（3）将整个同样的转化过程应用与点$\mathbf{x}_{0}$以产生一变化点$\mathbf{x}_{w}$。**（未做）**
+（3）将整个同样的转化过程应用与点$\mathbf{x}_{0}$以产生一变化点$\mathbf{x}_{w}$。**（不会）**
 
-（4）通过详细计算，证明原分布中从$\mathbf{x}_{0}$到均值$\boldsymbol{\mu}$的Mahalanobis距离与变换后的分布中从$\mathbf{x}_{w}$到0的Mahalanobis距离相等。**（未做）**
+（4）通过详细计算，证明原分布中从$\mathbf{x}_{0}$到均值$\boldsymbol{\mu}$的Mahalanobis距离与变换后的分布中从$\mathbf{x}_{w}$到0的Mahalanobis距离相等。**（不会）**
 
-（5）概率密度在一个一般的线性变换下是否保持不变？换句话说，对于某线性变化$\mathbf{T}$，是否有$p\left(\mathbf{x}_{0} | N(\boldsymbol{\mu}, \mathbf{\Sigma})\right)=p\left(\mathbf{T}^{t} \mathbf{x}_{0} | N\left(\mathbf{T}^{t} \boldsymbol{\mu}, \mathbf{T}^{t} \mathbf{\Sigma} \mathbf{T}\right)\right)$？解释原因。**（未做）**
+（5）概率密度在一个一般的线性变换下是否保持不变？换句话说，对于某线性变化$\mathbf{T}$，是否有$p\left(\mathbf{x}_{0} | N(\boldsymbol{\mu}, \mathbf{\Sigma})\right)=p\left(\mathbf{T}^{t} \mathbf{x}_{0} | N\left(\mathbf{T}^{t} \boldsymbol{\mu}, \mathbf{T}^{t} \mathbf{\Sigma} \mathbf{T}\right)\right)$？解释原因。**（不会）**
 
-（6）证明当把一个一般的白化电话$\mathbf{A}_{\omega}=\mathbf{\Phi} \mathbf{\Lambda}^{\frac{1}{2}}$应用于一个高斯分布时可保证最终分布的协方差与单位阵$\mathbf{I}$成比例，检查变换后的分布是否仍然具有归一化特征。**（未做）**
+（6）证明当把一个一般的白化电话$\mathbf{A}_{\omega}=\mathbf{\Phi} \mathbf{\Lambda}^{\frac{1}{2}}$应用于一个高斯分布时可保证最终分布的协方差与单位阵$\mathbf{I}$成比例，检查变换后的分布是否仍然具有归一化特征。**（不会）**
 
 31、对于两类一维问题，设$p\left(x | \omega_{i}\right) \sim N\left(\mu_{i}, \sigma^{2}\right)$，且$P\left(\omega_{1}\right)=P\left(\omega_{2}\right)=\frac{1}{2}$。
 
-（1）证明最小误差概率为 **（未做完）**
+（1）证明最小误差概率为
 
 $$P_{e}=\frac{1}{\sqrt{2 \pi}} \int_{a}^{\infty} e^{\frac{-u^{2}}{2}} d u$$
 
@@ -356,19 +372,36 @@ $$P_{e}=\frac{1}{\sqrt{2 \pi}} \int_{a}^{\infty} e^{\frac{-u^{2}}{2}} d u$$
 
 证明：
 
-根据式71可以知道最小误差为
+假设$\left|x-\mu_{1}\right|<\left|x-\mu_{2}\right|$为$\omega_{1}$，否则就是$\omega_{2}$，假设$\mu_{1}<\mu_{2}$，那么就可以得到
 
-$\begin{aligned} 
-P(correct) &=\sum_{i=1}^{c} \int_{\mathcal{R}_{i}} p\left(\mathbf{x} | \omega_{i}\right) P\left(\omega_{i}\right) d \mathbf{x} \\
- &= \frac{1}{2}\int_{\mathcal{R}_{1}} p\left(\mathbf{x} | \omega_{1}\right) d \mathbf{x} + \frac{1}{2}\int_{\mathcal{R}_{2}} p\left(\mathbf{x} | \omega_{2}\right) d \mathbf{x} \\
- &= \frac{1}{2}\int_{\mathcal{R}_{1}} \frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{(x-\mu_{1})^{2}}{2 \sigma^{2}}\right) d \mathbf{x} + \frac{1}{2}\int_{\mathcal{R}_{2}} \frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{(x-\mu_{2})^{2}}{2 \sigma^{2}}\right) d \mathbf{x}
-\end{aligned}$
+$$\begin{aligned}
+P(\text {error}) &=P\left(\left|x-\mu_{1}\right|>\left|x-\mu_{2}\right| | \omega_{1}\right) P\left(\omega_{1}\right)+P\left(\left|x-\mu_{2}\right|>\left|x-\mu_{1}\right| | \omega_{2}\right) P\left(\omega_{2}\right) \\
+&=P_{e}=\frac{1}{\sqrt{2 \pi}} \int_{a}^{\infty} e^{\frac{-u^{2}}{2}} d u
+\end{aligned}$$
 
-（2）利用不等式 **（未做）**
+其中$a=\frac{\left|\mu_{2}-\mu_{1}\right|}{(2 \sigma)}$
+
+（2）利用不等式
 
 $$P_{e}=\frac{1}{\sqrt{2 \pi}} \int_{a}^{\infty} e^{\frac{-t^{2}}{2}} d t \leqslant \frac{1}{\sqrt{2 \pi} a} e^{\frac{-a^{2}}{2}}$$
 
 证明当$\frac{\left|\mu_{2}-\mu_{1}\right|}{\sigma}$趋于无穷时，$P_{e}$趋向于零。
+
+证明：
+
+因为
+
+$$\lim _{a \rightarrow \infty} \frac{1}{\sqrt{2 \pi} a} e^{\frac{-a^{2}}{2}}=0$$
+
+并且
+
+$$\begin{aligned}
+P_{e} &=\frac{1}{\sqrt{2 \pi}} \int_{a}^{\infty} e^{\frac{-u^{2}}{2}} d u \\
+& \leq \frac{1}{\sqrt{2 \pi}} \int_{a}^{\infty} \frac{u}{a} e^{\frac{-u^{2}}{2}} d u \\
+&=\frac{1}{\sqrt{2 \pi} a} e^{\frac{-a^{2}}{2}}
+\end{aligned}$$
+
+因此，当$a=\frac{\left|\mu_{2}-\mu_{1}\right|}{\sigma}$趋于无穷时，$P_{e}$趋向于零。
 
 43、设向量$\mathbf{x}=\left(x_{1}, \cdots, x_{d}\right)^{t}$的分量为二值的（0或1），且设$P\left(\omega_{j}\right)$的类别状态$\omega_{j}$的先验概率，其中$j=1, \cdots, c$。现定义
 
@@ -417,13 +450,41 @@ g_{j}(\mathbf{x}) &=\sum_{i=1}^{d}\left[x_{i} \ln p_{i j}+\left(1-x_{i}\right) \
 
 根据书上式（38）的多维多元正态秘书函数可以得到，当$\mathbf{x}=\begin{pmatrix} 0.3\\ 0.3 \end{pmatrix}$时，$p\left(\mathbf{x} | \omega_{1}\right) P\left(\omega_{1}\right)=0.04849$，$p\left(\mathbf{x} | \omega_{2}\right) P\left(\omega_{2}\right)=0.03250$，$p\left(\mathbf{x} | \omega_{3}\right) P\left(\omega_{3}\right)=0.04437$，所以$\mathbf{x}=\begin{pmatrix} 0.3\\ 0.3 \end{pmatrix}$属于第1类。
 
-（2）假设对于某特定的测试点，第一个特征值丢失了，即对$\mathbf{x}=\begin{pmatrix} *\\ 0.3 \end{pmatrix}$进行分类。 **（未做）**
+（2）假设对于某特定的测试点，第一个特征值丢失了，即对$\mathbf{x}=\begin{pmatrix} *\\ 0.3 \end{pmatrix}$进行分类。
 
-（3）假设对于某特定的测试点，第一个特征值丢失了，即对$\mathbf{x}=\begin{pmatrix} 0.3\\ * \end{pmatrix}$进行分类。 **（未做）**
+根据
 
-（4）对点$\mathbf{x}=\begin{pmatrix} 0.2\\ 0.6 \end{pmatrix}$重复以上各步。**（未做完）**
+$$P\left(\omega_{i}\right) p\left(\left(\begin{array}{c}
+* \\
+0.3
+\end{array}\right) | \omega_{i}\right)=P\left(\omega_{i}\right) \int_{-\infty}^{\infty} p\left(\left(\begin{array}{c}
+x \\
+0.3
+\end{array}\right) | \omega_{i}\right) d x$$
+
+可以得到$P\left(\omega_{1}\right) p\left((*, 0.3)^{t} | \omega_{1}\right)=0.12713$，$P\left(\omega_{1}\right) p\left((*, 0.3)^{t} | \omega_{2}\right)=0.10409$，$P\left(\omega_{1}\right) p\left((*, 0.3)^{t} | \omega_{3}\right)=0.13035$，所以$\mathbf{x}=\begin{pmatrix} *\\ 0.3 \end{pmatrix}$为第3类。
+
+（3）假设对于某特定的测试点，第一个特征值丢失了，即对$\mathbf{x}=\begin{pmatrix} 0.3\\ * \end{pmatrix}$进行分类。
+
+根据
+
+$$P\left(\omega_{i}\right) \tilde{p}\left(\left(\begin{array}{c}
+0.3 \\
+*
+\end{array}\right) | \omega_{i}\right)=P\left(\omega_{i}\right) \int_{-\infty}^{\infty} p\left(\left(\begin{array}{l}
+0.3 \\
+y
+\end{array}\right) | \omega_{i}\right) d y$$
+
+可以得到$P\left(\omega_{1}\right) p\left((*, 0.3)^{t} | \omega_{1}\right)=0.12713$，$P\left(\omega_{1}\right) p\left((*, 0.3)^{t} | \omega_{2}\right)=0.10409$，$P\left(\omega_{1}\right) p\left((*, 0.3)^{t} | \omega_{3}\right)=0.11346$，所以$\mathbf{x}=\begin{pmatrix} 0.3\\ * \end{pmatrix}$为第1类。
+
+（4）对点$\mathbf{x}=\begin{pmatrix} 0.2\\ 0.6 \end{pmatrix}$重复以上各步。
 
 当$\mathbf{x}=\begin{pmatrix} 0.2\\ 0.6 \end{pmatrix}$时，$P\left(\omega_{1}\right) p\left(\mathbf{x} | \omega_{1}\right)=0.04344$，$P\left(\omega_{2}\right) p\left(\mathbf{x} | \omega_{2}\right)=0.03556$，$P\left(\omega_{3}\right) p\left(\mathbf{x} | \omega_{3}\right)=0.04589$，所以$\mathbf{x}=\begin{pmatrix} 0.2\\ 0.6 \end{pmatrix}$属于第3类
+
+当$\mathbf{x}=\begin{pmatrix} *\\ 0.6 \end{pmatrix}$时，$P\left(\omega_{1}\right) p\left(\mathbf{x} | \omega_{1}\right)=0.11108$，$P\left(\omega_{2}\right) p\left(\mathbf{x} | \omega_{2}\right)=0.12276$，$P\left(\omega_{3}\right) p\left(\mathbf{x} | \omega_{3}\right)=0.13232$，所以$\mathbf{x}=\begin{pmatrix} *\\ 0.6 \end{pmatrix}$属于第3类
+
+当$\mathbf{x}=\begin{pmatrix} 0.2\\ * \end{pmatrix}$时，$P\left(\omega_{1}\right) p\left(\mathbf{x} | \omega_{1}\right)=0.11108$，$P\left(\omega_{2}\right) p\left(\mathbf{x} | \omega_{2}\right)=0.12276$，$P\left(\omega_{3}\right) p\left(\mathbf{x} | \omega_{3}\right)=0.10247$，所以$\mathbf{x}=\begin{pmatrix} 0.2\\ * \end{pmatrix}$属于第2类
 
 ## 思考题
 
@@ -553,9 +614,10 @@ $$p\left(\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{n} | \boldsymbol{\m
 
 根据最大似然的求解方法，即对上式两边求对数，就可以得到
 
-$$l(\boldsymbol{\mu}, \mathbf{\Sigma})=-\frac{n}{2} \ln (2 \pi)-\frac{n}{2} \ln |\mathbf{\Sigma}|-\frac{1}{2} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\boldsymbol{\mu}\right)^{t} \mathbf{\Sigma}^{-1}\left(\mathbf{x}_{k}-\boldsymbol{\mu}\right)=0$$
-
-**（上式化简不会）**
+$$\begin{aligned} 
+l(\boldsymbol{\mu}, \mathbf{\Sigma}) &= -\frac{n}{2} \ln (2 \pi)-\frac{n}{2} \ln |\mathbf{\Sigma}|-\frac{1}{2} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\boldsymbol{\mu}\right)^{t} \mathbf{\Sigma}^{-1}\left(\mathbf{x}_{k}-\boldsymbol{\mu}\right)\\
+ &=-\frac{n}{2} \ln (2 \pi)-\frac{n}{2} \ln |\mathbf{\Sigma}|-\frac{1}{2}\left[\sum_{k=1}^{n} \mathbf{x}_{k}^{t} \mathbf{x}_{k}-2 \boldsymbol{\mu}^{t} \mathbf{\Sigma}^{-1} \mathbf{x}_{k}+n \boldsymbol{\mu}^{t} \mathbf{\Sigma}^{-1} \boldsymbol{\mu}\right]
+\end{aligned}$$
 
 然后分别对上式中的$\boldsymbol{\mu}$和$\mathbf{\Sigma}$进行求导，并令其等于0，就可以解出
 
@@ -563,7 +625,7 @@ $$\hat{\boldsymbol{\mu}}=\frac{1}{n} \sum_{k=1}^{n} \mathbf{x}_{k}$$
 
 $$\hat{\mathbf{\Sigma}}=\frac{1}{n} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\hat{\boldsymbol{\mu}}\right)\left(\mathbf{x}_{k}-\hat{\boldsymbol{\mu}}\right)^{t}$$
 
-13、令$p(\mathbf{x} | \mathbf{\Sigma}) \sim \mathrm{N}(\boldsymbol{\mu}, \mathbf{\Sigma})$，其中$\boldsymbol{\mu}$已知，而$\mathbf{\Sigma}$未知。证明对$\mathbf{\Sigma}$的最大似然估计为 **（未做）**
+13、令$p(\mathbf{x} | \mathbf{\Sigma}) \sim \mathrm{N}(\boldsymbol{\mu}, \mathbf{\Sigma})$，其中$\boldsymbol{\mu}$已知，而$\mathbf{\Sigma}$未知。证明对$\mathbf{\Sigma}$的最大似然估计为 **（不会）**
 
 $$\hat{\mathbf{\Sigma}}=\frac{1}{n} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\hat{\boldsymbol{\mu}}\right)\left(\mathbf{x}_{k}-\hat{\boldsymbol{\mu}}\right)^{t}$$
 
@@ -594,8 +656,6 @@ $$\mathbf{C}_{n}=\frac{1}{n-1} \sum_{k=1}^{n}\left(\mathbf{x}_{k}-\hat{\boldsymb
 （2）证明，用递归方法求解样本均值和样本协方差的公式为
 
 $$\hat{\boldsymbol{\mu}}_{n+1}=\hat{\boldsymbol{\mu}}_{n}+\frac{1}{n+1}\left(\mathbf{x}_{n+1}-\hat{\boldsymbol{\mu}}_{n}\right)$$
-
-**未证明**
 
 $$\mathbf{C}_{n+1}=\frac{n-1}{n} \mathbf{C}_{n}+\frac{1}{n+1}\left(\mathbf{x}_{n+1}-\hat{\boldsymbol{\mu}}_{n}\right)\left(\mathbf{x}_{n+1}-\hat{\boldsymbol{\mu}}_{n}\right)^{t}$$ 
 
@@ -628,12 +688,31 @@ $$\begin{aligned}
  &=\hat{\mu}_{n}+\frac{1}{n+1}\left(\mathbf{x}_{n+1}-\hat{\mu}_{n}\right)
 \end{aligned}$$
 
+$$\begin{aligned} 
+\mathbf{C}_{n+1} &= \frac{1}{n} \sum_{k=1}^{n+1}\left(\mathbf{x}_{k}-\mathbf{m}_{n+1}\right)\left(\mathbf{x}_{k}-\mathbf{m}_{n+1}\right)^{t} \\
+ &=\frac{1}{n}\left[\sum_{k=1}^{n}\left(\mathbf{x}_{k}-\mathbf{m}_{n+1}\right)\left(\mathbf{x}_{k}-\mathbf{m}_{n+1}\right)^{t}+\left(\mathbf{x}_{n+1}-\mathbf{m}_{n+1}\right)\left(\mathbf{x}_{n+1}-\mathbf{m}_{n+1}\right)^{t}\right] \\
+ &=\frac{1}{n}\left[(n-1) \mathbf{C}_{n}+\frac{n}{(n+1)^{2}}\left(\mathbf{x}_{n+1}-\mathbf{m}_{n}\right)\left(\mathbf{x}_{n+1}-\mathbf{m}_{n}\right)^{t}\right]+\frac{1}{n}\left(\left(\frac{n}{n+1}\right)^{2}\left(\mathbf{x}_{n+1}-\mathbf{m}_{n}\right)\left(\mathbf{x}_{n+1}-\mathbf{m}_{n}\right)^{t}\right) \\
+ &=\frac{n-1}{n} \mathbf{C}_{n}+\left(\frac{1}{(n+1)^{2}}+\frac{n}{(n+1)^{2}}\right)\left(\mathbf{x}_{n+1}-\mathbf{m}_{n}\right)\left(\mathbf{x}_{n+1}-b f m_{n}\right)^{t} \\
+ &=\frac{n-1}{n} \mathbf{C}_{n}+\frac{1}{n+1}\left(\mathbf{x}_{n+1}-\mathbf{m}_{n}\right)\left(\mathbf{x}_{n+1}-\mathbf{m}_{n}\right)^{t}
+\end{aligned}$$
 
-（3）用这些递归公式计算样本均值和样本方差的计算复杂度分别是多少？**未完全**
+（3）用这些递归公式计算样本均值和样本方差的计算复杂度分别是多少？
 
-均值的复杂度为$O(d)$。
+因为
 
-（4）在什么情况下，你会偏向于采用非递归公式；而在什么情况下，你会偏向于采用递归公式。**未完成**
+$$\hat{\mu}_{n+1}=\hat{\mu}_{n}+\frac{1}{n+1}\left(\mathbf{x}_{n+1}-\hat{\mu}_{n}\right)$$
+
+所以均值复杂度为$O(d)$
+
+因为
+
+$$\mathbf{C}_{n+1}=\frac{n-1}{n} \mathbf{C}_{n}+\frac{1}{(n+1)}\left(\mathbf{x}_{n+1}-\mathbf{m}_{n}\right)\left(\mathbf{x}_{n+1}-\mathbf{m}_{n}\right)^{t}$$
+
+所以均值复杂度为$O\left(d n^{2}\right)$
+
+（4）在什么情况下，你会偏向于采用非递归公式；而在什么情况下，你会偏向于采用递归公式。
+
+递归方法可以实现在线分类。非递归方法由于没有混入新样本的误差，所以更精确。
 
 38、令$p_{x}\left(\mathbf{x} | \omega_{i}\right)$，$i=1,2$为任意的概率密度函数，均值为$\mu_{i}$，协方差矩阵为$\mathbf{\Sigma}_{i}$，其中并不要求$p_{x}\left(\mathbf{x} | \omega_{i}\right)$必须为正态概率密度。令$y=\mathbf{w}^{t} \mathbf{x}$表示投影，并且设投影后的结果的概率密度函数为$p\left(y | \omega_{i}\right)$，其均值为$\mu_{i}$,方差为$\sigma_{1}^{2}$。
 
@@ -703,7 +782,9 @@ $$\mathbf{S}_{W}=P\left(\omega_{1}\right) \mathbf{\Sigma}_{1}+P\left(\omega_{2}\
 
 $$\mathbf{w}=\left[P\left(\omega_{1}\right) \mathbf{\Sigma}_{1}+P\left(\omega_{2}\right) \mathbf{\Sigma}_{2}\right]^{-1}\left(\mu_{1}-\mu_{2}\right)$$
 
-（3）在（1）和（2）之间，哪个于公式（96）的关系更密切，请解释为什么。**（未完成）**
+（3）在（1）和（2）之间，哪个与公式（96）的关系更密切，请解释为什么。
+
+（1）与公式（96）关系更加密切。因为当$\tilde{m}_{i}=\mu_{i}$，并且$\tilde{s}_{i}^{2}=\sigma_{i}^{2}$，同时统计没有发生改变时，$J(\mathbf{w})$和$J_{1}(\mathbf{w})$有精确的应对关系。
 
 39、表达式
 
@@ -719,8 +800,10 @@ $$J_{1}=\left(m_{1}-m_{2}\right)^{2}+\frac{1}{n_{1}} s_{1}^{2}+\frac{1}{n_{2}} s
 
 $$\begin{aligned} 
 J_{1} &= \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left[\left(y_{i}-m_{1}\right)-\left(y_{j}-m_{2}\right)+\left(m_{1}-m_{2}\right)\right]^{2} \\
- &=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left[\left(y_{i}-m_{1}\right)^{2}+\left(y_{j}-m_{2}\right)^{2}+\left(m_{1}-m_{2}\right)^{2} +2\left(y_{i}-m_{1}\right)\left(y_{j}-m_{2}\right)+2\left(y_{i}-m_{1}\right)\left(m_{1}-m_{2}\right)+2\left(y_{j}-m_{2}\right)\left(m_{1}-m_{2}\right)\right] \\
- &=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{i}-m_{1}\right)^{2}+\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{j}-m_{2}\right)^{2}+\left(m_{1}-m_{2}\right)^{2} + \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{i}-m_{1}\right)\left(y_{j}-m_{2}\right)+\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{i}-m_{1}\right)\left(m_{1}-m_{2}\right) + \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{j}-m_{2}\right)\left(m_{1}-m_{2}\right)
+ &=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left[\left(y_{i}-m_{1}\right)^{2}+\left(y_{j}-m_{2}\right)^{2}+\left(m_{1}-m_{2}\right)^{2} +2\left(y_{i}-m_{1}\right)\left(y_{j}-m_{2}\right)\right.\\
+ &\left. +2\left(y_{i}-m_{1}\right)\left(m_{1}-m_{2}\right)+2\left(y_{j}-m_{2}\right)\left(m_{1}-m_{2}\right)\right]\\
+ &=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{i}-m_{1}\right)^{2}+\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{j}-m_{2}\right)^{2}+\left(m_{1}-m_{2}\right)^{2} + \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{i}-m_{1}\right)\left(y_{j}-m_{2}\right) \\
+ &+\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{i}-m_{1}\right)\left(m_{1}-m_{2}\right) + \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{j}-m_{2}\right)\left(m_{1}-m_{2}\right)
 \end{aligned}$$
 
 因为
@@ -733,8 +816,10 @@ $$s_{2}^{2}=\sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{j}-m_{2}\right)^{2}$$
 
 $$\begin{aligned} 
 J_{1} &= \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left[\left(y_{i}-m_{1}\right)-\left(y_{j}-m_{2}\right)+\left(m_{1}-m_{2}\right)\right]^{2} \\
- &=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left[\left(y_{i}-m_{1}\right)^{2}+\left(y_{j}-m_{2}\right)^{2}+\left(m_{1}-m_{2}\right)^{2} +2\left(y_{i}-m_{1}\right)\left(y_{j}-m_{2}\right)+2\left(y_{i}-m_{1}\right)\left(m_{1}-m_{2}\right)+2\left(y_{j}-m_{2}\right)\left(m_{1}-m_{2}\right)\right] \\
- &=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{i}-m_{1}\right)^{2}+\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{j}-m_{2}\right)^{2}+\left(m_{1}-m_{2}\right)^{2} + \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{i}-m_{1}\right)\left(y_{j}-m_{2}\right)+\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{i}-m_{1}\right)\left(m_{1}-m_{2}\right) + \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{j}-m_{2}\right)\left(m_{1}-m_{2}\right) \\ 
+ &=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left[\left(y_{i}-m_{1}\right)^{2}+\left(y_{j}-m_{2}\right)^{2}+\left(m_{1}-m_{2}\right)^{2} +2\left(y_{i}-m_{1}\right)\left(y_{j}-m_{2}\right) \right. \\
+ &\left. +2\left(y_{i}-m_{1}\right)\left(m_{1}-m_{2}\right)+2\left(y_{j}-m_{2}\right)\left(m_{1}-m_{2}\right)\right] \\
+ &=\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{i}-m_{1}\right)^{2}+\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}}\left(y_{j}-m_{2}\right)^{2}+\left(m_{1}-m_{2}\right)^{2} + \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{i}-m_{1}\right)\left(y_{j}-m_{2}\right) \\
+ &+\frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{i}-m_{1}\right)\left(m_{1}-m_{2}\right) + \frac{1}{n_{1} n_{2}} \sum_{y_{i} \in \mathcal{Y}_{1}} \sum_{y_{j} \in \mathcal{Y}_{2}} 2\left(y_{j}-m_{2}\right)\left(m_{1}-m_{2}\right) \\
  &=\frac{1}{n_{1}} s_{1}^{2}+\frac{1}{n_{2}} s_{2}^{2}+\left(m_{1}-m_{2}\right)^{2}
 \end{aligned}$$
 
@@ -748,7 +833,7 @@ $$J_{2}=\frac{1}{n_{1}} s_{1}^{2}+\frac{1}{n_{2}} s_{2}^{2}$$
 
 $$J_{2}=\frac{1}{n_{1}} s_{1}^{2}+\frac{1}{n_{2}} s_{2}^{2}$$
 
-（3）如果$y=\mathbf{w}^{t} \mathbf{x}$，证明在约束条件$J_{2}=1$下，使得$J_{1}$最大化的$\mathbf{w}$为 **（未完成）**
+（3）如果$y=\mathbf{w}^{t} \mathbf{x}$，证明在约束条件$J_{2}=1$下，使得$J_{1}$最大化的$\mathbf{w}$为 **（不会）**
 
 $$\mathbf{w}=\lambda\left(\frac{1}{n_{1}} \mathbf{S}_{1}+\frac{1}{n_{2}} \mathbf{S}_{2}\right)^{-1}\left(\mathbf{m}_{1}-\mathbf{m}_{2}\right)$$
 
@@ -762,7 +847,7 @@ $$\mathbf{m}_{i}=\frac{1}{n_{i}} \sum_{\mathbf{x} \in \mathcal{D}_{i}} \mathbf{x
 
 $$\mathbf{S}_{i}=\sum_{\mathbf{x} \in \mathcal{D}_{i}} n_{i}\left(\mathbf{m}_{i}-\mathbf{m}\right)\left(\mathbf{m}_{i}-\mathbf{m}\right)^{t}$$
 
-40、如果$\mathbf{S}_{B}$和$\mathbf{S}_{W}$为两个对称$d \times d$的实数矩阵，那么我们知道存在着$n$个本征值$\lambda_{1}, \cdots, \lambda_{n}$，满足$\left|\mathbf{S}_{B}-\lambda \mathbf{S}_{W}\right|=0$，和对应的$n$个本征向量$\mathbf{e}_{1}, \cdots, \mathbf{e}_{n}$，满足$\mathbf{S}_{\mathbf{B}} \mathbf{e}_{i}=\lambda_{i} \mathbf{S}_{W} \mathbf{e}_{i}$。而且，当$\mathbf{S}_{W}$正定时，这些本征向量就能够被归一化，因此$\mathbf{e}_{i}^{t} \mathbf{S}_{W} \mathbf{e}_{j}=\delta_{i j}$和$\mathbf{e}_{i}^{t} \mathbf{S}_{B} \mathbf{e}_{j}=\lambda_{i} \delta_{i j}$。令$\tilde{\mathbf{S}}_{W}=\mathbf{W}^{t} \mathbf{S}_{W} \mathbf{W}$和$\tilde{\mathbf{S}}_{B}=\mathbf{W}^{t} \mathbf{S}_{B} \mathbf{W}$，其中$\mathbf{W}$为一个$d \times n$的矩阵，其各列向量对应于前面所述的$n$个本征向量。**（未完成）**
+40、如果$\mathbf{S}_{B}$和$\mathbf{S}_{W}$为两个对称$d \times d$的实数矩阵，那么我们知道存在着$n$个本征值$\lambda_{1}, \cdots, \lambda_{n}$，满足$\left|\mathbf{S}_{B}-\lambda \mathbf{S}_{W}\right|=0$，和对应的$n$个本征向量$\mathbf{e}_{1}, \cdots, \mathbf{e}_{n}$，满足$\mathbf{S}_{\mathbf{B}} \mathbf{e}_{i}=\lambda_{i} \mathbf{S}_{W} \mathbf{e}_{i}$。而且，当$\mathbf{S}_{W}$正定时，这些本征向量就能够被归一化，因此$\mathbf{e}_{i}^{t} \mathbf{S}_{W} \mathbf{e}_{j}=\delta_{i j}$和$\mathbf{e}_{i}^{t} \mathbf{S}_{B} \mathbf{e}_{j}=\lambda_{i} \delta_{i j}$。令$\tilde{\mathbf{S}}_{W}=\mathbf{W}^{t} \mathbf{S}_{W} \mathbf{W}$和$\tilde{\mathbf{S}}_{B}=\mathbf{W}^{t} \mathbf{S}_{B} \mathbf{W}$，其中$\mathbf{W}$为一个$d \times n$的矩阵，其各列向量对应于前面所述的$n$个本征向量。**（不会）**
 
 （1）证明$\tilde{\mathbf{S}}_{W}$是一个$n \times n$的单位矩阵$I$，而$\tilde{\mathbf{S}}_{B}$是一个对角矩阵，其中各个对角线上的元素正好是前面所述的$n$个本征值。（这表明多重判别函数分析中的判别函数都是互不相关的）
 
@@ -770,7 +855,7 @@ $$\mathbf{S}_{i}=\sum_{\mathbf{x} \in \mathcal{D}_{i}} n_{i}\left(\mathbf{m}_{i}
 
 （3）令$\mathbf{y}=\mathbf{W}^{t} \mathbf{x}$。然后令$\mathbf{y}^{\prime}=\mathbf{Q D y}$，其中$\mathbf{D}$为$n \times n$的非奇异对角矩阵，表示对坐标轴的尺度变换，$\mathbf{Q}$为正交矩阵，表示对坐标轴的旋转。证明$J$对这种变换具有不变性。
 
-41、考虑两个正态分布，它们的协方差矩阵相同，但都是任意的。证明，对于一个合适的阈值，Fisher线性分类函数可以用负的对数似然比来得到。**（未完成）**
+41、考虑两个正态分布，它们的协方差矩阵相同，但都是任意的。证明，对于一个合适的阈值，Fisher线性分类函数可以用负的对数似然比来得到。**（不会）**
 
 # 第四章 非参数技术
 
@@ -814,7 +899,7 @@ $$\begin{aligned}
 
 所以$\bar{p}_{n}(x) \sim N\left(\mu, \sigma^{2}+h_{n}^{2}\right)$
 
-（2）**（未完成）**
+（2）
 
 根据式子（24）得到
 
@@ -827,7 +912,29 @@ $$\begin{aligned}
 
 所以$\operatorname{Var}\left[p_{n}(x)\right] \approx \frac{1}{2 n h_{n} \sqrt{\pi}} p(x)$
 
-（3）**（未完成）**
+（3）
+
+$$\begin{aligned}
+p(x)-\bar{p}_{n}(x) &=\frac{1}{\sqrt{2 \pi} \sigma} \exp \left[-\frac{1}{2} \frac{(x-\mu)^{2}}{\sigma^{2}}\right]-\frac{1}{\sqrt{2 \pi} \sqrt{h_{n}^{2}+\sigma^{2}}} \exp \left[-\frac{1}{2} \frac{(x-\mu)^{2}}{h_{n}^{2}+\sigma^{2}}\right] \\
+&=\frac{1}{\sqrt{2 \pi} \sigma} \exp \left[-\frac{1}{2} \frac{(x-\mu)^{2}}{h_{n}^{2}+\sigma^{2}}\right]\left\{1-\frac{\sigma}{\sqrt{h_{n}^{2}+\sigma^{2}}} \exp \left[-\frac{1}{2} \frac{(x-\mu)^{2}}{h_{n}^{2}+\sigma^{2}}+\frac{1}{2} \frac{(x-\mu)^{2}}{\sigma^{2}}\right]\right\} \\
+&=p(x)\left\{1-\frac{1}{\sqrt{1+\left(h_{n} / \sigma\right)^{2}}} \exp \left[-\frac{(x-\mu)^{2}}{2}\left\{\frac{1}{h_{n}^{2}+\sigma^{2}}-\frac{1}{\sigma^{2}}\right\}\right]\right\} \\
+&=p(x)\left\{1-\frac{1}{\sqrt{1+\left(h_{n} / \sigma\right)^{2}}} \exp \left[\frac{1}{2} \frac{h_{n}^{2}(x-\mu)^{2}}{h_{n}^{2}+\sigma^{2}}\right]\right\}
+\end{aligned}$$
+
+把$h_{n}$扩展到二阶得到
+
+$$\frac{1}{\sqrt{1+\left(\frac{h_{n}}{\sigma}\right)^{2}}} \simeq 1-\frac{1}{2}\left(h_{n} / \sigma\right)^{2}$$
+
+$$\exp \left[\frac{h_{n}^{2}}{2 \sigma^{2}} \frac{(x-\mu)^{2}}{h_{n}^{2}+\sigma^{2}}\right] \simeq 1+\frac{h_{n}^{2}}{2 \sigma^{2}} \frac{(x-\mu)^{2}}{h_{n}^{2}+\sigma^{2}}$$
+
+忽略高于$h_{n}^{2}$的项得到
+
+$$\begin{aligned}
+p(x)-\bar{p}_{n}(x) & \simeq p(x)\left\{1-\left(1-\frac{1}{2}\left(\frac{h_{n}}{\sigma}\right)^{2}\right)\left(1+\frac{h_{n}^{2}}{2 \sigma^{2}} \frac{(x-\mu)^{2}}{h_{n}^{2}+\sigma^{2}}\right)\right\} \\
+& \simeq p(x)\left\{1-1+\frac{1}{2} \frac{h_{n}^{2}}{\sigma^{2}}-\frac{h_{n}^{2}}{2 \sigma^{2}} \frac{(x-\mu)^{2}}{h_{n}^{2}+\sigma^{2}}\right\} \\
+& \simeq \frac{1}{2}\left(\frac{h_{n}}{\sigma}\right)^{2}\left[1-\frac{(x-\mu)^{2}}{h_{n}^{2}+\sigma^{2}}\right] p(x) \\
+& \simeq \frac{1}{2}\left(\frac{h_{n}}{\sigma}\right)^{2}\left[1-\left(\frac{x-\mu}{\sigma}\right)^{2}\right] p(x)
+\end{aligned}$$
 
 7、证明最近邻规则中的Voronoi网格必须是凸的。也就是说，对于同一个体积中的两个点$\mathbf{x}_{1}$，$\mathbf{x}_{2}$，位于连接着两个点的线段上的所有点也必定位于这个体积内部。
 
@@ -843,7 +950,7 @@ $$\mathbf{x}(\lambda)=(1-\lambda) \mathbf{x}_{1}+\lambda \mathbf{x}_{2}$$
 
 根据凸的定义，就可以得到了Voronoi网格是凸的。
 
-9、考虑下面的二维空间的3-类别问题 **（未完成）**
+9、考虑下面的二维空间的3-类别问题 **（不会）**
 
 | $\omega_{1}$ | | $\omega_{2}$ | | $\omega_{3}$ | |
 | :------: | :------: | :------: | :------: | :------: | :------: |
@@ -957,7 +1064,7 @@ $$\mathbf{x}=\mathbf{x}_{a}-\frac{g\left(\mathbf{x}_{a}\right)}{\|\mathbf{w}\|^{
 
 得证
 
-12、考虑二次判别函数（式（4））**（未完成）**
+12、考虑二次判别函数（式（4））**（不会）**
 
 $$g(\mathbf{x})=w_{0}+\sum_{i=1}^{d} w_{i} x_{i}+\sum_{i=1}^{d} \sum_{j=1}^{d} w_{i j} x_{i} x_{j}$$
 
@@ -1092,7 +1199,7 @@ $$J^{\prime}(\mathbf{a})=\int\left[\mathbf{a}^{t} \mathbf{y}-g_{o}(\mathbf{x})\r
 
 因为上式中的第二项与$\mathbf{a}$无关，所以只要$\mathbf{a}$最小化，那么整个式子就最小化。
 
-32、考虑支持向量机和分属两类的训练样本：**（未完成）**
+32、考虑支持向量机和分属两类的训练样本：**（不会）**
 
 $$\begin{array}{ccc}
 \omega_{1}:(1,1)^{t} & (2,2)^{t} & (2,0)^{t} \\
@@ -1100,6 +1207,8 @@ $$\begin{array}{ccc}
 \end{array}$$
 
 （1）在图中作出这6个训练点，构造具有最优超平面和最优间隔的权向量。
+
+{% asset_img svm.png 超平面 %}
 
 （2）哪些是支持向量？
 
@@ -1175,18 +1284,151 @@ $\omega_{2}$=NOT $a_{3}$ OR ($a_{3}$ AND $a_{1}$) AND ((NOT $a_{2}$ AND $a_{4}$)
 
 ## 课后习题
 
-23、
+23、请证明式（24）中的“留一法”均值估计$\mu(\cdot)$等价于式（22）的样本均值$\hat{\mu}$。
 
-40
+证明：
+
+根据式子（25）
+
+$$\begin{aligned}
+\mu_{(\cdot)} &=\frac{1}{n} \sum_{i=1}^{n} \mu_{(i)} \\
+&=\frac{1}{n} \sum_{i=1}^{n}\left[\frac{1}{n-1} \sum_{j \neq i} x_{j}\right] \\
+&=\frac{1}{n(n-1)} \sum_{i=1}^{n}\left[\sum_{j=1}^{n} x_{j}-x_{i}\right] \\
+&=\frac{1}{n(n-1)} \sum_{i=1}^{n}\left[n \hat{\mu}-x_{i}\right] \\
+&=\frac{n}{n-1} \hat{\mu}-\frac{1}{n(n-1)} \sum_{i=1}^{n} x_{i} \\
+&=\frac{n}{n-1} \hat{\mu}-\frac{1}{n-1} \hat{\mu} \\
+&=\hat{\mu}
+\end{aligned}$$
+
+40、如果$n^{\prime}$个独立随机选取的测试集中有$k$个错分类的模型，那么如式（38）所示，$k$具有二项式分布 **（不会）**
+
+$$P(k)=\left(\begin{array}{l} n^{\prime} \\ k \end{array}\right) p^{k}(1-p)^{n^{\prime}-k}$$
+
+请证明$p$的最大似然估计$\hat{p}=\frac{k}{n^{\prime}}$，如式（39）所示。
 
 # 第十章 无监督学习和聚类
 
 ## 课后习题
 
-3、
+3、假设一个一维的混合正态模型由两个正态分量组成，每个分量都以原点为中心：
 
-4、
+$$p(x | \boldsymbol{\theta})=P\left(\omega_{1}\right) \frac{1}{\sqrt{2 \pi} \sigma_{1}} e^{\frac{-x^{2}}{\left(2 \sigma_{1}^{2}\right)}}+\left(1-P\left(\omega_{1}\right)\right) \frac{1}{\sqrt{2 \pi} \sigma_{2}} e^{\frac{-x^{2}}{\left(2 \sigma_{2}^{2}\right)}}$$
 
-6、
+而参数向量为$\boldsymbol{\theta}=\left(P\left(\omega_{1}\right), \sigma_{1}, \sigma_{2}\right)^{t}$。
 
-32、
+（1）证明在这些条件下，这个混合密度是完全不可辨识的。
+
+（2）假设$P\left(\omega_{1}\right)$的值是确定而未知的，混合模型是可辨识的吗？
+
+（3）假设$\sigma_{1}$和$\sigma_{2}$是已知的，但$P\left(\omega_{1}\right)$是未知的。模型是可辨识的吗？也就是说，$P\left(\omega_{1}\right)$可由样本数据求出吗？
+
+证明：
+
+（1）当$\sigma_{1}=\sigma_{2}$，$P\left(\omega_{1}\right)$的取值范围为[0,1]，保持相同的混合密度。因此，混合密度无法确定。
+
+（2）如果$P\left(\omega_{1}\right)$是固定的且已知的，并且不等于0、0.5或1，那么模型是可辨识的。对于$P\left(\omega_{1}\right)$的这三个值，不能恢复第一个分布的参数。如果$P\left(\omega_{1}\right)=1$，不能恢复第二个分布的参数。如果$P\left(\omega_{1}\right)=0.5$，那么两个分布的参数可以互换。
+
+（3）如果$\sigma_{1}=\sigma_{2}$，因为$P\left(\omega_{1}\right)$和$P\left(\omega_{2}\right)$可以互换，所以$P\left(\omega_{1}\right)$不能够被识别。如果$\sigma_{1} \neq \sigma_{2}$，那么$P\left(\omega_{1}\right)$可以确定。
+
+4、令$\mathbf{x}$表示含有$d$个分量的向量，每个分量在0或1间取值，让$P(\mathbf{x} | \theta)$表示$c$个多变量伯努利分布组成的混合分布，
+
+$$P(\mathbf{x} | \boldsymbol{\theta})=\sum_{i=1}^{c} P\left(\mathbf{x} | \omega_{i}, \boldsymbol{\theta}_{i}\right) P\left(\omega_{i}\right)$$
+
+其中
+
+$$P\left(\mathbf{x} | \omega_{i}, \boldsymbol{\theta}_{i}\right)=\prod_{j=1}^{d} \theta_{i j}^{x_{j}}\left(1-\theta_{i j}\right)^{1-x_{j}}$$
+
+（1）请推出下面的偏导数公式
+
+$$\frac{\partial \ln P\left(\mathbf{x} | \omega_{i}, \boldsymbol{\theta}_{i}\right)}{\partial \theta_{i j}}=\frac{\mathbf{x}_{i}-\theta_{i j}}{\theta_{i j}\left(1-\theta_{i j}\right)}$$
+
+（2）用最大似然估计的一般公式证明参数向量$\boldsymbol{\theta}_{i}$的最大似然估计$\hat{\boldsymbol{\theta}_{i}}$，必须满足
+
+$$\hat{\boldsymbol{\theta}}_{i}=\frac{\sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}_{i}\right) \mathbf{x}_{k}}{\sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}_{i}\right)}$$
+
+（3）解释你在（2）中得到的答案。
+
+解：
+
+（1）首先对$P\left(\mathbf{x} | \omega_{i}, \boldsymbol{\theta}_{i}\right)$取对数
+
+$$\ln P\left(\mathbf{x} | \omega_{i}, \boldsymbol{\theta}_{i}\right)=\sum_{i=1}^{d}\left[x_{i j} \ln \theta_{i j}+\left(1-x_{i j}\right) \ln \left(1-\theta_{i j}\right)\right]$$
+
+然后对$\theta_{i j}$求导得到
+
+$$\begin{aligned}
+\frac{\partial \ln P\left(\mathbf{x} | \omega_{i}, \boldsymbol{\theta}_{i}\right)}{\partial \theta_{i j}} &=\frac{x_{i j}}{\theta_{i j}}-\frac{1-x_{i j}}{1-\theta_{i j}} \\
+&=\frac{x_{i j}\left(1-\theta_{i j}\right)-\theta_{i j}\left(1-x_{i j}\right)}{\theta_{i j}\left(1-\theta_{i j}\right)} \\
+&=\frac{x_{i j}-x_{i j} \theta_{i j}-\theta_{i j}+\theta_{i j} x_{i j}}{\theta_{i j}\left(1-\theta_{i j}\right)} \\
+&=\frac{x_{i j}-\theta_{i j}}{\theta_{i j}\left(1-\theta_{i j}\right)}
+\end{aligned}$$
+
+（2）根据式子（7）可以知道
+
+$$\sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}_{i}\right) \nabla_{\boldsymbol{\theta}_{i}} \ln P\left(x_{k} | \omega_{i}, \hat{\boldsymbol{\theta}}_{i}\right)=0$$
+
+更具（1）中的结论可以得到
+
+$$\nabla_{\boldsymbol{\theta}_{i}} \ln P\left(x_{k} | \omega_{i}, \hat{\boldsymbol{\theta}}_{i}\right)=\frac{x_{k} \hat{\boldsymbol{\theta}}_{i}}{\hat{\boldsymbol{\theta}}_{i}\left(1-\hat{\boldsymbol{\theta}}_{i}\right)}$$
+
+因此就可以得到
+
+$$\sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}_{i}\right) \frac{\mathbf{x}_{k}-\hat{\boldsymbol{\theta}}_{i}}{\hat{\boldsymbol{\theta}}_{i}\left(1-\hat{\boldsymbol{\theta}}_{i}\right)}=0$$
+
+假设$\hat{\boldsymbol{\theta}}_{i} \in(0,1)$，因此就有
+
+$$\sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}_{i}\right)\left(\mathbf{x}_{k}-\hat{\boldsymbol{\theta}}_{i}\right)=\mathbf{0}$$
+
+所以就得到
+
+$$\hat{\boldsymbol{\theta}}_{i}=\frac{\sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}_{i}\right) \mathbf{x}_{k}}{\sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}_{i}\right)}$$
+
+（3）$\boldsymbol{\theta}_{i}$的最大似然估计$\hat{\boldsymbol{\theta}}_{i}$是$\mathbf{x}_{k}$的加权平均，其中权重是混合权重$\hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}_{i}\right)$的后验概率。
+
+6、考虑一个含有$c$个成分的混合概率，参数向量$\theta$和先验概率$P\left(\omega_{i}\right)$都是未知的。令$\hat{P}\left(\omega_{i}\right)$表示$P\left(\omega_{i}\right)$的最大似然估计，$\hat{\boldsymbol{\theta}}_{i}$表示$\boldsymbol{\theta}_{i}$的最大似然估计。证明如果似然函数是可微的而且对于任何$i$，$\hat{P}\left(\omega_{i}\right) \neq 0$，则$\hat{P}\left(\omega_{i}\right)$和$\hat{\boldsymbol{\theta}}_{i}$必须满足式（11）和（12），即有 **（不会）**
+
+$$\hat{P}\left(\omega_{i}\right)=\frac{1}{n} \sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}\right)$$
+
+和
+
+$$\sum_{k=1}^{n} \hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}\right) \nabla_{\boldsymbol{\theta}_{i}} \ln p\left(\mathbf{x}_{k} | \omega_{i}, \hat{\boldsymbol{\theta}}_{i}\right)=0$$
+
+其中
+
+$$\hat{P}\left(\omega_{i} | \mathbf{x}_{k}, \hat{\boldsymbol{\theta}}\right)=\frac{p\left(\mathbf{x}_{k} | \omega_{i}, \hat{\boldsymbol{\theta}}_{i}\right) \hat{P}\left(\omega_{i}\right)}{\sum_{i=1}^{c} p\left(\mathbf{x}_{k} | \omega_{j}, \hat{\boldsymbol{\theta}}_{j}\right) \hat{P}\left(\omega_{j}\right)}$$
+
+32、定义相似性度量为$s\left(\mathbf{x}, \mathbf{x}^{\prime}\right)=\frac{\mathbf{x}^{t} \mathbf{x}^{\prime}}{\left(\|\mathbf{x}\|\left\|\mathbf{x}^{\prime}\right\|\right)}$
+
+（1）如果$\mathbf{x}$的每个分量都是二值的（取-1或1），$x_{i}=1$表示$\mathbf{x}$拥有第$i$项属性，$x_{i}=-1$则表示$\mathbf{x}$不具有这个属性，请解释相似性度量的意义。
+
+（2）证明在这种情况下，欧几里得距离的平方满足
+
+$$\left\|\mathbf{x}-\mathbf{x}^{\prime}\right\|^{2}=2 d\left(1-s\left(\mathbf{x}, \mathbf{x}^{\prime}\right)\right)$$
+
+证明：
+
+根据式子（50）得到相似性度量为
+
+（1）因为$\mathbf{x}$和$\mathbf{x}^{\prime}$是$d$维的向量，并且当$x_{i}=1$表示$\mathbf{x}$拥有第$i$项属性，$x_{i}=-1$则表示$\mathbf{x}$不具有这个属性。因此向量的欧式长度维
+
+$$\|\mathbf{x}\|=\left\|\mathbf{x}^{\prime}\right\|=\sqrt{\sum_{i=1}^{d} x_{i}^{2}}=\sqrt{\sum_{i=1}^{d} 1}=\sqrt{d}$$
+
+所以相似性度量可以写为
+
+$$\begin{aligned}
+s\left(\mathbf{x}, \mathbf{x}^{\prime}\right) &=\frac{\mathbf{x}^{t} \mathbf{x}^{\prime}}{\sqrt{d} \sqrt{d}} \\
+&=\frac{1}{d} \sum_{i=1}^{d} x_{i} x_{i}^{\prime} \\
+&=\frac{1}{d} [\text{一般特征数}-\text{非一般特征数}] \\
+&=\frac{1}{d} [\text{一般特征数}-(d-\text{非一般特征数)}] \\
+&=\frac{2}{d} (\text{一般特征数}) - 1
+\end{aligned}$$
+
+（2）根据（1）结果，使$\|\mathbf{x}\|=\left\|\mathbf{x}^{\prime}\right\|=\sqrt{d}$
+
+$$\begin{aligned}
+\left\|\mathbf{x}-\mathbf{x}^{\prime}\right\|^{2} &=\left(\mathbf{x}-\mathbf{x}^{\prime}\right)^{t}\left(\mathbf{x}-\mathbf{x}^{\prime}\right) \\
+&=\mathbf{x}^{t} \mathbf{x}+\mathbf{x}^{\prime t} \mathbf{x}^{\prime}-2 \mathbf{x}^{t} \mathbf{x}^{\prime} \\
+&=\|\mathbf{x}\|^{2}+\left\|\mathbf{x}^{\prime}\right\|^{2}-2 s\left(\mathbf{x}, \mathbf{x}^{\prime}\right)\|\mathbf{x}\|\left\|\mathbf{x}^{\prime}\right\| \\
+&=d+d-2 s\left(\mathbf{x}, \mathbf{x}^{\prime}\right) \sqrt{d} \sqrt{d} \\
+&=2 d\left[1-s\left(\mathbf{x}, \mathbf{x}^{\prime}\right)\right]
+\end{aligned}$$
