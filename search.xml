@@ -91,7 +91,26 @@
 <p>普通网络和残差网络按照图3的形式。网络的输入为<span class="math inline">\(32 \times 32\)</span>减去图像均值的图像。第一层为<span class="math inline">\(3 \times 3\)</span>的卷积层。然后作者使用<span class="math inline">\(6n\)</span>个<span class="math inline">\(3 \times 3\)</span>的卷积层进行堆叠，卷积层对应的特征图有三种<span class="math inline">\(\{32,16,8\}\)</span>，每一种的卷积层数量为<span class="math inline">\(2n\)</span>。对应的卷积核数量为<span class="math inline">\(\{16,32,64\}\)</span>。使用步长为2的卷积进行下采样。网络的最后再进行全局平均池化，以及一个10路的全链接层和softmax。总共有<span class="math inline">\(6 n+2\)</span>个堆叠权重层。具体结构如下表所示：</p>
 <img src="/deep-residual-learning/net-architecture.png" class title="网络结构">
 <p>当使用快捷连接时，作者把网络中<span class="math inline">\(3 \times 3\)</span>的网络层进行两两连接（合计<span class="math inline">\(3n\)</span>个快捷连接）。在这个数据集上，作者为所有模型都使用恒等快捷连接，因此我们的残差网络与普通网络具有相同的深度、宽度和参数数量。</p>
+<p>作者使用0.0001的权重衰减和0.9的动量，并通过文献中的方法进行初始化权重，以及BN，但是没有dropout。这些模型在2个GPUs上使用128的mini-batch进行训练。学习率初始为0.1，在第3.2万和4.8万次迭代时将其除以10，总的迭代次数为6.4万次，这是由第4.5万次/0.5万次的训练集/验证集分配所决定的。作者在训练过程中使用简单的数据扩充：每条边填充4个像素，并且对水平翻转或填充后的图像进行<span class="math inline">\(32 \times 32\)</span>的切片随即采样。而在测试阶段，作者只对单窗口的原始<span class="math inline">\(32 \times 32\)</span>图像进行评估。</p>
+<p>作者比较了<span class="math inline">\(n=\{3,5,7,9\}\)</span>，也就是20、32、44、56层的网络。图6（左）显示的普通网络的特点。深度普通网络随着深度的加深，训练误差也在增大。这一现象与在ImageNet（图4，左）和MNIST数据集上相似，表明了优化上的难度确实是一个很重要的问题。</p>
+<p>图6（中）是残差网络的特性。与在ImageNet数据集上类似（图4，右），作者的残差网络能够完全克服优化的困难，并且当网络深度增加时能够获得精度增益。</p>
+<p>作者继续探索了<span class="math inline">\(n=18\)</span>，也就是110层的残差网络。这该网络中，作者发现初始化为0.1的学习率太大，不能很好的收敛。所以作者使用0.01的训练误差来训练，直到训练误差低于80%（大约迭代400次），然后再把学习率调整为0.1，并且继续训练。剩下的训练过程与之前相同。110层残差网络也能很好的收敛（图6，中间）。残差网络相比于其他深度网络和窄带网络。如FitNet和Highway（如表6），也能达到最好的效果（6.43%，表6）。</p>
+<img src="/deep-residual-learning/training-on-cifar-10.png" class title="CIFAR-10数据集上的训练">
+<p>图6：CIFAR-10数据集上的训练。虚线表示训练错误，粗线表示测试错误。左：普通网络。110层的普通网络的错误高大60%以上，因此并没有展示出来。中间：残差网路。右：110层和1202层的残差网络。</p>
+<p>表7：CIFAR-10测试数据集上的分类误差。所有方法都有数据扩充。对于ResNet-110，作者运行它5次，并显示“最佳（平均值±标准偏差）”。</p>
+<img src="/deep-residual-learning/cifar-10-test-classification-error.png" class title="CIFAR-10测试数据集上的分类误差">
+<p><strong>层响应分析：</strong> 如图7显示了层响应的标准偏差。响应是每个<span class="math inline">\(3 \times 3\)</span>卷积层的BN之后和其他非线性（ReLU/加法）之前的输出。对于残差网络，这个分析结果也揭示了残差函数的响应强度。图7显示了残差网络的响应比它对应的普通网络的响应要小。这些结果支持作者的基本动机（第3.1节），即残差函数通常比非残差函数更接近于零。作者还注意到深度残差网络具有更小的响应幅度，如图7中的20层残差网络、56层残差网络和110层的残差网络之间的比较所证明。</p>
+<img src="/deep-residual-learning/standard-deviations.png" class title="CIFAR-10数据集上层响应的标准差">
+<p>图7：CIFAR-10数据集上层响应的标准差。响应是每个<span class="math inline">\(3 \times 3\)</span>卷积层的BN之后和其他非线性（ReLU/加法）之前的输出。上：图层按其原始顺序显示。下：响应按降序排列。</p>
+<p><strong>探索超过1000层：</strong> 作者探索了一个超过1000层的深度模型。作者设置<span class="math inline">\(n=2\)</span>得到了1202层网络，该网络按照上面的方法进行训练。作者的方法显示没有优化困难，并且1000层的网络也能得到&lt;0.1%的训练误差（图6，右）。它的测试误差仍然相当大（7.93%，表6）。</p>
+<p>但在如此激进的深度模型上，仍然存在一些尚未解决的问题。在1202层网络上的测试结果比110层网络的结果要差，虽然有相似的训练误差。作者认为这是过拟合造成的。对于较小的数据集并不需要1202层的网络。在这个数据集上使用一些如maxout或dropout等强正则化的方法才能获得最佳的结果。在本文中，作者没有使用maxout或dropout，只是简单的通过设计深层窄带模型来进行正则化，而且不用担心优化的难度。但是通过强大的正则化或许能够提高实验结果，作者会在以后进行研究。</p>
 <h2 id="pascal和ms-coco的目标检测">PASCAL和MS COCO的目标检测</h2>
+<p>作者的方法在其他识别任务上也能有很好的泛化性。表7和表8显示了在PASCAL VOC 2007和2012，以及COCO上的目标检测的结果。作者使用了Faster R-CNN作为检测方法。作者更加关注使用101层残差网络代替VGG-16后的性能提升。使用不同网络进行检测的实现是一样的，所以检测结果只能得益于更好的网络。最值得注意的是，在COCO数据集的挑战中，作者获得了在COCO标准指标上比先前结果高6.0%的成绩，这相当于28%的相对提升。而这完全得益于所学到的表达。</p>
+<p>表7：基于Faster R-CNN在PASCAL VOC 2007/2012测试集上目标检测的mAP</p>
+<img src="/deep-residual-learning/object-detection-pascal.png" class title="在PASCAL测试集上的目标检测">
+<p>表8：基于Faster R-CNN在COCO测试集上目标检测的mAP</p>
+<img src="/deep-residual-learning/object-detection-coco.png" class title="在COCO测试集上的目标检测">
+<p>基于深度残差网络，我们在ILSVRC &amp; COCO 2015竞赛的ImageNet检测、ImageNet定位、COCO检测以及COCO分割上获得了第一名。</p>
 ]]></content>
       <categories>
         <category>论文</category>
