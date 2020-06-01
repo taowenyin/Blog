@@ -3477,7 +3477,7 @@ W_{0}^{t+1}=W_{0}^{t}-\gamma_{t} \xi\left(y, \mathbf{x}^{*}\right) \mathbf{w}_{y
   <entry>
     <title>ROS问题集锦</title>
     <url>/ros-qa/</url>
-    <content><![CDATA[<h1 id="ros机械臂控制问题集锦">ROS机械臂控制问题集锦</h1><p><a href="https://blog.csdn.net/weixin_39579805" target="_blank" rel="noopener">参考链接</a></p>]]></content>
+    <content><![CDATA[<h1 id="ros机械臂控制问题集锦">ROS机械臂控制问题集锦</h1><p><a href="https://blog.csdn.net/weixin_39579805" target="_blank" rel="noopener">参考链接</a></p><h1 id="melodic执行rviz报错could-not-find-the-gui-install-the-joint_state_publisher_gui-package">melodic执行RVIZ报错“Could not find the GUI, install the 'joint_state_publisher_gui' package”</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install ros-melodic-joint-state-publisher-gui</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>ROS</category>
       </categories>
