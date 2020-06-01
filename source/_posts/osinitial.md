@@ -147,6 +147,12 @@ sudo apt-get upgrade
 sudo apt-get install libfprint0 fprint-demo libpam-fprintd
 ```
 
+## Ubuntu性能修改插件
+
+```bash
+sudo apt-get install indicator-cpufreq
+```
+
 ## UGet
 
 ```bash
@@ -1189,10 +1195,22 @@ Port 443
 ssh -T git@github.com
 ```
 
-## Ubuntu性能修改插件
+## Ubuntu录音消除杂英
+
+>* 1、打开Pulse配置文件
 
 ```bash
-sudo apt-get install indicator-cpufreq
+sudo gedit /etc/pulse/default.pa
+```
+
+>* 2、在尾部添加降噪配置
+
+```bash
+#Active Noise Removal
+.ifexists module-echo-cancel.so
+load-module module-echo-cancel aec_method=webrtc source_name=mic source_properties=device.description=MicHD
+set-default-source "mic"
+.endif
 ```
 
 # 游戏模拟器
@@ -1236,22 +1254,4 @@ makerom -ciatocci XX.cia
 
 ```bash
 python 3ds_decrypt_v2.py XX.cci
-```
-
-## Ubuntu录音消除杂英
-
->* 1、打开Pulse配置文件
-
-```bash
-sudo gedit /etc/pulse/default.pa
-```
-
->* 2、在尾部添加降噪配置
-
-```bash
-#Active Noise Removal
-.ifexists module-echo-cancel.so
-load-module module-echo-cancel aec_method=webrtc source_name=mic source_properties=device.description=MicHD
-set-default-source "mic"
-.endif
 ```
