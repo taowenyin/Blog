@@ -6489,7 +6489,7 @@ W_{0}^{t+1}=W_{0}^{t}-\gamma_{t} \xi\left(y, \mathbf{x}^{*}\right) \mathbf{w}_{y
 </ul>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-<h2 id="ubuntu录音消除杂英">Ubuntu录音消除杂英</h2>
+<h2 id="ubuntu录音消除杂音">Ubuntu录音消除杂音</h2>
 <blockquote>
 <ul>
 <li>1、打开Pulse配置文件</li>
