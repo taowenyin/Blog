@@ -1195,7 +1195,7 @@ Port 443
 ssh -T git@github.com
 ```
 
-## Ubuntu录音消除杂英
+## Ubuntu录音消除杂音
 
 >* 1、打开Pulse配置文件
 
