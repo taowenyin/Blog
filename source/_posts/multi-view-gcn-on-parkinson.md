@@ -62,6 +62,42 @@ e\left(v_{i}, v_{j}\right) & \text { if } v_{i} \in N_{j} \text { or } v_{j} \in
 
 图1：作者框架的总体流程
 
+### C1：多视图GCN
+
+传统的巻积神经网络（CNN）依赖于规则的类网格结构，在网格的每个位置都有一个定义较好的领域（例如2D和3D图像）。在一个图结构中，一个顶点的领域通常没有自然的选择，因此将巻积运算推广到图设置是不容易。Shuman等人通过在谱域中定图巻积证明了这种推广的可行性，并提出了GCN。由于GCN能够有效的模拟群体中的非线性特性，并且在频谱带上具有更好的图形特性挖掘能力，作者提出了多视图GCN，用于不同视图的群体图的有效融合。该方法主要包含两个步骤：（i）设计视图间多视图巻积的算子；（ii）将多视图图分组到一个视图池的操作。
+
+**图卷积：** 基于拉普拉斯矩阵矩阵和图傅立叶变换（GFT）定义谱域上的图卷积是GCN的关键。作者首先正则化图拉普拉斯$\mathbf{L}=\mathbf{I}-\mathbf{D}^{-1 / 2} \mathbf{A} \mathbf{D}^{-1 / 2}$，其中$\mathbf{A} \in \mathbb{R}^{n \times n}$是与图关联的邻接矩阵，$\mathbf{D} \in \mathbb{R}^{n \times n}$是$d_{i, i}=\sum_{j} a_{i, j}$的对角矩阵，并且$\mathbf{I} \in \mathbb{R}^{n \times n}$是一个恒等矩阵。因为$\mathbf{L}$是实对称半正定矩阵，它可以分解为$\mathbf{L}=\mathbf{U} \mathbf{\Lambda} \mathbf{U}^{\mathbf{T}}$，其中$\mathbf{U} \in \mathbb{R}^{n \times n}$是$\mathbf{U} \mathbf{U}^{\mathbf{T}}=\mathbf{I}$的特征向量矩阵（称为傅立叶基），$\mathbf{\Lambda} \in \mathbb{R}^{n \times n}$是特征$\left\{\lambda_{i}\right\}_{i=1}^{n}$的对角矩阵。特征值表示相关特征向量的频率，即与较大特征值相关的特征向量在连接顶点之间的振荡速度更快。具体来说，为了获取信号在图数据集上的维以频率表示，作者定义了在BGG $\tilde{G}$上的拉普拉斯矩阵，因为所有的图与邻接矩阵共享一个公共结构$\tilde{A}$。
+
+设$\mathbf{x} \in \mathbb{R}^{n}$是定义在图$G$中的向量集上的一个信号，其中$x_{i}$表示第$i$个顶点的信号值。GFT被定义为$\hat{\mathbf{x}}=\mathbf{U}^{\mathrm{T}} \mathbf{x}$，其将信号$\mathbf{x}$转化为傅立叶基$\mathbf{U}$所跨越的谱域，然后图卷积就可以定义为式子1：
+
+$$\mathbf{y}=g_{\theta}(\mathbf{L}) \mathbf{x}=g_{\theta}\left(\mathbf{U} \mathbf{\Lambda} \mathbf{U}^{\mathrm{T}}\right) \mathbf{x}=\mathbf{U} g_{\theta}(\mathbf{\Lambda}) \mathbf{U}^{\mathrm{T}} \mathbf{x}$$
+
+其中，$\theta \in \mathbb{R}^{n}$是要学习的傅立叶矢量的向量，$g_{\theta}$是一个滤波器，可以认为是$\mathbf{\Lambda}$的函数。为了使滤波器$s$在空间中具有局部的特性，并降低计算复杂度，$g_{\theta}$可以使用切比雪夫多项式的$s$阶展开进行逼近。那么$g_{\theta}$就为式子2：
+
+$$g_{\theta}(\boldsymbol{\Lambda})=\sum_{p=0}^{s-1} \theta_{p} T_{p}(\tilde{\boldsymbol{\Lambda}})$$
+
+其中参数$\theta \in \mathbb{R}^{s}$是切比雪夫系数向量，$T_{p}(\tilde{\boldsymbol{\Lambda}}) \in \mathbb{R}^{n \times n}$是切比雪夫多项式在$\tilde{\mathbf{\Lambda}}=2 \mathbf{\Lambda} / \lambda_{\max }-\mathbf{I}$处的$s$阶展开，标量特征值的对角矩阵位于$[-1,1]$。
+
+把式子2代入式子1就可以得到$\mathbf{y}=g_{\theta}(\mathbf{L}) \mathbf{x}=\sum_{p=0}^{s-1} \theta_{p} T_{p}(\tilde{\mathbf{L}}) \mathbf{x}$，其中$\tilde{\mathbf{L}}=\frac{2}{\lambda_{\max }} \mathbf{L}-\mathbf{I}$。定义$\tilde{\mathbf{x}}_{p}=T_{p}(\tilde{\mathbf{L}}) \mathbf{x}$，可以使用递推关系来计算$\tilde{\mathbf{x}}_{i}=2 \tilde{\mathbf{L}} \tilde{\mathbf{x}}_{p-1}-\tilde{\mathbf{x}}_{p-2}$，其中$\tilde{\mathbf{x}}_{0}=\mathbf{x}$，并且$\tilde{\mathbf{x}}_{1}=\tilde{\mathbf{L}} \mathbf{x}$，最后在一个GCN中第$j$个输出特征映射就可以表示为
+
+$$\mathbf{y}_{j}=\sum_{i=1}^{F_{i n}} g_{\theta_{i, j}}(\mathbf{L}) \mathbf{x}_{i}$$
+
+从而就产生了$F_{in} \times F_{out}$维的可以训练的切比雪夫系数$\theta_{i, j} \in \mathbb{R}^{k}$向量，其中$\mathbf{x}_{i}$表示从一个图中得到输入特征映射。在作者的例子中，$\mathbf{x}_{i}$表示每个图对应的相似矩阵$\mathbf{X}$的第$i$行，并且$F_{i n}=n$（脑感兴趣区ROIs的数量）。所有输出被收集到特征矩阵$\mathbf{Y}=\left[\mathbf{y}_{1}, \mathbf{y}_{2}, \cdots, \mathbf{y}_{F_{o u t}}\right] \in \mathbb{R}^{n \times F_{out}}$中，其中每行表示一个ROI的提取特征。
+
+**视图池：** 对于每一个特定区域，GCN的输出都是$M$个特征矩阵$\left\{\mathbf{Y}^{(1)}, \cdots, \mathbf{Y}^{(k)}, \cdots, \mathbf{Y}^{(M)}\right\}$，其中每个矩阵$\mathbf{Y}^{(k)} \in \mathbb{R}^{n \times F_{out}}$表示一个视图。与多视图CNN的视图池类似，作者对每个特定区域中的所有$M$个特征矩阵使用元素最大化操作，从而将多个视图聚合在一起，生成一个共享的特征矩阵$\mathbf{Z}$。这个视图池类似于多视图CNN中的视图池层。另一个方式是按元素进行平均，但这个方法在作者的实验中效果不好（如表2所示）。原因可能是最大化操作学习了组合视图而不是平均视图，因此可以在忽略其他视图的同时使用每个特征的信息量更大的视图。
+
+表2：使用单视图和多视图结构比较二分类（AUC）和采集聚类（NMI）
+
+{% asset_img single-view-and-multi-view.png 使用单视图和多视图结构比较二分类（AUC）和采集聚类（NMI） %}
+
+{% asset_img flowchart-multi-view-gcn.png 作者的多视图GCN的流程图 %}
+
+图2：作者的多视图GCN的流程图。基于这个多视图GCN，可以根据BCGs和BGG的相似矩阵逐步融合BCGs的不同视图，从而获得BCGs和BGG的局部和全局结构信息。
+
+### C2：两两匹佩
+
+### C3：Softmax
+
 # 实验和结果
 
 # 讨论
