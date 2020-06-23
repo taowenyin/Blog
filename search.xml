@@ -19,6 +19,19 @@
 <p><strong>非线性特征学习：</strong> 目前大多数用于神经图象分析的机器学习方法都基于线性或多线性模型，这些模型对神经影像中包含的信息的探索能力有限。因此，作者使用了GCN，这是一个强大的工具，可以探索频段频谱的图特征。这为作者的框架带来了更好的性能。</p>
 <p><strong>多图融合：</strong> 不同于传统的聚焦于单一图（图像模式）的方法不同，作者的方法融合了1）从每次采集的MRI部分获得BGG的空间信息；2）从每次采集的DTI中获得不同的BCG特征。这充分利用了分散在不同数据源的信息。</p>
 <h1 id="方法">方法</h1>
+<p>本节作者先描述了问题的设定，并且详细解释了作者的方法。为方便描述，作者使用小写字母表示标量（例如<span class="math inline">\(x\)</span>），使用粗体小写字母表示向量（例如<span class="math inline">\(\mathbf{x}\)</span>），使用粗体大写字母表示矩阵（例如<span class="math inline">\(\mathbf{X}\)</span>）。作者还使用小写字母<span class="math inline">\(i\)</span>、<span class="math inline">\(j\)</span>表示索引。作者使用<span class="math inline">\(x_{i}\)</span>表示向量<span class="math inline">\(\mathbf{x}\)</span>的第<span class="math inline">\(i\)</span>个元素，<span class="math inline">\(x_{i j}\)</span>表示矩阵<span class="math inline">\(\mathbf{X}\)</span>中第<span class="math inline">\(i\)</span>行，第<span class="math inline">\(j\)</span>列的元素。除非另有说明，否则所有向量都是列向量。</p>
+<h2 id="问题设置">问题设置</h2>
+<p>假设作者已经采集了<span class="math inline">\(N\)</span>次的特定区域的ROI数据，并且从不同的度量或者视图获取了<span class="math inline">\(M\)</span>个BCGs。每个BCG能够表示位一个无向权重图<span class="math inline">\(G=(V, E)\)</span>。顶点集<span class="math inline">\(V=\left\{v_{1}, \ldots, v_{n}\right\}\)</span>由大脑中的ROI组成，<span class="math inline">\(E\)</span>中的每个边由连接强度来加权，其中<span class="math inline">\(n\)</span>表示ROI的数量。作者通过<span class="math inline">\(n \times n\)</span>的相似矩阵<span class="math inline">\(\mathbf{X}\)</span>表示边权重，其中<span class="math inline">\(x_{i j}\)</span>表示<span class="math inline">\(ROI_{i}\)</span>和<span class="math inline">\(ROI_{j}\)</span>之间连接强度。作者假设顶点保持不变，但边随视图而变化。因此，对于某个特定区域都有<span class="math inline">\(M\)</span>个BCGs，即<span class="math inline">\(\left\{G^{(k)}=\left(V, E^{(k)}\right)\right\}_{k=1}^{M}\)</span>和一组相似矩阵<span class="math inline">\(\left\{\mathbf{X}^{(1)}, \ldots, \mathbf{X}^{(k)}, \ldots \mathbf{X}^{(M)} \right\}\)</span>。</p>
+<p>基于区域坐标的几何信息来定义一个无向权重图BGG，即<span class="math inline">\(\tilde{G}=(V, E)\)</span>，其中区域坐标是K近邻（K-NN）图。该图使用多个ROIs作为顶点集<span class="math inline">\(V=\left\{v_{1}, \ldots, v_{n}\right\}\)</span>，其中每个ROI都与其中心坐标关联。边由欧氏距离的高斯相似函数进行加权，例如<span class="math inline">\(e\left(v_{i}, v_{j}\right)=\exp \left(-\frac{\left\|v_{i}-v_{j}\right\|^{2}}{2 \sigma^{2}}\right)\)</span>。作者使用K-NN来识别一组靠近顶点<span class="math inline">\(v_{i}\)</span>的点点集<span class="math inline">\(N_{i}\)</span>，并且如果<span class="math inline">\(v_{i} \in N_{j}\)</span>或者<span class="math inline">\(v_{j} \in N_{i}\)</span>，那么就把<span class="math inline">\(v_{i}\)</span>与<span class="math inline">\(v_{j}\)</span>进行连接。然后，邻接矩阵<span class="math inline">\(\tilde{\mathbf{A}}\)</span>可以与表示一组ROIs最相近的<span class="math inline">\(\tilde{G}\)</span>进行关联，其中元素为：</p>
+<p><span class="math display">\[\tilde{a}_{i, j}=\left\{\begin{array}{ll}
+e\left(v_{i}, v_{j}\right) &amp; \text { if } v_{i} \in N_{j} \text { or } v_{j} \in N_{i} \\
+0, &amp; \text { otherwise }
+\end{array}\right.\]</span></p>
+<p>作者的目标是通过融合特定区域的BCG和共享的BGG来学习每一个特定区域的特征表示，其中特定区域的BCG和共享的BGG表示每个个体的特定区域的局部特征和被试群体的特定区域的全局特征。具体来说，作者开发了一个定制的多视图卷积网络（MVGCN）模型来学习神经影像数据中的特征表示。</p>
+<h2 id="作者的方法">作者的方法</h2>
+<p>图1展示作者开发的基于多视图脑图的关系预测的MVGCN整体框架。作者的模型是一个由三个主要主要部分组成的深度神经网络：第一个部分是一个多视图的GCN，通过每次采集来提取特征矩阵；第二个部分是一个两两匹配的策略，用于将每次采集到了的特征矩阵对聚合到一个特征向量；第三部分是一个用于关系预测的softmax预测。所有这些部分都通过反向传播和随机优化进行训练。需要注意的是，MVGCN是一个端到端的结构，在视图池和两两匹配中没有引入额外的参数。并且在多视图GCN部分，视图中的所有分支都共享相同的参数。接下来，作者将对每个组件进行详细解释。</p>
+<img src="/multi-view-gcn-on-parkinson/overall-flowchart.png" class title="总体流程">
+<p>图1：作者框架的总体流程</p>
 <h1 id="实验和结果">实验和结果</h1>
 <h1 id="讨论">讨论</h1>
 <h1 id="结论">结论</h1>
