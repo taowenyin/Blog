@@ -4,7 +4,7 @@ mathjax: true
 date: 2020-06-25 20:04:51
 updated: {{ date }}
 tags: [MRI, 深度学习]
-categories: [论文, 图巻积网络]
+categories: [ASD, 图巻积网络]
 ---
 
 # 摘要
