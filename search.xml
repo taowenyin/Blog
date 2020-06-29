@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Self-weighted adaptive structure learning for ASD diagnosis via multi-template multi-center representation</title>
+    <url>/self-weighted-adaptive-for-multi-center/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>ASD</category>
+        <category>图巻积网络</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>MultiCenter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【2018】Identification of autism spectrum disorder using deep learning and the ABIDE dataset</title>
     <url>/identification-of-autism-spectrum-disorder/</url>
     <content><![CDATA[<h1 id="摘要">摘要</h1><p>本研究的目的是仅基于患者的大脑激活模式，应用深度学习算法从大型脑成像数据集中识别自闭症谱系障碍（ASD）患者。作者从一个由多个站点数据集组成名叫ABIDE的世界数据集调查ASD患者的大脑图像数据。ASD是一种以社会缺陷和重复行为为特征的大脑疾病。根据最近疾病控制中心的数据，美国每68名儿童中就有一名患有自闭症。作者研究了从功能性脑成像数据中客观识别ASD参与者的功能连接性模式，并试图揭示从分类中产生的神经模式。研究结果提高了最新水平，在数据集中，ASD患者与对照组患者的识别准确率达到70%。从分类中得出的模式显示了大脑前区和后区之间的脑功能的反相关性；该反相关性证实了目前的经验证据，即ASD中大脑连接性的前后位体被破坏。根据作者的深度学习模型，展示了结果并确定大脑中最有助于区分自闭症和典型发育控制的区域。</p><a id="more"></a>
@@ -82,7 +95,7 @@
 <h1 id="原文在线原文"><a href="http://repositorio.pucrs.br/dspace/bitstream/10923/10759/2/Identification_of_autism_spectrum_disorder_using_deep_learning_and_the_ABIDE_dataset.pdf" target="_blank" rel="noopener">原文</a>，<a href="https://www.sciencedirect.com/science/article/pii/S2213158217302073?via%3Dihub" target="_blank" rel="noopener">在线原文</a></h1>
 ]]></content>
       <categories>
-        <category>论文</category>
+        <category>ASD</category>
         <category>图巻积网络</category>
       </categories>
       <tags>
@@ -171,7 +184,7 @@ e\left(v_{i}, v_{j}\right) &amp; \text { if } v_{i} \in N_{j} \text { or } v_{j}
 <h1 id="原文"><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6371363/" target="_blank" rel="noopener">原文</a></h1>
 ]]></content>
       <categories>
-        <category>论文</category>
+        <category>PD</category>
         <category>图巻积网络</category>
       </categories>
       <tags>
