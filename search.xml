@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AutoEncoder理解和推导</title>
+    <url>/autoencoder/</url>
+    <content><![CDATA[<p>自编码器是神经网络的一种，经过训练后能尝试将输入复制到输出。自编码器内部由一个隐藏层<span class="math inline">\(h\)</span>，可以产生编码表示输入。该网络可以看作由两部分组成：一个由函数<span class="math inline">\(h=f(x)\)</span>表示的编码器和一个生成重构的解码器<span class="math inline">\(r=g(h)\)</span>。</p><h1 id="欠完备自编吗器">欠完备自编吗器</h1><p>从自编码器获得有用特征的一种方法是<strong>限制<span class="math inline">\(h\)</span>的维度比<span class="math inline">\(x\)</span>小</strong>，这种编码维度小于输入维度的自编码器称为欠完备自编码器。学习欠完备自编码器的表示将强制自编码器捕捉训练数据中最显著的特征。其最小化损失函数为</p><a id="more"></a>
+
+
+<p><span class="math display">\[L(x,g(f(x)))\]</span></p>
+<p>当解码器是线性的且<span class="math inline">\(L\)</span>是均方误差，<strong>欠完备的自编码器会学习出与PCA相同的生成子空间</strong>，即训练数的主元子空间。不幸的是，<strong>如果编码器和解码器被赋予过大的容量，自编码器会执行复制任务而捕捉不到任何有关数据分布的有用信息。</strong></p>
+<h1 id="正则自编码器">正则自编码器</h1>
+<p>通过正则自编码器，即使模型容量大到足以学习一个无意义的恒等函数，非线性且过完备的正则自编码器仍然能够从数据中学到一些关于数据分布有用的信息。</p>
+<h2 id="稀疏自编码器">稀疏自编码器</h2>
+<p>稀疏自编码器简单地在训练时结合编码层的稀疏惩罚项<span class="math inline">\(\Omega (h)\)</span>和重构误差</p>
+<p><span class="math display">\[L(x, g(f(x)))+\Omega (h)\]</span></p>
+<p>其中<span class="math inline">\(g(h)\)</span>是解码器的输出，通常<span class="math inline">\(h\)</span>是编码器的输出，即<span class="math inline">\(h=f(x)\)</span>。</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Self-weighted adaptive structure learning for ASD diagnosis via multi-template multi-center representation</title>
     <url>/self-weighted-adaptive-for-multi-center/</url>
     <content><![CDATA[<h1 id="摘要">摘要</h1><p>孤独症谱系障碍（ASD）是一种神经发育疾病，可引起严重的社交、交流、互动和行为障碍。到目前为止，许多基于图像的机器学习技术已经被提出来解决自闭症的诊断问题。然而，这些技术大多局限于来自一个成像中心的单个模板或数据集。本文提出了一种新的多模板、多中心的集成分类方法，用于自动诊断ASD疾病。具体来说，基于不同的预定义模板和我们提出的基于皮尔逊相关系数的稀疏低秩表示，为每个受试者构建不同的多功能连接（FC）脑网络。从这些FC网络中提取特征后，利用我们的自加权自适应结构学习（SASL）模型选择信息特征来学习最优的相似矩阵。对于每个模板，SASL方法自动分配一个从结构信息中学习的最优权重，而不需要额外的权重和参数。最后，使用基于多模板、多中心表达的集成策略得到最终诊断结果。为了证明我们提出的方法的有效性，我们在公开的ABIDE数据集上进行了大量的实验。实验结果表明，该方法提高了ASD的诊断性能，优于现有的诊断方法。</p><a id="more"></a>
