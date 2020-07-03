@@ -16,6 +16,17 @@
 <p>稀疏自编码器在训练时结合编码层的稀疏惩罚项<span class="math inline">\(\Omega (h)\)</span>和重构误差</p>
 <p><span class="math display">\[L(x, g(f(x)))+\Omega (h)\]</span></p>
 <p>其中<span class="math inline">\(g(h)\)</span>是解码器的输出<span class="math inline">\(r\)</span>，通常<span class="math inline">\(h\)</span>是编码器的输出特征，即<span class="math inline">\(h=f(x)\)</span>，惩罚项为L1范数<span class="math inline">\(\Omega(h)=\lambda \sum_{i}\left|h_{i}\right|\)</span>。</p>
+<p>1、使用<span class="math inline">\(a_{j}^{(2)}\)</span>表示第2层第<span class="math inline">\(j\)</span>个神经元的激活度；</p>
+<p>2、使用<span class="math inline">\(a_{j}^{(2)}(x)\)</span>表示在给定输入值为<span class="math inline">\(x\)</span>的情况下，第2层第<span class="math inline">\(j\)</span>个神经元的激活度；</p>
+<p>3、使用<span class="math inline">\(\hat{\rho}_{j}=\frac{1}{m} \sum_{i=1}^{m}\left[a_{j}^{(2)}\left(x^{(i)}\right)\right]\)</span>表示第2层第<span class="math inline">\(j\)</span>个神经元在训练集上的平均活跃度；</p>
+<p>4、使用<span class="math inline">\(\rho\)</span>表示稀疏性参数，通常是一个接近0的值（如<span class="math inline">\(\rho=0.05\)</span>），可以令<span class="math inline">\(\hat{\rho}_{j}=\rho\)</span>，来对神经元<span class="math inline">\(a_{j}^{(2)}\)</span>的稀疏性进行限制，<strong>即<span class="math inline">\(\hat{\rho}_{j}\)</span>与<span class="math inline">\(\rho\)</span>越接近越好，因此就需要使用KL散度来衡量他们之间的差异。</strong></p>
+<p>KL散度又称相对熵，是对两个概率分布<span class="math inline">\(P\)</span>和<span class="math inline">\(Q\)</span>差异的非对称性度量，非对称性意味着<span class="math inline">\(D(P \| Q) \neq D(Q \| P)\)</span>，<span class="math inline">\(D(P \| Q)\)</span>表示用概率分布<span class="math inline">\(Q\)</span>来拟合概率分布<span class="math inline">\(P\)</span>时所产生的信息损耗。假设由随机变量<span class="math inline">\(x\)</span>，那么</p>
+<p><strong>1、离散性随机变量的散度</strong>为<span class="math inline">\(D(P \| Q)=\sum\left(p(x) \log \left(\frac{p(x)}{q(x)}\right)\right)\)</span>，其中<span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>表示随机变量的分布，<span class="math inline">\(p(x)\)</span>表示随机变量取<span class="math inline">\(x\)</span>的概率。</p>
+<p><strong>2、连续性随机变量的散度</strong>为<span class="math inline">\(D(P \| Q)=\int p(s) \log \left(\frac{p(x)}{q(x)}\right) d(s)\)</span>，其中<span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>表示随机变量<span class="math inline">\(x\)</span>的概率分布。</p>
+<p>当<span class="math inline">\(P=Q\)</span>时，<span class="math inline">\(D=0\)</span>，并且当<span class="math inline">\(P\)</span>和<span class="math inline">\(Q\)</span>的差异增大时，<span class="math inline">\(D\)</span>值递增。</p>
+<p>因此，在稀疏子编码器中，使用<span class="math inline">\(\hat{\rho}_{j}\)</span>来逼近<span class="math inline">\(\rho\)</span>，即KL散度为</p>
+<p><span class="math display">\[\sum_{j=1}^{N} K L\left(\rho \| \hat{\rho}_{j}\right)=\sum_{j=1}^{N} \rho \log \frac{\rho}{\hat{\rho}_{j}}+(1-\rho) \log \frac{1-\rho}{1-\hat{\rho}_{j}}\]</span></p>
+<p>此时的惩罚函数就是<span class="math inline">\(\Omega(h)=\sum_{j=1}^{N} K L\left(\rho \| \hat{\rho}_{j}\right)\)</span>。</p>
 <h2 id="去噪自编码器">去噪自编码器</h2>
 <p>去噪自编码器是一类接受损坏数据作为输入，并训练来预测原始未被损坏数据作为输出的自编码器，其本质是最小化</p>
 <p><span class="math display">\[L(x, g(f(\tilde{x})))\]</span></p>
