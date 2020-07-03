@@ -3,17 +3,28 @@
   <entry>
     <title>AutoEncoder理解和推导</title>
     <url>/autoencoder/</url>
-    <content><![CDATA[<p>自编码器是神经网络的一种，经过训练后能尝试将输入复制到输出。自编码器内部由一个隐藏层<span class="math inline">\(h\)</span>，可以产生编码表示输入。该网络可以看作由两部分组成：一个由函数<span class="math inline">\(h=f(x)\)</span>表示的编码器和一个生成重构的解码器<span class="math inline">\(r=g(h)\)</span>。</p><h1 id="欠完备自编吗器">欠完备自编吗器</h1><p>从自编码器获得有用特征的一种方法是<strong>限制<span class="math inline">\(h\)</span>的维度比<span class="math inline">\(x\)</span>小</strong>，这种编码维度小于输入维度的自编码器称为欠完备自编码器。学习欠完备自编码器的表示将强制自编码器捕捉训练数据中最显著的特征。其最小化损失函数为</p><a id="more"></a>
-
-
-<p><span class="math display">\[L(x,g(f(x)))\]</span></p>
-<p>当解码器是线性的且<span class="math inline">\(L\)</span>是均方误差，<strong>欠完备的自编码器会学习出与PCA相同的生成子空间</strong>，即训练数的主元子空间。不幸的是，<strong>如果编码器和解码器被赋予过大的容量，自编码器会执行复制任务而捕捉不到任何有关数据分布的有用信息。</strong></p>
+    <content><![CDATA[<p>自编码器是神经网络的一种，经过训练后能尝试将输入复制到输出。自编码器内部由一个隐藏层<span class="math inline">\(h\)</span>，可以产生编码表示输入。该网络可以看作由两部分组成：一个由函数<span class="math inline">\(h=f(x)\)</span>表示的编码器和一个生成重构的解码器<span class="math inline">\(r=g(h)\)</span>，其目的是尽量使<span class="math inline">\(g(f(x))=x\)</span>。此外，还可以扩展到随机性概率分布<span class="math inline">\(p_{encoder}(h|x)=x \to h\)</span>和<span class="math inline">\(p_{decoder}(x|h)=h \to x\)</span>。</p><a id="more"></a>
+<img src="/autoencoder/autoencoder-structure.png" class title="自编码器的一般结构">
+<h1 id="欠完备自编吗器">欠完备自编吗器</h1>
+<p>从自编码器获得有用特征的一种方法是<strong>限制<span class="math inline">\(h\)</span>的维度比<span class="math inline">\(x\)</span>小</strong>，这种编码维度小于输入维度的自编码器称为欠完备自编码器。学习欠完备自编码器的表示将强制自编码器捕捉训练数据中最显著的特征。其最小化损失函数为</p>
+<p><span class="math display">\[L(x,g(f(x)))=\frac{1}{N} \sum_{i=1}^{N}(x-g(f(x)))^{2}\]</span></p>
+<p>即输入数据与经自编码器重构后的数据之间的误差。<strong>损失函数一般分为经验风险损失函数与结构风险损失函数。</strong> 经验风险损失函数指预测结果和实际结果之间的差别，如上式就是经验风险损失函数。结构风险损失函数是在经验风险损失函数上添加一个正则项，如L0、L1、L2和稀疏正则项等。常用的损失函数有六种，分别是0-1损失、绝对值损失函数函数、平方损失函数、对数损失函数、指数损失函数、铰链损失函数。</p>
+<p>当解码器是线性的且<span class="math inline">\(L\)</span>是均方误差（如上式），<strong>欠完备的自编码器会学习出与PCA相同的生成子空间</strong>，即训练数的主元子空间。不幸的是，<strong>如果编码器和解码器被赋予过大的容量，自编码器会执行复制任务而捕捉不到任何有关数据分布的有用信息。</strong></p>
 <h1 id="正则自编码器">正则自编码器</h1>
 <p>通过正则自编码器，即使模型容量大到足以学习一个无意义的恒等函数，非线性且过完备的正则自编码器仍然能够从数据中学到一些关于数据分布有用的信息。</p>
 <h2 id="稀疏自编码器">稀疏自编码器</h2>
-<p>稀疏自编码器简单地在训练时结合编码层的稀疏惩罚项<span class="math inline">\(\Omega (h)\)</span>和重构误差</p>
+<p>稀疏自编码器在训练时结合编码层的稀疏惩罚项<span class="math inline">\(\Omega (h)\)</span>和重构误差</p>
 <p><span class="math display">\[L(x, g(f(x)))+\Omega (h)\]</span></p>
-<p>其中<span class="math inline">\(g(h)\)</span>是解码器的输出，通常<span class="math inline">\(h\)</span>是编码器的输出，即<span class="math inline">\(h=f(x)\)</span>。</p>
+<p>其中<span class="math inline">\(g(h)\)</span>是解码器的输出<span class="math inline">\(r\)</span>，通常<span class="math inline">\(h\)</span>是编码器的输出特征，即<span class="math inline">\(h=f(x)\)</span>，惩罚项为L1范数<span class="math inline">\(\Omega(h)=\lambda \sum_{i}\left|h_{i}\right|\)</span>。</p>
+<h2 id="去噪自编码器">去噪自编码器</h2>
+<p>去噪自编码器是一类接受损坏数据作为输入，并训练来预测原始未被损坏数据作为输出的自编码器，其本质是最小化</p>
+<p><span class="math display">\[L(x, g(f(\tilde{x})))\]</span></p>
+<p>其中<span class="math inline">\(\tilde{x}\)</span>是被某种噪声破坏的<span class="math inline">\(x\)</span>的副本，即可以加入高斯噪声等。去噪自编码器是强制<span class="math inline">\(f\)</span>和<span class="math inline">\(g\)</span>隐式的学习<span class="math inline">\(p_{data}(x)\)</span>的结构，然后通过最小化重构误差来获得有用的特征，基本步骤分三步：</p>
+<p>1、从训练数据中采一个训练样本<span class="math inline">\(x\)</span>；</p>
+<p>2、从损坏过程<span class="math inline">\(C(\tilde{x}|x=x)\)</span>采一个损坏样本<span class="math inline">\(\tilde{x}\)</span>；</p>
+<p>3、将<span class="math inline">\((x,\tilde{x})\)</span>作为训练样本来估计自编码器的重构分布<span class="math inline">\(p_{reconstruct}(x|\tilde{x})=p_{decoder}(x|h)\)</span>，其中<span class="math inline">\(h\)</span>是编码器<span class="math inline">\(f(\tilde{x})\)</span>的输出，<span class="math inline">\(p_{decoder}\)</span>根据解码器函数<span class="math inline">\(g(h)\)</span>定义。</p>
+<p>通常采用梯度法（如小批量梯度下降）来近似最小化。</p>
+<img src="/autoencoder/dae-structure.png" class title="去噪自编码器的一般结构">
 ]]></content>
       <categories>
         <category>机器学习</category>
