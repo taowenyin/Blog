@@ -5,6 +5,14 @@
     <url>/autoencoder/</url>
     <content><![CDATA[<p>自编码器是神经网络的一种，经过训练后能尝试将输入复制到输出。自编码器内部由一个隐藏层<span class="math inline">\(h\)</span>，可以产生编码表示输入。该网络可以看作由两部分组成：一个由函数<span class="math inline">\(h=f(x)\)</span>表示的编码器和一个生成重构的解码器<span class="math inline">\(r=g(h)\)</span>，其目的是尽量使<span class="math inline">\(g(f(x))=x\)</span>。此外，还可以扩展到随机性概率分布<span class="math inline">\(p_{encoder}(h|x)=x \to h\)</span>和<span class="math inline">\(p_{decoder}(x|h)=h \to x\)</span>。</p><a id="more"></a>
 <img src="/autoencoder/autoencoder-structure.png" class title="自编码器的一般结构">
+<h1 id="正则化">正则化</h1>
+<p>正则化有好几种，如L0、L1、L2和稀疏正则项等，其他正则化与它们只是形式上有所区别，但本质上数学核心都是一样的。</p>
+<p>1、L1正则化</p>
+<p><span class="math display">\[C=C_{0}+\frac{\alpha}{n} \sum_{w}|w|\]</span></p>
+<p>2、L2正则化</p>
+<p><span class="math display">\[C=C_{0}+\frac{\alpha}{2 n} \sum_{w} w^{2}\]</span></p>
+<p>其中<span class="math inline">\(C_{0}\)</span>表示损失函数，<span class="math inline">\(\frac{\alpha}{n} \sum_{w}|w|\)</span>和<span class="math inline">\(\frac{\alpha}{2 n} \sum_{w} w^{2}\)</span>表示正则项，而<span class="math inline">\(\alpha\)</span>表示惩罚因子。通过增加正则项就可以有“意识”地避开增大<span class="math inline">\(w\)</span>的方向去行走，从而提高模型的泛化性。</p>
+<img src="/autoencoder/l1-l2.png" class title="损失函数和正则函数之间的关系">
 <h1 id="欠完备自编吗器">欠完备自编吗器</h1>
 <p>从自编码器获得有用特征的一种方法是<strong>限制<span class="math inline">\(h\)</span>的维度比<span class="math inline">\(x\)</span>小</strong>，这种编码维度小于输入维度的自编码器称为欠完备自编码器。学习欠完备自编码器的表示将强制自编码器捕捉训练数据中最显著的特征。其最小化损失函数为</p>
 <p><span class="math display">\[L(x,g(f(x)))=\frac{1}{N} \sum_{i=1}^{N}(x-g(f(x)))^{2}\]</span></p>
@@ -35,7 +43,7 @@
 <p>当<span class="math inline">\(P=Q\)</span>时，<span class="math inline">\(D=0\)</span>，并且当<span class="math inline">\(P\)</span>和<span class="math inline">\(Q\)</span>的差异增大时，<span class="math inline">\(D\)</span>值递增。</p>
 <p>因此，在稀疏子编码器中，使用<span class="math inline">\(\hat{\rho}_{j}\)</span>来逼近<span class="math inline">\(\rho\)</span>，即KL散度为</p>
 <p><span class="math display">\[\sum_{j=1}^{N} K L\left(\rho \| \hat{\rho}_{j}\right)=\sum_{j=1}^{N} \rho \log \frac{\rho}{\hat{\rho}_{j}}+(1-\rho) \log \frac{1-\rho}{1-\hat{\rho}_{j}}\]</span></p>
-<p>此时的惩罚函数就是<span class="math inline">\(\Omega(h)=\sum_{j=1}^{N} K L\left(\rho \| \hat{\rho}_{j}\right)\)</span>。</p>
+<p>此时的惩罚函数就是<span class="math inline">\(\Omega(h)=\lambda \sum_{j=1}^{N} K L\left(\rho \| \hat{\rho}_{j}\right)\)</span>。</p>
 ]]></content>
       <categories>
         <category>机器学习</category>
