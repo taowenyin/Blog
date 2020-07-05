@@ -11,6 +11,22 @@ categories: [机器学习]
 
 {% asset_img autoencoder-structure.png 自编码器的一般结构 %}
 
+# 正则化
+
+正则化有好几种，如L0、L1、L2和稀疏正则项等，其他正则化与它们只是形式上有所区别，但本质上数学核心都是一样的。
+
+1、L1正则化
+
+$$C=C_{0}+\frac{\alpha}{n} \sum_{w}|w|$$
+
+2、L2正则化
+
+$$C=C_{0}+\frac{\alpha}{2 n} \sum_{w} w^{2}$$
+
+其中$C_{0}$表示损失函数，$\frac{\alpha}{n} \sum_{w}|w|$和$\frac{\alpha}{2 n} \sum_{w} w^{2}$表示正则项，而$\alpha$表示惩罚因子。通过增加正则项就可以有“意识”地避开增大$w$的方向去行走，从而提高模型的泛化性。
+
+{% asset_img l1-l2.png 损失函数和正则函数之间的关系 %}
+
 # 欠完备自编吗器
 
 从自编码器获得有用特征的一种方法是**限制$h$的维度比$x$小**，这种编码维度小于输入维度的自编码器称为欠完备自编码器。学习欠完备自编码器的表示将强制自编码器捕捉训练数据中最显著的特征。其最小化损失函数为
@@ -71,4 +87,4 @@ KL散度又称相对熵，是对两个概率分布$P$和$Q$差异的非对称性
 
 $$\sum_{j=1}^{N} K L\left(\rho \| \hat{\rho}_{j}\right)=\sum_{j=1}^{N} \rho \log \frac{\rho}{\hat{\rho}_{j}}+(1-\rho) \log \frac{1-\rho}{1-\hat{\rho}_{j}}$$
 
-此时的惩罚函数就是$\Omega(h)=\sum_{j=1}^{N} K L\left(\rho \| \hat{\rho}_{j}\right)$。
+此时的惩罚函数就是$\Omega(h)=\lambda \sum_{j=1}^{N} K L\left(\rho \| \hat{\rho}_{j}\right)$。
