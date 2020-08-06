@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>【2020】Identifying Autism Spectrum Disorder From Resting-State fMRI Using Deep Belief Network</title>
+    <url>/identifying-asd-from-rsfmri-using-dbn/</url>
+    <content><![CDATA[<h1 id="介绍">介绍</h1><p>作者提出了一种使用深度信念网络（DBN）的图分类模型。</p><p>1、首先，利用基于图的特征选择方法（GBFS）从外部和内部两个方面来选择ASD的显著功能关联度（FCs）。</p><p>2、然后，实现了一种基于有限路径的深度优先搜索（RP-DFS）算法，进一步挖掘图上隐含的拓扑信息。</p><p>3、最后，提出一种具有自动超参数调节功能的三层DBN来识别ASD患者。</p>]]></content>
+      <categories>
+        <category>ASD</category>
+        <category>图巻积网络</category>
+      </categories>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>MRI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AutoEncoder理解和推导</title>
     <url>/autoencoder/</url>
     <content><![CDATA[<p>自编码器是神经网络的一种，经过训练后能尝试将输入复制到输出。自编码器内部由一个隐藏层<span class="math inline">\(h\)</span>，可以产生编码表示输入。该网络可以看作由两部分组成：一个由函数<span class="math inline">\(h=f(x)\)</span>表示的编码器和一个生成重构的解码器<span class="math inline">\(r=g(h)\)</span>，其目的是尽量使<span class="math inline">\(g(f(x))=x\)</span>。此外，还可以扩展到随机性概率分布<span class="math inline">\(p_{encoder}(h|x)=x \to h\)</span>和<span class="math inline">\(p_{decoder}(x|h)=h \to x\)</span>。</p><a id="more"></a>
