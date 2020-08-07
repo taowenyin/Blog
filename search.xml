@@ -33,7 +33,7 @@
 <p>（1）选择ASD中显著的特征</p>
 <blockquote>
 <ul>
-<li>使用所有ASD的数据集，并计算每个连接性的均值（表示为<span class="math inline">\(mean(FC_{ASD})\)</span>）和全局的均值（<span class="math inline">\(mean_{ASD}\)</span>），以及全局标准差（<span class="math inline">\(STD_{ASD}\)</span>）。</li>
+<li>合并ASD的数据集，并计算每个连接性的均值（表示为<span class="math inline">\(mean(FC_{ASD})\)</span>）和全局的均值（<span class="math inline">\(mean_{ASD}\)</span>），以及全局标准差（<span class="math inline">\(STD_{ASD}\)</span>）。</li>
 <li>这些连接性的均值<span class="math inline">\(mean(FC_{ASD}(i, j))\)</span>与<span class="math inline">\(mean_{ASD}\)</span>的差值高或低<span class="math inline">\(\alpha \times STD_{ASD}\)</span>被认为是满足条件。其中，筛选因子<span class="math inline">\(\alpha\)</span>用于控制所选连接数的数量。</li>
 </ul>
 </blockquote>
