@@ -70,7 +70,9 @@
 <img src="/identifying-asd-from-rsfmri-using-dbn/rp-dfs.png" class title="RP-DFS算法">
 <h2 id="带自动调参的dbn模型">带自动调参的DBN模型</h2>
 <p>DBN的训练通常分为两步：无监督的预训练和有监督的微调。</p>
-<p>在无监督的预训练中，DBN层迭代学习如何概率地重建无标签的可见单元。将RBMs中可见层和隐藏层的激活函数分别设置为Affine函数和Sigmoid函数。然后，DBNs的监督学习使用均方根传播（RMSProp）和动量技术作为反向传播方法（其中激活函数是校正的线性单元（ReLU））对生成的网络进行微调。输出来自Softmax函数，产生每个类别的概率。为了计算估计值和真实值之间的差异，无监督学习和有监督学习都使用相同的损失函数，即交叉熵。为了减少过拟合，采用了Dropout正则化方法。</p>
+<p>1、在无监督的预训练中，DBN的各层反复学习以概率方式重建无标签的可见单元。将RBMs中可见层和隐藏层的激活函数分别设置为Affine函数和Sigmoid函数（类似于AE）。</p>
+<p>2、在监督学习中使用RMSProp优化算法和动量技术作为反向传播方法（其中激活函数是ReLU）对生成的网络进行微调。输出的激活函数为Softmax函数，产生每个类别的概率。</p>
+<p>为了计算估计值和真实值之间的差异，无监督学习和有监督学习都使用相同的损失函数，即交叉熵。为了减少过拟合，采用了Dropout正则化方法。</p>
 <p>本文首次将基于高斯过程的贝叶斯优化（BO）自动超参数调整技术应用于精神疾病的计算诊断。</p>
 <p><span class="math display">\[x^{*}=\arg \max _{x \in \mathcal{X} \subseteq \mathbb{R}^{d}} f(x)\]</span></p>
 <p>其中<span class="math inline">\(\mathcal{X}\)</span>是全局优化中感兴趣的特定空间。假设<span class="math inline">\(f\)</span>未知，BO的顺序设计策略首先把<span class="math inline">\(f\)</span>看成一个随机函数，然后在它上面加上一个优先权。然后从功能评估中收集测试的数据，用更新的先验值近似<span class="math inline">\(f\)</span>上的后验分布。反之，后验分布可以被用来构造一下函数<span class="math inline">\(f\)</span>。</p>
