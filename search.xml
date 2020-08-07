@@ -49,10 +49,13 @@
 <img src="/identifying-asd-from-rsfmri-using-dbn/visualization-of-brain-networks.png" class title="脑网络可视化">
 <p>图3：从不同方向观察ASD和TC组的脑网络。</p>
 <p>2、内部度量</p>
-<p>使用KNN的图扩展在外部度量的基础上构建图来发现ROI的潜在联系，并且作者假设ASD的神经元活动可能是潜在相关区域的协同激活模式，而不是单个区域间的连接相互作用，因此显著的链接周围的ROI都不属于该链接。通过图4的方法就可以初始化整个图。</p>
+<p>使用KNN的图扩展在外部度量的基础上构建图来发现ROI的潜在联系，并且作者假设ASD的神经元活动可能是潜在相关区域的协同激活模式，而不是单个区域间的连接相互作用，因此显著的链接周围的ROI都不属于该链接。</p>
+<p>（1）首先用连接<span class="math inline">\(Node_{d}\)</span>和<span class="math inline">\(Node_{t}\)</span>的边来初始化图。</p>
+<p>（2）然后通过基于欧式距离的KNN创建每个节点的子图。</p>
+<p>（3）节点<span class="math inline">\(Node_{d}\)</span>和<span class="math inline">\(Node_{t}\)</span>的子图添加到图中，节点之间的权重通过PCC计算得到。</p>
+<p>（4）在为每个显著链接使用GBFS后，FC特征就变为<span class="math inline">\(81 \times(K+1)^{2}=3969\)</span>，本文中的<span class="math inline">\(K=6\)</span>，再过滤掉681个重复连接，最后剩3288个特征<span class="math inline">\(((3288 / 19900) \times 100 \%)\)</span>，为原始特征数的<span class="math inline">\(16.52\%\)</span>。</p>
 <img src="/identifying-asd-from-rsfmri-using-dbn/graph-extension-of-K-nearest-neighbors.png" class title="KNN的图扩展">
 <p>图4：通过KNN的图扩展来构建图</p>
-<p>在为每个显著链接使用GBFS后，FC特征就变为<span class="math inline">\(81 \times(K+1)^{2}=3969\)</span>，本文中的<span class="math inline">\(K=6\)</span>，再过滤掉681个重复连接，最后剩3288个特征<span class="math inline">\(((3288 / 19900) \times 100 \%)\)</span>，为原始特征数的<span class="math inline">\(16.52\%\)</span>。</p>
 <p>算法1：GBFS的伪代码</p>
 <img src="/identifying-asd-from-rsfmri-using-dbn/gbfs.png" class title="GBFS算法">
 <h2 id="有限路径的深度优先搜索rp-dfs算法">有限路径的深度优先搜索（RP-DFS）算法</h2>
