@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>【2020】Convolutional Kernels with an Element-wise Weighting Mechanism for Identifying Abnormal Brain Connectivity Patterns</title>
+    <url>/ckew-identifying-brain-connectivity-patterns/</url>
+    <content><![CDATA[<h1 id="摘要">摘要</h1><p>基于深度学习的人脑网络分类近年来受到越来越多的关注。然而，目前的方法在探索脑网络的拓扑结构信息方面仍然是有限的。本文提出了一种新的基于元素加权机制的卷积核来提取脑网络的层次拓扑特征，其中每个权值都被赋予一个具有独特神经科学意义的元素。此外，本文还提出了一种新的基于CKEW的分类框架，通过跟踪特征分析方法，有效地诊断出脑部疾病并挖掘出最重要的原始特征。在ASD和ADHD数据集的fMRI数据集的实验结果表明，与几种最先进的脑疾病分类方法相比，我们的方法能更准确地区分受试群体，而异常的连接模式和大脑区域更可能成为与大脑疾病相关的生物标志物。</p><a id="more"></a>
+
+<h1 id="介绍">介绍</h1>
+<p>作者提出了基于元素加权机制的卷积核（CKEW，convolutional kernels with an element-wise weighting mechanism）。不同于传统的卷积核，在CKEW中的每个边都有独立的参数，而非共享参数。</p>
+<p>1、根据功能连接体的特定拓扑局部性，我们设计了一种基于元素加权的卷积核机制（CKEW），该机制赋予每个功能连接体特定的神经科学意义，在此基础上，我们提出了一种新的基于CKEW的分类框架来提取大脑网络的层次拓扑特征。</p>
+<p>2、基于所提出的框架，我们提出了一种基于脑网络边缘和节点的特征跟踪分析方法，通过累积从上层到下层的高层特征权重，从而发现脑网络的关键原始特征与其分类结果之间的显著相关性，并进行识别与脑疾病相关的生物标志物。</p>
+<p>3、在一系列模拟数据集和三个真实数据集上进行了系统的实验，以验证所提出的CKEW和新框架。实验结果验证了该框架在所有测试用例上的有效性。而且我们的方法能够显著地识别重要的功能连接和大脑区域。</p>
+<h1 id="方法">方法</h1>
+<h2 id="核心思想">核心思想</h2>
+<p>一个脑网络通常可以表示为一个图<span class="math inline">\(\mathbf{G}=(\mathbf{V}, \mathbf{E})\)</span>，其中<span class="math inline">\(\mathbf{V}\)</span>表示一组脑区的节点，<span class="math inline">\(\mathbf{E}\)</span>是一个邻接矩阵，其中每个元素（边）<span class="math inline">\(E_{i j} \in \mathbf{E}\)</span>表示每两个脑区<span class="math inline">\(V_{i}\)</span>和<span class="math inline">\(V_{j}\)</span>的连接强度。虽然用邻接矩阵表示的脑网络是网格状的数据，但脑网络数据和图像数据有两个本质的区别。</p>
+<p>我们提出了一种基于元素加权机制的卷积核（CKEW）来提取脑网络的层次拓扑特征，并将其应用于脑疾病的分类。CKEW为大脑连接组中的每个元素（边缘）赋予一个唯一的权重，而不是像BrainNetCNN中那样连接到同一节点的所有边的权重都是共享的。目的是更真实有效地提取脑网络的拓扑结构信息。</p>
+<h2 id="在e2e层中的ckew">在E2E层中的CKEW</h2>
+<h2 id="在e2n层中的ckew">在E2N层中的CKEW</h2>
+<h2 id="基于ckew的脑分类网络">基于CKEW的脑分类网络</h2>
+<h2 id="原始特征重要性评价">原始特征重要性评价</h2>
+]]></content>
+      <categories>
+        <category>ASD</category>
+      </categories>
+      <tags>
+        <tag>MRI</tag>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【2020】Identifying Autism Spectrum Disorder From Resting-State fMRI Using Deep Belief Network</title>
     <url>/identifying-asd-from-rsfmri-using-dbn/</url>
     <content><![CDATA[<h1 id="介绍">介绍</h1><p>作者提出了一种使用深度信念网络（DBN）的图分类模型。</p><p>1、首先，利用基于图的特征选择方法（GBFS）从外部和内部两个方面来选择ASD的显著功能关联性（FCs）。</p><p>2、然后，实现了一种基于有限路径的深度优先搜索（RP-DFS）算法，进一步挖掘图上隐含的拓扑信息。</p><p>3、最后，提出一种具有自动超参数调节功能的三层DBN来识别ASD患者。</p><a id="more"></a>
@@ -84,8 +111,8 @@
         <category>图巻积网络</category>
       </categories>
       <tags>
-        <tag>深度学习</tag>
         <tag>MRI</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -245,8 +272,8 @@
         <category>图巻积网络</category>
       </categories>
       <tags>
-        <tag>深度学习</tag>
         <tag>MRI</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -334,8 +361,8 @@ e\left(v_{i}, v_{j}\right) &amp; \text { if } v_{i} \in N_{j} \text { or } v_{j}
         <category>图巻积网络</category>
       </categories>
       <tags>
-        <tag>深度学习</tag>
         <tag>MRI</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
