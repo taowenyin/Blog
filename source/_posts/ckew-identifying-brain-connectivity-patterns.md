@@ -73,9 +73,9 @@ $$G^{l+1, o}=f\left(\sum_{i=1}^{M^{l}} \sum_{r=1}^{|\mathbf{V}|} C_{r}^{l, i, o}
 
 $$A^{l+1, o}=f\left(\sum_{i=1}^{M^{l}} W_{i o}^{l} G^{l, i}+b_{o}^{l}\right)$$
 
-其中，$W_{i o}^{l} \in \mathbb{R}^{M^{t} \times M^{l+1}}$是权重，$b_{o}^{l} \in \mathbb{R}^{M^{l+1}}$是第$l$层的偏置项；$M^{l}$表示第$l$层全连接层的神经元的数量。在不失一般性的情况下，可以通过使用几个完全连接的层来提取更深层次的高级功能来扩展基本框架。
+其中，$W_{i o}^{l} \in \mathbb{R}^{M^{l} \times M^{l+1}}$是权重，$b_{o}^{l} \in \mathbb{R}^{M^{l+1}}$是第$l$层的偏置项；$M^{l}$表示第$l$层全连接层的神经元的数量。在不失一般性的情况下，可以通过使用几个完全连接的层来提取更深层次的高级功能来扩展基本框架。
 
-Softmax分类是我们框架的最后一层。$p\left(y^{(n)}=j \mid \mathbf{A}^{\left(^{(n)}\right.} ; \boldsymbol{\theta}\right)$是特征图$\mathbf{A}^{l^{(n)}}$把第$l$层第$n$个样本分类到类别$j$的概率，其中$y^{(n)}$是第$n$个样本的标签，$\boldsymbol{\theta}=\left\{\mathbf{W}^{l}, \mathbf{b}^{l}\right\}$，$\mathbf{W}^{l} \in \mathbb{R}^{M^{l} \times J}$是权重，$\mathbf{b}^{l} \in \mathbb{R}^{J}$是偏置项。表达式可以表示为
+Softmax分类是我们框架的最后一层。$p\left(y^{(n)}=j \mid \mathbf{A}^{l^{(n)}} ; \boldsymbol{\theta}\right)$是特征图$\mathbf{A}^{l^{(n)}}$把第$l$层第$n$个样本分类到类别$j$的概率，其中$y^{(n)}$是第$n$个样本的标签，$\boldsymbol{\theta}=\left\{\mathbf{W}^{l}, \mathbf{b}^{l}\right\}$，$\mathbf{W}^{l} \in \mathbb{R}^{M^{l} \times J}$是权重，$\mathbf{b}^{l} \in \mathbb{R}^{J}$是偏置项。表达式可以表示为
 
 $$p\left(y^{(n)}=j \mid \mathbf{A}^{(n)} ; \boldsymbol{\theta}\right)=\frac{\exp \left(\sum_{i=1}^{M^{l}} W_{i j}^{l} A_{i}^{l (n)}+b_{j}^{l}\right)}{\sum_{k=1}^{J} \exp \left(\sum_{i=1}^{M^{l}} W_{i k}^{l} A_{i}^{l (n)}+b_{k}^{l}\right)}$$
 
@@ -83,7 +83,7 @@ $$p\left(y^{(n)}=j \mid \mathbf{A}^{(n)} ; \boldsymbol{\theta}\right)=\frac{\exp
 
 为了训练我们的框架，我们采用如下损失函数：
 
-$$J(\mathbf{W}, \mathbf{b})=-\frac{1}{N}\left[\sum_{n=1}^{N} \sum_{j=1}^{J} 1\left\{y^{(n)}=j\right\} \log p\left(y^{(n)}=j \mid \mathbf{A}^{(n)} ; \boldsymbol{\theta}\right)\right]+\frac{\lambda}{2}\|\mathbf{W}\|_{2}^{2}$$
+$$J(\mathbf{W}, \mathbf{b})=-\frac{1}{N}\left[\sum_{n=1}^{N} \sum_{j=1}^{J} p\left\{y^{(n)}=j\right\} \log p\left(y^{(n)}=j \mid \mathbf{A}^{(n)} ; \boldsymbol{\theta}\right)\right]+\frac{\lambda}{2}\|\mathbf{W}\|_{2}^{2}$$
 
 其中$\mathbf{W}$，$\mathbf{b}$包括框架中的所有参数（权重和偏差），$N$是样本数量，$\frac{\lambda}{2}\|\mathbf{W}\|_{2}^{2}$是$L_{2}$正则项，其目的是控制权重的大小以防止过度拟合，参数λ用于控制等式上式中两项的相对重要性。
 
@@ -93,7 +93,7 @@ $$J(\mathbf{W}, \mathbf{b})=-\frac{1}{N}\left[\sum_{n=1}^{N} \sum_{j=1}^{J} 1\le
 
 ## 原始特征重要性评价
 
-为了更好地理解该框架的分类结果，我们提出了一种跟踪特征分析方法，该方法可以自上而下地探测根源，从而反导出对结果影响更大的相对重要的原始特征（脑网络中的节点和边缘）。在深度模型中，一个特征在一个层中的重要性可以描述为一些相关权重的组合。因此，特征分析可以通过两个相邻层之间权重的线性组合来执行。根据文献中的方法，我们从上到下给出了各层特征的重要性度量（称为IMF）。具体地说，特征分析可以按以下顺序导出：Softmax层、全连接层、N2G层、E2N层和E2E层。
+为了更好地理解该框架的分类结果，我们提出了一种跟踪特征分析方法，该方法可以自上而下地探测根源，从而反导出对结果影响更大的相对重要的原始特征（脑网络中的节点和边）。在深度模型中，一个特征在一个层中的重要性可以描述为一些相关权重的组合。因此，特征分析可以通过两个相邻层之间权重的线性组合来执行。根据文献中的方法，我们从上到下给出了各层特征的重要性度量（称为Importance Metric of Features，IMF）。具体地说，特征分析可以按以下顺序导出：Softmax层、全连接层、N2G层、E2N层和E2E层。
 
 在Softmax层中，第$i$个输入特征的重要性可以通过中提出的方法来计算。对于本文中的二元分类，公式表示为，
 
@@ -109,9 +109,9 @@ $$I M F_{r}^{L_{2}, i}=\sum_{o=1}^{M^{L_{3}}} W_{r}^{L_{3}, i, o} I M F^{L_{3}, 
 
 $$I M F_{r c}^{L_{1}, i}=\sum_{o=1}^{M^{L_{2}}} W_{r c}^{L_{2}, i, o}\left(I M F_{r}^{L_{2}, o}+I M F_{c}^{L_{2}, o}\right)$$
 
-$$I M F_{r c}^{L_{0}, i}=\sum_{o=1}^{M^{L_{1}}} W_{r c}^{L_{1}, i, o} \sum_{k=1}^{|\mathbf{V}|}\left(I M F_{r k}^{L_{1}, i, o}+I M F_{k c}^{L_{1}, i, o}\right)$$
+$$I M F_{r c}^{L_{0}, i}=\sum_{o=1}^{M^{L_{1}}} W_{r c}^{L_{1}, i, o} \sum_{k=1}^{|\mathbf{V}|}\left(I M F_{r k}^{L_{1}, i, o}+I M F_{c k}^{L_{1}, i, o}\right)$$
 
-最后，利用式（12）和式（13）分别确定原始脑网络中各边缘（$E_{rc}$）和每个节点（$N_{r}$）对分类结果的重要作用。
+最后，利用下式分别确定原始脑网络中各边（$E_{rc}$）和每个节点（$N_{r}$）对分类结果的重要作用。
 
 $$I M F\left(E_{r c}\right)=\sum_{i=1}^{M^{L_{0}}} I M F_{r c}^{L_{0}, i}$$
 
