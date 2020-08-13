@@ -36,17 +36,17 @@
 <p><span class="math display">\[G^{l+1, o}=f\left(\sum_{i=1}^{M^{l}} \sum_{r=1}^{|\mathbf{V}|} C_{r}^{l, i, o} N_{r}^{l, i}+b^{l, o}\right)\]</span></p>
 <p>全连接层主要对前一层的输出进行线性组合和非线性变换，以提取更多的高层特征。全连接层的输出定义为，</p>
 <p><span class="math display">\[A^{l+1, o}=f\left(\sum_{i=1}^{M^{l}} W_{i o}^{l} G^{l, i}+b_{o}^{l}\right)\]</span></p>
-<p>其中，<span class="math inline">\(W_{i o}^{l} \in \mathbb{R}^{M^{t} \times M^{l+1}}\)</span>是权重，<span class="math inline">\(b_{o}^{l} \in \mathbb{R}^{M^{l+1}}\)</span>是第<span class="math inline">\(l\)</span>层的偏置项；<span class="math inline">\(M^{l}\)</span>表示第<span class="math inline">\(l\)</span>层全连接层的神经元的数量。在不失一般性的情况下，可以通过使用几个完全连接的层来提取更深层次的高级功能来扩展基本框架。</p>
-<p>Softmax分类是我们框架的最后一层。<span class="math inline">\(p\left(y^{(n)}=j \mid \mathbf{A}^{\left(^{(n)}\right.} ; \boldsymbol{\theta}\right)\)</span>是特征图<span class="math inline">\(\mathbf{A}^{l^{(n)}}\)</span>把第<span class="math inline">\(l\)</span>层第<span class="math inline">\(n\)</span>个样本分类到类别<span class="math inline">\(j\)</span>的概率，其中<span class="math inline">\(y^{(n)}\)</span>是第<span class="math inline">\(n\)</span>个样本的标签，<span class="math inline">\(\boldsymbol{\theta}=\left\{\mathbf{W}^{l}, \mathbf{b}^{l}\right\}\)</span>，<span class="math inline">\(\mathbf{W}^{l} \in \mathbb{R}^{M^{l} \times J}\)</span>是权重，<span class="math inline">\(\mathbf{b}^{l} \in \mathbb{R}^{J}\)</span>是偏置项。表达式可以表示为</p>
+<p>其中，<span class="math inline">\(W_{i o}^{l} \in \mathbb{R}^{M^{l} \times M^{l+1}}\)</span>是权重，<span class="math inline">\(b_{o}^{l} \in \mathbb{R}^{M^{l+1}}\)</span>是第<span class="math inline">\(l\)</span>层的偏置项；<span class="math inline">\(M^{l}\)</span>表示第<span class="math inline">\(l\)</span>层全连接层的神经元的数量。在不失一般性的情况下，可以通过使用几个完全连接的层来提取更深层次的高级功能来扩展基本框架。</p>
+<p>Softmax分类是我们框架的最后一层。<span class="math inline">\(p\left(y^{(n)}=j \mid \mathbf{A}^{l^{(n)}} ; \boldsymbol{\theta}\right)\)</span>是特征图<span class="math inline">\(\mathbf{A}^{l^{(n)}}\)</span>把第<span class="math inline">\(l\)</span>层第<span class="math inline">\(n\)</span>个样本分类到类别<span class="math inline">\(j\)</span>的概率，其中<span class="math inline">\(y^{(n)}\)</span>是第<span class="math inline">\(n\)</span>个样本的标签，<span class="math inline">\(\boldsymbol{\theta}=\left\{\mathbf{W}^{l}, \mathbf{b}^{l}\right\}\)</span>，<span class="math inline">\(\mathbf{W}^{l} \in \mathbb{R}^{M^{l} \times J}\)</span>是权重，<span class="math inline">\(\mathbf{b}^{l} \in \mathbb{R}^{J}\)</span>是偏置项。表达式可以表示为</p>
 <p><span class="math display">\[p\left(y^{(n)}=j \mid \mathbf{A}^{(n)} ; \boldsymbol{\theta}\right)=\frac{\exp \left(\sum_{i=1}^{M^{l}} W_{i j}^{l} A_{i}^{l (n)}+b_{j}^{l}\right)}{\sum_{k=1}^{J} \exp \left(\sum_{i=1}^{M^{l}} W_{i k}^{l} A_{i}^{l (n)}+b_{k}^{l}\right)}\]</span></p>
 <p>其中<span class="math inline">\(J\)</span>表示类别的种类。</p>
 <p>为了训练我们的框架，我们采用如下损失函数：</p>
-<p><span class="math display">\[J(\mathbf{W}, \mathbf{b})=-\frac{1}{N}\left[\sum_{n=1}^{N} \sum_{j=1}^{J} 1\left\{y^{(n)}=j\right\} \log p\left(y^{(n)}=j \mid \mathbf{A}^{(n)} ; \boldsymbol{\theta}\right)\right]+\frac{\lambda}{2}\|\mathbf{W}\|_{2}^{2}\]</span></p>
+<p><span class="math display">\[J(\mathbf{W}, \mathbf{b})=-\frac{1}{N}\left[\sum_{n=1}^{N} \sum_{j=1}^{J} p\left\{y^{(n)}=j\right\} \log p\left(y^{(n)}=j \mid \mathbf{A}^{(n)} ; \boldsymbol{\theta}\right)\right]+\frac{\lambda}{2}\|\mathbf{W}\|_{2}^{2}\]</span></p>
 <p>其中<span class="math inline">\(\mathbf{W}\)</span>，<span class="math inline">\(\mathbf{b}\)</span>包括框架中的所有参数（权重和偏差），<span class="math inline">\(N\)</span>是样本数量，<span class="math inline">\(\frac{\lambda}{2}\|\mathbf{W}\|_{2}^{2}\)</span>是<span class="math inline">\(L_{2}\)</span>正则项，其目的是控制权重的大小以防止过度拟合，参数λ用于控制等式上式中两项的相对重要性。</p>
 <p>在训练中，我们采用Adam方法最小化损失函数<span class="math inline">\(J(\mathbf{W}, \mathbf{b})\)</span>。批大小设置为96，学习率设置为0.0001。<span class="math inline">\(\lambda\)</span>的值是从候选集{0.1，0.01，0.05，0.001，0.005，0.0005}中选取的。为了避免过拟合，我们采取了早期停止策略。一旦在验证集上的<span class="math inline">\(J(\mathbf{W}, \mathbf{b})\)</span>在<span class="math inline">\(E_{patience}\)</span>阶段没有进一步优化，或者迭代过程达到最大迭代次数（<span class="math inline">\(E_{max}\)</span>阶段），训练过程将停止。在本文中，<span class="math inline">\(E_{patience}\)</span>和<span class="math inline">\(E_{max}\)</span>分别设为50和10000。算法1说明了基于CKEW的分类过程的细节。</p>
 <img src="/ckew-identifying-brain-connectivity-patterns/algorithm-1.jpg" class title="算法1">
 <h2 id="原始特征重要性评价">原始特征重要性评价</h2>
-<p>为了更好地理解该框架的分类结果，我们提出了一种跟踪特征分析方法，该方法可以自上而下地探测根源，从而反导出对结果影响更大的相对重要的原始特征（脑网络中的节点和边缘）。在深度模型中，一个特征在一个层中的重要性可以描述为一些相关权重的组合。因此，特征分析可以通过两个相邻层之间权重的线性组合来执行。根据文献中的方法，我们从上到下给出了各层特征的重要性度量（称为IMF）。具体地说，特征分析可以按以下顺序导出：Softmax层、全连接层、N2G层、E2N层和E2E层。</p>
+<p>为了更好地理解该框架的分类结果，我们提出了一种跟踪特征分析方法，该方法可以自上而下地探测根源，从而反导出对结果影响更大的相对重要的原始特征（脑网络中的节点和边）。在深度模型中，一个特征在一个层中的重要性可以描述为一些相关权重的组合。因此，特征分析可以通过两个相邻层之间权重的线性组合来执行。根据文献中的方法，我们从上到下给出了各层特征的重要性度量（称为Importance Metric of Features，IMF）。具体地说，特征分析可以按以下顺序导出：Softmax层、全连接层、N2G层、E2N层和E2E层。</p>
 <p>在Softmax层中，第<span class="math inline">\(i\)</span>个输入特征的重要性可以通过中提出的方法来计算。对于本文中的二元分类，公式表示为，</p>
 <p><span class="math display">\[I M F^{L_{4}, i}=W^{L_{5}, i, 1}-W^{L_{5}, i, 0}\]</span></p>
 <p>基于<span class="math inline">\(I M F^{L_{4}, i}\)</span>，在全连接层的第<span class="math inline">\(i\)</span>个输入特征的重要性可以按照下面的计算得到：</p>
@@ -54,8 +54,8 @@
 <p>根据前一层计算出的特征的重要性，可以分别计算第<span class="math inline">\(i\)</span>个输入特征在N2G层、E2N层和E2E层中的重要性：</p>
 <p><span class="math display">\[I M F_{r}^{L_{2}, i}=\sum_{o=1}^{M^{L_{3}}} W_{r}^{L_{3}, i, o} I M F^{L_{3}, o}\]</span></p>
 <p><span class="math display">\[I M F_{r c}^{L_{1}, i}=\sum_{o=1}^{M^{L_{2}}} W_{r c}^{L_{2}, i, o}\left(I M F_{r}^{L_{2}, o}+I M F_{c}^{L_{2}, o}\right)\]</span></p>
-<p><span class="math display">\[I M F_{r c}^{L_{0}, i}=\sum_{o=1}^{M^{L_{1}}} W_{r c}^{L_{1}, i, o} \sum_{k=1}^{|\mathbf{V}|}\left(I M F_{r k}^{L_{1}, i, o}+I M F_{k c}^{L_{1}, i, o}\right)\]</span></p>
-<p>最后，利用式（12）和式（13）分别确定原始脑网络中各边缘（<span class="math inline">\(E_{rc}\)</span>）和每个节点（<span class="math inline">\(N_{r}\)</span>）对分类结果的重要作用。</p>
+<p><span class="math display">\[I M F_{r c}^{L_{0}, i}=\sum_{o=1}^{M^{L_{1}}} W_{r c}^{L_{1}, i, o} \sum_{k=1}^{|\mathbf{V}|}\left(I M F_{r k}^{L_{1}, i, o}+I M F_{c k}^{L_{1}, i, o}\right)\]</span></p>
+<p>最后，利用下式分别确定原始脑网络中各边（<span class="math inline">\(E_{rc}\)</span>）和每个节点（<span class="math inline">\(N_{r}\)</span>）对分类结果的重要作用。</p>
 <p><span class="math display">\[I M F\left(E_{r c}\right)=\sum_{i=1}^{M^{L_{0}}} I M F_{r c}^{L_{0}, i}\]</span></p>
 <p><span class="math display">\[I M F\left(N_{r}\right)=\sum_{c=1}^{|\mathbf{V}|} I M F\left(E_{r c}\right)\]</span></p>
 ]]></content>
