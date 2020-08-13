@@ -83,7 +83,7 @@ $$p\left(y^{(n)}=j \mid \mathbf{A}^{(n)} ; \boldsymbol{\theta}\right)=\frac{\exp
 
 为了训练我们的框架，我们采用如下损失函数：
 
-$$J(\mathbf{W}, \mathbf{b})=-\frac{1}{N}\left[\sum_{n=1}^{N} \sum_{j=1}^{J} p\left\{y^{(n)}=j\right\} \log p\left(y^{(n)}=j \mid \mathbf{A}^{(n)} ; \boldsymbol{\theta}\right)\right]+\frac{\lambda}{2}\|\mathbf{W}\|_{2}^{2}$$
+$$J(\mathbf{W}, \mathbf{b})=-\frac{1}{N}\left[\sum_{n=1}^{N} \sum_{j=1}^{J} 1\left\{y^{(n)}=j\right\} \log p\left(y^{(n)}=j \mid \mathbf{A}^{(n)} ; \boldsymbol{\theta}\right)\right]+\frac{\lambda}{2}\|\mathbf{W}\|_{2}^{2}$$
 
 其中$\mathbf{W}$，$\mathbf{b}$包括框架中的所有参数（权重和偏差），$N$是样本数量，$\frac{\lambda}{2}\|\mathbf{W}\|_{2}^{2}$是$L_{2}$正则项，其目的是控制权重的大小以防止过度拟合，参数λ用于控制等式上式中两项的相对重要性。
 
